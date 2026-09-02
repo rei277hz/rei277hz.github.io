@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#101216" />
     <title>modCAM16-HK ACES 2.0 Inverse Color Picker</title>
-    <script type="module" crossorigin src="./assets/index-DqSoJ4Ik.js"></script>
+    <script type="module" crossorigin src="./assets/index-Bcd6zxen.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-C3RjDONe.css">
   </head>
   <body>
@@ -36,7 +36,10 @@
           </div>
           <div class="background-control">
             <label for="background-brightness">Background <span class="control-value" id="background-brightness-value">0.500</span></label>
-            <input id="background-brightness" type="range" min="0" max="1" step="0.001" value="0.5" aria-label="Background brightness" />
+            <div class="range-wrap">
+              <span id="background-stick" class="stick-marker" hidden aria-hidden="true"></span>
+              <input id="background-brightness" type="range" min="0" max="10" step="0.001" value="0.5" aria-label="Linear background brightness" />
+            </div>
           </div>
         </div>
       </section>
@@ -44,9 +47,9 @@
         <div class="control-row profile-row">
           <label for="profile">Mode</label>
             <select id="profile" aria-label="Source gamut and transform">
-            <option value="0">Rec.2020 (P3-D65 limited) / Rec2100-D65_1000nit_in_Rec2100-D65_ST2084</option>
+            <option value="2" selected>P3-D65 / P3-D65_1000nit_in_Rec2100-D65_ST2084</option>
             <option value="1">Rec.709-D65 / Rec709-D65_100nit_in_Rec709-D65_BT1886</option>
-            <option value="2">P3-D65 / P3-D65_1000nit_in_Rec2100-D65_ST2084</option>
+            <option value="0">Rec.2020 (P3-D65 limited) / Rec2100-D65_1000nit_in_Rec2100-D65_ST2084</option>
           </select>
         </div>
         <div class="control-row">
@@ -54,9 +57,9 @@
           <div class="slider-control">
             <div class="range-wrap">
               <span id="reflectance-stick" class="stick-marker" hidden aria-hidden="true"></span>
-              <input id="reflectance" type="range" min="0" max="1" step="0.001" value="0.5" />
+            <input id="reflectance" type="range" min="0" max="1.1" step="0.001" value="0.5" />
             </div>
-            <input id="reflectance-number" class="number-input" type="number" min="0" max="1" step="any" value="0.500" inputmode="decimal" aria-label="Reflectance value" />
+            <input id="reflectance-number" class="number-input" type="number" min="0" max="1.1" step="any" value="0.500" inputmode="decimal" aria-label="Neutral ACEScg value" />
           </div>
         </div>
         <div class="control-row">
@@ -80,7 +83,7 @@
           </div>
         </div>
       </section>
-      <footer class="app-footer">* The selected ACEScg value is pre-adjusted so the Rec2100-D65_1000nit_in_Rec2100-D65_ST2084 path produces the selected Refl, Hue, and Saturation for the Rec.2020 (P3-D65 limited) source.</footer>
+      <footer class="app-footer">* Refl is the requested neutral ACEScg value; ColorChecker dots are absolute ACEScg references rendered through the selected ACES 2.0 view.</footer>
     </main>
   </body>
 </html>
