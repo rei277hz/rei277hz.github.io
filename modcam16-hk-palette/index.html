@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#101216" />
     <title>modCAM16-HK ACES 2.0 Inverse Color Picker</title>
-    <script type="module" crossorigin src="./assets/index-C5EczE2a.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CV4DP3M5.css">
+    <script type="module" crossorigin src="./assets/index-BrRetCje.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-4QjhBQbt.css">
   </head>
   <body>
     <main class="app-shell">
@@ -35,8 +35,10 @@
               <input id="tint-number" class="number-input" type="number" min="-100" max="100" step="any" value="0" inputmode="decimal" aria-label="Display tint" />
             </div>
           </div>
-          <div class="display-controls-actions">
+          <div class="display-controls-actions" role="group" aria-label="Display white balance actions">
             <button id="white-balance-reset" class="action-button" type="button" aria-label="Reset display white balance" disabled>Reset</button>
+            <button id="white-balance-store" class="action-button" type="button" aria-label="Store current display white balance">Store</button>
+            <button id="white-balance-recall" class="action-button" type="button" aria-label="Recall stored display white balance" disabled>Recall</button>
           </div>
         </div>
         <div class="preview-panel">
