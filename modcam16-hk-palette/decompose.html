@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#121417" />
     <title>Image decomposition | modCAM16-HK</title>
-    <script type="module" crossorigin src="./assets/decompose-ATLOuzM7.js"></script>
+    <script type="module" crossorigin src="./assets/decompose-BpUFcMKs.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-B5Qt9EMX.js">
-    <link rel="stylesheet" crossorigin href="./assets/decompose-DheBbTwH.css">
+    <link rel="stylesheet" crossorigin href="./assets/decompose-BY6vNuIh.css">
   </head>
   <body>
     <main class="decompose-shell">
@@ -161,10 +161,22 @@
                 <h2 id="downloads-heading">Downloads</h2>
               </div>
             </div>
-            <p class="panel-copy">Both files are linear ACEScg/AP1 OpenEXR with fp16 channels and ZIP compression.</p>
+            <p class="panel-copy">The two preview JPEGs are shown inline before you download them. All four outputs are created locally.</p>
+            <div class="preview-grid">
+              <figure class="preview-card">
+                <img id="base-preview-image" class="preview-image" alt="Base preview JPEG" hidden />
+                <figcaption>Base preview JPEG</figcaption>
+              </figure>
+              <figure class="preview-card">
+                <img id="exposure-preview-image" class="preview-image" alt="Exposure preview JPEG" hidden />
+                <figcaption>Exposure preview JPEG</figcaption>
+              </figure>
+            </div>
             <div class="download-grid">
               <button id="download-base" class="download-button" type="button" disabled><span>Base EXR</span><small id="base-size">Waiting for calculation</small></button>
               <button id="download-exposure" class="download-button" type="button" disabled><span>Exposure EXR</span><small id="exposure-size">Waiting for calculation</small></button>
+              <button id="download-base-preview" class="download-button" type="button" disabled><span>Base preview JPEG</span><small id="base-preview-size">Waiting for calculation</small></button>
+              <button id="download-exposure-preview" class="download-button" type="button" disabled><span>Exposure preview JPEG</span><small id="exposure-preview-size">Waiting for calculation</small></button>
             </div>
           </section>
         </div>
