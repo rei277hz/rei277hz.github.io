@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0d1117" />
     <title>Image decomposition | modCAM16-HK</title>
-    <script type="module" crossorigin src="./assets/decompose-BznLvXD8.js"></script>
+    <script type="module" crossorigin src="./assets/decompose-CWw2PIjG.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-B5Qt9EMX.js">
-    <link rel="stylesheet" crossorigin href="./assets/decompose-Bj3ZDy75.css">
+    <link rel="stylesheet" crossorigin href="./assets/decompose-D6vsc4T2.css">
   </head>
   <body>
     <main class="decompose-shell">
@@ -15,17 +15,17 @@
       <section class="upload-row" aria-labelledby="input-heading">
         <h2 id="input-heading" class="sr-only">Input image</h2>
         <input id="file-input" type="file" accept=".exr,.jpg,.jpeg,.png,.heic,.heif,image/png,image/jpeg,image/heif,image/heic" hidden />
-        <button id="upload-button" class="upload-button" type="button"><svg class="upload-mark" aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M3.5 6.5h6l2 2h9v9.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2v-9.5a2 2 0 0 1 2-2Z"/><path d="M2.5 10h18"/></svg><span><strong>Load image</strong><small>EXR · JPEG · PNG · HEIC · HEIF</small></span></button>
-        <div id="metadata-summary" class="metadata-summary" hidden></div>
+        <button id="source-preview-frame" class="source-preview-frame" type="button" aria-label="Load an image">
+          <span id="source-preview-empty" class="source-preview-empty"><strong>Load an image</strong><small>EXR · JPEG · PNG · HEIC · HEIF</small></span>
+          <img id="source-preview-image" class="source-preview-image" alt="Source image preview" hidden />
+          <span id="source-preview-state" class="source-preview-state" aria-live="polite" hidden></span>
+        </button>
         <div class="control-group interpretation-group">
-          <button id="override-source" class="override-button" type="button" hidden>Override embedded ICC</button>
-          <div id="interpretation-fields" hidden>
-            <div class="form-grid">
-              <label class="field"><span>Primaries</span><select id="source-gamut"><option value="">Select primaries</option><option value="Rec.709 / sRGB">sRGB (Rec.709)</option><option value="Display P3 / P3-D65">Display P3 (P3-D65)</option><option value="Rec.2020">Rec.2020</option><option value="Adobe RGB">Adobe RGB</option><option value="ACEScg">ACEScg</option><option value="ACES2065-1">ACES2065-1</option></select></label>
-              <label class="field"><span>Transfer</span><select id="source-transfer"><option value="">Select transfer</option><option value="Linear">Linear</option><option value="sRGB">sRGB</option><option value="Gamma 1.8">Gamma 1.8</option><option value="Gamma 2.2">Gamma 2.2</option><option value="Gamma 2.4 / BT.1886">Gamma 2.4 / BT.1886</option><option value="BT.709 / BT.2020">BT.709 / BT.2020</option><option value="PQ / ST 2084">PQ / ST 2084</option><option value="HLG / BT.2100">HLG / BT.2100</option></select></label>
-            </div>
-            <p id="interpretation-error" class="validation-message" role="alert" hidden></p>
+          <div class="form-grid">
+            <label class="field"><span>Primaries</span><select id="source-gamut"><option value="embedded">Use embedded interpretation</option><option value="">Select primaries</option><option value="Rec.709 / sRGB">sRGB (Rec.709)</option><option value="Display P3 / P3-D65">Display P3 (P3-D65)</option><option value="Rec.2020">Rec.2020</option><option value="Adobe RGB">Adobe RGB</option><option value="ACEScg">ACEScg</option><option value="ACES2065-1">ACES2065-1</option></select></label>
+            <label class="field"><span>Transfer</span><select id="source-transfer"><option value="embedded">Use embedded interpretation</option><option value="">Select transfer</option><option value="Linear">Linear</option><option value="sRGB">sRGB</option><option value="Gamma 1.8">Gamma 1.8</option><option value="Gamma 2.2">Gamma 2.2</option><option value="Gamma 2.4 / BT.1886">Gamma 2.4 / BT.1886</option><option value="BT.709 / BT.2020">BT.709 / BT.2020</option><option value="PQ / ST 2084">PQ / ST 2084</option><option value="HLG / BT.2100">HLG / BT.2100</option></select></label>
           </div>
+          <p id="interpretation-error" class="validation-message" role="alert" hidden></p>
         </div>
         <div id="metadata-warning" class="inline-warning" role="status" hidden></div>
       </section>
