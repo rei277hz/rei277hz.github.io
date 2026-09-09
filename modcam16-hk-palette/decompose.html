@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0d1117" />
     <title>Image decomposition | modCAM16-HK</title>
-    <script type="module" crossorigin src="./assets/decompose-_y__4hpA.js"></script>
+    <script type="module" crossorigin src="./assets/decompose-C_F476aS.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-B5Qt9EMX.js">
     <link rel="stylesheet" crossorigin href="./assets/decompose-DGP1w7LN.css">
   </head>
@@ -14,9 +14,9 @@
       <h1 class="sr-only">Image decomposition</h1>
       <section class="upload-row" aria-labelledby="input-heading">
         <h2 id="input-heading" class="sr-only">Input image</h2>
-        <input id="file-input" type="file" accept=".exr,.jpg,.jpeg,.png,.heic,.heif,image/png,image/jpeg,image/heif,image/heic" hidden />
+        <input id="file-input" type="file" accept=".dng,.DNG,.exr,.jpg,.jpeg,.png,.heic,.heif,image/x-adobe-dng,image/dng,image/png,image/jpeg,image/heif,image/heic" hidden />
         <button id="source-preview-frame" class="source-preview-frame" type="button" aria-label="Load an image">
-          <span id="source-preview-empty" class="source-preview-empty"><strong>Load an image</strong><small>EXR · JPEG · PNG · HEIC · HEIF</small></span>
+          <span id="source-preview-empty" class="source-preview-empty"><strong>Load an image</strong><small>DNG · EXR · JPEG · PNG · HEIC · HEIF</small></span>
           <img id="source-preview-image" class="source-preview-image" alt="Source image preview" hidden />
           <span id="source-preview-state" class="source-preview-state" aria-live="polite" hidden></span>
         </button>
@@ -50,7 +50,7 @@
           <figure><button id="base-preview-trigger" class="preview-trigger" type="button" disabled aria-label="Open larger base preview"><img id="base-preview-image" class="preview-image" alt="Base preview JPEG" hidden /></button><figcaption>Base preview</figcaption></figure>
           <figure><button id="exposure-preview-trigger" class="preview-trigger" type="button" disabled aria-label="Open larger exposure preview"><img id="exposure-preview-image" class="preview-image" alt="Exposure preview JPEG" hidden /></button><figcaption>Exposure preview</figcaption></figure>
         </div>
-        <div class="downloads"><button id="download-base" class="download-button" type="button" disabled><span>Base EXR</span><small>ACEScg fp16</small><small id="base-size">Waiting</small></button><button id="download-exposure-rgb" class="download-button" type="button" disabled><span>Exposure EXR</span><small>ACEScg fp16</small><small id="exposure-rgb-size">Waiting</small></button><button id="download-exposure" class="download-button" type="button" disabled><span>Exposure EXR (norm EV)</span><small>Scalar fp16</small><small id="exposure-size">Waiting</small></button></div>
+        <div class="downloads"><button id="download-base" class="download-button" type="button" disabled><span>Base EXR</span><small>ACEScg fp16</small><small id="base-size">Waiting</small></button><button id="download-exposure" class="download-button" type="button" disabled><span>Exposure EXR</span><small>ACEScg fp16</small><small id="exposure-size">Waiting</small></button><button id="download-exposure-norm-ev" class="download-button" type="button" disabled><span>Exposure EXR (norm EV)</span><small>Scalar fp16</small><small id="exposure-norm-ev-size">Waiting</small></button></div>
       </section>
 
       <section class="report-row" aria-labelledby="report-heading"><div class="report-heading"><button id="report-toggle" class="report-toggle" type="button" aria-controls="report-content" aria-expanded="false" aria-label="Expand analytic report" disabled><span class="report-caret" aria-hidden="true"></span></button><h2 id="report-heading">Analytic report</h2></div><div id="empty-report" class="empty-state">Complete a calculation to see diagnostics.</div><div id="report-content" hidden><div id="report-summary" class="report-summary"></div><div id="report-warnings" class="inline-warning" hidden></div><div id="report-metrics" class="metrics"><dl id="report-metrics-left"></dl><dl id="report-metrics-right"></dl></div></div></section>
