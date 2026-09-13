@@ -9,28 +9,69 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
     />
     <title>modCAM16-HK Cartesian Color Picker</title>
-    <script type="module" crossorigin src="./assets/index-LFwvZ5iN.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-k6FHdO80.css">
+    <script type="module" crossorigin src="./assets/index-Ccrmr2u6.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C9U98-Zs.css">
   </head>
   <body>
     <main class="app-shell">
       <section class="visuals">
-        <div class="plot-frame" aria-busy="true">
-          <canvas
-            id="gamut-checkerboard"
-            width="512" height="512" aria-hidden="true"
-          ></canvas>
-          <img
-            id="gamut-slice"
-            width="512" height="512" alt="J', x', and y' gamut slice"
-          />
-          <canvas
-            id="gamut-indicators"
-            width="512" height="512" aria-hidden="true"
-          ></canvas>
-          <span id="plot-status" class="plot-status" role="status"
-            >Loading color engine…</span
+        <div class="gamut-stage">
+          <div class="j-wheel-control">
+            <span class="control-label" id="j-label">J'</span>
+            <div
+              class="j-wheel"
+              id="j-wheel"
+              role="slider"
+              tabindex="0"
+              aria-labelledby="j-label"
+              aria-orientation="vertical"
+              aria-valuemin="0"
+              aria-valuemax="1"
+              aria-valuenow="0.3"
+              aria-valuetext="0.300"
+            >
+              <div class="j-wheel-ticks" aria-hidden="true">
+                <span style="--tick: 0">0.0</span>
+                <span style="--tick: 0.1">0.1</span>
+                <span style="--tick: 0.2">0.2</span>
+                <span style="--tick: 0.3">0.3</span>
+                <span style="--tick: 0.4">0.4</span>
+                <span style="--tick: 0.5">0.5</span>
+                <span style="--tick: 0.6">0.6</span>
+                <span style="--tick: 0.7">0.7</span>
+                <span style="--tick: 0.8">0.8</span>
+                <span style="--tick: 0.9">0.9</span>
+                <span style="--tick: 1">1.0</span>
+              </div>
+              <div class="j-wheel-track" aria-hidden="true">
+                <span id="j-reference-tick" class="j-reference-tick"></span>
+                <span id="j-stick" class="j-patch-tick" hidden></span>
+                <span class="j-wheel-roller"></span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="plot-frame"
+            id="plot-frame"
+            aria-busy="true"
+            aria-label="Gamut slice"
           >
+            <canvas
+              id="gamut-checkerboard"
+              width="512" height="512" aria-hidden="true"
+            ></canvas>
+            <img
+              id="gamut-slice"
+              width="512" height="512" alt="J', x', and y' gamut slice"
+            />
+            <canvas
+              id="gamut-indicators"
+              width="512" height="512" aria-hidden="true"
+            ></canvas>
+            <span id="plot-status" class="plot-status" role="status"
+              >Loading color engine…</span
+            >
+          </div>
         </div>
         <div class="preview-panel">
           <div class="preview-column">
@@ -103,56 +144,6 @@
                 value="0.128354041"
                 aria-label="Background source P3 brightness, 0 to 10"
               />
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="controls" aria-label="Color controls">
-        <div class="control-band" aria-label="J prime and fitted-radius controls">
-          <div class="j-wheel-control">
-            <span class="control-label" id="j-label">J'</span>
-            <div
-              class="j-wheel"
-              id="j-wheel"
-              role="slider"
-              tabindex="0"
-              aria-labelledby="j-label"
-              aria-orientation="vertical"
-              aria-valuemin="0"
-              aria-valuemax="1"
-              aria-valuenow="0.3"
-              aria-valuetext="0.300"
-            >
-              <div class="j-wheel-ticks" aria-hidden="true">
-                <span style="--tick: 0">0.0</span>
-                <span style="--tick: 0.1">0.1</span>
-                <span style="--tick: 0.2">0.2</span>
-                <span style="--tick: 0.3">0.3</span>
-                <span style="--tick: 0.4">0.4</span>
-                <span style="--tick: 0.5">0.5</span>
-                <span style="--tick: 0.6">0.6</span>
-                <span style="--tick: 0.7">0.7</span>
-                <span style="--tick: 0.8">0.8</span>
-                <span style="--tick: 0.9">0.9</span>
-                <span style="--tick: 1">1.0</span>
-              </div>
-              <div class="j-wheel-track" aria-hidden="true">
-                <span id="j-reference-tick" class="j-reference-tick"></span>
-                <span id="j-stick" class="j-patch-tick" hidden></span>
-                <span class="j-wheel-roller"></span>
-              </div>
-            </div>
-          </div>
-          <div class="rolling-control">
-            <span class="control-label" id="rolling-label">x' / y'</span>
-            <div
-              id="rolling-pad"
-              class="rolling-pad"
-              tabindex="0"
-              role="group"
-              aria-labelledby="rolling-label"
-            >
-              <span id="rolling-ball" class="rolling-ball" aria-hidden="true"></span>
             </div>
           </div>
         </div>
