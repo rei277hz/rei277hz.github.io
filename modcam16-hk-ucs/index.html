@@ -9,8 +9,8 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
     />
     <title>modCAM16-HK Cartesian Color Picker</title>
-    <script type="module" crossorigin src="./assets/index-D81HnC3Z.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DZfbd3jk.css">
+    <script type="module" crossorigin src="./assets/index-60qKjjn8.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CmVz1qI9.css">
   </head>
   <body>
     <main class="app-shell">
@@ -118,10 +118,20 @@
           </select>
         </div>
         <div class="control-band" aria-label="J prime and fitted-radius controls">
-          <div class="j-rail-control">
+          <div class="j-wheel-control">
             <span class="control-label" id="j-label">J'</span>
-            <div class="j-rail" id="j-rail">
-              <div class="j-ticks" aria-hidden="true">
+            <div
+              class="j-wheel"
+              id="j-wheel"
+              role="slider"
+              tabindex="0"
+              aria-labelledby="j-label"
+              aria-valuemin="0"
+              aria-valuemax="1"
+              aria-valuenow="0.3"
+              aria-valuetext="0.300"
+            >
+              <div class="j-wheel-ticks" aria-hidden="true">
                 <span style="--tick: 0">0.0</span>
                 <span style="--tick: 0.1">0.1</span>
                 <span style="--tick: 0.2">0.2</span>
@@ -134,18 +144,11 @@
                 <span style="--tick: 0.9">0.9</span>
                 <span style="--tick: 1">1.0</span>
               </div>
-              <span id="j-reference-tick" class="j-reference-tick" aria-hidden="true"></span>
-              <span id="j-stick" class="j-patch-tick" hidden aria-hidden="true"></span>
-              <input
-                id="j-rail-input"
-                class="j-rail-input"
-                type="range"
-                min="0"
-                max="1"
-                step="any"
-                value="0.3"
-                aria-labelledby="j-label"
-              />
+              <div class="j-wheel-track" aria-hidden="true">
+                <span id="j-reference-tick" class="j-reference-tick"></span>
+                <span id="j-stick" class="j-patch-tick" hidden></span>
+                <span class="j-wheel-roller"></span>
+              </div>
             </div>
           </div>
           <div class="rolling-control">
@@ -158,8 +161,6 @@
               aria-labelledby="rolling-label"
               aria-describedby="rolling-value"
             >
-              <span id="x-stick" class="rolling-locator rolling-locator-x" hidden aria-hidden="true"></span>
-              <span id="y-stick" class="rolling-locator rolling-locator-y" hidden aria-hidden="true"></span>
               <span id="rolling-ball" class="rolling-ball" aria-hidden="true"></span>
             </div>
             <span id="rolling-value" class="rolling-value" aria-live="polite">x' 0.380, y' 0.650</span>
