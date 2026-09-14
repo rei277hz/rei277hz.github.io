@@ -9,8 +9,8 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
     />
     <title>modCAM16-HK Cartesian Color Picker</title>
-    <script type="module" crossorigin src="./assets/index-DVSdskAY.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-8zgh5ZUl.css">
+    <script type="module" crossorigin src="./assets/index-D5f2-2Yo.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-fNdAVgNm.css">
   </head>
   <body>
     <main class="app-shell">
@@ -48,6 +48,7 @@
                 <span id="j-reference-tick" class="j-reference-tick"></span>
                 <span id="j-stick" class="j-patch-tick" hidden></span>
                 <span id="j-image-stick" class="j-image-tick" hidden></span>
+                <span id="background-stick" class="j-background-tick" hidden aria-hidden="true"></span>
                 <span id="j-current-indicator" class="j-current-indicator"></span>
               </div>
             </div>
@@ -126,31 +127,6 @@
               aria-hidden="true"
             ></span>
           </div>
-          <div class="background-control">
-            <label for="background-brightness"
-              >Background J'
-              <span class="control-value" id="background-brightness-value"
-                >0.150</span
-              ></label
-            >
-            <div class="range-wrap">
-              <span
-                id="background-stick"
-                class="stick-marker"
-                hidden
-                aria-hidden="true"
-              ></span>
-              <input
-                id="background-brightness"
-                type="range"
-                min="0"
-                max="1"
-                step="any"
-                value="0.15"
-                aria-label="Background J prime, 0 to 1"
-              />
-            </div>
-          </div>
         </div>
       </section>
       <section id="image-panel" class="image-panel" data-ready="false" aria-labelledby="image-heading">
@@ -163,6 +139,7 @@
           <button id="image-load" class="action-button" type="button">Load image</button>
         </div>
         <div class="image-controls">
+          <label class="image-field image-scale-field"><input id="image-scale-203" type="checkbox" checked /> <span>Scale linear source ×2.03 before HDR inverse</span></label>
           <label id="image-gamut-field" class="image-field" hidden><span>Primaries</span><select id="image-gamut">
             <option value="embedded">Use embedded interpretation</option>
             <option value="" disabled>Select primaries manually…</option>
