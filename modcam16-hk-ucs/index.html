@@ -9,8 +9,8 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
     />
     <title>modCAM16-HK Cartesian Color Picker</title>
-    <script type="module" crossorigin src="./assets/index-DPUyn37k.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BkT7P1Yo.css">
+    <script type="module" crossorigin src="./assets/index-EWF2E8Jh.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CvUBaJI2.css">
   </head>
   <body>
     <main class="app-shell">
@@ -131,14 +131,14 @@
       </section>
       <section id="image-panel" class="image-panel" data-ready="false" aria-labelledby="image-heading">
         <div class="image-toolbar">
-          <div>
-            <h2 id="image-heading">Image color locator</h2>
-            <p id="image-status" class="image-status" role="status">Load an image to locate its colors.</p>
-          </div>
+          <h2 id="image-heading">Image color locator</h2>
           <input id="image-file-input" type="file" hidden accept=".dng,.DNG,.exr,.jpg,.jpeg,.png,.heic,.heif,image/x-adobe-dng,image/dng,image/png,image/jpeg,image/heif,image/heic" />
-          <button id="image-load" class="action-button" type="button">Load image</button>
-          <button id="image-options" class="action-button" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="image-options-dialog" disabled>Image Options</button>
+          <div class="image-toolbar-actions">
+            <button id="image-load" class="action-button" type="button">Load image</button>
+            <button id="image-options" class="action-button" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="image-options-dialog" disabled>Image Options</button>
+          </div>
         </div>
+        <p id="image-status" class="image-status" role="status">Load an image to locate its colors.</p>
         <dialog id="image-options-dialog" class="image-options-dialog" aria-labelledby="image-options-heading">
           <form method="dialog" class="image-options-card">
             <div class="image-options-heading"><h3 id="image-options-heading">Image Options</h3><button id="image-options-close" class="action-button" value="cancel" type="submit">Close</button></div>
