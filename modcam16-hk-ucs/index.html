@@ -9,8 +9,8 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
     />
     <title>modCAM16-HK Cartesian Color Picker</title>
-    <script type="module" crossorigin src="./assets/index-CtThi8Cd.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-ae0PZOQo.css">
+    <script type="module" crossorigin src="./assets/index-p-ouR0P0.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BkT7P1Yo.css">
   </head>
   <body>
     <main class="app-shell">
@@ -137,8 +137,13 @@
           </div>
           <input id="image-file-input" type="file" hidden accept=".dng,.DNG,.exr,.jpg,.jpeg,.png,.heic,.heif,image/x-adobe-dng,image/dng,image/png,image/jpeg,image/heif,image/heic" />
           <button id="image-load" class="action-button" type="button">Load image</button>
+          <button id="image-options" class="action-button" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="image-options-dialog">Image Options</button>
         </div>
-        <div class="image-controls">
+        <dialog id="image-options-dialog" class="image-options-dialog" aria-labelledby="image-options-heading">
+          <form method="dialog" class="image-options-card">
+            <div class="image-options-heading"><h3 id="image-options-heading">Image Options</h3><button id="image-options-close" class="action-button" value="cancel" type="submit">Close</button></div>
+            <p id="image-interpretation-warning" class="image-options-warning" role="status" hidden></p>
+            <div class="image-controls">
           <label class="image-field image-scale-field"><input id="image-scale-203" type="checkbox" checked /> <span>Scale linear source ×2.03 before HDR inverse</span></label>
           <label id="image-gamut-field" class="image-field" hidden><span>Primaries</span><select id="image-gamut">
             <option value="embedded">Use embedded interpretation</option>
@@ -160,11 +165,20 @@
             <option value="PQ / ST 2084">PQ / ST 2084</option>
             <option value="HLG / BT.2100">HLG / BT.2100</option>
           </select></label>
-        </div>
-        <div id="image-viewport" class="image-viewport" data-ready="false">
-          <img id="image-preview" alt="Loaded source image" />
-          <canvas id="image-overlay" width="512" height="512" aria-label="Image color locator"></canvas>
+            </div>
+          </form>
+        </dialog>
+        <div class="image-row">
           <canvas id="image-loupe" width="192" height="192" aria-label="Pixel loupe"></canvas>
+          <div id="image-viewport" class="image-viewport" data-ready="false">
+            <img id="image-preview" alt="Loaded source image" />
+            <canvas id="image-overlay" width="512" height="512" aria-label="Image color locator"></canvas>
+          </div>
+          <div class="image-zoom-controls" aria-label="Image zoom">
+            <button type="button" class="action-button image-zoom-button" data-image-zoom="1" aria-pressed="true">1x</button>
+            <button type="button" class="action-button image-zoom-button" data-image-zoom="2" aria-pressed="false">2x</button>
+            <button type="button" class="action-button image-zoom-button" data-image-zoom="5" aria-pressed="false">5x</button>
+          </div>
         </div>
         <p id="image-stats" class="image-stats" role="status"></p>
       </section>
