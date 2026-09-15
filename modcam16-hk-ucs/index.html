@@ -9,15 +9,14 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
     />
     <title>modCAM16-HK Cartesian Color Picker</title>
-    <script type="module" crossorigin src="./assets/index-D2kYVy08.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BwmhQIun.css">
+    <script type="module" crossorigin src="./assets/index-D4QC9siY.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DQ50TnLF.css">
   </head>
   <body>
     <main class="app-shell">
       <section class="visuals">
         <div class="gamut-stage">
           <div class="j-wheel-control">
-            <label class="control-label" id="j-label" for="j-number">J'</label>
             <div class="j-wheel-body">
               <div
                 class="j-wheel"
@@ -56,13 +55,15 @@
                 </svg>
               </div>
             </div>
-            <input id="j-number" class="number-input j-number" type="number"
-              min="0" max="1" step="0.001" value="0.300"
-              inputmode="decimal" aria-label="J prime value" />
+            <div class="j-number-row">
+              <label class="control-label" id="j-label" for="j-number">J’=</label>
+              <input id="j-number" class="number-input j-number" type="number"
+                min="0" max="1" step="0.001" value="0.300"
+                inputmode="decimal" aria-label="J’ value" />
+            </div>
           </div>
-          <div class="slice-column">
-            <div
-              class="plot-frame"
+          <div
+            class="plot-frame"
               id="plot-frame"
               aria-busy="true"
               aria-label="Gamut slice"
@@ -73,13 +74,23 @@
               ></canvas>
               <img
                 id="gamut-slice"
-                width="512" height="512" alt="J', x', and y' gamut slice"
+                width="512" height="512" alt="J’, x’, and y’ gamut slice"
               />
               <img id="gamut-colorchecker" width="1024" height="1024" alt="" aria-hidden="true" />
               <canvas
                 id="gamut-indicators"
                 width="512" height="512" aria-hidden="true"
               ></canvas>
+              <div class="slice-coordinate-inputs" aria-label="Cartesian coordinates">
+                <label for="x-number">x’=</label>
+                <input id="x-number" class="number-input coordinate-number" type="number"
+                  min="0" max="1" step="0.001" value="0.380"
+                  inputmode="decimal" aria-label="x’ value" />
+                <label for="y-number">y’=</label>
+                <input id="y-number" class="number-input coordinate-number" type="number"
+                  min="0" max="1" step="0.001" value="0.650"
+                  inputmode="decimal" aria-label="y’ value" />
+              </div>
               <span id="plot-status" class="plot-status" role="status"
                 >Loading color engine…</span
               >
@@ -87,7 +98,6 @@
                 <button id="full-rec2020-toggle" class="action-button toggle-button" type="button" aria-pressed="true">Rec.2020</button>
                 <button id="desaturate-toggle" class="action-button toggle-button" type="button" aria-pressed="false">Desaturate</button>
               </div>
-            </div>
           </div>
         </div>
         <div class="preview-panel">
