@@ -9,8 +9,8 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
     />
     <title>modCAM16-HK Cartesian Color Picker</title>
-    <script type="module" crossorigin src="./assets/index-HDD5sOPV.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DGEmhHlK.css">
+    <script type="module" crossorigin src="./assets/index-CSDl_CjS.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-m--nHTpa.css">
   </head>
   <body>
     <main class="app-shell">
@@ -48,40 +48,46 @@
                 <span id="j-reference-tick" class="j-reference-tick"></span>
                 <span id="j-stick" class="j-patch-tick" hidden></span>
                 <span id="j-image-stick" class="j-image-tick" hidden></span>
-                <span id="background-stick" class="j-background-tick" hidden aria-hidden="true"></span>
-                <span id="j-current-indicator" class="j-current-indicator"></span>
+                <svg id="background-stick" class="j-background-tick" viewBox="0 0 10 14" hidden aria-hidden="true">
+                  <polygon points="0.5,0.5 9.5,7 0.5,13.5" fill="#171a20" stroke="#fff" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" />
+                </svg>
+                <svg id="j-current-indicator" class="j-current-indicator" viewBox="0 0 8 10" aria-hidden="true">
+                  <polygon points="0,0 8,5 0,10" fill="#fff" />
+                </svg>
               </div>
             </div>
             <input id="j-number" class="number-input j-number" type="number"
               min="0" max="1" step="0.001" value="0.300"
               inputmode="decimal" aria-label="J prime value" />
           </div>
-          <div
-            class="plot-frame"
-            id="plot-frame"
-            aria-busy="true"
-            aria-label="Gamut slice"
-          >
-            <canvas
-              id="gamut-checkerboard"
-              width="512" height="512" aria-hidden="true"
-            ></canvas>
-            <img
-              id="gamut-slice"
-              width="512" height="512" alt="J', x', and y' gamut slice"
-            />
-            <img id="gamut-colorchecker" width="1024" height="1024" alt="" aria-hidden="true" />
-            <canvas
-              id="gamut-indicators"
-              width="512" height="512" aria-hidden="true"
-            ></canvas>
-            <span id="plot-status" class="plot-status" role="status"
-              >Loading color engine…</span
+          <div class="slice-column">
+            <div class="slice-options" role="group" aria-label="Authoring gamut options">
+              <button id="full-rec2020-toggle" class="action-button toggle-button" type="button" aria-pressed="true">Full Rec.2020</button>
+              <button id="desaturate-toggle" class="action-button toggle-button" type="button" aria-pressed="false">Desaturate</button>
+            </div>
+            <div
+              class="plot-frame"
+              id="plot-frame"
+              aria-busy="true"
+              aria-label="Gamut slice"
             >
-          </div>
-          <div class="slice-options" role="group" aria-label="Authoring gamut options">
-            <button id="full-rec2020-toggle" class="action-button toggle-button" type="button" aria-pressed="true">Full Rec.2020</button>
-            <button id="desaturate-toggle" class="action-button toggle-button" type="button" aria-pressed="false">Desaturate</button>
+              <canvas
+                id="gamut-checkerboard"
+                width="512" height="512" aria-hidden="true"
+              ></canvas>
+              <img
+                id="gamut-slice"
+                width="512" height="512" alt="J', x', and y' gamut slice"
+              />
+              <img id="gamut-colorchecker" width="1024" height="1024" alt="" aria-hidden="true" />
+              <canvas
+                id="gamut-indicators"
+                width="512" height="512" aria-hidden="true"
+              ></canvas>
+              <span id="plot-status" class="plot-status" role="status"
+                >Loading color engine…</span
+              >
+            </div>
           </div>
         </div>
         <div class="preview-panel">
