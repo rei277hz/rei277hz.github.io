@@ -11,6 +11,7 @@ const J_PEAK: f32 = 217.2768649129496;
 const SOURCE_SCALE: f32 = 2.03;
 const SOURCE_PEAK: f32 = 10.0 / SOURCE_SCALE;
 const SOURCE_EPS: f32 = 1.0e-7;
+// Shared with the CPU/WASM and Painter paths; R=1 contains Rec.2020 blue.
 const FITTED_RADIUS_K: f32 = 5.977038579617132;
 const FITTED_RADIUS_D: f32 = 3.557365336640551;
 const PROFILE_STRIDE: u32 = 56u;
