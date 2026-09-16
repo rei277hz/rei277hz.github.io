@@ -9,8 +9,8 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
     />
     <title>modCAM16-HK Cartesian Color Picker</title>
-    <script type="module" crossorigin src="./assets/index-BJP1M5ZP.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CsvZ5pnm.css">
+    <script type="module" crossorigin src="./assets/index-Day_4Hve.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C5ImwDgu.css">
   </head>
   <body>
     <main class="app-shell">
@@ -97,6 +97,11 @@
               <div class="slice-options" role="group" aria-label="Authoring gamut options">
                 <button id="full-rec2020-toggle" class="action-button toggle-button" type="button">Rec.2020 (P3-D65 Limited)</button>
               </div>
+              <span
+                id="colorchecker-name"
+                class="colorchecker-name"
+                aria-hidden="true"
+              ></span>
           </div>
         </div>
         <div class="preview-panel">
@@ -141,11 +146,6 @@
                 Set
               </button>
             </div>
-            <span
-              id="colorchecker-name"
-              class="colorchecker-name"
-              aria-hidden="true"
-            ></span>
           </div>
         </div>
       </section>
@@ -158,15 +158,15 @@
           <input id="image-file-input" type="file" hidden accept=".dng,.DNG,.exr,.jpg,.jpeg,.png,.heic,.heif,image/x-adobe-dng,image/dng,image/png,image/jpeg,image/heif,image/heic" />
           <div class="image-toolbar-actions">
             <button id="image-load" class="action-button" type="button">Load image</button>
-            <button id="image-options" class="action-button" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="image-options-dialog" disabled>Image Options</button>
+            <button id="image-options" class="action-button" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="image-options-dialog" disabled>Option</button>
           </div>
         </div>
         <dialog id="image-options-dialog" class="image-options-dialog" aria-labelledby="image-options-heading">
           <form method="dialog" class="image-options-card">
-            <div class="image-options-heading"><h3 id="image-options-heading">Image Options</h3><button id="image-options-close" class="action-button" value="cancel" type="submit">Close</button></div>
+            <div class="image-options-heading"><h3 id="image-options-heading">Option</h3><button id="image-options-close" class="action-button" value="cancel" type="submit">Close</button></div>
             <p id="image-interpretation-warning" class="image-options-warning" role="status" hidden></p>
             <div class="image-controls">
-          <label class="image-field image-scale-field"><input id="image-scale-203" type="checkbox" checked /> <span>Scale linear source ×2.03 before HDR inverse</span></label>
+          <label class="image-field image-scale-field"><input id="image-scale-203" type="checkbox" /> <span>Use HDR 203 nits diffuse white</span></label>
           <label id="image-gamut-field" class="image-field" hidden><span>Primaries</span><select id="image-gamut">
             <option value="embedded">Use embedded interpretation</option>
             <option value="" disabled>Select primaries manually…</option>
@@ -206,9 +206,8 @@
         <p id="image-stats" class="image-stats" role="status"></p>
       </section>
       <footer class="app-footer">
-        * J′x′y′ → HDR Rec.2020-D65 display-linear RGB → inverse
-        <i>ACES 2.0 - HDR 1000 nits (Rec.2020)</i> → scene-reference ACEScg →
-        <i id="footer-view-name">ACES 2.0 - HDR 1000 nits (Rec.2020)</i> → page display.
+        <p>* J′, x′ and y′ decide a color's lightness and chromaticity; its ACEScg value is reproduced with <i>ACES 2.0 - HDR 1000 nits (Rec.2020)</i>.</p>
+        <p>** Colors displayed on this page use the <i id="footer-view-name">ACES 2.0 - HDR 1000 nits (Rec.2020)</i> view transform.</p>
       </footer>
     </main>
   </body>
