@@ -9,8 +9,8 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
     />
     <title>modCAM16-HK Cartesian Color Picker</title>
-    <script type="module" crossorigin src="./assets/index-y5MbCOpV.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BVz5a0U3.css">
+    <script type="module" crossorigin src="./assets/index-D4W3g8yW.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-dIe8umWD.css">
   </head>
   <body>
     <main class="app-shell">
@@ -166,7 +166,13 @@
             <div class="image-options-heading"><h3 id="image-options-heading">Options</h3><button id="image-options-close" class="action-button" value="cancel" type="submit">Close</button></div>
             <p id="image-interpretation-warning" class="image-options-warning" role="status" hidden></p>
             <div class="image-controls">
-          <label class="image-field image-scale-field"><input id="image-scale-203" type="checkbox" /> <span>Use HDR 203 nits diffuse white</span></label>
+          <label class="image-field image-units-field">
+            <input id="image-treat-display-linear-one-as-hdr203-white" type="checkbox" />
+            <span class="image-units-copy">
+              <span>Treat display-linear 1.0 as HDR 203 nits diffuse white</span>
+              <small id="image-units-help">No multiplier will be applied.</small>
+            </span>
+          </label>
           <label id="image-gamut-field" class="image-field" hidden><span>Primaries</span><select id="image-gamut">
             <option value="embedded">Use embedded interpretation</option>
             <option value="" disabled>Select primaries manually…</option>
