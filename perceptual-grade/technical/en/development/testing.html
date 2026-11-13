@@ -1,0 +1,651 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Testing and measurements - Perceptual Grade Technical Report</title>
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css" integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js" integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk" crossorigin="anonymous"></script>
+
+        <meta name="description" content="English technical report on the current Perceptual Grade reference and project development.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/fonts-6a07186e.css">
+        <link rel="stylesheet" href="../theme/grade-dda453c0.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-53542b48.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-2d92a0d7.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/pontano-sans@5.3.0/files/pontano-sans-latin-wght-normal.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64 256x256" href="../../../favicon.ico?v=b4dbc1f8e6d1">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png?v=65f37d4e63e3">
+<link rel="manifest" href="../../../site.webmanifest">
+</head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu"><li role="none"><button role="menuitem" class="grade-auto" id="grade-theme-auto">Auto</button></li>
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Dark</button></li>
+                            
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"><a href="../index.html"><img class="brand-icon" src="../../../assets/icons/perceptual-grade-32-transparent.png" srcset="../../../assets/icons/perceptual-grade-64-transparent.png 2x" alt="" width="32" height="32"><span>Perceptual Grade Technical Report</span></a></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rei277hz/chromaticity" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+<nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="testing-and-measurements"><a class="header" href="#testing-and-measurements">Testing and measurements</a></h1>
+<blockquote>
+<p><strong>Historical implementation guidance:</strong> this chapter retains the 1.23.2 runtime, source layout, and validation profile. For current development commands and supported behavior, use the product READMEs in <a href="https://github.com/rei277hz/chromaticity">chromaticity</a>.</p>
+</blockquote>
+<p>Choose validation around the behavior you changed. Numerical tests isolate equations and invariants; DCTL parity tests compare the analytic reference; native-render tests check the graph actually evaluated by Blender. Packaging and documentation tests cover the artifacts readers and users receive. The <a href="building.html#run-tests">build chapter</a> lists the targets.</p>
+<p>A failing reproduction should identify the host version, input interpretation, grade, render method and device. Run the focused gate first, then the related integration gates. Report measured results with their workload and settings, so another contributor can reproduce them.</p>
+<h2 id="shared-grade-regression-checks"><a class="header" href="#shared-grade-regression-checks">Shared Grade regression checks</a></h2>
+<p>Run the ownership and real undo/redo fixtures with:</p>
+<pre><code class="language-sh">buck2 test //:blender_test_shared_grades //:blender_test_shared_grade_undo
+</code></pre>
+<p>These tests use real Blender RNA and native evaluation graphs. They cover empty selectors, lazy allocation and cancelled drags, cross-editor propagation, local Render Method and handle focus, independent copies, renaming, unlinking, retained unused data, Grade-owned keyframes, current-format node ownership, and save/load/disable/re-enable. The undo fixture exercises Blender’s undo stack for shared edits, allocation, copies and unlinking.</p>
+<p><code>//:blender_test_white_and_render_ui</code> renders a Grade shared between Shader and Compositor users, then compares output with the extension disabled. The existing render fixtures also check native save/reload and packed LUT persistence. Selector draw tests validate the <code>template_ID</code> binding; interactive desktop operation and GPU rendering still require a desktop check.</p>
+<h2 id="grade-and-stack-editing-regressions"><a class="header" href="#grade-and-stack-editing-regressions">Grade and Stack editing regressions</a></h2>
+<p>Run the current authoring regressions through the same isolated Blender runner:</p>
+<pre><code class="language-sh">buck2 test //:blender_test_stack_editing //:blender_test_grade_stack \
+  //:blender_test_working_white //:blender_test_shared_grade_undo
+</code></pre>
+<p><code>test_stack_editing.py</code> invokes 53 pytest cases under <code>tests/blender/stack_editing/</code>.
+Pytest and its exact development dependencies are pinned in <code>third_party</code>; they
+are not part of the installed extension. The cases exercise compact controls,
+shared ownership, enable/inverse state, Grade-node pencils, one active pencil
+across multiple Grade and Stack nodes in both editor types, sidebar and close-button
+synchronization, explicit pencil activation, occurrence
+tracking during reorder, disabled editing, handle gestures and cancellation,
+installed-LUT-only scopes, rejection of outdated bakes, native Shader/Compositor
+CPU output, and current-format save/load/undo/disable/re-enable.</p>
+<p>The original Stack and working-white fixtures continue to cover scheduling,
+shared animation, signed RGB, alpha and coordinate invariance. Their inverse
+operations now use single-entry Stacks. The ordinary Grade remains forward
+with an independent Render Method. The undo fixture also covers entry bypass.
+<code>inverse_reference.py</code> is a test-only Stage 2+3 adapter used by numerical solver
+checks and historical precision studies; it does not provide an inverse node.</p>
+<p><a href="../../../downloads/grade-stack-ui-validation.json">The merged-source validation record</a>
+separates actual authoring runs from the Buck2 release gate and desktop/GPU checks.</p>
+<h2 id="progressive-stack-bake-measurements"><a class="header" href="#progressive-stack-bake-measurements">Progressive Stack bake measurements</a></h2>
+<p>The 1.18.0 regression gates are:</p>
+<pre><code class="language-sh">buck2 test //:numerical_test_progressive_lut //:numerical_test_cube_native \
+  //:blender_test_stack_editing //:blender_test_grade_stack
+</code></pre>
+<p>They check nested-grid identity, exactly 274,625 total analytic samples for a settled preview/refinement pair, bit-for-bit common-vertex reuse, inverse diagnostic counts, cancellation and native sampling at both resolutions. The Blender cases cover preview publication, scope cache refresh, coalescing during continuous drags, deleted nodes, and final-render synchronization.</p>
+<p>Three fresh numerical runs per case on Python 3.13.15 / NumPy 2.5.3, with one BLAS thread, produced these median times:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Workload</th><th style="text-align: right">Independent 65³ bake</th><th style="text-align: right">First 33³ preview</th><th style="text-align: right">Refinement only</th><th style="text-align: right">Progressive total</th></tr>
+</thead>
+<tbody>
+<tr><td>Three forward Grades</td><td style="text-align: right">1.016 s</td><td style="text-align: right">0.121 s</td><td style="text-align: right">0.860 s</td><td style="text-align: right">0.979 s</td></tr>
+<tr><td>One inverse Grade</td><td style="text-align: right">4.247 s</td><td style="text-align: right">0.996 s</td><td style="text-align: right">3.766 s</td><td style="text-align: right">4.830 s</td></tr>
+<tr><td>Forward → inverse → forward</td><td style="text-align: right">4.693 s</td><td style="text-align: right">1.090 s</td><td style="text-align: right">4.192 s</td><td style="text-align: right">5.282 s</td></tr>
+</tbody>
+</table>
+</div>
+<p>Medians are taken separately, so columns need not add exactly. Timings exclude imports, scheduling delays, Blender image publication and rendering. They are numerical measurements on this host, not an interactive frame-rate or deadline guarantee. Two solver phases can add overhead even though the vertex count is unchanged; preview latency is the benefit. These measurements do not establish a sub-five-second final bake for all Stacks.</p>
+<p>All nine refined 65³ tables were bit-for-bit identical to independent full bakes with the same parameters. This checks that refinement preserves final values for these workloads; 33³ previews still have coarser interpolation and are replaced before final rendering/saving. This timing run does not repeat the photographic display-error study.</p>
+<p><a href="../../../downloads/progressive-bake-performance.json">JSON with Grade parameters, environment and all runs</a> / <a href="../../../downloads/progressive-bake-performance.csv">CSV timings</a>.</p>
+<p>To repeat the timing measurement in an already prepared test tree:</p>
+<pre><code class="language-sh">python tools/testing/run_fixture.py --authoring-preview --tree . \
+  --script tests/blender/benchmark_progressive.py \
+  --output-dir /absolute/path/to/results --capture tests/blender/reports
+</code></pre>
+<p>Use the same generated inputs and environment described below. The timing script uses three repetitions by default and never reuses completed cube caches. This explicit authoring runner does not replace the Buck2 gate.</p>
+<h2 id="cpu-solver-optimization-and-gpu-exploration-1220"><a class="header" href="#cpu-solver-optimization-and-gpu-exploration-1220">CPU solver optimization and GPU exploration (1.22.0)</a></h2>
+<p>The installed CPU inverse now measures an analytic regular-system Jacobian,
+including the reference-dependent H–K inverse. It reuses coefficient work,
+skips inactive families and solves the two-variable normal step explicitly.
+Its accepted forward function, iteration limits, candidate thresholds and
+diagnostic tolerance are unchanged. The <a href="forward-inverse-math.html#analytic-regular-jacobian">math specification</a>
+defines these derivatives and their numerical branches.</p>
+<p>Three interleaved fresh runs compared the supplied 1.21.0 solver with the
+optimized solver on the current AP1 grid, using Python 3.13.15, NumPy 2.5.3
+and one BLAS/OMP thread:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Workload</th><th style="text-align: right">Baseline 65³</th><th style="text-align: right">Optimized 65³</th><th style="text-align: right">Ratio</th></tr>
+</thead>
+<tbody>
+<tr><td>One inverse Grade</td><td style="text-align: right">6.177 s</td><td style="text-align: right">4.425 s</td><td style="text-align: right">1.40×</td></tr>
+<tr><td>Forward → inverse → forward</td><td style="text-align: right">5.230 s</td><td style="text-align: right">4.514 s</td><td style="text-align: right">1.16×</td></tr>
+<tr><td>Three forward Grades</td><td style="text-align: right">2.236 s</td><td style="text-align: right">2.206 s</td><td style="text-align: right">1.01×</td></tr>
+</tbody>
+</table>
+</div>
+<p>This host showed substantial timing variation; retain every run rather than
+interpreting the ratios as a workstation guarantee. Across the nine table
+comparisons, the mixed/forward results were bit-for-bit identical and the
+largest inverse table change was <span data-tex="1.49&#92;times10^{-8}"></span> in absolute RGB.
+Every progressive table matched its independent full bake exactly, with all
+common vertices reused. The 80 before/after accuracy checks cover 2,114
+photographic/signed/HDR/neutral inputs per case, four whites and four Grade
+configurations. The largest per-sample reproduction increase was
+<span data-tex="7.21&#92;times10^{-10}"></span>. Existing best-effort failures remain visible in the
+data; this is not a proof of invertibility for arbitrary grades.</p>
+<p><a href="../../../downloads/cpu-solver-performance.json">CPU timings JSON</a>,
+<a href="../../../downloads/cpu-solver-performance.csv">CSV</a>,
+<a href="../../../downloads/cpu-solver-accuracy.json">accuracy JSON</a>, and
+<a href="../../../downloads/inverse-jacobian.json">derivative checks</a> retain parameters,
+fixtures, environment and source fingerprints. Frozen baseline code lives
+only in test fixtures and is excluded from the installed extension.</p>
+<pre><code class="language-sh">buck2 test //:numerical_test_inverse_jacobian //:numerical_test_cpu_solver_accuracy \
+  //:numerical_test_inverse_solver //:numerical_test_inverse_math \
+  //:numerical_test_progressive_lut //:blender_test_grade_stack \
+  //:blender_test_stack_editing
+buck2 build //:cpu_solver_benchmark --show-full-output
+</code></pre>
+<p>A cached Buck build result is an earlier timing sample. To collect fresh runs
+in a prepared tree, use the explicit authoring runner:</p>
+<pre><code class="language-sh">python tools/testing/run_fixture.py --authoring-preview --tree . \
+  --script tests/blender/benchmark_cpu_solver.py \
+  --output-dir /absolute/path/to/fresh-results --capture tests/blender/reports
+</code></pre>
+<h3 id="gpu-experiment-1220-historical-record"><a class="header" href="#gpu-experiment-1220-historical-record">GPU experiment (1.22.0 historical record)</a></h3>
+<p>The 1.22.0 frozen sources formed a developer experiment. Blender compiled its
+Python-contained compute shader at runtime through
+<code>GPUShaderCreateInfo</code>; no external GPU package or precompiled binary is installed.
+Each invocation evaluates one vertex. It keeps the full Grade sequence,
+regular two-variable inverse, scalar H–K/Tone inverses, and full-forward RGB
+Broyden recovery on the device. Parameters use a fixed-capacity texture so
+ordinary edits/short Stack changes can reuse the program and sampler layout.
+The final table is read once per phase. A nested bake evaluates exactly
+274,625 vertices, copying all 33³ common values into the final 65³ table.</p>
+<p>The portable experiment uses float32. Its RGB stopping scale is
+<span data-tex="&#92;max(10^{-12},&#92;lVert y&#92;rVert_&#92;infty)"></span>, with device cutoff
+<span data-tex="3&#92;times10^{-6}"></span>. Preserving relative accuracy in dark colors matters:
+using the CPU’s <span data-tex="1+&#92;lVert y&#92;rVert_&#92;infty"></span> normalization with a float32-sized
+cutoff skipped small but visible dark adjustments. The fixed-reference guard
+and tone Newton policies also use float32-sized thresholds. The installed
+float64 CPU policy is unchanged. GPU audit fields count vertices needing RGB
+recovery and those still above the device cutoff; they do not assert the CPU’s
+<span data-tex="2&#92;times10^{-8}"></span> diagnostic accuracy.</p>
+<p>The full-grid software-renderer result and the independent photographic RGB/
+four-output ACES comparison are in the <a href="../../../downloads/gpu-solver-exploration.md">GPU exploration report</a>,
+with <a href="../../../downloads/gpu-solver-performance.json">JSON</a>,
+<a href="../../../downloads/gpu-solver-performance.csv">timing CSV</a>, and
+<a href="../../../downloads/gpu-solver-photographic-errors.csv">photographic error CSV</a>.
+The report distinguishes warm bakes, driver compilation/first use and CPU repair.
+Software-renderer timings cannot establish physical-GPU/Metal/Vulkan performance.
+GPU baking was not selected by installed 1.22.0 nodes. The current source tools
+now measure the installed implementation below; the downloadable 1.22.0
+results retain their original source fingerprints and scope.</p>
+<p>Run the opt-in arithmetic checks and a small context/dispatch probe with:</p>
+<pre><code class="language-sh">buck2 test //:gpu_solver_math
+buck2 build //:gpu_solver_smoke --show-full-output
+</code></pre>
+<p>Run a fresh full measurement in a chosen desktop Blender:</p>
+<pre><code class="language-sh">buck2 run //:gpu_solver_benchmark -- \
+  --blender /absolute/path/to/blender \
+  --output /absolute/path/to/gpu-results/gpu-solver-performance.json \
+  --full-grid --progressive --repeats 3 --repair
+</code></pre>
+<p>For photographic ACES metrics, also pass <code>--fixture-samples 2048</code> and
+<code>--analysis-pythonpath /absolute/path/to/locked-analysis-wheels</code>. This directory
+must supply the pinned test-only PyOpenColorIO wheel matching Blender’s Python.
+The wrapper enables Blender’s explicit system-Python-path option for this run.
+It uses factory startup and a private copy of the source tree. The same wrapper
+can be invoked from source with <code>python tools/experiments/run_gpu_solver.py</code>.
+No extension installation or existing project is needed. By default it rejects
+software devices; <code>--allow-software</code> records a software correctness run explicitly.</p>
+<p>The output includes shader/first-layout warm-up costs, every timing repetition,
+complete Grade parameters, source/fixture/OCIO fingerprints, full-grid status,
+device metadata, audit counts, separate scene/display eligibility counts,
+JSON/CSV distributions and snapshots of evaluated code. Absolute RGB uses the
+Rec.2020/D65 [0,10] input cube; ACES-rendered metrics use the AP1/ACES [0,128]
+input cube. These independent masks are fixed at exact Stack input; pixels
+outside both are excluded. GPU arithmetic, CPU LUT, and GPU LUT errors against
+the complete float64 reference are separate measurements. Final render/save
+publication and interactive scheduling are excluded from numerical timings.</p>
+<p>These fixtures were executed with the pinned authoring-preview runtime.
+Buck2 was unavailable on this host; its dependency/build gate and physical-GPU
+desktop integration remain to be run on a supported workstation.</p>
+<h2 id="complete-metal-matrix-update-fix-1232"><a class="header" href="#complete-metal-matrix-update-fix-1232">Complete Metal matrix update fix (1.23.2)</a></h2>
+<p>The next Mac log showed one shader failure followed by CPU fallback, confirming
+the 1.23.1 error policy. Compilation still rejected the <code>mat2</code> and <code>mat3</code>
+rank-one matrices divided by a scalar. Both complete updates now operate on
+vector columns before constructing a matrix; the solver equations and policy
+are unchanged.</p>
+<p>The arithmetic fixture reads every updated column for nonzero asymmetric
+Jacobians and signed vectors. It checks the actual squared displacement and
+small/large denominators, plus the two- and three-dimensional secant conditions.
+The installed fixture retains the plain compiler/dispatch exception tests and
+once-per-context fallback. Run the same <code>//:gpu_solver_math</code> and <code>//:gpu_baking</code>
+targets below. <a href="../../../downloads/gpu-metal-matrix-fix.json">Validation data</a> records
+the current checks, source fingerprints and software-renderer scope. These
+runs establish software OpenGL correctness, not native Metal compilation or a
+new hardware performance measurement.</p>
+<h2 id="metal-shader-startup-fix-1231"><a class="header" href="#metal-shader-startup-fix-1231">Metal shader startup fix (1.23.1)</a></h2>
+<p>A supplied Mac log showed the compute shader failing on undeclared
+<code>outerProduct</code>, followed by a plain <code>Exception: Shader Compile Error</code> escaping
+the draw callback and triggering compilation on every redraw. The shader now
+uses explicit column constructors for both Broyden rank-one updates. GPU
+acquisition and dispatch catch ordinary exceptions, log/cache the failure once
+per context, and let the timer publish the current CPU result.</p>
+<p>The arithmetic fixture additionally checks both helpers with asymmetric signed
+vectors. The installed fixture injects a plain compiler exception, checks the
+single attempt and traceback, confirms that Preparing is cleared, and verifies
+the current CPU LUT. Its dispatch-error injection also uses plain <code>Exception</code>.
+Run the same <code>//:gpu_solver_math</code> and <code>//:gpu_baking</code> targets below.
+<a href="../../../downloads/gpu-metal-startup-fix.json">The fix validation</a> retains counts,
+source fingerprints and the software-renderer scope. Physical Metal startup
+and performance still require a Mac run. The 1.23.0 timing/photographic tables
+below retain their original source snapshots; they are not new 1.23.1 timing
+measurements. See <a href="../../../manual/en/guide/render-methods.html#gpu-startup-errors-and-logs">startup errors and logs</a>.</p>
+<h2 id="installed-gpu-baking-1230"><a class="header" href="#installed-gpu-baking-1230">Installed GPU baking (1.23.0)</a></h2>
+<p>The installed implementation is <code>model/gpu.py</code>, <code>model/gpu_shader.py</code>,
+<code>graph/gpu.py</code> and <code>graph/lut.py</code>. It automatically uses a physical graphics
+device for nonlinear LUT work and reports the backend in the sidebar.
+<code>tools/experiments/gpu_solver.py</code> is now a thin workstation-measurement adapter,
+with an optional strict whole-grid CPU repair probe that is not installed.
+The <a href="../../../manual/en/guide/render-methods.html#automatic-gpu-baking">render-method guide</a> explains
+selection, first-use compilation and save/render CPU completion.</p>
+<pre><code class="language-sh">buck2 test //:gpu_solver_math //:gpu_baking
+buck2 build //:gpu_solver_smoke --show-full-output
+buck2 run //:gpu_solver_benchmark -- \
+  --blender /Applications/Blender.app/Contents/MacOS/Blender \
+  --output /absolute/path/to/results/gpu-solver-performance.json \
+  --full-grid --progressive --repeats 3 \
+  --fixture-samples 2048 \
+  --analysis-pythonpath /absolute/path/to/locked-analysis-wheels
+</code></pre>
+<p><code>--repeats 3</code> performs three fresh timed bakes for each workload; it does not
+change inverse iterations or quality. The default workloads are one inverse,
+forward → inverse → forward, and three forward Grades. Shader creation and
+first-layout/driver warm-up are reported separately. Final numerical bake time
+includes bounded dispatches, texture upload/readback, flagged CPU recovery,
+coordinate conversions and float32 storage. Flagged vertices share one CPU
+recovery pool per preview/refinement phase. It excludes UI debounce, editor
+frame gaps, image packing/publication, imports and render time. <code>--repair</code>
+adds a separate strict whole-grid verification experiment, not the production
+flag-only repair policy. Buck’s cached build output is an earlier timing sample.</p>
+<p>The arithmetic fixture checks all eight whites, curve Fits, signed/HDR/dark
+inputs and independent float64 forward reproduction. The installed fixture
+uses actual Blender GPU objects to check automatic acquisition, context safety,
+nested exact reuse, worker rejection, flagged recovery, cancellation,
+draw/timer publication, edit coalescing, fallback, native output and cleanup.
+Its software-renderer opt-in is fixture-local; installed users keep automatic
+physical-device selection.</p>
+<p><a href="../../../downloads/gpu-baking-validation.md">The integration report</a>,
+<a href="../../../downloads/gpu-baking.json">checks and native measurements</a>,
+<a href="../../../downloads/gpu-baking-performance.json">fresh full-grid JSON</a>,
+<a href="../../../downloads/gpu-baking-performance.csv">timing CSV</a> and
+<a href="../../../downloads/gpu-baking-photographic-errors.csv">photographic distributions</a>
+record the actual validation scope. Photographic masks, four ACES outputs and
+reference semantics remain those of the earlier study. Current GPU LUT results
+include device-flagged CPU repair; GPU arithmetic-only results measure the shader
+without LUT interpolation. Float32 audit thresholds do not establish the CPU
+residual tolerance for every unflagged vertex.</p>
+<p>This host has a software graphics device. These authoring-preview checks do
+not establish physical GPU/Metal speed, a tenfold gain, interactive desktop
+behavior or the Buck2 release gate. Repeat the workload on the target Mac and
+retain its device, cold costs and every warm run when assessing those goals.</p>
+<h2 id="measure-render-methods"><a class="header" href="#measure-render-methods">Measure render methods</a></h2>
+<p>Run the benchmark on the workstation whose results you want to publish. It uses your desktop Blender with a built extension, factory startup, a deterministic signed/HDR texture, fixed nonzero Tone/Color adjustments and identical render settings for both methods. Six cases cover Shader small/full and Compositor full with Baked LUT and Direct. Preparation includes graph setup, coefficient data and LUT completion; one warm-up precedes repeated render timings. Retain the complete JSON, rather than a single summary value.</p>
+<p>Example on macOS, using Metal for Cycles and GPU compositing:</p>
+<pre><code class="language-sh">buck2 run //:benchmark -- \
+  --blender /Applications/Blender.app/Contents/MacOS/Blender \
+  --backend METAL --compositor-device GPU \
+  --width 1920 --height 1080 --samples 64 --trials 5 \
+  --output /absolute/path/to/perceptual-grade/docs/data/benchmark.json
+</code></pre>
+<p>For Linux, point <code>--blender</code> to a full desktop binary and choose CPU, CUDA, OPTIX, HIP or ONEAPI as available. Record the actual selected GPU and desktop build. The worker reports the compositor device separately. The small material occupies approximately 12.25% of the frame; both shader cases use an emissive surface to isolate repeated material grading from complex lighting variation.</p>
+<p>The checked-in <code>benchmark.json</code> is explicitly <strong>illustrative</strong>. A real run emits <code>status: measured</code> and device/version/settings metadata. In the current book build, replacing <code>products/perceptual-grade-book/docs/data/benchmark.json</code> and building <code>//products/perceptual-grade-book/generators:figures</code> updates the labelled chart and Markdown table together. The historical <code>//:documentation_benchmark</code> target used six tiny native CPU cases to verify the runner; its timings are validation data, not publication measurements.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/figures/render-benchmark.svg"><img src="../../../assets/figures/render-benchmark.svg" alt="Workload and preparation comparison" width="505" height="304"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/figures/render-benchmark.svg"><img src="../../../assets/figures/render-benchmark.svg" alt="Workload and preparation comparison" width="505" height="304"></a></span></label></p>
+<p class="figure-caption">The supplied dataset is illustrative. Replacing it with workstation measurements updates this chart and table.</p>
+
+<p>Illustrative data. These values demonstrate the reporting layout.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Workload</th><th>Method</th><th style="text-align: right">Preparation (s)</th><th style="text-align: right">Median render (s)</th></tr>
+</thead>
+<tbody>
+<tr><td>Shader / small</td><td>LUT</td><td style="text-align: right">0.900</td><td style="text-align: right">3.500</td></tr>
+<tr><td>Shader / full</td><td>LUT</td><td style="text-align: right">0.900</td><td style="text-align: right">5.600</td></tr>
+<tr><td>Compositor</td><td>LUT</td><td style="text-align: right">0.900</td><td style="text-align: right">0.480</td></tr>
+<tr><td>Shader / small</td><td>DIRECT</td><td style="text-align: right">0.400</td><td style="text-align: right">9.400</td></tr>
+<tr><td>Shader / full</td><td>DIRECT</td><td style="text-align: right">0.400</td><td style="text-align: right">17.200</td></tr>
+<tr><td>Compositor</td><td>DIRECT</td><td style="text-align: right">0.400</td><td style="text-align: right">0.620</td></tr>
+</tbody>
+</table>
+</div>
+<p><a href="../../../downloads/benchmark.json">Download the benchmark data</a>.</p>
+<h2 id="explicit-authoring-preview"><a class="header" href="#explicit-authoring-preview">Explicit authoring preview</a></h2>
+<p>Buck2 remains the release build/test gate. On a host where Buck cannot launch,
+<code>tools/testing/run_fixture.py --authoring-preview --tree &lt;prepared-test-tree&gt; --script tests/blender/test_chroma_drivers.py</code> runs the same fixture in an isolated
+copy. Supply the pinned CPython/wheels, compiled catalogs, generated artwork,
+localized DCTL/UI metadata and C++ host declared by <code>//:test_tree</code>. The runner
+sets <code>PG_AUTHORING_PREVIEW</code>, never <code>PG_BUCK_TEST</code>, and labels the execution.
+This mode does not validate Buck dependency resolution or satisfy its release gate.</p>
+<p>The p=2 regression fixtures live in <code>tests/blender/fixtures/p2</code>. Their generator
+is <code>tools/testing/freeze_p2.py</code>; it writes to a separate output directory for
+review. Its independent long-double driver formula is in <code>tests/blender/p2_oracle.py</code>.
+Historical fixture files and hashes are retained. Guard/grid checks still compare
+the old baselines for grades with inactive low/high controls. The new baselines
+cover intentional classifier changes at the original numerical tolerances.</p>
+<p><code>test_forward_inverse.py</code> validates the documented regular inverse on 48 mixed
+grades’ input samples and 2400 guard probes. It is a solver demonstration, not a
+production inverse baker or a convergence guarantee for arbitrary grades.</p>
+<h2 id="working-white-validation"><a class="header" href="#working-white-validation">Working-white validation</a></h2>
+<p><code>//:blender_test_working_white</code> checks all eight Grade whites, all three supported scene RGB spaces, matrix rebasing and decomposition, matrix-owned animation, both Add-menu entries, scopes, current-format save/load and reuse of ordinary/Stack LUTs after scene-space changes. It includes 24 native CPU renders across Shader/Compositor and Direct/Forward LUT/single-inverse Stack/mixed Stack paths. The 1.15.0 run passed 102 checks. <a href="../../../downloads/working-white-native.json">Download the native measurements</a>.</p>
+<p>Working-space invariance and LUT approximation are separate tests: unchanged LUT coordinates preserve the same sampled function across scene spaces, but do not make that sampled function exact.</p>
+<h2 id="inverse-and-stack-precision"><a class="header" href="#inverse-and-stack-precision">Inverse and Stack precision</a></h2>
+<p>Run <code>//:numerical_test_inverse_math</code>, <code>//:numerical_test_inverse_solver</code>, <code>//:blender_test_grade_stack</code> and <code>//:blender_test_shared_grade_undo</code> for inverse equations, node behavior, native rendering, persistence and undo. <code>tests/blender/evaluate_working_white_precision.py</code> measures the current fixed LUT boundaries, with D65, ACES and D50 Grades in a Forward → Inverse → Forward sequence.</p>
+<p>The earlier 1.15.0 Rec.709 report used 2,048 sampled pixels from each IMG_* fixture, converted from their original linear Rec.2020 coordinates without clipping. Mixed Stack p99 normalized RGB error is 0.000371–0.001575, lower than three separate LUTs in all four samples. Individual errors can be much larger: IMG_0472 has a Stack maximum of 0.082083 and ordinary inverse maximum of 0.206524. Extreme signed colors and extrapolation also have substantial errors. One cube removes intermediate interpolation but does not guarantee higher accuracy for every pixel.</p>
+<p>Normalization is max absolute RGB error divided by 1 + max absolute reference RGB; it is not perceptual ΔE or percent brightness. The ordinary inverse bake reports 174 approximate vertices out of 274,625; the mixed Stack reports 130. These are solver reproduction diagnostics before LUT storage/interpolation. <a href="../../../downloads/working-white-precision.json">Download the historical 1.15.0 measurements and Grade settings</a>. The implementation includes <code>docs/engineering/working-white-validation.md</code> with complete tables and validation scope. Native CPU lookup tests, inverse solving and interpolation measurements remain separate; GPU/Metal results are not claimed.</p>
+<p>That historical precision run took 4.08 seconds for the ordinary inverse, 5.13 seconds for the mixed-white Stack and 1.05 seconds for a forward Stack. These are single-run numerical bake measurements excluding Blender publication and the edit debounce. They do not guarantee a deadline for every grade or machine.</p>
+<h2 id="lut-sampling-and-aces-20-display-error"><a class="header" href="#lut-sampling-and-aces-20-display-error">LUT sampling and ACES 2.0 display error</a></h2>
+<p>Version 1.16.0 replaces the previous Rec.709 LUT with <strong>fixed linear Rec.2020/D65, −4…+64, 16 negative / 48 positive cells and positive asinh κ = 0.001</strong> for every Blender working space. The selection study compared 50 configurations, including fixed Rec.2020/D65, smaller negative ranges and four shaper families. It evaluates all 338,688 stored pixels from the four IMG_* fixtures for ten finalists, with four finalists also checked at −2 and +2 stops of input exposure. The stored fixtures sample every twelfth row and column of the original EXRs; this is not a full-resolution original-image evaluation.</p>
+<p>The study retains scene-RGB errors and adds absolute-light ΔE_ITP after the actual OCIO ACES 2.0 transforms: SDR 100 nits Rec.709, SDR 100 nits P3-D65, HDR 1000 nits P3-D65, and HDR 1000 nits Rec.2020, all with D65 creative white. Luminance error in nits, encoded-channel errors and fractions above ΔE_ITP 1/2/5 are also recorded. These display measures complement RGB error because the view transform changes the visibility of scene-linear differences.</p>
+<p>Each value below is the largest per-case p99 ΔE_ITP across four images and five ordinary/Stack workloads, using all stored pixels at original exposure. It is not a pooled percentile or a maximum-pixel error.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ACES 2.0 output</th><th style="text-align: right">Previous Rec.709</th><th style="text-align: right">Selected Rec.2020</th></tr>
+</thead>
+<tbody>
+<tr><td>SDR 100 nits Rec.709</td><td style="text-align: right">3.308</td><td style="text-align: right">1.510</td></tr>
+<tr><td>SDR 100 nits P3-D65</td><td style="text-align: right">3.683</td><td style="text-align: right">1.617</td></tr>
+<tr><td>HDR 1000 nits P3-D65</td><td style="text-align: right">3.938</td><td style="text-align: right">1.726</td></tr>
+<tr><td>HDR 1000 nits Rec.2020</td><td style="text-align: right">4.105</td><td style="text-align: right">1.823</td></tr>
+</tbody>
+</table>
+</div>
+<p>At input exposure −2 / 0 / +2 stops, the worst p99 across all outputs is 1.374 / 1.823 / 2.086 for the selected grid, versus 2.998 / 4.105 / 6.385 previously. At +2 stops, five pixels in an 84,672-pixel case exceed the −4 bound (0.00591%). The largest original-exposure error remains 11.738 ΔE_ITP; this is not a visually lossless transform. ΔE_ITP 1 is a sensitivity reference, not a universal visibility threshold.</p>
+<p>The historical production measurements used <code>tests/blender/run_lut_study.py evaluate_lut_sampling --production --mode full --ocio-config /path/config.ocio --output /fresh/results</code>. The current <code>--production</code> option follows the current policy and does not recreate the historical selected grid. The display comparison requires Blender’s OCIO 2.5.0 ACES 2.0 implementation for this comparison. <a href="../../../downloads/rec2020-production.json">Download production per-case measurements and metadata</a>. The full forward/inverse math and explicit sampling-basis equations are maintained <a href="forward-inverse-math.html">in this handbook</a>.</p>
+<p>The selected Rec.2020 configuration with range −4…+64, 16 negative cells and positive asinh κ = 0.001 reduces the worst per-case p99 ΔE_ITP from 4.105 to 1.823 at original exposure, although normalized scene-RGB p99 rises from 0.003427 to 0.004296. It also increases the worst fraction above ΔE_ITP 1 from 4.55% to 6.46%. The 12-negative-cell alternative has fewer moderate errors but a worse p99 at +2 stops. Smaller negative bounds reduce coverage; extrapolation remains possible. No configuration improves every metric. The choice prioritizes the worst p99 across the tested outputs and input exposures, while retaining the moderate-error fractions and domain exits in the report.</p>
+<p>That historical 1.16.0 Rec.2020 boundary was fixed across Blender scene spaces. Surrounding gamut/Bradford matrices convert to and from it; each Grade retains its own white and grading function. Changing the LUT basis must not change the model’s primaries, anchors or Grade interpretation.</p>
+<p>The source tools are <code>tests/blender/run_lut_study.py</code>, <code>evaluate_lut_sampling.py</code>, <code>lut_sampling.py</code>, <code>aces_metrics.py</code>, <code>test_lut_study.py</code> and <code>report_lut_sampling.py</code>. The 123 focused checks cover the sampler, extrapolation, scene-space covariance, independent ITP/PQ calculations and OCIO output-path agreement. OCIO, Colour and Matplotlib are analysis dependencies only. The historical production <code>Baker</code>/<code>Cube</code> evaluation reproduced the 1.16.0 selected experiment’s original-exposure summary values. The independent sampler checks, frozen analytic fixtures, native Shader/Compositor tests and working-space invariance checks cover integration. These results are not a native GPU test or a completed Buck2 release gate. <a href="../../../downloads/lut-sampling-report.zip">Read the original selection report with figures and reproduction commands</a> or <a href="../../../downloads/lut-sampling-summary.json">download the summary data</a>.</p>
+<p>The historical 1.14.1 <a href="../../../downloads/inverse-stack-precision.json">precision</a> and <a href="../../../downloads/inverse-bake-performance.json">performance</a> data remain available. Those measurements use a different RGB basis and Grade-white setup, so their errors are not a direct comparison with 1.15.0. <code>tests/blender/benchmark_inverse.py</code> measures repeated fresh numerical bakes; the older engineering report describes the Python-only solver redesign.</p>
+<h2 id="reproducible-lut-shaper-experiment"><a class="header" href="#reproducible-lut-shaper-experiment">Reproducible LUT shaper experiment</a></h2>
+<p>The subsequent <a href="lut-domain-study.html">+128 domain study</a> uses independent scene-RGB and ACES-rendered-RGB masks, adds native ACEScg/ACES white and fixed-primary AP1/D65 sampling, and extends the photographic exposure sweep. Its specifications, Buck2 targets and result tables are separate from the historical −2…+64 study below.</p>
+<p>Version 1.20.0 adds a declared Buck2 comparison of <strong>82 grids</strong> for the requested −2…+64 domain. The previous −4…+64 production grid remains a measurement baseline. The specification is <code>tests/blender/experiments/lut-shaper.json</code>: it contains the exact photographic fixture paths and SHA-256 hashes, three complete shared Grade definitions (matrices, whites and Tone/Color parameters), five workloads, exposure offsets, seed, shaper families/scales, negative allocations, output transforms and selection rule. <code>lut-shaper-matched.json</code>, <code>lut-shaper-negative.json</code> and <code>lut-shaper-refinement.json</code> record the three authoring batches. Editing the main specification invalidates its Buck2 input and recomputes the comparison.</p>
+<pre><code class="language-sh">buck2 build //:lut_shaper_evaluation //:lut_shaper_report --show-full-output
+buck2 test //:lut_shaper_experiment_test
+buck2 test //:lut_shaper_full_result_test
+buck2 build '//:lut_shaper_evaluation[selection]' \
+  '//:lut_shaper_evaluation[metrics]' '//:lut_shaper_evaluation[metadata]' \
+  '//:lut_shaper_evaluation[full]' --show-full-output
+</code></pre>
+<p>The smoke test runs a small photographic subset and verifies the artifact contract. The full-result test depends on the full experiment and independently reconstructs the selection from the per-case metrics. The full comparison takes substantially longer than an individual LUT bake because it renders millions of pixel comparisons through four ACES transforms for every candidate. Buck2 caches results when declared inputs remain unchanged.</p>
+<p>The evaluator uses the pinned development <code>bpy</code> wheel to extract the <strong>complete stock Blender OCIO configuration and resources</strong>, and the pinned PyOpenColorIO 2.5.0 CPU implementation. No installed desktop Blender path or ambient <code>OCIO</code> environment variable is needed. <code>bpy</code>, PyOpenColorIO, Colour and Matplotlib are development dependencies; PyOpenColorIO is absent from the installed extension. The source inventory, dependency locks, configuration/resource fingerprints, model source fingerprints and numerical parameters are captured in the result metadata. Numerical metrics are the reproducibility contract; elapsed times and platform metadata vary between runs. BLAS/OMP threads are fixed to one before loading NumPy.</p>
+<h3 id="inputs-and-analytic-reference"><a class="header" href="#inputs-and-analytic-reference">Inputs and analytic reference</a></h3>
+<p>The four IMG_* fixtures contain <strong>338,688 stored pixels</strong>, sampled every twelfth original EXR row and column. Every stored pixel is tested at −2, 0 and +2 stops, giving 1,016,064 inputs per workload. Signed inputs are retained. Forward Grade, whole-Grade inverse, inverse round trip, three-forward-Grade Stack and forward/inverse/forward Stack are separate workloads. Stage 1 stays outside the ordinary forward cube and is included in every Stack cube, including the single-entry inverse. All three Grades use their recorded working whites and the current Bradford connections.</p>
+<p>Each cube stores float32 values calculated directly from the float64 analytic Grade/Stack path, including bounded selected-inverse root solving. Between vertices, the independent prototype locates cells with <code>searchsorted</code> and performs tetrahedral interpolation using <strong>physical linear-RGB distances</strong>. The production sampler is checked against that prototype separately. Solver diagnostics and vertex hashes are recorded. The inverse reference is the selected analytic/numerical inverse function; it is not an assumption that all grades have an exact round trip.</p>
+<p>A deterministic screening subset uses 2,048 pixels per fixture. The four best balanced candidates, two best display candidates, two best absolute-RGB-p99 candidates, the baseline and explicit mandatory candidates enter full validation. Repeated choices count once. Every stored pixel is included in full validation; screening-excluded heldout distributions are also recorded. “Best” means best among that fully validated shortlist, rather than a proven optimum over every possible shaper or grade.</p>
+<h3 id="metrics-and-ranking"><a class="header" href="#metrics-and-ranking">Metrics and ranking</a></h3>
+<p>For a reference RGB <span data-tex="&#92;mathbf r"></span> and sampled RGB <span data-tex="&#92;hat{&#92;mathbf r}"></span>, the per-pixel absolute scene error is</p>
+<div class="grade-equation" data-tex="e_{&#92;mathrm{RGB}}=&#92;max_{j&#92;in&#92;{R,G,B&#92;}}|&#92;hat r_j-r_j|."></div>
+
+<p>It is measured separately in Linear Rec.709, Linear Rec.2020 and ACEScg, using the stock OCIO conversions. Normalized error <span data-tex="e_{&#92;mathrm{RGB}}/(1+&#92;max_j|r_j|)"></span> and relative error with a 0.001 denominator floor are also retained. Absolute RGB RMS is <span data-tex="&#92;sqrt{&#92;operatorname{mean}(e_{&#92;mathrm{RGB}}^2)}"></span>: it is the RMS of the per-pixel maximum-channel error, not an RMS pooled over channels.</p>
+<p>The four output transforms are SDR 100 nits Rec.709/BT.1886, SDR 100 nits P3-D65/sRGB, HDR 1000 nits P3-D65/PQ and HDR 1000 nits Rec.2020/PQ, with D65 creative white and no additional look or view exposure. The P3 HDR path uses the same OCIO ACES 2.0 output built-in even though stock Blender does not list that display pairing in its UI. Rendered differences include absolute-light ΔE_ITP, luminance nits, encoded-channel error, display-linear RGB nits and fractions above ΔE_ITP 1, 2 and 5.</p>
+<p>Each statistic is computed <strong>per fixture × exposure × workload</strong>, then the worst case is taken. Percentiles are not pooled across fixtures. The predeclared balanced objective minimizes the largest ratio to the previous grid across <strong>ten terms</strong>: four worst per-case rendered p99 ΔE_ITP values, three absolute scene-RGB p99 values and three absolute scene-RGB RMS values. All terms have equal standing in this minimax rule; a ratio above one identifies a regression. Ties use the worst rendered p99 and then the grid name. The rule requires a nonzero baseline error, so an identity-only grade is unsuitable for this ratio objective. Maxima and all other statistics remain in the tables even though they do not determine the ranking.</p>
+<h3 id="outputs-and-authoring-execution"><a class="header" href="#outputs-and-authoring-execution">Outputs and authoring execution</a></h3>
+<p><code>metadata.json</code> stores inputs, model/configuration versions and fingerprints; <code>selection.json</code> identifies the selected grid and objective; <code>screen-ranking.json</code> and <code>full-ranking.json</code> contain rankings. Per-grid <code>screen/</code> and <code>full/</code> JSON files retain every case, heldout distribution, worst-pixel coordinate, domain exit, RGB/display metric and solve diagnostic. <code>metrics.csv</code> and <code>ranking.csv</code> provide flattened tables. <code>manifest.json</code> fingerprints every non-cache output. The report target produces two scientific figures and <code>report.md</code>. Numerical cache files are build intermediates and are excluded from the downloadable report.</p>
+<p>The evaluator can also run as an explicitly labeled authoring check, with the pinned analysis dependencies available:</p>
+<pre><code class="language-sh">python -m tools.experiments.ocio_snapshot --output-dir /fresh/ocio
+python -m tools.experiments.lut_shaper --tree . \
+  --spec tests/blender/experiments/lut-shaper.json \
+  --ocio-config /fresh/ocio/colormanagement/config.ocio \
+  --output-dir /fresh/results
+python -m tools.experiments.check_lut_result --results /fresh/results
+python -m tools.experiments.report_lut_shaper --results /fresh/results \
+  --output-dir /fresh/report
+</code></pre>
+<p>The bundled authoring measurements were produced in three candidate batches, with identical fixtures, Grades, outputs, seed, screening samples and objective. Their input metadata is retained, and the exact global shortlist is reconstructed. They are not labeled as Buck2 execution: Buck2 cannot start in the authoring environment because <code>/proc/self/exe</code> is unavailable. The declaration/input audits, generator entry points, numerical checks and artifact verifier passed; the native Buck2 build/test gate still needs a normal supported host.</p>
+<h3 id="recorded-1200-comparison"><a class="header" href="#recorded-1200-comparison">Recorded 1.20.0 comparison</a></h3>
+<p>The 82-grid screen selected 12 full finalists. The measured balanced winner in the requested range is <strong>Rec.2020/D65 −2…64, signed log1p, 20 negative / 44 positive cells, positive κ = 0.003</strong>, with slope-matched negative κ = 0.0019620422371104795. The table retains the previous grid and the best full-finalist display-p99 alternative.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Worst per-case metric</th><th style="text-align: right">Previous −4 / 16 asinh .001</th><th style="text-align: right">Selected −2 / 20 log1p .003</th><th style="text-align: right">Display alternative −2 / 16 log1p .001</th></tr>
+</thead>
+<tbody>
+<tr><td>SDR100_Rec709 p99 ΔE_ITP</td><td style="text-align: right">1.847365</td><td style="text-align: right">2.183193</td><td style="text-align: right">1.706017</td></tr>
+<tr><td>SDR100_P3D65 p99 ΔE_ITP</td><td style="text-align: right">1.871935</td><td style="text-align: right">2.245625</td><td style="text-align: right">1.827746</td></tr>
+<tr><td>HDR1000_P3D65 p99 ΔE_ITP</td><td style="text-align: right">2.075527</td><td style="text-align: right">2.501072</td><td style="text-align: right">1.922715</td></tr>
+<tr><td>HDR1000_Rec2020 p99 ΔE_ITP</td><td style="text-align: right">2.085620</td><td style="text-align: right">2.514019</td><td style="text-align: right">2.063685</td></tr>
+<tr><td>Linear Rec.709 absolute RGB p99</td><td style="text-align: right">0.03051798</td><td style="text-align: right">0.02558292</td><td style="text-align: right">0.02650314</td></tr>
+<tr><td>Linear Rec.709 absolute RGB RMS</td><td style="text-align: right">0.01025971</td><td style="text-align: right">0.01265570</td><td style="text-align: right">0.01359318</td></tr>
+<tr><td>Linear Rec.2020 absolute RGB p99</td><td style="text-align: right">0.02595036</td><td style="text-align: right">0.02195883</td><td style="text-align: right">0.02310018</td></tr>
+<tr><td>Linear Rec.2020 absolute RGB RMS</td><td style="text-align: right">0.00865254</td><td style="text-align: right">0.01107384</td><td style="text-align: right">0.01191678</td></tr>
+<tr><td>ACEScg absolute RGB p99</td><td style="text-align: right">0.02521603</td><td style="text-align: right">0.02129752</td><td style="text-align: right">0.02237522</td></tr>
+<tr><td>ACEScg absolute RGB RMS</td><td style="text-align: right">0.00842654</td><td style="text-align: right">0.01074439</td><td style="text-align: right">0.01156180</td></tr>
+<tr><td>Balanced ratio to previous grid</td><td style="text-align: right">1.000000</td><td style="text-align: right">1.279837</td><td style="text-align: right">1.377258</td></tr>
+<tr><td>Worst fraction outside cube</td><td style="text-align: right">0.005905%</td><td style="text-align: right">0.184240%</td><td style="text-align: right">0.184240%</td></tr>
+</tbody>
+</table>
+</div>
+<p>The selected curve reduces the worst absolute RGB p99 from 0.030518 to 0.025583 (about 16.2%), but worst rendered p99 increases from 2.085620 to 2.514019 (about 20.5%), and worst absolute RGB RMS increases from 0.010260 to 0.012656 (about 23.4%). Its minimax ratio is 1.279837: <strong>the previous wider grid is still better on the joint objective</strong>. Under the mandatory −2 lower bound, this is the best tested balanced finalist. If displayed p99 alone is the goal, the 16-negative-cell log1p .001 variant is preferable, with larger RGB RMS. Ordinary forward Grade errors improve for the selected curve; Stack/inverse cases determine the overall tradeoff.</p>
+<p>The ACEScg nonnegative [0,64]³ corner calculation agrees with the proposed negative bound to stock-processor precision: minimum blue ≈ −1.939416. It also produces positive blue ≈ +65.939415, so +64 is not complete source-cube coverage. More significantly, the stored signed fixture inputs at +2 stops reach −4.902344 at a Stack LUT boundary; 137 pixels in that case lie below −2, compared with five below −4. The worst outside fraction across all workloads is 0.184240% for −2 versus 0.005905% for −4. These pixels are included in every percentile, RMS and display calculation and use continuous boundary-cell extrapolation. None is silently clipped or discarded. A source conversion bound therefore does not establish that −2 improves grading accuracy.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/lut-shaper-errors.svg"><img src="../../../assets/illustrations/lut-shaper-errors.svg" alt="Full-finalist display and RGB error tradeoffs" width="539" height="286"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/lut-shaper-errors.svg"><img src="../../../assets/illustrations/lut-shaper-errors.svg" alt="Full-finalist display and RGB error tradeoffs" width="539" height="286"></a></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/lut-shaper-placement.svg"><img src="../../../assets/illustrations/lut-shaper-placement.svg" alt="Previous and selected sample placement" width="519" height="298"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/lut-shaper-placement.svg"><img src="../../../assets/illustrations/lut-shaper-placement.svg" alt="Previous and selected sample placement" width="519" height="298"></a></span></label></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ID</th><th>Candidate</th><th>Role</th></tr>
+</thead>
+<tbody>
+<tr><td>S01</td><td><code>Rec2020_<wbr>neg2_<wbr>n12_<wbr>asinh0.001_<wbr>kn0.0005</code></td><td>Finalist</td></tr>
+<tr><td>S02</td><td><code>Rec2020_<wbr>neg2_<wbr>n14_<wbr>asinh0.001</code></td><td>Finalist</td></tr>
+<tr><td>S03</td><td><code>Rec2020_<wbr>neg2_<wbr>n16_<wbr>asinh0.001</code></td><td>Finalist</td></tr>
+<tr><td>S04</td><td><code>Rec2020_<wbr>neg2_<wbr>n16_<wbr>log1p0.001</code></td><td>Finalist</td></tr>
+<tr><td>S05</td><td><code>Rec2020_<wbr>neg2_<wbr>n16_<wbr>log1p0.001_<wbr>kn0.001</code></td><td>Finalist</td></tr>
+<tr><td>S06</td><td><code>Rec2020_<wbr>neg2_<wbr>n18_<wbr>log1p0.002</code></td><td>Finalist</td></tr>
+<tr><td>S07</td><td><code>Rec2020_<wbr>neg2_<wbr>n20_<wbr>log1p0.002</code></td><td>Finalist</td></tr>
+<tr><td>S08</td><td><code>Rec2020_<wbr>neg2_<wbr>n20_<wbr>log1p0.003</code></td><td>Selected</td></tr>
+<tr><td>S09</td><td><code>Rec2020_<wbr>neg2_<wbr>n22_<wbr>log1p0.003</code></td><td>Finalist</td></tr>
+<tr><td>S10</td><td><code>Rec2020_<wbr>neg2_<wbr>n8_<wbr>asinh0.003</code></td><td>Finalist</td></tr>
+<tr><td>S11</td><td><code>Rec2020_<wbr>neg2_<wbr>n8_<wbr>log1p0.003</code></td><td>Finalist</td></tr>
+<tr><td>S12</td><td><code>Rec2020_<wbr>neg4_<wbr>n16_<wbr>asinh0.001</code></td><td>Baseline</td></tr>
+</tbody>
+</table>
+</div>
+<p>These vector redraws use the recorded finalist scores and exact sampling axes in the original shaper report archive. No measurements are rerun to produce them. <a href="../../../downloads/chart-sources.zip">Download the chart sources and plotted data</a>.</p>
+<p><a href="../../../downloads/lut-shaper-selection.json">Download the selected grid and scores</a> or <a href="../../../downloads/lut-shaper-report.zip">the complete recorded JSON/CSV results, figures, input metadata and current-source confirmation</a>. The source package contains every referenced fixture and specification. Native CPU Shader/Compositor sampling, 33/65 nesting and half-buffer transport are validated separately from these float64-reference interpolation errors. GPU/Metal precision is not claimed.</p>
+<h2 id="native-ap1-production-lut-1210"><a class="header" href="#native-ap1-production-lut-1210">Native AP1 production LUT (1.21.0)</a></h2>
+<p>Production now uses <strong>native ACEScg/ACES white, bound 1024, 64 positive intervals, plain log1p κ = 0.01</strong>. The shaper and sampling space were selected by the domain study among its +128 finalists; the bound was raised afterwards, so the selection evidence covers the shaper rather than the 1024 domain. <a href="lut-domain-study.html#adopted-production-choice">The domain study</a> records why this display-linear/peak-nits choice differs from the encoded-RGB winner. Historical comparisons above retain their original parameters.</p>
+<pre><code class="language-sh">buck2 test //:numerical_test_cube_math //:numerical_test_cube_native \
+  //:numerical_test_progressive_lut //:numerical_test_lut_grid_regression \
+  //:numerical_test_hk_fixture_regression
+buck2 test //:renders_blender_cube_test //:blender_test_working_white \
+  //:blender_test_grade_stack //:blender_test_stack_editing \
+  //:blender_blender_half_precision_test
+</code></pre>
+<p>The independent AP1 oracle reconstructs primary matrices, Bradford adaptation, the axis and physical interpolation separately. Analytic fixtures remain frozen. Tests retain signed/HDR extrapolation, all eight Grade whites and three scene spaces, Shader/Compositor rendering, alpha, current-format save/load/undo, shared Grades, and exact 33³/65³ vertex reuse. The half-float buffer test covers the single-image base/edge encoding; Shader retains raw vertices. Native CPU and buffer-emulator checks are distinct from GPU/Metal acceptance.</p>
+
+                    <footer class="book-footer">Perceptual Grade Technical Report <a href="../reference/credits.html">Credits</a> <a href="../reference/license.html">License</a> <a href="../../../index.html">All books</a></footer></main>
+
+                    
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/math-96cc483f.js"></script>
+        <script src="../theme/reader-7b4ff642.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

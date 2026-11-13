@@ -1,0 +1,769 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Next Blender policy machines - Perceptual Grade Technical Report</title>
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css" integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js" integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk" crossorigin="anonymous"></script>
+
+        <meta name="description" content="English technical report on the current Perceptual Grade reference and project development.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/fonts-6a07186e.css">
+        <link rel="stylesheet" href="../theme/grade-dda453c0.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-53542b48.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-2d92a0d7.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/pontano-sans@5.3.0/files/pontano-sans-latin-wght-normal.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64 256x256" href="../../../favicon.ico?v=b4dbc1f8e6d1">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png?v=65f37d4e63e3">
+<link rel="manifest" href="../../../site.webmanifest">
+</head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu"><li role="none"><button role="menuitem" class="grade-auto" id="grade-theme-auto">Auto</button></li>
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Dark</button></li>
+                            
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"><a href="../index.html"><img class="brand-icon" src="../../../assets/icons/perceptual-grade-32-transparent.png" srcset="../../../assets/icons/perceptual-grade-64-transparent.png 2x" alt="" width="32" height="32"><span>Perceptual Grade Technical Report</span></a></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rei277hz/chromaticity" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+<nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="next-blender-policy-machines"><a class="header" href="#next-blender-policy-machines">Next Blender policy machines</a></h1>
+<p><a id="next-policy.overview"></a></p>
+<p>This chapter documents the policy layer in <code>products/perceptual-grade-next-blender</code>.
+That product is a separate generation from the historical extension described by
+the other development chapters. The policies are deliberately host-free Python:
+they observe facts from Blender or a worker, reduce one event at a time, and
+return effects for a runtime consumer to perform. They do not call Blender,
+start threads, write images, or send process commands themselves.</p>
+<p>Each machine is a small protocol:</p>
+<pre><code class="language-text">state + event -&gt; policy.step(...) -&gt; new state + effects
+</code></pre>
+<p>An effect is the policy’s authorization for one external operation. The runtime
+executes it and feeds the resulting receipt back as the next event. This keeps
+the state transition testable while making the side-effect boundary explicit.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/00-policy-layer.svg"><img src="../../../assets/illustrations/next-policy/00-policy-layer.svg" alt="The policy and effect-consumer boundary" width="445" height="799"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/00-policy-layer.svg"><img src="../../../assets/illustrations/next-policy/00-policy-layer.svg" alt="The policy and effect-consumer boundary" width="445" height="799"></a></span></label></p>
+<p class="figure-caption">Grade settings remain authoritative. Runtime observations enter a pure reducer; only its effects authorize adapter operations, and receipts return as events. The parameter/image transactions are comparison examples, while compositor callbacks also use the production gate.</p>
+
+<h2 id="what-a-policy-stores"><a class="header" href="#what-a-policy-stores">What a policy stores</a></h2>
+<p><a id="next-policy.contract"></a></p>
+<p>The design goal is to store independent facts and derive readiness from them.
+The simplification candidates below identify places where the implementation
+still duplicates facts or phases. A signature is an immutable correlation key
+for a request. Job IDs, observer tokens, and render generations distinguish
+receipts whose lifetimes must not be confused. Absence is <code>None</code>; an empty string
+is never a stand-in for “no demand”.</p>
+<p>The common safety rules are:</p>
+<ul>
+<li>Correlation checks govern receipts. Stale helper generations and gesture
+tokens are ignored; a same-generation render identity mismatch fails the
+ticket. During a gesture, a superseded node result may still become a preview.</li>
+<li>One-shot completion receipts cannot complete the same slot twice. Declarative
+node output effects deliberately repeat on idempotent events so the consumer
+can reconcile host state; preview receipts can also repeat.</li>
+<li>A current failure clears the renderable installation and selects the visible
+error path. A stale failure cannot damage newer demand.</li>
+<li>The consumer executes effects in order and reports success or failure. Policy
+code never performs a best-effort side effect in an exception handler.</li>
+</ul>
+<p>The <code>.inv</code> files in <code>requirements/</code> describe these transition contracts and
+examples. The verifier checks the declared properties against the Python source
+under their stated assumptions. It does not prove Blender’s native observations, image validity, thread
+affinity, worker implementation, or collection bookkeeping. The runtime tests
+and installed Blender tests cover those adapter premises.</p>
+<p>Read an edge as <strong>event or receipt [condition] / requested effect</strong>; the condition
+and effect are omitted when unnecessary. Each box represents one phase, or one
+configuration of facts for a policy that has no phase field. Phase labels match
+the implementation; configuration labels describe derived states rather than
+additional stored flags. Sequential phases always have separate boxes.
+<code>running</code> and <code>desired</code> abbreviate preparation signatures; <code>current</code> and
+<code>pending</code> in the observer figure abbreviate tokens. The join’s <code>pending</code> count
+is derived from its three child flags, not stored as another counter. For
+synchronous transactions, <code>success</code> and <code>failed</code> abbreviate operation receipts.
+Entering a synchronous operation phase requests its namesake effect; those
+repeated effect names are omitted from edges. A semicolon separates alternative
+events. The helper’s operation effects are described in its lifecycle section.</p>
+<p>A <strong>double border</strong> marks an absorbing state: later events cannot leave it.
+Some policies name that phase <code>terminal</code>; others retain names such as <code>released</code>
+or <code>closed</code>. Finality does not imply success. The publication transactions share
+their <code>terminal</code> phase between successful and failed paths, and resource
+retirement can finish without deleting anything. Ordinary states such as <code>idle</code>,
+node <code>error</code>, and helper <code>failed</code> can still transition and have a single border.
+The policy/effect-consumer overview above depicts data flow rather than states.</p>
+<p>The figures emphasize lifecycle decisions; the prose describes correlation
+checks, unchanged-state receipts, and less common transitions. Explanatory
+notes and the numbered simplification candidates stay outside the boxes.</p>
+<p>The sequence diagrams below follow those decisions through their effect
+consumers and Blender operations. Time runs downward. <code>opt</code> encloses optional
+work, <code>loop</code> repeated work, <code>alt</code> alternative paths, and <code>par</code> concurrent work.
+The frames describe control flow rather than additional stored states. Related
+policies share a sequence when they participate in the same interaction.</p>
+<h2 id="preparation-latest-demand-one-worker"><a class="header" href="#preparation-latest-demand-one-worker">Preparation: latest demand, one worker</a></h2>
+<p><a id="next-policy.preparation"></a></p>
+<p><code>src/policy/preparation.py</code> is used by <code>src/runtime/preparation.py</code>. Its state is
+just <code>desired_signature</code> and <code>running_signature</code>. A request always replaces the
+latest demand. If no work is running, the request also returns
+<code>prepare_signature</code>; otherwise it waits for the current physical worker to
+retire. A preview receipt publishes an intermediate result but does not free the
+running slot. A final receipt for the running signature retires that slot and,
+when a newer request exists, authorizes the newest successor.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/01-preparation.svg"><img src="../../../assets/illustrations/next-policy/01-preparation.svg" alt="Latest-demand preparation scheduling" width="816" height="863"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/01-preparation.svg"><img src="../../../assets/illustrations/next-policy/01-preparation.svg" alt="Latest-demand preparation scheduling" width="816" height="863"></a></span></label></p>
+<p class="figure-caption">A superseded success can still be delivered as a preview. A superseded failure is suppressed, and the latest demand is started after the old worker's final receipt.</p>
+
+<p>The distinction between preview and final matters. The host preparation lane
+may produce a preview and then continue working. Treating the preview as
+retirement would allow a second job to overlap the physical slot. Conversely,
+withdrawing demand does not claim that the worker has stopped; its final receipt
+still provides the retirement fence.</p>
+<p>The owning runtime also fences source lifetimes. <code>request</code>, <code>collect</code>, and
+<code>wait</code> in <code>runtime/preparation.py</code> do not let a caller’s cancellation release a
+slot before the executor function returns.</p>
+<h3 id="the-three-child-join"><a class="header" href="#the-three-child-join">The three-child join</a></h3>
+<p><a id="next-policy.preparation-join"></a></p>
+<p><code>src/policy/preparation_join.py</code> is the aggregate barrier used by
+<code>src/runtime/grade_preparation.py</code>. <code>new(signature)</code> marks <code>linear</code>, <code>tone</code>, and
+<code>boundary</code> pending. Each matching component receipt clears one bit. The final
+distinct receipt returns <code>completion_signature</code>; the first error is retained and
+returned only at that final point. Stale and duplicate receipts do nothing.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/01b-preparation-join.svg"><img src="../../../assets/illustrations/next-policy/01b-preparation-join.svg" alt="The three-component preparation join" width="696" height="1051"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/01b-preparation-join.svg"><img src="../../../assets/illustrations/next-policy/01b-preparation-join.svg" alt="The three-component preparation join" width="696" height="1051"></a></span></label></p>
+<p class="figure-caption">All three physical children retire before aggregate completion, including after an error. The runtime already wraps the receives in a shielded `asyncio.gather`; that is a scheduling fence in addition to this reducer's decision.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/01b-preparation-join-sequence.svg"><img src="../../../assets/illustrations/next-policy/01b-preparation-join-sequence.svg" alt="Preparation join workflow" width="1693" height="2335"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/01b-preparation-join-sequence.svg"><img src="../../../assets/illustrations/next-policy/01b-preparation-join-sequence.svg" alt="Preparation join workflow" width="1693" height="2335"></a></span></label></p>
+<p class="figure-caption">Each worker sends a component receipt to the join. `par` permits any completion order; the final distinct receipt authorizes assembly. Cancellation still waits for every physical worker through the shielded group.</p>
+
+<p>The preparer launches all three functions before awaiting any one of them. It
+then assembles the <code>PreparedGrade</code> only after the join authorizes completion,
+checks that boundary geometry belongs to the same appearance context, and
+prepares the parameter atlas. This is why a first error cannot immediately
+release the executor slot.</p>
+<p><strong>Simplification candidate J1.</strong> The fixed three-child barrier could be expressed
+directly around <code>asyncio.gather</code>, reducing the explicit pending-bit reducer.
+That is safe only if the replacement still rejects stale or duplicate receipts,
+retains the first error until every child has retired, preserves cancellation
+shielding, and leaves proof evidence for those properties. The current reducer
+is verbose, but its contract is easy to audit independently of asyncio.</p>
+<h2 id="node-output-policy"><a class="header" href="#node-output-policy">Node output policy</a></h2>
+<p><a id="next-policy.node-output"></a></p>
+<p><code>src/policy/node.py</code> is the per-node decision layer. The runtime creates and
+updates it from <code>nodes.py</code> and consumes its effects in <code>_consume_effects</code>. The
+state records current demand, the installed signature and quality, whether a
+gesture is active, the preparation correlation signature, and an optional
+error. It does not store an <code>output_mode</code> flag. <code>output_mode()</code> derives one of
+<code>current</code>, <code>preview</code>, <code>pending</code>, or <code>error</code>.</p>
+<p>Only this predicate permits rendering:</p>
+<pre><code class="language-text">desired_signature == applied_signature
+and desired_signature is not None
+and applied_quality == "full"
+and error is None
+</code></pre>
+<p>A new request may retain the last-good installation as a preview. A preparation
+receipt authorizes a build; an installation receipt records the resulting kernel.
+A current error removes the applied kernel from the policy state and selects
+the fail-closed output. A later request clears that error and starts again;
+<code>recovery_result</code> can also clear it when recovery installs a full result for
+the current non-<code>None</code> signature.</p>
+<p>The preparation signature identifies shared prepared Grade data; the desired
+kernel signature can additionally identify the node’s graph context. A current
+preparation receipt must match both correlations. A superseded successful
+receipt is eligible only while a gesture is active, and becomes a preview rather
+than current output. Once current full output exists, later receipts cannot
+replace it; a preview cannot downgrade a full installation of the same signature.
+<code>presentation</code> reissues the derived output policy without starting new work.
+<code>gesture_begin</code> and <code>gesture_release</code> change only gesture participation; release
+does not discard a retained preview. <code>request(None)</code> clears demand and the
+applied kernel. <code>dispose</code> resets the entire lifecycle and emits only disposal,
+without a presentation effect. The consumer fences subscriptions and releases
+references through the resource policy.</p>
+<p>The host shows a retained kernel as an updating preview. With no installed
+kernel, pending presentation may use an identity placeholder. A current error
+selects visible magenta output with alpha preserved; render preflight must not
+release a frame with this error or with merely pending/preview output.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/02-node.svg"><img src="../../../assets/illustrations/next-policy/02-node.svg" alt="Node output and installation policy" width="770" height="1173"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/02-node.svg"><img src="../../../assets/illustrations/next-policy/02-node.svg" alt="Node output and installation policy" width="770" height="1173"></a></span></label></p>
+<p class="figure-caption">Presentation is derived from authoritative demand and installation facts. A stale receipt cannot replace a current result, and a preview is never render-ready.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/01-preparation-node-sequence.svg"><img src="../../../assets/illustrations/next-policy/01-preparation-node-sequence.svg" alt="Preparation and node output workflow" width="1851" height="2863"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/01-preparation-node-sequence.svg"><img src="../../../assets/illustrations/next-policy/01-preparation-node-sequence.svg" alt="Preparation and node output workflow" width="1851" height="2863"></a></span></label></p>
+<p class="figure-caption">Preparation owns the worker slot, while the node owns presentation. A, B, and C name settings versions; preparation and kernel signatures still have their separate correlations. This trace runs outside a gesture, so an obsolete A cannot replace the retained Z preview. A preview receipt does not retire A. Current C is installed through the consumer, or its preparation failure selects visible magenta output with alpha preserved.</p>
+
+<p><code>stack_replace</code> and <code>grade_changed</code> are scalar observations. They may authorize
+reconciliation, but they do not themselves change the node’s kernel state. The
+runtime owns ordered Stack membership and Grade lookup; this proof does not
+prove those collections.</p>
+<p><strong>Simplification candidate J2.</strong> Rebuild observations return the same state and
+add a <code>rebuild</code> permission to the resulting presentation effect. A stateless
+policy helper could authorize that reconciliation while the lifecycle reducer
+continues to own presentation. This is a possible organizational reduction,
+not evidence of redundant stored state. Keep reconciliation behind an effect
+consumer, including on these state-preserving transitions.</p>
+<h2 id="helper-process-lifecycle"><a class="header" href="#helper-process-lifecycle">Helper process lifecycle</a></h2>
+<p><a id="next-policy.helper"></a></p>
+<p><code>src/policy/helper.py</code> governs one helper process and one physical work slot.
+<code>runtime/execution.py</code> translates its effects into process and transport
+operations. The generation fences a process session; <code>probe_id</code> fences startup
+and <code>active_id</code> fences submitted work. The policy does not own payload queues or
+join implementation.</p>
+<p>Startup proceeds from <code>stopped</code> to <code>starting</code>, then <code>probing</code> after <code>hello</code>, and
+to <code>ready</code> only after a matching successful probe. A preview publishes while
+the slot remains active. A final result or cancellation retires the slot before
+the next dispatch. An active cancellation sends a cancel request; it is not a
+receipt that the work has stopped.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/03-helper.svg"><img src="../../../assets/illustrations/next-policy/03-helper.svg" alt="Helper process lifecycle" width="1171" height="2940"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/03-helper.svg"><img src="../../../assets/illustrations/next-policy/03-helper.svg" alt="Helper process lifecycle" width="1171" height="2940"></a></span></label></p>
+<p class="figure-caption">Shutdown escalates from a channel shutdown request to terminate, kill, and an explicitly unretired condition. Physical exit settles work before cleanup is attempted.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/03-helper-sequence.svg"><img src="../../../assets/illustrations/next-policy/03-helper-sequence.svg" alt="Helper process workflow" width="1612" height="2693"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/03-helper-sequence.svg"><img src="../../../assets/illustrations/next-policy/03-helper-sequence.svg" alt="Helper process workflow" width="1612" height="2693"></a></span></label></p>
+<p class="figure-caption">The process and transport perform only operations requested by helper effects. Cancellation leaves active work owned until its final receipt or physical exit. Shutdown deadlines control escalation; cleanup begins only after exit and completes through its own receipt.</p>
+
+<p>Failure or timeout moves a live process toward termination. A channel shutdown
+uses <code>stopping</code>; a process without that transport uses <code>terminating</code>. Terminate
+and kill timeouts lead to <code>unretired</code>, which keeps ownership visible rather than
+pretending cleanup succeeded. After physical exit, the policy publishes job and
+probe outcomes, queues cancellation or failure, and enters <code>retiring</code>. Cleanup
+may be retried; only a successful cleanup receipt reaches <code>closed</code> or <code>failed</code>.
+Cleanup failure itself requests no new work; a later <code>shutdown</code> event requests
+another cleanup attempt. <code>failed</code> can still become <code>closed</code> on shutdown, so
+only <code>closed</code> has the absorbing-state border.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Observation</th><th>Additional runtime detail</th></tr>
+</thead>
+<tbody>
+<tr><td>Shutdown during starting, probing, or ready</td><td>Enter <code>stopping</code> when a channel exists; otherwise <code>terminating</code>. Failure enters <code>terminating</code> directly.</td></tr>
+<tr><td>Cancel the startup probe</td><td>Withdraw startup and shut down; a late successful probe cannot grant readiness.</td></tr>
+<tr><td>Cancel active ordinary work</td><td>Send cancellation but retain the physical slot until a matching result/cancel receipt or exit.</td></tr>
+<tr><td>Poll while the process lives</td><td>Authorize channel pumping, or listener acceptance during starting/stopping. No transport work after retirement.</td></tr>
+<tr><td>EOF during normal operation</td><td>Enter the failure path. EOF during shutdown is insufficient evidence of process exit.</td></tr>
+<tr><td>Timeout</td><td>Ignore a stale stage; escalate starting/stopping to termination, terminating to killing, and killing to unretired.</td></tr>
+<tr><td>Planned exit, with no earlier error</td><td>Settle outstanding work as cancellation; otherwise preserve the first causal failure.</td></tr>
+<tr><td>Shutdown after <code>failed</code></td><td>Reach <code>closed</code>; cleanup already succeeded.</td></tr>
+</tbody>
+</table>
+</div>
+<p>Generation and job identity are intentionally separate. The current runtime
+cannot restart a failed helper object: it creates a new owner whose numeric job
+IDs start again at one. Process session and token checks in the transport provide
+additional isolation; the reducer still checks generation before every receipt.</p>
+<p><strong>Simplification candidate J3.</strong> A smaller lifecycle could remove generation or
+combine probe and active correlation only if the runtime contract guarantees
+process restart isolation and ordered receipts. Until that contract changes,
+keep the generation fence; otherwise an old helper can publish into a new one.</p>
+<h2 id="production-bank-publication"><a class="header" href="#production-bank-publication">Production bank publication</a></h2>
+<p><a id="next-policy.bank-publication"></a></p>
+<p><code>src/policy/bank_publication.py</code> is the active production publication path. The
+parameter-image code in <code>nodes.py</code> constructs two packed image banks, while
+<code>runtime/bank_publication.py</code> consumes the reducer’s effects. The inactive bank
+is staged and checked before the selector changes. Selection is read back, then
+delivery publishes the resource and dispatches installation results to all
+affected node records.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/04-bank-publication.svg"><img src="../../../assets/illustrations/next-policy/04-bank-publication.svg" alt="Production two-bank publication" width="1204" height="1847"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/04-bank-publication.svg"><img src="../../../assets/illustrations/next-policy/04-bank-publication.svg" alt="Production two-bank publication" width="1204" height="1847"></a></span></label></p>
+<p class="figure-caption">An invalid active bank first closes output, then repairs both banks. A selection or delivery failure restores the old selector before failing closed.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/04-bank-publication-sequence.svg"><img src="../../../assets/illustrations/next-policy/04-bank-publication-sequence.svg" alt="Bank publication workflow" width="1668" height="2781"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/04-bank-publication-sequence.svg"><img src="../../../assets/illustrations/next-policy/04-bank-publication-sequence.svg" alt="Bank publication workflow" width="1668" height="2781"></a></span></label></p>
+<p class="figure-caption">The consumer writes the packed banks, reads back the selector, and dispatches installation receipts to Blender nodes. Alternative frames distinguish ordinary staging and repair. A failed selector change or delivery restores the old selector before bounded failure-output closure retries.</p>
+
+<p>The admission facts require two distinct valid bank indices and an admitted
+publication context. If the active bank is invalid, <code>repair_gate</code> first waits
+for confirmed failure-output closure. Only then may <code>repair_stage</code> repair both
+banks. A failed stage or unclean pack fails closed. A wrong selector readback or
+delivery receipt enters <code>restore_selector</code>; the old bank and graph bindings are
+restored before the final failure output is attempted. The runtime bounds failed
+closure retries and reports <code>indeterminate</code> if it cannot establish a reliable
+output.</p>
+<p>Both successful delivery and a successful <code>closed</code> receipt in <code>fail</code> reach the
+same <code>terminal</code> phase. The reducer does not store separate success and failure
+end states. A failed closure receipt remains in <code>fail</code> and requests another
+closure attempt; it has not reached <code>terminal</code>.</p>
+<p><strong>Simplification candidates B1 and B2.</strong> <code>stage</code> and <code>repair_stage</code> have the same
+receipt and outgoing transitions, so one phase could carry a <code>repair</code> effect
+variant while retaining the close-before-repair gate. The candidate bank is also
+mathematically <code>1 - active_bank</code> for this fixed two-bank resource and is already
+derived by <code>GradeResource</code>; storing both indices duplicates a fact. Either
+change must retain the distinct-bank admission check, repair ordering, selector
+restoration, and fail-closed retry bound.</p>
+<h2 id="publication-strategies-in-the-comparison-example"><a class="header" href="#publication-strategies-in-the-comparison-example">Publication strategies in the comparison example</a></h2>
+<p>The repository contains a publication comparison example under
+<code>examples/publication_compare</code>. Its policies are useful design experiments,
+but they are not one sequential production pipeline. Production uses the
+two-bank transaction above and the save-packing helpers described below.</p>
+<h3 id="immutable-parameter-image-transaction"><a class="header" href="#immutable-parameter-image-transaction">Immutable parameter-image transaction</a></h3>
+<p><a id="next-policy.parameter-publication"></a></p>
+<p><code>examples/publication_compare/policy/parameter_publication.py</code> models a fresh
+immutable image: stage, snapshot, bind, commit, activate, deliver, then retire.
+Stage or snapshot failure goes directly to visible failure and retirement.
+Failure from binding through delivery enters the restoration sequence
+(<code>restore_bindings</code>, <code>restore_metadata</code>, <code>restore_resource</code>) first.
+The comparison node calls it from <code>examples/publication_compare/nodes.py</code>.</p>
+<p>Its separate <code>candidate_effect()</code> permits reuse only when the candidate is not
+exposed, and allocation only while the pool contains fewer than three images.
+<code>retirement_effect()</code> protects current and candidate images; removal requires
+quiescence, zero native users, and no protection. These are allocation predicates,
+not extra phases of the binding transaction.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/05-parameter-publication.svg"><img src="../../../assets/illustrations/next-policy/05-parameter-publication.svg" alt="Immutable parameter-image publication" width="693" height="2680"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/05-parameter-publication.svg"><img src="../../../assets/illustrations/next-policy/05-parameter-publication.svg" alt="Immutable parameter-image publication" width="693" height="2680"></a></span></label></p>
+<p class="figure-caption">This strategy keeps the current and candidate versions separate through binding and activation. Every restoration component is attempted after a failed transaction.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/05-parameter-publication-sequence.svg"><img src="../../../assets/illustrations/next-policy/05-parameter-publication-sequence.svg" alt="Immutable parameter publication workflow" width="1689" height="2687"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/05-parameter-publication-sequence.svg"><img src="../../../assets/illustrations/next-policy/05-parameter-publication-sequence.svg" alt="Immutable parameter publication workflow" width="1689" height="2687"></a></span></label></p>
+<p class="figure-caption">This comparison-only sequence follows one fresh immutable candidate. Each operation returns a receipt before the next action is authorized. Failed binding through delivery enters restoration; every restoration component is attempted even if an earlier component fails.</p>
+
+<h3 id="shared-image-transaction"><a class="header" href="#shared-image-transaction">Shared-image transaction</a></h3>
+<p><a id="next-policy.image-publication"></a></p>
+<p><code>src/policy/image_publication.py</code> is also exercised by the comparison example.
+It snapshots an existing image, uploads and packs when the snapshot is not
+already matching and clean, commits metadata, delivers, and retires. Upload,
+packing, or metadata-commit failure enters restoration. Restore-upload failure
+stops restoration immediately; restore-pack failure or an unclean restored image
+does the same. Only successful restoration of both reaches restore-metadata,
+after which the transaction still reports failure. Preparation or snapshot
+failure, and failed delivery, go directly to failure and retirement. Production
+save handling instead calls
+<code>request_save_packing()</code> and <code>finish_save_packing()</code> for a generated dirty
+parameter image. Those helpers do not claim a new publication.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/05b-image-publication.svg"><img src="../../../assets/illustrations/next-policy/05b-image-publication.svg" alt="Shared-image publication and restoration" width="958" height="2643"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/05b-image-publication.svg"><img src="../../../assets/illustrations/next-policy/05b-image-publication.svg" alt="Shared-image publication and restoration" width="958" height="2643"></a></span></label></p>
+<p class="figure-caption">The shared-image strategy can skip upload and packing when the captured image is already matching and clean. Its rollback still cannot make stale output current.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/05b-image-publication-sequence.svg"><img src="../../../assets/illustrations/next-policy/05b-image-publication-sequence.svg" alt="Shared image publication workflow" width="1623" height="2687"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/05b-image-publication-sequence.svg"><img src="../../../assets/illustrations/next-policy/05b-image-publication-sequence.svg" alt="Shared image publication workflow" width="1623" height="2687"></a></span></label></p>
+<p class="figure-caption">This comparison-only sequence changes one existing image. The clean-snapshot branch skips upload and packing. Restore-metadata is reached only after restore-upload and restore-pack succeed; failed restoration goes directly to visible failure and retirement.</p>
+
+<h3 id="compositor-supersession"><a class="header" href="#compositor-supersession">Compositor supersession</a></h3>
+<p><a id="next-policy.compositor-publication"></a></p>
+<p><code>src/policy/compositor_publication.py</code> protects a compositor snapshot with a
+positive scene ID and epoch. It is used in production by <code>PublicationGate</code> for
+finished/reset evaluation callbacks and activity observations. Its live
+<code>admit</code>/<code>superseded</code> publication effect is used by the comparison example’s
+<code>snapshot_commit()</code> path. Admission of an eligible unprotected snapshot emits
+an epoch without changing state. The subsequent <code>superseded</code> receipt records
+the protected scene and epoch; a successful later completion for the same scene
+clears protection.
+Old epochs, other scenes, cancellation, and non-quiescent reset are ignored.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/05c-compositor-publication.svg"><img src="../../../assets/illustrations/next-policy/05c-compositor-publication.svg" alt="Compositor supersession protection" width="614" height="485"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/05c-compositor-publication.svg"><img src="../../../assets/illustrations/next-policy/05c-compositor-publication.svg" alt="Compositor supersession protection" width="614" height="485"></a></span></label></p>
+<p class="figure-caption">The production gate uses the callback and reset transitions; the live admission/supersession flow is comparison-only. Protection prevents a second live swap until a later evaluation completes.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/05c-compositor-publication-sequence.svg"><img src="../../../assets/illustrations/next-policy/05c-compositor-publication-sequence.svg" alt="Compositor supersession workflow" width="1901" height="2399"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/05c-compositor-publication-sequence.svg"><img src="../../../assets/illustrations/next-policy/05c-compositor-publication-sequence.svg" alt="Compositor supersession workflow" width="1901" height="2399"></a></span></label></p>
+<p class="figure-caption">Live admission and fresh-image binding belong to the comparison example. Production also delivers evaluation-finished and reset observations to the policy. An older epoch, a different scene, or an unsuccessful completion leaves protection in place.</p>
+
+<h2 id="resource-adoption-and-retirement"><a class="header" href="#resource-adoption-and-retirement">Resource adoption and retirement</a></h2>
+<p><a id="next-policy.resources"></a></p>
+<p><code>src/policy/resources.py</code> contains two related decisions. <code>may_adopt()</code> is a
+predicate, not a state machine: owner, node, space, completeness, image
+validity, and image agreement must all be true. <code>runtime/grade_resources.py</code>
+uses it at the boundary where a persisted host resource is considered the
+installed resource.</p>
+<p>The reducer sequences disposal and retirement. Disposal fences subscriptions,
+then detaches the node’s Grade and kernel references. Retirement observes the
+native resource. A live, owned,
+zero-user, unprotected resource is eligible for eviction; a non-live wrapper
+can be evicted directly. After eviction, the policy requires a fresh eligibility
+observation before native removal.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/06-resources.svg"><img src="../../../assets/illustrations/next-policy/06-resources.svg" alt="Resource adoption and retirement" width="804" height="1685"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/06-resources.svg"><img src="../../../assets/illustrations/next-policy/06-resources.svg" alt="Resource adoption and retirement" width="804" height="1685"></a></span></label></p>
+<p class="figure-caption">Adoption is a conjunction predicate. Deletion is a separate receipt sequence with a fresh zero-user and protection check.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/06-resources-sequence.svg"><img src="../../../assets/illustrations/next-policy/06-resources-sequence.svg" alt="Resource retirement workflow" width="1856" height="2085"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/06-resources-sequence.svg"><img src="../../../assets/illustrations/next-policy/06-resources-sequence.svg" alt="Resource retirement workflow" width="1856" height="2085"></a></span></label></p>
+<p class="figure-caption">Disposal optionally adds the fencing and detachment prefix to retirement. The consumer obtains native facts again after eviction, so the original zero-user observation cannot by itself authorize native deletion.</p>
+
+<p><strong>Simplification candidate R1.</strong> The <code>disposal</code> and <code>retirement</code> entry paths
+already share the suffix beginning at <code>observe</code>. Their two initial phases exist
+only to issue the first effect. An initializer returning <code>(state, effects)</code> could
+remove these entry phases, at the cost of a different runtime runner contract.
+This offers less benefit than B1/B2 or P1. Disposal must still fence and detach
+before observation; ordinary retirement must begin with observation. Native user counts remain authoritative; adding a
+Python ownership ledger would create a second, stale source of truth.</p>
+<h2 id="gesture-observer-and-participants"><a class="header" href="#gesture-observer-and-participants">Gesture observer and participants</a></h2>
+<p><code>src/policy/gesture.py</code> supplies scalar decisions to
+<code>runtime/gesture_coordinator.py</code>. The coordinator owns the per-window gesture
+collections, target filtering, and native event routing. The policy owns token
+allocation, observer handoff, phase checks, deferred completion, participant
+release, and undo permission.</p>
+<h3 id="observer-installation"><a class="header" href="#observer-installation">Observer installation</a></h3>
+<p><a id="next-policy.observer"></a></p>
+<p>The observer state has <code>current_token</code> and <code>pending_token</code>, plus a monotonically
+allocated serial. The first window observation invokes an installation. During a
+replacement, the current observer remains admitted while the new token is
+pending. Only an installation receipt for that pending token can promote it;
+failure leaves the current observer. A lost current observer may leave a
+pending replacement alive. Reset invalidates callbacks but preserves the serial.
+The figure separates pending installation with and without a current observer;
+losing the current observer while a replacement is pending moves between those
+configurations. Reset always clears
+both tokens, including from pending. Native input must match the current token;
+an explicit adapter event with token <code>None</code> remains allowed. Handoff also checks
+the captured gesture token and its armed/active phase. After installation, the
+coordinator replays the latest move/finish or requests handoff for a newer gesture.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/07-gesture.svg"><img src="../../../assets/illustrations/next-policy/07-gesture.svg" alt="Observer handoff policy" width="1334" height="1205"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/07-gesture.svg"><img src="../../../assets/illustrations/next-policy/07-gesture.svg" alt="Observer handoff policy" width="1334" height="1205"></a></span></label></p>
+<p class="figure-caption">A stale installation or loss receipt has no authority. The current observer stays usable until the pending native installation succeeds.</p>
+
+<h3 id="gesture-participation"><a class="header" href="#gesture-participation">Gesture participation</a></h3>
+<p><a id="next-policy.gesture"></a></p>
+<p>The coordinator stores <code>armed</code>, <code>active</code>, and deferred finishing phases for each
+gesture, together with its participating node targets. Movement of at least
+three pixels on either axis crosses the active
+threshold. Release or cancel is deferred until the native widget has applied its
+final value; observation then authorizes participant completion. Activation
+begins a node gesture unless another active participant already owns it, in which
+case it requests a refresh. An armed gesture that finishes without activating
+refreshes a changed target. Only the final active participant releases a node.
+Native gestures do not authorize a manual undo checkpoint;
+manual undo is allowed only for an adapter-owned changed gesture.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/07b-gesture-participants.svg"><img src="../../../assets/illustrations/next-policy/07b-gesture-participants.svg" alt="Gesture participation in the runtime coordinator" width="616" height="817"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/07b-gesture-participants.svg"><img src="../../../assets/illustrations/next-policy/07b-gesture-participants.svg" alt="Gesture participation in the runtime coordinator" width="616" height="817"></a></span></label></p>
+<p class="figure-caption">The policy checks scalar token and phase facts. The runtime remains responsible for collection order, lookup, target filtering, and native event delivery.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/07-gesture-sequence.svg"><img src="../../../assets/illustrations/next-policy/07-gesture-sequence.svg" alt="Observer and gesture workflow" width="2110" height="2725"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/07-gesture-sequence.svg"><img src="../../../assets/illustrations/next-policy/07-gesture-sequence.svg" alt="Observer and gesture workflow" width="2110" height="2725"></a></span></label></p>
+<p class="figure-caption">Observer acknowledgement precedes token promotion. Movement activates participants; finishing waits until the native widget has applied its final value. The coordinator releases a node only when its final active participant finishes, with optional auto-keying and adapter-owned undo handled by its effects.</p>
+
+<h2 id="render-preflight"><a class="header" href="#render-preflight">Render preflight</a></h2>
+<p><a id="next-policy.render-preflight"></a></p>
+<p><code>src/policy/render_preflight.py</code> protects the render boundary. A ticket starts in
+<code>waiting</code> with a render identity, scene identity, frame, subframe, and
+generation. <code>runtime/publication.py</code> queues it and <code>nodes.py</code> performs the
+main-thread reconciliation before resolving it.</p>
+<p>The ticket releases only when all correlation fields match, the event is a
+publication, the signature is non-<code>None</code>, it equals the published signature,
+and there is no error. A same-generation mismatch or failure enters <code>failed</code>.
+A stale generation is ignored so an old callback cannot fail a newer ticket.
+Terminal receipts do nothing. The non-<code>None</code> condition is precise: this reducer
+does not independently reject an empty string. Signature construction and other
+policy assumptions must establish any stronger signature format rule.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/08-render-preflight.svg"><img src="../../../assets/illustrations/next-policy/08-render-preflight.svg" alt="Render preflight authorization" width="434" height="401"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/08-render-preflight.svg"><img src="../../../assets/illustrations/next-policy/08-render-preflight.svg" alt="Render preflight authorization" width="434" height="401"></a></span></label></p>
+<p class="figure-caption">The gate queues and wakes the waiting thread, but the reducer authorizes release only for an exact published signature. A mismatch fails closed.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/illustrations/next-policy/08-render-preflight-sequence.svg"><img src="../../../assets/illustrations/next-policy/08-render-preflight-sequence.svg" alt="Render preflight workflow" width="2552" height="2413"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/illustrations/next-policy/08-render-preflight-sequence.svg"><img src="../../../assets/illustrations/next-policy/08-render-preflight-sequence.svg" alt="Render preflight workflow" width="2552" height="2413"></a></span></label></p>
+<p class="figure-caption">The render thread waits while Blender's main thread reads the exact frame and reconciles its Grade kernels. Admission can retry before reconciliation begins. An exact publication releases the ticket; a failure applies visible error output before delivering the failed ticket.</p>
+
+<p><strong>Simplification candidate P1.</strong> <code>RenderPreflightTicket</code> currently repeats the
+identity fields already held in its policy state so that cross-thread callers
+can construct plain events. A ticket could instead expose a correlation value
+derived from the state and centralize event construction. This is safe only if
+the state remains immutable to the waiting thread and every callback still
+passes the same render, scene, frame, subframe, and generation checks.</p>
+<h2 id="how-the-proofs-should-be-read"><a class="header" href="#how-the-proofs-should-be-read">How the proofs should be read</a></h2>
+<p>The policy requirements are executable contracts, not a model of all Blender
+behavior. For example:</p>
+<ul>
+<li><code>requirements/preparation.inv</code> proves latest-demand replacement and receipt
+correlation; it does not prove executor cancellation.</li>
+<li><code>requirements/preparation_join.inv</code> proves the all-three barrier and delayed
+error; <code>grade_preparation.py</code> supplies the physical <code>gather</code> and shielding.</li>
+<li><code>requirements/node.inv</code> proves current/full/error presentation decisions;
+runtime checks and host tests must establish kernel structure, image contents,
+and graph ownership.</li>
+<li><code>requirements/helper.inv</code> proves generation and job fencing, escalation, exit
+ordering, and cleanup ownership; transport queue ordering remains an adapter
+contract.</li>
+<li>The bank, image, and resource requirements prove fail-closed sequencing and
+eligibility predicates, while their consumers perform native operations and
+collect receipts.</li>
+<li><code>requirements/gesture.inv</code> proves scalar token, phase, participant, and undo
+decisions. It does not prove the coordinator’s collection bookkeeping.</li>
+<li><code>requirements/render_preflight.inv</code> proves exact release correlation and
+stale-generation handling. It does not prove that Blender’s scene snapshot
+is correct.</li>
+</ul>
+<p>Some named requirements make the review points especially concrete. The
+preparation queue properties are <code>running_request_only_replaces_latest_demand</code>,
+<code>final_receipt_starts_latest_successor</code>, and
+<code>obsolete_failure_does_not_publish_error</code>. The join uses
+<code>any_completion_order_joins_after_all_three</code> and
+<code>child_error_is_retained_until_last_retirement</code>. The node uses
+<code>full_quality_is_required_for_current_output</code>,
+<code>current_failure_clears_applied_output</code>, and
+<code>stale_full_result_updates_drag_preview</code>. The helper uses
+<code>stale_generation_is_ignored</code>, <code>cancel_request_retains_active_slot</code>, and
+<code>cleanup_failure_retains_owner_and_error</code>. The production bank uses
+<code>repair_requires_successful_closed_receipt</code>,
+<code>selector_change_requires_clean_staging_receipt</code>, and
+<code>failed_delivery_restores_original_selector</code>. Resource deletion uses
+<code>deletion_requires_eviction_and_fresh_eligibility</code>; gesture behavior uses
+<code>observer_handoff_commits_only_after_ack</code>,
+<code>last_participant_authorizes_release</code>, and <code>native_finish_never_pushes_undo</code>;
+render release uses <code>release_requires_correlated_exact_publication</code> and
+<code>stale_generation_cannot_release_or_fail_current_ticket</code>. These are the
+concrete contracts behind the diagrams and the simplification notes above.</p>
+<h2 id="follow-one-edit-through-the-layer"><a class="header" href="#follow-one-edit-through-the-layer">Follow one edit through the layer</a></h2>
+<p>Suppose the last installed kernel is <code>Z</code>, with full quality. The user changes
+settings quickly enough to request <code>A</code>, then <code>B</code>, then <code>C</code> while <code>A</code> is still
+running. The node policy and preparation policy each retain different facts:
+the node tracks what may be displayed, while the preparation scheduler tracks
+which immutable snapshot occupies its worker.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Event</th><th>Demand, worker, and installation</th></tr>
+</thead>
+<tbody>
+<tr><td>Settled before edit</td><td>Demand <code>Z</code>; worker idle; <code>Z</code> full, current.</td></tr>
+<tr><td>Request <code>A</code></td><td>Demand <code>A</code>; start worker <code>A</code>; retain <code>Z</code> as preview.</td></tr>
+<tr><td>Request <code>B</code>, then <code>C</code></td><td>Demand becomes <code>C</code>; <code>A</code> stays in the worker slot; <code>Z</code> remains preview.</td></tr>
+<tr><td>Final success for <code>A</code></td><td>Retire <code>A</code>, start <code>C</code>; outside a gesture, ignore <code>A</code> at the node; retain <code>Z</code> preview.</td></tr>
+<tr><td>Final success for <code>C</code></td><td>Worker idle; matching preparation authorizes build <code>C</code>; <code>Z</code> remains preview.</td></tr>
+<tr><td>Installation success for <code>C</code></td><td>Demand and installation are <code>C</code> full; presentation becomes current.</td></tr>
+</tbody>
+</table>
+</div>
+<p>If <code>A</code> fails instead, the preparation policy suppresses that obsolete failure
+and starts <code>C</code> after <code>A</code> retires. If the current <code>C</code> build fails, node policy
+clears the applied kernel and moves to error output. This trace explains why
+the two signature state machines are not redundant: one correlates prepared
+data, and one correlates a node’s installable graph and rendered output.</p>
+<h2 id="source-map-and-reproduction"><a class="header" href="#source-map-and-reproduction">Source map and reproduction</a></h2>
+<p>This chapter’s diagrams link to authored D2 in the repository’s
+<a href="https://github.com/rei277hz/chromaticity/tree/main/products/perceptual-grade-book/docs/book/diagrams"><code>docs/book/diagrams</code></a>
+directory. All figures use the pinned D2 distribution’s ELK layout engine.
+The generated figure hashes, layout flags, and renderer pin are recorded in the
+<a href="../../../downloads/provenance/next-policy-diagrams.json">diagram provenance manifest</a>.
+The links below open the implementation, formal requirements, and runtime
+effect consumer. The parameter-image policy is in the comparison example; the
+other listed policies are in the product’s <code>src/policy</code> package.</p>
+<ul>
+<li>Preparation scheduler: <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/policy/preparation.py">policy</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/requirements/preparation.inv">requirements</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/runtime/preparation.py">consumer</a>.</li>
+<li>Preparation join: <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/policy/preparation_join.py">policy</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/requirements/preparation_join.inv">requirements</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/runtime/grade_preparation.py">consumer</a>.</li>
+<li>Node output: <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/policy/node.py">policy</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/requirements/node.inv">requirements</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/nodes.py">consumer</a>.</li>
+<li>Helper process: <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/policy/helper.py">policy</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/requirements/helper.inv">requirements</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/runtime/execution.py">consumer</a>.</li>
+<li>Production bank publication: <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/policy/bank_publication.py">policy</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/requirements/bank_publication.inv">requirements</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/runtime/bank_publication.py">consumer</a>, called from <code>nodes.py</code>.</li>
+<li>Immutable parameter-image comparison: <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/examples/publication_compare/policy/parameter_publication.py">policy</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/examples/publication_compare/requirements/parameter_publication.inv">requirements</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/examples/publication_compare/runtime/parameter_publication.py">consumer</a>.</li>
+<li>Shared-image publication: <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/policy/image_publication.py">policy</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/requirements/image_publication.inv">requirements</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/runtime/image_publication.py">consumer</a>, exercised by the comparison example.</li>
+<li>Compositor publication gate: <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/policy/compositor_publication.py">policy</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/requirements/compositor_publication.inv">requirements</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/runtime/publication.py">consumer</a>; live snapshot publication is comparison-only.</li>
+<li>Resource lifecycle: <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/policy/resources.py">policy</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/requirements/resources.inv">requirements</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/runtime/resource_lifecycle.py">consumers</a> and <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/runtime/grade_resources.py">Grade resources</a>.</li>
+<li>Gesture coordination: <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/policy/gesture.py">policy</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/requirements/gesture.inv">requirements</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/runtime/gesture_coordinator.py">consumer</a>.</li>
+<li>Render preflight: <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/policy/render_preflight.py">policy</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/requirements/render_preflight.inv">requirements</a> · <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-next-blender/src/runtime/publication.py">consumer</a>, resolved from <code>nodes.py</code>.</li>
+</ul>
+<p>Regenerate the diagram assets and both English reading formats from the
+repository root with the declared Buck2 targets:</p>
+<pre><code class="language-sh">buck2 build --remote-only //products/perceptual-grade-book/diagrams:assets
+buck2 build --remote-only \
+  '//products/perceptual-grade-book:site[html]' \
+  '//products/perceptual-grade-book:technical-report[pdf]' \
+  '//products/perceptual-grade-book:technical-report[epub]'
+</code></pre>
+<p>The site target includes the English and Simplified Chinese editions; the policy
+chapter and its 23 generated SVGs appear only in English. The diagram source
+files, D2 archive, renderer adapter, and figure manifest are declared Buck2
+inputs, so the first command is reproducible without a system D2 installation.</p>
+<p>Build and run the product policy evidence with Buck2’s remote execution:</p>
+<pre><code class="language-sh">buck2 build //products/perceptual-grade-next-blender:verify_policies --remote-only
+buck2 test //products/perceptual-grade-next-blender/tests:policy_verification --remote-only
+buck2 test //products/perceptual-grade-next-blender/tests:policy_preparation \
+  //products/perceptual-grade-next-blender/tests:policy_preparation_join \
+  //products/perceptual-grade-next-blender/tests:policy_node \
+  //products/perceptual-grade-next-blender/tests:policy_helper \
+  //products/perceptual-grade-next-blender/tests:policy_resources \
+  //products/perceptual-grade-next-blender/tests:policy_image_publication \
+  //products/perceptual-grade-next-blender/tests:policy_compositor_publication \
+  //products/perceptual-grade-next-blender/tests:policy_bank_publication \
+  //products/perceptual-grade-next-blender/tests:policy_gesture \
+  //products/perceptual-grade-next-blender/tests:policy_render_preflight --remote-only
+</code></pre>
+<p>These checks are deliberately scoped to <code>products/perceptual-grade-next-blender</code>.
+They complement runtime and installed-host tests; passing the <code>.inv</code> proofs
+alone is not evidence that a native image write, process operation, or gesture
+observer succeeded.</p>
+<h2 id="a-simplification-order"><a class="header" href="#a-simplification-order">A simplification order</a></h2>
+<p>The strongest low-risk reductions are the ones that remove duplicated facts
+without weakening a correlation fence:</p>
+<ol>
+<li>Merge bank <code>stage</code> and <code>repair_stage</code> into one staging phase with an explicit
+repair effect, while preserving close-before-repair.</li>
+<li>Derive <code>candidate_bank</code> from the active bank for the fixed two-bank resource.</li>
+<li>Centralize render-ticket correlation construction so the ticket does not
+duplicate policy-owned identity fields.</li>
+<li>Consider replacing the fixed preparation join only after its physical
+retirement, first-error, duplicate-receipt, and cancellation guarantees have
+equivalent executable evidence.</li>
+</ol>
+<p>Helper generations and gesture tokens are not redundant state: they protect
+against process restart and native observer replacement. Removing them would
+require a new runtime contract, not just a smaller diagram. Likewise, replacing
+the derived node presentation modes with stored booleans would make stale or
+partial output easier to present as current.</p>
+
+                    <footer class="book-footer">Perceptual Grade Technical Report <a href="../reference/credits.html">Credits</a> <a href="../reference/license.html">License</a> <a href="../../../index.html">All books</a></footer></main>
+
+                    
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/math-96cc483f.js"></script>
+        <script src="../theme/reader-7b4ff642.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

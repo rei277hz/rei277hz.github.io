@@ -1,0 +1,1645 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Full forward and inverse math - Perceptual Grade Technical Report</title>
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css" integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js" integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk" crossorigin="anonymous"></script>
+
+        <meta name="description" content="English technical report on the current Perceptual Grade reference and project development.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/fonts-6a07186e.css">
+        <link rel="stylesheet" href="../theme/grade-dda453c0.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-53542b48.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-2d92a0d7.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/pontano-sans@5.3.0/files/pontano-sans-latin-wght-normal.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64 256x256" href="../../../favicon.ico?v=b4dbc1f8e6d1">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png?v=65f37d4e63e3">
+<link rel="manifest" href="../../../site.webmanifest">
+</head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu"><li role="none"><button role="menuitem" class="grade-auto" id="grade-theme-auto">Auto</button></li>
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Dark</button></li>
+                            
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"><a href="../index.html"><img class="brand-icon" src="../../../assets/icons/perceptual-grade-32-transparent.png" srcset="../../../assets/icons/perceptual-grade-64-transparent.png 2x" alt="" width="32" height="32"><span>Perceptual Grade Technical Report</span></a></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rei277hz/chromaticity" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+<nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="full-forward-and-inverse-math"><a class="header" href="#full-forward-and-inverse-math">Full forward and inverse math</a></h1>
+<p>This chapter contains the current reference specification alongside the retained <strong>Perceptual Grade 1.23.2</strong> derivation. The current analytic authority is <code>libraries/perceptual-grade-reference</code>: section 6.5 describes its Stage 3, and section 20 its inverse and Stack oracle. Sections 6.3–6.4 and 9–19 retain the historical control set, signed-lift/fallback policy and deployed inverse machinery except where a current comparison is explicitly marked. Those historical profiles do not implement the corrected Warp ordering.</p>
+<p>The equations assume fixed grade parameters and viewing conditions. An inverse need not have a slider representation. Equations describe real arithmetic; numerical branches and implementation profiles are stated separately. An algebraic reduction followed by scalar or two-variable root solving is called a <strong>semi-analytic inverse</strong> here. That term describes the retained production inverse, not the current reference search, and does not claim a universal closed form or global convergence.</p>
+<p>For a fixed positive reference energy and positive requested lightness, the standalone H–K guard is one-to-one and has a unique inverse from a bounded, strictly monotone scalar equation. The retained production inverse nests that guard inverse inside a two-variable Stage-3 solve, then undoes Tone and Stage 1. The current reference instead evaluates the complete forward map for each candidate, with H–K repair before Scale and cube containment at RGB export; section 20 specifies that search.</p>
+<p>The full grade can still have multiple preimages. Black clipping, singular matrices, signed extension, fallback selection, finite precision, and creative stage-3 folds require explicit policies. A fixed-reference guard inverse does not by itself establish injectivity of the complete grade.</p>
+<h2 id="1-source-contract-and-implementation-profiles"><a class="header" href="#1-source-contract-and-implementation-profiles">1. Source contract and implementation profiles</a></h2>
+<p>The following source names belong to the retained 1.23.2 derivation. Current reference entry points are <code>src/model.py</code>, <code>src/grading.py</code>, <code>src/inverse.py</code> and <code>src/stack.py</code> under <code>libraries/perceptual-grade-reference</code>.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Source</th><th>Relevant functions</th></tr>
+</thead>
+<tbody>
+<tr><td><code>model/linear.py</code></td><td><code>safe_source_white</code>, <code>rgb_to_xyz</code>, <code>adaptation</code>, <code>references</code>, <code>directional_matrix</code>, <code>matrices</code></td></tr>
+<tr><td><code>model/tone.py</code></td><td><code>viewing</code>, <code>response</code>, <code>unresponse</code>, <code>eccentricity</code>, <code>kernel_integral</code>, <code>saturation_gain</code>, <code>Model.remap</code>, <code>Model.attributes</code>, <code>Model.core</code>, <code>Model.apply</code></td></tr>
+<tr><td><code>model/color.py</code></td><td><code>chroma_drivers</code>, <code>chroma_crossover</code>, <code>Model.stage2_with_ja</code>, <code>Model.weights</code>, <code>Model.drivers</code>, <code>Model.adjustments</code>, <code>hue_concentration</code>, <code>Model.stage3</code>, <code>hk_energy</code>, <code>_project_hk_energy</code>, <code>Model.decode</code>, <code>Model.apply</code></td></tr>
+<tr><td><code>model/curves.py</code></td><td><code>integral_jet</code>, <code>weights_jet</code>, <code>jets</code>, <code>coefficients</code>, <code>Table</code>, <code>BasisTable</code>, <code>ToneModel</code>, <code>ColorModel</code></td></tr>
+<tr><td><code>graph/tone.py</code>, <code>graph/color.py</code>, <code>graph/curve_tables.py</code></td><td>Native graph equivalents and coefficient-table evaluation</td></tr>
+<tr><td><code>Perceptual-Grade.dctl</code></td><td><code>pg_model</code>, <code>pg_linear</code>, <code>pg_stage2_appearance</code>, <code>pg_drivers_ja</code>, <code>pg_attributes</code>, <code>pg_hue_concentration</code>, <code>pg_stage3_ja</code>, <code>pg_hk_energy</code>, <code>pg_project_energy</code>, <code>pg_decode_reference</code>, <code>pg_core</code>, <code>pg_nonlinear_eval</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>The shared coefficient machinery is compared with the current reference where marked. Section 18 retains the historical semi-analytic inverse and Stack composition; section 19 retains its working-white and LUT-boundary contract. The <a href="../theory/lut.html">sampling chapter</a> gives the current reference/shared input-repair and sampler rules, while <a href="testing.html#lut-sampling-and-aces-20-display-error">testing</a> records the historical experiments and their limits.</p>
+<p>When implementing an inverse, select the forward evaluator to invert:</p>
+<ol>
+<li><strong>Current independent reference:</strong> use the reference Stage 3 in section 6.5 and the complete forward evaluation in section 20.</li>
+<li><strong>Historical scalar tables:</strong> use the profile-specific coefficient tables, endpoint jets and rules in section 14.</li>
+<li><strong>Retained DCTL/native kernel:</strong> preserve that profile’s controls, ordering, preprocessing, precision, validity tests and bypass decisions.</li>
+</ol>
+<p>These profiles differ in mathematical design as well as arithmetic. Agreement with the independent Python reference is not evidence of a completed Resolve or Blender render test. Select the intended forward function before inverting it.</p>
+<p>The retained DCTL order defines the historical signed-lift/fallback contract in sections 9–19. It must not replace the current reference order in section 6.5. RGB/XYZ adapters use the selected grading basis; optional diagnostics, scopes and display rendering remain outside the grading function.</p>
+<h2 id="2-symbols-spaces-and-units"><a class="header" href="#2-symbols-spaces-and-units">2. Symbols, spaces, and units</a></h2>
+<p>Vectors are columns. Products such as division of two cone triples, absolute value of a vector, and scalar response functions on a vector are componentwise unless stated otherwise. All ordinary logarithms are natural logarithms. Trigonometric arguments are radians; stored Hue and Heading controls use degrees.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Symbol</th><th>Definition</th></tr>
+</thead>
+<tbody>
+<tr><td><span data-tex="x,y&#92;in&#92;mathbb R^3"></span></td><td>Input and output scene-linear working RGB; negative and above-one values are permitted</td></tr>
+<tr><td><span data-tex="x_1=M_1x"></span></td><td>Working RGB after stage 1</td></tr>
+<tr><td><span data-tex="P,P^{-1}"></span></td><td>Working RGB-to-XYZ and XYZ-to-RGB matrices</td></tr>
+<tr><td><span data-tex="W_s,W_d"></span></td><td>Source and destination white XYZ, each normalized to <span data-tex="Y=1"></span></td></tr>
+<tr><td><span data-tex="A"></span></td><td>CAT16 XYZ-to-cone matrix</td></tr>
+<tr><td><span data-tex="Q=&#92;operatorname{diag}(1/(AW_d))AP"></span></td><td>Working RGB-to-normalized-cone matrix</td></tr>
+<tr><td><span data-tex="n=Qx_1"></span></td><td>Normalized cone triple before source-specific roundoff zeroing</td></tr>
+<tr><td><span data-tex="q=(H,a,b)"></span>; <span data-tex="z=a+ib"></span></td><td>Appearance coordinates; <span data-tex="z"></span> is a complex representation of the same real pair</td></tr>
+<tr><td><span data-tex="C=&#92;lvert z&#92;rvert"></span>; <span data-tex="h=&#92;arg z"></span></td><td>Actual modCAM16 chroma and hue; hue is irrelevant when <span data-tex="C=0"></span></td></tr>
+<tr><td><span data-tex="J=J_A"></span></td><td>Achromatic appearance lightness, carried independently of <span data-tex="H,C"></span></td></tr>
+<tr><td><span data-tex="s=75C/J"></span></td><td>modCAM16 saturation; undefined at exact black</td></tr>
+<tr><td><span data-tex="p_d=2"></span>, <span data-tex="s_0=35"></span>, <span data-tex="C_n=2"></span></td><td>Fixed classifier exponent, saturation midpoint, and absolute-chroma neutral fade scale</td></tr>
+<tr><td><span data-tex="r_s=s_0/75=7/15"></span></td><td>Ratio converting <span data-tex="J"></span> to the classifier boundary</td></tr>
+<tr><td><span data-tex="v_n(C)"></span>, <span data-tex="&#92;omega(J,C)"></span></td><td>Neutral visibility and high-saturation membership, defined in section 6.2</td></tr>
+<tr><td><span data-tex="H=J_{&#92;mathrm{HK}}"></span></td><td>Signed H–K lightness; <span data-tex="H=&#92;sqrt{J^2+66C}"></span> only for <span data-tex="J&#92;ge0"></span></td></tr>
+<tr><td><span data-tex="k_{&#92;mathrm{HK}}=66"></span></td><td>Fixed chromatic contribution to squared H–K lightness</td></tr>
+<tr><td><span data-tex="q_0,q_2,q_3,q_g"></span></td><td>Appearance after stage 1, after stage 2, raw stage-3 request, and guarded stage-3 output</td></tr>
+<tr><td><span data-tex="J_i,C_i,z_i"></span></td><td>The corresponding achromatic lightness, chroma, and complex pair at index <span data-tex="i"></span></td></tr>
+<tr><td><span data-tex="E_r"></span></td><td>Nonnegative guard reference: <span data-tex="&#92;max(J_2&#92;lvert J_2&#92;rvert,0)"></span> in the current reference; <span data-tex="J_2^2"></span> on the historical positive branch</td></tr>
+<tr><td><span data-tex="E=J_g^2"></span></td><td>Guard output energy, carried directly into appearance decoding</td></tr>
+<tr><td><span data-tex="X=H_3^2"></span>, <span data-tex="D=X-66C_3"></span></td><td>Raw requested squared lightness and raw requested achromatic energy</td></tr>
+<tr><td><span data-tex="U=H_g^2=E+66C_g"></span></td><td>Guarded squared lightness</td></tr>
+<tr><td><span data-tex="R_w,P_w"></span></td><td>Effective reference and peak luminances in nits</td></tr>
+<tr><td><span data-tex="&#92;mathcal E(n)"></span></td><td>Normalized-cone appearance encoding; also returns <span data-tex="J"></span> or <span data-tex="J^2"></span> directly</td></tr>
+<tr><td><span data-tex="&#92;mathcal D(q,E)"></span></td><td>Plain appearance decoding to normalized cones using supplied energy; it does <strong>not</strong> apply the guard</td></tr>
+<tr><td><span data-tex="&#92;Phi=&#92;mathcal E&#92;circ Q"></span></td><td>Working RGB appearance encoding on its valid branch</td></tr>
+<tr><td><span data-tex="T,S,&#92;mathcal R_{E_r}"></span></td><td>Stage 2, raw stage 3, and fixed-reference H–K guard</td></tr>
+</tbody>
+</table>
+</div>
+<p><span data-tex="H,J,C"></span> are appearance-coordinate values, not nits or log RGB code values. The grading <span data-tex="a,b"></span> have radius <span data-tex="C"></span>; they are not the logarithmically compressed CAM16-UCS pair.</p>
+<p>The current reference carries <code>State(q, energy)</code> with <span data-tex="E_s=J_A|J_A|"></span>, so <span data-tex="J_A=&#92;operatorname{sign}(E_s)&#92;sqrt{|E_s|}"></span>. With <span data-tex="b=&#92;sqrt{66C}"></span>, its signed lightness is <span data-tex="H=&#92;sqrt{J_A^2+b^2}"></span> for <span data-tex="J_A&#92;ge0"></span>, and <span data-tex="H=2b-&#92;sqrt{J_A^2+b^2}"></span> otherwise. Tone carries the scaled energy; the guard receives its frozen post-Tone value. Do not reconstruct that reference by subtracting rounded <span data-tex="H_2^2-66C_2"></span>. The older <code>Appearance(H,a,b,J)</code> and subtraction-based probe conventions belong to the retained profile below.</p>
+<h2 id="3-stage-1-exact-matrix-construction"><a class="header" href="#3-stage-1-exact-matrix-construction">3. Stage 1: exact matrix construction</a></h2>
+<h3 id="31-working-primaries-and-white"><a class="header" href="#31-working-primaries-and-white">3.1 Working primaries and white</a></h3>
+<p>Define</p>
+<div class="grade-equation" data-tex="&#92;operatorname{XYZ}(x_c,y_c,Y)
+=Y&#92;left(&#92;frac{x_c}{y_c},1,&#92;frac{1-x_c-y_c}{y_c}&#92;right)^T."></div>
+
+<p>For working primary chromaticities <span data-tex="p_R,p_G,p_B"></span>, let</p>
+<div class="grade-equation" data-tex="P_0=[&#92;operatorname{XYZ}(p_R,1)&#92;;&#92;operatorname{XYZ}(p_G,1)&#92;;&#92;operatorname{XYZ}(p_B,1)],
+&#92;qquad s=P_0^{-1}W_d,
+&#92;qquad P=P_0&#92;operatorname{diag}(s)."></div>
+
+<p>The standalone reference supports these RGB spaces. Blender nodes use the fixed grading basis and selected white in section 19, independently of their scene RGB space:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Space</th><th>Red <span data-tex="xy"></span></th><th>Green <span data-tex="xy"></span></th><th>Blue <span data-tex="xy"></span></th><th>White <span data-tex="xy"></span></th></tr>
+</thead>
+<tbody>
+<tr><td>Linear Rec.709</td><td><span data-tex="(.64,.33)"></span></td><td><span data-tex="(.30,.60)"></span></td><td><span data-tex="(.15,.06)"></span></td><td><span data-tex="(.3127,.3290)"></span></td></tr>
+<tr><td>Linear Rec.2020</td><td><span data-tex="(.708,.292)"></span></td><td><span data-tex="(.170,.797)"></span></td><td><span data-tex="(.131,.046)"></span></td><td><span data-tex="(.3127,.3290)"></span></td></tr>
+<tr><td>ACEScg</td><td><span data-tex="(.713,.293)"></span></td><td><span data-tex="(.165,.830)"></span></td><td><span data-tex="(.128,.044)"></span></td><td><span data-tex="(.32168,.33767)"></span></td></tr>
+</tbody>
+</table>
+</div>
+<p>For another DCTL space/white selection, use its selected <span data-tex="P,W_d"></span> consistently throughout; do not silently substitute Rec.709 or D65.</p>
+<h3 id="32-source-white-preprocessing-and-adaptation"><a class="header" href="#32-source-white-preprocessing-and-adaptation">3.2 Source-white preprocessing and adaptation</a></h3>
+<div class="grade-equation" data-tex="A=&#92;begin{bmatrix}
+.401288&amp;.650173&amp;-.051461&#92;&#92;
+-.250268&amp;1.204414&amp;.045854&#92;&#92;
+-.002079&amp;.048952&amp;.953127
+&#92;end{bmatrix}."></div>
+
+<p>The source projects source-white chromaticity into an admissible polygon. First clamp each coordinate to <span data-tex="[0,.9]"></span>. Require <span data-tex="y_c&#92;ge.002"></span> and, for every row <span data-tex="(A_{i1},A_{i2},A_{i3})"></span>,</p>
+<div class="grade-equation" data-tex="(A_{i1}-A_{i3})x_c+(A_{i2}-A_{i3})y_c+A_{i3}
+&#92;ge .002&#92;sqrt{(A_{i1}-A_{i3})^2+(A_{i2}-A_{i3})^2}."></div>
+
+<p>If the clamped point is outside this convex polygon, project it to the closest point on its boundary in Euclidean <span data-tex="xy"></span> distance. The Python model substitutes D65 for nonfinite source coordinates; reject or sanitize nonfinite parameters consistently with the selected host. This is parameter preprocessing, not a per-pixel color operation.</p>
+<p>With the resulting <span data-tex="W_s"></span>,</p>
+<div class="grade-equation" data-tex="M_{&#92;mathrm{CAT}}=A^{-1}&#92;operatorname{diag}&#92;left(&#92;frac{AW_d}{AW_s}&#92;right)A."></div>
+
+<p>The Python reset path uses exact identity when source and destination <span data-tex="xy"></span> differ by less than <span data-tex="5&#92;times10^{-8}"></span> in both coordinates. Preserve effective preprocessed parameters and reset flags when reproducing a host.</p>
+<h3 id="33-directional-controls"><a class="header" href="#33-directional-controls">3.3 Directional controls</a></h3>
+<p>Adapt the Rec.709 red and blue primaries from D65 to <span data-tex="W_d"></span>, convert their XYZ to <span data-tex="xy"></span>, then take 30% of each displacement from destination-white chromaticity <span data-tex="w_d"></span>. Call these reference points <span data-tex="p_r,p_b"></span>.</p>
+<p>For each directional control <span data-tex="i&#92;in&#92;{r,b&#92;}"></span>, with internal Balance <span data-tex="b_i"></span> in stops, Spread <span data-tex="s_i"></span> in percent and Heading <span data-tex="&#92;vartheta_i"></span> in degrees,</p>
+<div class="grade-equation" data-tex="p_i&#39;=w_d+(1+s_i/100)R_{&#92;pi&#92;vartheta_i/180}(p_i-w_d),"></div>
+
+<div class="grade-equation" data-tex="V_i=&#92;operatorname{XYZ}(p_i,1),&#92;qquad
+V_i&#39;=2^{b_i}&#92;operatorname{XYZ}(p&#39;_{i,x},&#92;max(.01,p&#39;_{i,y}),1),"></div>
+
+<div class="grade-equation" data-tex="&#92;mathsf B=[W_d&#92;;V_r&#92;;V_b],&#92;qquad
+&#92;mathsf B&#39;=[W_d&#92;;V_r&#39;&#92;;V_b&#39;],&#92;qquad
+M_{&#92;mathrm{dir}}=&#92;mathsf B&#39;&#92;mathsf B^{-1}."></div>
+
+<p>The DCTL negates the displayed Balance controls before supplying these internal <span data-tex="b_i"></span>. Do not negate stored internal model values again.</p>
+<p>For exposure <span data-tex="e"></span> in stops,</p>
+<div class="grade-equation" data-tex="&#92;boxed{M_1=2^eP^{-1}M_{&#92;mathrm{dir}}M_{&#92;mathrm{CAT}}P,&#92;qquad x_1=M_1x.}"></div>
+
+<p>If all directional controls are zero, the source uses an exact identity directional matrix. Exposure commutes with these matrices.</p>
+<h2 id="4-appearance-encoding-and-plain-decoding"><a class="header" href="#4-appearance-encoding-and-plain-decoding">4. Appearance encoding and plain decoding</a></h2>
+<h3 id="41-viewing-constants"><a class="header" href="#41-viewing-constants">4.1 Viewing constants</a></h3>
+<p>The analytic reference derives both effective values through a smooth bounded map rather than integer rounding. For lower bound <span data-tex="&#92;ell"></span>, upper bound <span data-tex="u"></span> and the quintic ease <span data-tex="e(x)=x^3(6-8x+3x^2)"></span>,</p>
+<div class="grade-equation" data-tex="&#92;operatorname{floor}_{&#92;ell}(v)=&#92;begin{cases}&#92;ell,&amp;v&#92;le&#92;ell&#92;&#92; &#92;ell+e(v-&#92;ell),&amp;&#92;ell&lt;v&lt;&#92;ell+1&#92;&#92; v,&amp;v&#92;ge&#92;ell+1&#92;end{cases}
+&#92;qquad
+&#92;operatorname{cap}_{u}(v)=&#92;begin{cases}v,&amp;v&#92;le u-1&#92;&#92; u-e(u-v),&amp;u-1&lt;v&lt;u&#92;&#92; u,&amp;v&#92;ge u&#92;end{cases}"></div>
+
+<div class="grade-equation" data-tex="R_w=&#92;operatorname{cap}_{1000}&#92;!&#92;left(&#92;operatorname{floor}_{48}(R_{&#92;mathrm{input}})&#92;right),
+&#92;qquad
+P_w=&#92;operatorname{cap}_{10000}&#92;!&#92;left(&#92;operatorname{floor}_{2R_w}(P_{&#92;mathrm{input}})&#92;right)."></div>
+
+<p>Both maps are exactly the identity more than one unit inside the bound and exactly the bound outside it, with matching first and second derivatives at the joins. The 1.23.2 DCTL rounds to the nearest nit instead; that produces a step of one nit at every half-nit and is the reason a fractional Reference Nits input can behave differently between the two implementations. Use the smooth form for the reference.</p>
+<p>The DCTL peak menu first chooses from 500, 1000, 2000, 4000 nits, promoting an insufficient selection to its supported value satisfying the reference constraint. Treat <strong>effective</strong> <span data-tex="R_w,P_w"></span> as configuration shared by forward and inverse; do not reinterpret menu indices as nits.</p>
+<p>Define</p>
+<div class="grade-equation" data-tex="L_A=.1R_w,&#92;quad k=(5L_A+1)^{-1},"></div>
+
+<div class="grade-equation" data-tex="F_L=.2k^4(5L_A)+.1(1-k^4)^2(5L_A)^{1/3},&#92;qquad
+&#92;gamma=.943019577159."></div>
+
+<p>The cone response and its inverse are</p>
+<div class="grade-equation" data-tex="&#92;rho(n)=&#92;operatorname{sgn}(n)&#92;frac{400(F_L|n|)^{.42}}{27.13+(F_L|n|)^{.42}},"></div>
+
+<div class="grade-equation" data-tex="&#92;rho^{-1}(s)=&#92;frac{&#92;operatorname{sgn}(s)}{F_L}
+&#92;left(&#92;frac{27.13|s|}{400-|s|}&#92;right)^{1/.42},&#92;qquad |s|&lt;400."></div>
+
+<p>Let <span data-tex="A_w=3.05&#92;rho(1)"></span> and <span data-tex="Q=&#92;operatorname{diag}(1/(AW_d))AP"></span>.</p>
+<h3 id="42-encode-normalized-cones"><a class="header" href="#42-encode-normalized-cones">4.2 Encode normalized cones</a></h3>
+<p>For <span data-tex="s=&#92;rho(n)"></span>, define</p>
+<div class="grade-equation" data-tex="A_c=2s_R+s_G+.05s_B,"></div>
+
+<div class="grade-equation" data-tex="a_o=s_R-s_G+(s_B-s_G)/11,&#92;qquad
+b_o=(s_R+s_G-2s_B)/9."></div>
+
+<p>If <span data-tex="s=0"></span>, return exact black <span data-tex="H=J=C=a=b=0"></span>. Otherwise require <span data-tex="A_c&gt;0"></span> and finite results. Then</p>
+<div class="grade-equation" data-tex="J=100(A_c/A_w)^&#92;gamma,&#92;quad r_o=&#92;operatorname{hypot}(a_o,b_o),&#92;quad
+h=&#92;operatorname{atan2}(b_o,a_o),"></div>
+
+<div class="grade-equation" data-tex="&#92;begin{aligned}
+&#92;epsilon(h)={}&amp;1-.0582&#92;cos h-.0258&#92;cos(2h)-.1347&#92;cos(3h)+.0289&#92;cos(4h)&#92;&#92;
+&amp;-.1475&#92;sin h-.0308&#92;sin(2h)+.0385&#92;sin(3h)+.0096&#92;sin(4h),
+&#92;end{aligned}"></div>
+
+<div class="grade-equation" data-tex="C=1204&#92;epsilon(h)r_o/A_w,&#92;quad
+z=C e^{ih},&#92;quad H=&#92;operatorname{hypot}(J,&#92;sqrt{66C})."></div>
+
+<p>If <span data-tex="r_o=0"></span>, set <span data-tex="C=a=b=0"></span> without computing hue. Also return <span data-tex="J^2"></span> directly from <span data-tex="A_c"></span>. This signed-response encoder can encode valid decoded outputs with negative cone components; do not lift such an output merely to inspect its appearance.</p>
+<h3 id="43-decode-with-a-supplied-achromatic-energy"><a class="header" href="#43-decode-with-a-supplied-achromatic-energy">4.3 Decode with a supplied achromatic energy</a></h3>
+<p>For <span data-tex="q=(H,a,b)"></span>, <span data-tex="C=&#92;operatorname{hypot}(a,b)"></span> and supplied <span data-tex="E&#92;ge0"></span>, use</p>
+<div class="grade-equation" data-tex="J=&#92;sqrt E,&#92;qquad A_c=A_w(J/100)^{1/&#92;gamma},"></div>
+
+<div class="grade-equation" data-tex="(a_o,b_o)=&#92;frac{A_w}{1204&#92;epsilon(h)}(a,b),"></div>
+
+<div class="grade-equation" data-tex="&#92;begin{bmatrix}s_R&#92;&#92;s_G&#92;&#92;s_B&#92;end{bmatrix}
+=&#92;frac1{1403}
+&#92;begin{bmatrix}460&amp;451&amp;288&#92;&#92;460&amp;-891&amp;-261&#92;&#92;460&amp;-220&amp;-6300&#92;end{bmatrix}
+&#92;begin{bmatrix}A_c&#92;&#92;a_o&#92;&#92;b_o&#92;end{bmatrix}."></div>
+
+<p>At <span data-tex="C=0"></span>, set <span data-tex="a_o=b_o=0"></span>. Then</p>
+<div class="grade-equation" data-tex="&#92;mathcal D(q,E)=&#92;rho^{-1}(s),&#92;qquad x_1=Q^{-1}&#92;mathcal D(q,E)."></div>
+
+<p>Source validity requires finite coordinates and output, <span data-tex="H&#92;ge0"></span>, <span data-tex="E&#92;ge0"></span>, and <span data-tex="&#92;max_i|s_i|&lt;399.998"></span>. Exceeding the response limit is an invalid branch, not permission to clip and accept it. The Python model clips <span data-tex="s"></span> for safe evaluation but separately rejects that result.</p>
+<p>On a regular physical point, <span data-tex="E=H^2-66C"></span>. After the guard, <strong>use its carried <span data-tex="E"></span></strong>. When encoding an observed RGB output for inversion, compute <span data-tex="E"></span> from <span data-tex="A_c"></span>, not from <span data-tex="H^2-66C"></span>. Plain decoding here must not silently apply the H–K guard a second time.</p>
+<h2 id="5-stage-2-tone-and-saturation-preserving-scaling"><a class="header" href="#5-stage-2-tone-and-saturation-preserving-scaling">5. Stage 2: tone and saturation-preserving scaling</a></h2>
+<h3 id="51-neutral-nits-and-effective-landmarks"><a class="header" href="#51-neutral-nits-and-effective-landmarks">5.1 Neutral nits and effective landmarks</a></h3>
+<p>The neutral-nits coordinate is</p>
+<div class="grade-equation" data-tex="&#92;nu(v)=&#92;left(&#92;frac{3.05&#92;rho(&#92;max(v,0)/R_w)}{A_w}&#92;right)^&#92;gamma."></div>
+
+<p>For five input nits values <span data-tex="v_i"></span>, ordered Black, Shadows, Midtones, White, Highlights, calculate <span data-tex="j_i=&#92;nu(v_i)"></span> and enforce sequentially</p>
+<div class="grade-equation" data-tex="j_i&#92;leftarrow&#92;max(j_i,j_{i-1}+.001),&#92;quad i=1,&#92;ldots,4."></div>
+
+<p>Define the tone black offset <span data-tex="&#92;beta_T=j_0"></span>, span <span data-tex="s_T=j_4-j_0&gt;0"></span> and <span data-tex="u_i=(j_i-&#92;beta_T)/s_T"></span>. The target coordinates are</p>
+<div class="grade-equation" data-tex="(y_0,y_1,y_2,y_3,y_4)
+=&#92;left(0,&#92;nu(&#92;Lambda_{&#92;mathrm{low}}R_w),&#92;nu(.18R_w),1,&#92;nu(P_w)&#92;right),
+&#92;qquad &#92;Lambda_{&#92;mathrm{low}}=0.015507796089266005."></div>
+
+<p>Set <span data-tex="y_0=0,y_3=1"></span> exactly, as the source does. The analytic reference uses <span data-tex="&#92;Lambda_{&#92;mathrm{low}}=0.015507796089266005"></span>, placing Shadows at <span data-tex="3.148"></span> nits at the default reference. The 1.23.2 DCTL and the bundled legacy model use <span data-tex="0.037153526983"></span>, or <span data-tex="7.542"></span> nits. Only this landmark differs; scale or compare tone curves only between records produced with the same constant.</p>
+<h3 id="52-kernel-and-tone-function"><a class="header" href="#52-kernel-and-tone-function">5.2 Kernel and tone function</a></h3>
+<p>For width <span data-tex="w&gt;0"></span>, define <span data-tex="&#92;operatorname{sigmoid}(x)=1/(1+e^{-x})"></span> and</p>
+<div class="grade-equation" data-tex="K(t;l,r,w)=&#92;int_0^t&#92;left[&#92;operatorname{sigmoid}&#92;left(&#92;frac{v-l}{w}&#92;right)
+-&#92;operatorname{sigmoid}&#92;left(&#92;frac{v-r}{w}&#92;right)&#92;right]dv."></div>
+
+<p>Equivalently, with <span data-tex="&#92;varphi_w(v)=w&#92;log(1+e^{v/w})"></span>,</p>
+<div class="grade-equation" data-tex="K(t;l,r,w)=&#92;varphi_w(t-l)-&#92;varphi_w(-l)-&#92;varphi_w(t-r)+&#92;varphi_w(-r)."></div>
+
+<p>Use stable <code>log1p</code>, <code>expm1</code>, and softplus differences in code. The source uses a narrow-interval branch when <span data-tex="r-l&lt;.1w"></span>: let <span data-tex="d=r-l"></span>, <span data-tex="a=.387298334621"></span>, nodes <span data-tex="s_j=(l+r)/2+(-a,0,a)_jd"></span>, and weights <span data-tex="(.277777777778,.444444444444,.277777777778)"></span>. Evaluate</p>
+<div class="grade-equation" data-tex="K(t)&#92;approx d&#92;sum_j&#92;omega_j&#92;left[
+&#92;operatorname{sigmoid}&#92;left(&#92;frac{t-s_j}{w}&#92;right)
+-&#92;operatorname{sigmoid}&#92;left(&#92;frac{-s_j}{w}&#92;right)&#92;right]."></div>
+
+<p>This numerical branch is part of source matching. Invert the same branch rather than a subtly different ideal integral if exact source reproduction is the objective.</p>
+<p>For <span data-tex="w_T=.05&#92;,2^{-&#92;mathrm{Fit}_T}"></span>, define</p>
+<div class="grade-equation" data-tex="m=&#92;min_{i=0}^3&#92;frac{y_{i+1}-y_i}{u_{i+1}-u_i}&gt;0,&#92;qquad
+r_i=&#92;max(0,y_{i+1}-y_i-m(u_{i+1}-u_i)),"></div>
+
+<div class="grade-equation" data-tex="f(t)=mt+&#92;sum_{i=0}^3r_i&#92;frac{K(t;u_i,u_{i+1},w_T)}{K(1;u_i,u_{i+1},w_T)},"></div>
+
+<div class="grade-equation" data-tex="&#92;boxed{T_H(H_0)=100f&#92;left(&#92;max&#92;left(0,&#92;frac{H_0/100-&#92;beta_T}{s_T}&#92;right)&#92;right).}"></div>
+
+<p>At <span data-tex="t=1"></span>, pin the output to <span data-tex="100y_4"></span>. Intermediate targets are soft constraints, not exact interpolation points. The highlight endpoint is not a clipping ceiling: <span data-tex="t&gt;1"></span> is allowed and retains the positive linear tail <span data-tex="mt"></span>.</p>
+<p>If <span data-tex="&#92;beta_T=0"></span> and <span data-tex="&#92;max_i|j_i-y_i|&lt;3&#92;times10^{-7}"></span>, the source takes the identity tone bypass. For an active curve, <span data-tex="T_H"></span> is strictly increasing above <span data-tex="100&#92;beta_T"></span> and maps all lower lightnesses to zero.</p>
+<h3 id="53-full-stage-2-transformation"><a class="header" href="#53-full-stage-2-transformation">5.3 Full stage-2 transformation</a></h3>
+<p>For a valid incoming <span data-tex="q_0"></span> with <span data-tex="J_0^2=H_0^2-66C_0&#92;ge0"></span>, let <span data-tex="H_2=T_H(H_0)"></span>. The positive scale <span data-tex="k_T"></span> solves</p>
+<div class="grade-equation" data-tex="J_0^2k_T^2+66C_0k_T-H_2^2=0,"></div>
+
+<p>so</p>
+<div class="grade-equation" data-tex="k_T=&#92;frac{2H_2^2}{&#92;operatorname{hypot}(66C_0,2J_0H_2)+66C_0},
+&#92;qquad q_2=(H_2,k_Ta_0,k_Tb_0),&#92;qquad J_2=k_TJ_0."></div>
+
+<p>Both <span data-tex="J"></span> and <span data-tex="C"></span> scale by <span data-tex="k_T"></span>, preserving <span data-tex="75C/J"></span> and hue. Here <span data-tex="b_0"></span> is the incoming opponent coordinate, distinct from the tone black offset <span data-tex="&#92;beta_T"></span>.</p>
+<p>For implementation, the source’s scaled quadratic avoids overflow. For generic source <span data-tex="(H,J,C)"></span> and target lightness <span data-tex="H_t"></span>, set</p>
+<div class="grade-equation" data-tex="r=H_t/H,&#92;quad s=&#92;max(1,r),&#92;quad
+u=(J/H)(r/s),&#92;quad v=(33C/H^2)/s,"></div>
+
+<div class="grade-equation" data-tex="k=&#92;frac{r/s}{&#92;operatorname{hypot}(u,v)+v}&#92;,r."></div>
+
+<p>Use the zero-output limit if <span data-tex="H&#92;le0"></span> or <span data-tex="H_t&#92;le0"></span>. Exact identity/bypass cases can return the input directly. Standalone appearance probes with no carried <span data-tex="J"></span> retain the existing no-fit behavior for <span data-tex="H^2&lt;66C"></span>. Full paths use valid encoder-derived <span data-tex="J"></span> directly and carry its scaled value through Tone; a rounded <span data-tex="H^2-66C"></span> no longer controls the classifier or falsely rejects a valid encoded point. Invalid encoding, black clipping and inverse-domain fallback retain their separate checks.</p>
+<h2 id="6-stage-3-coefficient-curves-contributions-and-explicit-operations"><a class="header" href="#6-stage-3-coefficient-curves-contributions-and-explicit-operations">6. Stage 3: coefficient curves, contributions, and explicit operations</a></h2>
+<p>Throughout this section, <span data-tex="(H,z)=(H_2,z_2)"></span> is the <strong>original stage-3 input</strong>. No coefficient or driver is recomputed from the rotated, concentrated, gained, or offset color.</p>
+<h3 id="61-tonal-coefficient-curves"><a class="header" href="#61-tonal-coefficient-curves">6.1 Tonal coefficient curves</a></h3>
+<p>Let <span data-tex="H_&#92;star=100y_4"></span>, <span data-tex="H_i=100y_i"></span>, and</p>
+<div class="grade-equation" data-tex="p(v)=6v^5-15v^4+10v^3,&#92;qquad
+t=p(&#92;operatorname{clamp}(H/H_&#92;star,0,1)),&#92;qquad
+&#92;ell_i=p(H_i/H_&#92;star)."></div>
+
+<p>For a family <span data-tex="f"></span> with width <span data-tex="w_f=.05&#92;,2^{-&#92;mathrm{Fit}_f}"></span>, calculate</p>
+<div class="grade-equation" data-tex="U_i(H)=&#92;frac{K(t;&#92;ell_i,&#92;ell_{i+1},w_f)}{K(1;&#92;ell_i,&#92;ell_{i+1},w_f)},&#92;qquad i=0,1,2,3."></div>
+
+<p>Apply the source rounding guard sequentially: clamp each value to <span data-tex="[0,1]"></span> and to no more than the previous value, obtaining <span data-tex="1&#92;ge U_0&#92;ge U_1&#92;ge U_2&#92;ge U_3&#92;ge0"></span>.</p>
+<p>Normal weights and Adaptance weights are respectively</p>
+<div class="grade-equation" data-tex="&#92;boldsymbol&#92;beta_f=(1-U_1,U_1-U_2,U_2-U_3,U_3),"></div>
+
+<div class="grade-equation" data-tex="&#92;boldsymbol&#92;beta_A=(U_0-U_1,U_1-U_2,U_2-U_3,U_3)."></div>
+
+<p>For stored heights <span data-tex="(c_S,c_M,c_W,c_H)"></span>, the coefficient is their dot product with the appropriate weights. These heights are ordered Shadows, Midtones, White, Highlights. Concentration uses the Hue family’s Fit and weights. Coefficients hold their last height above Highlights; Adaptance fades to zero at black.</p>
+<p>The classifier uses the fixed saturation midpoint below. It has no tonal curve, fixed-Fit interpolation, or peak-dependent calibration. The control coefficients above remain tone dependent.</p>
+<h3 id="62-drivers-and-the-equivalent-3-by-6-contribution-matrix"><a class="header" href="#62-drivers-and-the-equivalent-3-by-6-contribution-matrix">6.2 Drivers and the equivalent 3-by-6 contribution matrix</a></h3>
+<p>For the fixed exponent <span data-tex="p_d=2"></span>, define</p>
+<div class="grade-equation" data-tex="&#92;boxed{&#92;omega(J,C)=&#92;frac{C^2}{C^2+r_s^2&#92;lvert J&#92;rvert^2},&#92;qquad
+v_n(C)=&#92;frac{C^2}{C^2+C_n^2},&#92;qquad r_s=&#92;frac{35}{75},&#92; C_n=2.}"></div>
+
+<p>For <span data-tex="J&#92;neq0"></span>, <span data-tex="&#92;omega=&#92;lvert s&#92;rvert^2/(&#92;lvert s&#92;rvert^2+s_0^2)"></span> with <span data-tex="s=75C/J"></span>. Use the rational expression at <span data-tex="J=0"></span> and never form the possibly infinite saturation ratio. The absolute value in <span data-tex="r_s&#92;lvert J&#92;rvert"></span> is the analytic reference’s signed-symmetric form: the classifier splits on <span data-tex="&#92;lvert s&#92;rvert"></span>, so a color below the achromatic axis keeps the same low/high membership as its positive counterpart. The 1.23.2 DCTL uses <span data-tex="&#92;max(J,0)"></span> instead, sending every negative achromatic color to <span data-tex="d_h"></span>. State the convention before comparing driver values across implementations. The complete drivers are</p>
+<div class="grade-equation" data-tex="&#92;boxed{d_&#92;ell=v_n(1-&#92;omega),&#92;qquad d_h=v_n&#92;omega,&#92;qquad
+d_a=&#92;frac{a}{&#92;operatorname{hypot}(C,2)},&#92;quad
+d_b=&#92;frac{b}{&#92;operatorname{hypot}(C,2)}.}"></div>
+
+<p>At <span data-tex="C=J=0"></span>, define all four drivers as zero. At <span data-tex="C=0,J&gt;0"></span>, they also vanish. At <span data-tex="J=0,C&gt;0"></span>, the limiting pair is <span data-tex="(0,v_n)"></span>. The lower/higher weights sum to <span data-tex="v_n"></span> and cross at <span data-tex="s=35"></span>; the shared visibility factor makes their memberships complementary at every input. Tone’s common positive scaling <span data-tex="(J,C)&#92;mapsto(kJ,kC)"></span> leaves <span data-tex="&#92;omega"></span> invariant but changes <span data-tex="v_n"></span>. Thus the classification is saturation invariant; the complete driver values are not exposure invariant.</p>
+<p>Evaluate without large squares:</p>
+<pre><code class="language-text">m = max(C, r_s*J)
+u = C/m if m &gt; 0 else 0
+v = r_s*J/m if m &gt; 0 else 0
+D = u*u + v*v
+visibility = (C/hypot(C, 2))^2
+d_low  = visibility*v*v/D if D &gt; 0 else 0
+d_high = visibility*u*u/D if D &gt; 0 else 0
+</code></pre>
+<p>Computing both normalized numerators avoids loss of a very small lower weight in <code>1-high</code>. For a fixed <span data-tex="H"></span>, the physically valid chroma domain is <span data-tex="0&#92;le C&#92;le H^2/66"></span>. The crossover is</p>
+<div class="grade-equation" data-tex="C_{50}(H)=r_s&#92;left[&#92;sqrt{H^2+(33r_s)^2}-33r_s&#92;right]
+=&#92;frac{r_sH^2}{&#92;operatorname{hypot}(H,33r_s)+33r_s}."></div>
+
+<p>Use the rationalized form (with scaled products) for dark values. The scope’s near-neutral statistical selector uses <span data-tex="C&#92;le C_{50}(H)/4"></span>; that selector does not enter image grading. Neither peak nits nor Fit appears in the classifier.</p>
+<p>Let <span data-tex="L_j(H)"></span> be Lightness contribution curves in <span data-tex="H"></span> units, <span data-tex="R_j(H)"></span> Chroma contribution curves in stops, <span data-tex="g_0"></span> global chroma gain in stops, <span data-tex="&#92;theta_0(H)"></span> the tonal Hue curve in degrees, and <span data-tex="&#92;theta_&#92;ell,&#92;theta_h"></span> the global low-/high-chroma Hue controls in degrees. With <span data-tex="&#92;kappa=&#92;pi/180"></span>,</p>
+<div class="grade-equation" data-tex="&#92;begin{bmatrix}H_3&#92;&#92;&#92;theta&#92;&#92;&#92;sigma&#92;end{bmatrix}
+=
+&#92;begin{bmatrix}
+1&amp;0&amp;L_&#92;ell(H)&amp;L_h(H)&amp;L_a(H)&amp;L_b(H)&#92;&#92;
+0&amp;&#92;kappa&#92;theta_0(H)&amp;&#92;kappa&#92;theta_&#92;ell&amp;&#92;kappa&#92;theta_h&amp;0&amp;0&#92;&#92;
+0&amp;(&#92;ln2)g_0&amp;(&#92;ln2)R_&#92;ell(H)&amp;(&#92;ln2)R_h(H)&amp;(&#92;ln2)R_a(H)&amp;(&#92;ln2)R_b(H)
+&#92;end{bmatrix}
+&#92;begin{bmatrix}H&#92;&#92;1&#92;&#92;d_&#92;ell&#92;&#92;d_h&#92;&#92;d_a&#92;&#92;d_b&#92;end{bmatrix}."></div>
+
+<p>Thus <span data-tex="H_3=H+&#92;Delta H"></span> and <span data-tex="g=e^&#92;sigma&gt;0"></span>. The literal implementation evaluates four drivers plus offsets; this augmented matrix is an equivalent formulation. <code>pg_attributes</code> returns <span data-tex="(&#92;Delta H,&#92;theta,&#92;sigma)"></span>, not final <span data-tex="(H,a,b)"></span>.</p>
+<p><strong>Hue-angle calculation belongs to the contribution math; application of hue rotation is a separate operation.</strong> There are no <span data-tex="d_a,d_b"></span> terms in the Hue row. Consequently <span data-tex="&#92;theta"></span> depends on <span data-tex="H,C"></span> but not independently on incoming hue. This is the property used to eliminate hue from the inverse.</p>
+<h3 id="63-concentration-1232-dctl-control"><a class="header" href="#63-concentration-1232-dctl-control">6.3 Concentration (1.23.2 DCTL control)</a></h3>
+<p>Sections 6.3 and 6.4 describe the 1.23.2 production stage, which the DCTL and the Blender release implement. The analytic reference replaced both with the tonal web and the neutral-destination Adaptance in section 6.5, so the inverse constructions in sections 10–18 apply to the 1.23.2 control set. Read the two schemes as separate stages sharing the driver and coefficient machinery above them, never as one stage with alternative parameters.</p>
+<p>Let the two Concentration curves form <span data-tex="v(H)=v_a(H)+iv_b(H)"></span>, and let</p>
+<div class="grade-equation" data-tex="&#92;tau=|v|/.6,&#92;qquad
+w_c(H,C)=&#92;frac{&#92;tanh&#92;tau}{&#92;tau}&#92;,v(H)&#92;frac{C^2}{C^2+4}."></div>
+
+<p>Use <span data-tex="&#92;tanh&#92;tau/&#92;tau=1"></span> at zero. The DCTL uses <span data-tex="1-&#92;tau^2/3+2&#92;tau^4/15"></span> for <span data-tex="&#92;tau&lt;.001"></span>; the Python model uses the continuous hyperbolic-tangent expression. With <span data-tex="C&gt;0"></span> and <span data-tex="u=z/C"></span>,</p>
+<div class="grade-equation" data-tex="u_f=&#92;frac{u+w_c}{1+&#92;overline{w_c}u},&#92;qquad z_f=Cu_f."></div>
+
+<p>Since <span data-tex="|w_c|&lt;.6&lt;1"></span>, denominators on the unit circle cannot vanish. The map preserves <span data-tex="C"></span> and orientation. At <span data-tex="C=0"></span>, set <span data-tex="z_f=0"></span>; zero Concentration controls use an exact identity fast path.</p>
+<h3 id="64-gain-hue-rotation-and-adaptance"><a class="header" href="#64-gain-hue-rotation-and-adaptance">6.4 Gain, hue rotation, and Adaptance</a></h3>
+<p>For Adaptance strength <span data-tex="&#92;alpha&#92;in[0,1]"></span>, define</p>
+<div class="grade-equation" data-tex="r_A(C)=.25+&#92;frac{.75}{1+(C/30)^2},&#92;qquad
+&#92;eta_A(H,C)=&#92;frac{&#92;max(H,0)}{100}
+&#92;frac{&#92;alpha r_A(C)}{1-&#92;alpha+&#92;alpha r_A(C)},"></div>
+
+<div class="grade-equation" data-tex="B_A(H,C)=&#92;eta_A(H,C)[A_a(H)+iA_b(H)]."></div>
+
+<p>The raw stage-3 output is</p>
+<div class="grade-equation" data-tex="&#92;boxed{S(H,z)=&#92;left(H+&#92;Delta H(H,z),&#92; B_A(H,C)+e^{&#92;sigma(H,z)+i&#92;theta(H,C)}z_f&#92;right).}"></div>
+
+<p>Equivalently, the actual Hue operation is <span data-tex="R_&#92;theta"></span> on <span data-tex="(a_f,b_f)"></span>, multiplied by scalar <span data-tex="g"></span> and followed by the Adaptance offset. The source returns the input unchanged at <span data-tex="H=0"></span>, and when stage 3 is inactive.</p>
+<h3 id="65-the-reference-stage-tonal-web-selective-adaptance-final-scale"><a class="header" href="#65-the-reference-stage-tonal-web-selective-adaptance-final-scale">6.5 The reference stage: tonal web, selective Adaptance, final scale</a></h3>
+<p>The current reference replaces sections 6.3 and 6.4 with the following. Freeze post-Tone chroma <span data-tex="C_0"></span>, signed energy <span data-tex="E_0=J_A|J_A|"></span>, drivers <span data-tex="&#92;mathbf d"></span>, and the nonnegative tonal selector</p>
+<div class="grade-equation" data-tex="h=&#92;sqrt{|E_0|+66C_0}."></div>
+
+<p>Coefficient rows, web geometry and Adaptance read this frozen selector, which differs from signed <span data-tex="H"></span> when <span data-tex="E_0&lt;0"></span>. Pixel chroma, hue and energy continue to change through the operations. The final Scale is selected separately from the pre-Adaptance web result.</p>
+<p><strong>Direct rows.</strong> For lightness and chroma coefficient vectors evaluated at the frozen selector, <span data-tex="&#92;mathbf L(h)"></span>, <span data-tex="&#92;mathbf R(h)"></span>, and global chroma gain <span data-tex="g_0"></span>,</p>
+<div class="grade-equation" data-tex="H_1=H+&#92;mathbf L(h)&#92;cdot&#92;mathbf d,&#92;qquad
+(a_1,b_1)=2^{g_0+&#92;mathbf R(h)&#92;cdot&#92;mathbf d}(a,b)."></div>
+
+<p>The implementation carries the corresponding signed energy rather than reconstructing it by an unstable difference of squared coordinates.</p>
+<p><strong>Web radial field.</strong> For source radius <span data-tex="R"></span>, target <span data-tex="T"></span>, and positive toe <span data-tex="&#92;tau"></span>,</p>
+<div class="grade-equation" data-tex="A(C)=&#92;left(1+(C/&#92;tau)^4&#92;right)^{-1/4},&#92;quad
+g_{&#92;mathrm c}=&#92;frac{T/R-A(R)}{1-A(R)},&#92;quad
+F(C)=C&#92;left[g_{&#92;mathrm c}+(1-g_{&#92;mathrm c})A(C)&#92;right]."></div>
+
+<p>Its derivative is <span data-tex="g_{&#92;mathrm c}+(1-g_{&#92;mathrm c})(1+(C/&#92;tau)^4)^{-5/4}&gt;0"></span>. Evaluate <span data-tex="1-A"></span> in factored form to retain the fourth-order toe. The angular, chroma and Scale toes are unnormalized soft minima:</p>
+<div class="grade-equation" data-tex="&#92;tau_&#92;theta=&#92;left(2^{-8}+&#92;sum_i(0.1R_i)^{-8}&#92;right)^{-1/8},&#92;quad
+&#92;tau_C=&#92;left(2^{-8}+&#92;sum_i[(0.1R_i)^{-8}+(0.1T_i)^{-8}]&#92;right)^{-1/8},"></div>
+
+<div class="grade-equation" data-tex="&#92;tau_S=&#92;left(2^{-8}+&#92;sum_i[(0.1T_i)^{-8}+(0.1V_i)^{-8}]&#92;right)^{-1/8},
+&#92;qquad V_i=2^{&#92;mathrm{log&#92;_scale}_i}T_i."></div>
+
+<p>Thus each toe is no larger than 2 or one tenth of any participating radius. A second radial field maps <span data-tex="T_i"></span> to <span data-tex="V_i"></span>. Evaluating it at the pre-Adaptance web chroma <span data-tex="C_1"></span> selects <span data-tex="&#92;lambda=F_S(C_1)/C_1"></span>, with the neutral limit <span data-tex="&#92;lambda=1"></span>. Adaptance and repair do not resample that field.</p>
+<p><strong>Web angular field.</strong> Let source sector width be <span data-tex="w"></span>, destination endpoints <span data-tex="&#92;varphi_0,&#92;varphi_1"></span>, slope <span data-tex="s=(&#92;varphi_1-&#92;varphi_0)/w"></span>, and shared vertex derivative <span data-tex="d=(&#92;tfrac12(s_{&#92;mathrm{left}}^{-4}+s_{&#92;mathrm{right}}^{-4}))^{-1/4}"></span>. The quintic Bézier ordinates are</p>
+<div class="grade-equation" data-tex="[&#92;varphi_0,&#92; &#92;varphi_0+wd_0/5,&#92; &#92;varphi_0+2wd_0/5,&#92; &#92;varphi_1-2wd_1/5,&#92; &#92;varphi_1-wd_1/5,&#92; &#92;varphi_1]."></div>
+
+<p>For pixel hue <span data-tex="&#92;theta"></span>, apply <span data-tex="&#92;theta+S_5(&#92;min(C/&#92;tau_&#92;theta,1))(&#92;mathrm{warp}(&#92;theta)-&#92;theta)"></span>. Positive radial coefficients interpolate logarithmically between destination hues. Rows interpolate with the quintic smoother on anchor spacing, with constant tails; target hues must preserve strict cyclic order.</p>
+<p><strong>Selective Adaptance.</strong> Four neutral a/b destinations calibrate positive response gains. At anchor <span data-tex="H_i"></span>, let <span data-tex="A_0=A_w(H_i/100)^{1/&#92;gamma}"></span>, <span data-tex="r_0=A_0/3.05"></span>, and decode target responses <span data-tex="r_i^*&#92;in(0,400)"></span>:</p>
+<div class="grade-equation" data-tex="m_i=&#92;frac{r_i^*(400-r_0)}{r_0(400-r_i^*)},&#92;qquad g_i=m_i^{1/0.42}."></div>
+
+<p>Interpolate <span data-tex="&#92;log m_i"></span> with cardinal weights. The independent setting <span data-tex="R_{1/2}&#92;in[0.05,1]"></span>, default 0.25, specifies the source <span data-tex="C/|J_A|"></span> ratio at half influence. The frozen mask is</p>
+<div class="grade-equation" data-tex="v=&#92;frac{R_{1/2}^4E_0^2}{R_{1/2}^4E_0^2+C_0^4}."></div>
+
+<p>Neutrals have <span data-tex="v=1"></span>; chromatic <span data-tex="E_0=0"></span> has <span data-tex="v=0"></span>; exact black remains unchanged. Transform responses by <span data-tex="r_i&#39;=k^vT_{m_i^v}(r_i)"></span>, where</p>
+<div class="grade-equation" data-tex="T_m(r)=&#92;frac{mr}{1+(m-1)|r|/400}&#92;qquad(|r|&#92;le400)."></div>
+
+<p>The exterior continuation is algebraic; responses at or beyond the physical pole are not directly uncompressed. Reconstruct responses from carried energy and opponent coordinates. The common <span data-tex="k"></span> is calibrated against a hypothetical neutral at the same frozen tonal selector. It preserves that neutral’s <span data-tex="J_A"></span> at the Adaptance output; the subsequent H–K repair may change it.</p>
+<p><strong>Repair, then Scale.</strong> Apply the H–K guard of section 7 to the Adaptance result, using <span data-tex="E_r=&#92;max(E_0,0)"></span>. For requested <span data-tex="H&#92;ge0"></span> it produces <span data-tex="E_g&#92;ge0"></span>; for <span data-tex="H&gt;0"></span> and <span data-tex="E_r&gt;0"></span>, <span data-tex="E_g&gt;0"></span>. Negative requested H retains the signed bypass. Then apply the previously selected <span data-tex="&#92;lambda&gt;0"></span>:</p>
+<div class="grade-equation" data-tex="(a,b,E)=(&#92;lambda a_g,&#92;lambda b_g,&#92;lambda^2E_g)."></div>
+
+<p>The compact pad coordinate <span data-tex="(a,b)/&#92;sqrt{C^2+|E|}"></span> is invariant under this Scale. On the repaired nonnegative branch, <span data-tex="H(&#92;lambda)=&#92;sqrt{&#92;lambda^2E_g+66&#92;lambda C_g}"></span> increases strictly for every nonblack point. The guard is not idempotent: a second application at export would reintroduce Scale-dependent saturation movement.</p>
+<p>The order is <strong>direct rows → web hue/chroma → selective Adaptance → H–K repair → common positive Scale</strong>. RGB export subsequently performs only cube containment. Appearance Stack handoffs retain repair and Scale. The complete reference inverse is the forward-validated search of section 20; the historical two-variable inverse of sections 10–13 does not implement this Stage 3.</p>
+<h2 id="7-hk-guard-complete-forward-math"><a class="header" href="#7-hk-guard-complete-forward-math">7. H–K guard: complete forward math</a></h2>
+<p>The equations below define the standalone bounded guard used by both profiles. For the current reference, <span data-tex="q_3"></span> is the request after Adaptance and before Scale, and <span data-tex="E_r=&#92;max(E_0,0)"></span> comes from carried post-Tone signed energy. Historically, the reference was formed from Stage-2 coordinates as <span data-tex="E_r=&#92;max(H_2^2-66C_2,0)"></span>; on the exact positive appearance branch this equals <span data-tex="J_2^2"></span>, but finite-precision subtraction need not equal the carried value. The current reference uses its frozen carried <span data-tex="E_0"></span> instead. Its historical guard request is <span data-tex="q_3=S(q_2)"></span>. The constants are</p>
+<div class="grade-equation" data-tex="k_{&#92;mathrm{HK}}=66,&#92;quad &#92;text{knee}=1,&#92;quad
+&#92;text{maximum fractional H lift}=.20,&#92;quad
+&#92;lambda=(1+.20)^2-1=.44."></div>
+
+<p>For a finite request with <span data-tex="H_3&#92;ge0"></span>, the exact-real notation is</p>
+<div class="grade-equation" data-tex="X=H_3^2,&#92;quad C_3=|z_3|,&#92;quad D=X-66C_3,&#92;quad
+E_r=&#92;max(E_0,0),"></div>
+
+<div class="grade-equation" data-tex="&#92;delta=&#92;frac{E_rX}{E_r+X}."></div>
+
+<p>When the denominator is zero set <span data-tex="&#92;delta=0"></span>. Evaluate the harmonic expression without the potentially overflowing product:</p>
+<div class="grade-equation" data-tex="&#92;delta=&#92;frac{&#92;min(E_r,X)}{1+&#92;min(E_r,X)/&#92;max(E_r,X)}"></div>
+
+<p>when the maximum is positive.</p>
+<p>The repaired achromatic energy is</p>
+<div class="grade-equation" data-tex="E=
+&#92;begin{cases}
+D,&amp;D&#92;ge&#92;delta,&#92;&#92;
+&#92;displaystyle&#92;frac{&#92;delta}{(1+4t+10t^2)^{1/4}},&#92;quad t=(&#92;delta-D)/&#92;delta,
+&amp;D&lt;&#92;delta,&#92; &#92;delta&gt;0,&#92;&#92;
+0,&amp;D&lt;&#92;delta,&#92; &#92;delta=0.
+&#92;end{cases}"></div>
+
+<p>The source evaluates the active branch stably with</p>
+<div class="grade-equation" data-tex="v=&#92;frac{&#92;delta}{&#92;delta+&#92;max(&#92;delta-D,0)},&#92;qquad u=1-v,
+&#92;qquad
+E=&#92;frac{&#92;delta&#92;sqrt v}{&#92;sqrt{&#92;sqrt{v^2+4vu+10u^2}}}."></div>
+
+<p>Allocate this energy repair between lightness lift and chroma reduction:</p>
+<div class="grade-equation" data-tex="Z=&#92;max(E-D,0),&#92;quad L=&#92;lambda X,&#92;quad
+G=&#92;frac{LZ}{&#92;operatorname{hypot}(2L,Z)},"></div>
+
+<div class="grade-equation" data-tex="H_g=&#92;sqrt{X+G},&#92;qquad
+C_g=&#92;min&#92;left(C_3,&#92;max&#92;left(0,&#92;frac{X+G-E}{66}&#92;right)&#92;right),"></div>
+
+<div class="grade-equation" data-tex="z_g=(C_g/C_3)z_3."></div>
+
+<p>At zero denominators use the explicit zero limit; at <span data-tex="C_3=0"></span>, leave its zero pair unchanged. If <span data-tex="E&#92;le D"></span>, return <span data-tex="q_3"></span> unchanged. The guard preserves hue wherever chroma is nonzero. It carries <span data-tex="E"></span> separately into <span data-tex="&#92;mathcal D(q_g,E)"></span>.</p>
+<p>On the regular domain <span data-tex="E_r&gt;0,H_3&gt;0,C_3&#92;ge0"></span>, the active-branch clipping operators do not destroy information: <span data-tex="0&lt;E&lt;&#92;delta&lt;X"></span>, <span data-tex="0&#92;le G&lt;&#92;min(Z/2,L)"></span>, and</p>
+<div class="grade-equation" data-tex="C_g=C_3-(Z-G)/66&gt;0&#92;quad&#92;text{when active}."></div>
+
+<p>Thus the <code>min</code> and <code>max</code> simply protect numerical boundaries on this domain. Also</p>
+<div class="grade-equation" data-tex="H_3&#92;le H_g&lt;1.2H_3,&#92;qquad E+66C_g=H_g^2."></div>
+
+<p>The historical execution profile sends negative requested <span data-tex="H_3"></span>, nonfinite requests and invalid decoding to its fallback path. Current reference repair instead bypasses negative H, rejects nonfinite requests and leaves RGB legality to cube export. Squaring a negative <span data-tex="H_3"></span> never admits it to the positive-branch proof.</p>
+<p>For the current signed reference, compute the guard’s legacy deficit without subtracting nearly equal <span data-tex="H^2"></span> and <span data-tex="66C"></span>. With authoritative request energy <span data-tex="E_s"></span>, set</p>
+<div class="grade-equation" data-tex="b=&#92;sqrt{66C},&#92;qquad u=&#92;frac{E_s}{&#92;operatorname{hypot}(&#92;sqrt{|E_s|},b)+b},&#92;qquad
+D=&#92;begin{cases}E_s,&amp;E_s&#92;ge0,&#92;&#92; E_s+2u^2,&amp;E_s&lt;0.&#92;end{cases}"></div>
+
+<p>Use the zero limit when the denominator vanishes. This equals <span data-tex="H^2-66C"></span> under the signed H–K map. The current guard bypasses negative requested H; nonnegative-H repair yields nonnegative carried energy, including zero-reference cases. The retained fallback policy discussed above belongs to the historical execution profile. The current reference applies this repair once before Scale and carries <span data-tex="&#92;lambda^2E_g"></span> to export.</p>
+<h2 id="8-is-the-guard-invertible-domain-and-proof"><a class="header" href="#8-is-the-guard-invertible-domain-and-proof">8. Is the guard invertible? Domain and proof</a></h2>
+<h3 id="81-positive-reference-energy-yes-with-one-scalar-root"><a class="header" href="#81-positive-reference-energy-yes-with-one-scalar-root">8.1 Positive reference energy: yes, with one scalar root</a></h3>
+<p>Hold <span data-tex="E_r&gt;0"></span> fixed. Given a guarded output <span data-tex="(H_g,z_g)"></span> with <span data-tex="E&gt;0"></span>, define</p>
+<div class="grade-equation" data-tex="C_g=|z_g|,&#92;qquad U=E+66C_g=H_g^2."></div>
+
+<p>Prefer forming <span data-tex="U"></span> from the carried or directly encoded <span data-tex="E"></span> and <span data-tex="C_g"></span>. If externally supplied redundant fields disagree beyond tolerance, reject the inconsistent record rather than silently altering the color.</p>
+<p>If</p>
+<div class="grade-equation" data-tex="E&#92;ge&#92;delta(E_r,U)=&#92;frac{E_rU}{E_r+U},"></div>
+
+<p>the unique inverse request is the output itself: the guard was inactive.</p>
+<p>Otherwise the guard was active. Necessarily <span data-tex="E&lt;E_r"></span>. For a trial <span data-tex="X"></span>, define</p>
+<div class="grade-equation" data-tex="&#92;delta(X)=&#92;frac{E_rX}{E_r+X},&#92;qquad
+t(X)=&#92;frac{&#92;sqrt{10[&#92;delta(X)/E]^4-6}-2}{10},"></div>
+
+<div class="grade-equation" data-tex="D(X)=&#92;delta(X)[1-t(X)],&#92;qquad
+Z(X)=E-D(X),&#92;qquad L(X)=&#92;lambda X."></div>
+
+<p>The formula for <span data-tex="t"></span> is the nonnegative root of</p>
+<div class="grade-equation" data-tex="[&#92;delta/E]^4=1+4t+10t^2."></div>
+
+<p>Solve</p>
+<div class="grade-equation" data-tex="&#92;boxed{F_E(X)=X+&#92;frac{&#92;lambda X&#92;,Z(X)}{&#92;sqrt{4&#92;lambda^2X^2+Z(X)^2}}=U}"></div>
+
+<p>on the guaranteed bracket</p>
+<div class="grade-equation" data-tex="&#92;boxed{&#92;max&#92;left(&#92;frac{U}{1+&#92;lambda},&#92;frac{EE_r}{E_r-E}&#92;right)&#92;le X&#92;le U.}"></div>
+
+<p>Recover</p>
+<div class="grade-equation" data-tex="&#92;boxed{H_3=&#92;sqrt X,&#92;qquad C_3=&#92;frac{X-E+Z(X)}{66},&#92;qquad
+z_3=&#92;frac{C_3}{C_g}z_g.}"></div>
+
+<p><span data-tex="C_g&gt;0"></span> automatically holds in this active positive-energy branch. A neutral output with <span data-tex="C_g=0,E&gt;0"></span> uses the inactive branch.</p>
+<h3 id="82-why-the-scalar-root-is-unique"><a class="header" href="#82-why-the-scalar-root-is-unique">8.2 Why the scalar root is unique</a></h3>
+<p>At fixed observed <span data-tex="E"></span>, differentiating the reversed energy law gives</p>
+<div class="grade-equation" data-tex="&#92;frac{dD}{d&#92;delta}=-&#92;frac{15t^2}{1+5t}&#92;le0,&#92;qquad
+&#92;frac{d&#92;delta}{dX}=&#92;frac{E_r^2}{(E_r+X)^2}&gt;0."></div>
+
+<p>Therefore</p>
+<div class="grade-equation" data-tex="Z&#39;(X)=&#92;frac{15t^2}{1+5t}&#92;frac{E_r^2}{(E_r+X)^2}&#92;ge0."></div>
+
+<p>For <span data-tex="G(L,Z)=LZ/&#92;sqrt{4L^2+Z^2}"></span>,</p>
+<div class="grade-equation" data-tex="&#92;frac{&#92;partial G}{&#92;partial L}=&#92;frac{Z^3}{(4L^2+Z^2)^{3/2}}&#92;ge0,&#92;qquad
+&#92;frac{&#92;partial G}{&#92;partial Z}=&#92;frac{4L^3}{(4L^2+Z^2)^{3/2}}&#92;ge0."></div>
+
+<p>Hence</p>
+<div class="grade-equation" data-tex="&#92;boxed{F_E&#39;(X)=1+&#92;lambda G_L+G_ZZ&#39;(X)&#92;ge1.}"></div>
+
+<p>The residual is strictly increasing. At the lower bracket endpoint it is nonpositive, and at <span data-tex="X=U"></span> it is positive for an active repair. Exactly one root exists. Bisection or safeguarded Brent/Newton is appropriate; no multidimensional search is needed for the fixed-reference guard itself.</p>
+<p>The inactive and active images cannot overlap: an active result satisfies <span data-tex="E&lt;&#92;delta(E_r,X)&#92;le&#92;delta(E_r,U)"></span>, whereas an inactive result satisfies the reverse inequality. This also proves the branch test in section 8.1.</p>
+<p>For every fixed <span data-tex="E_r&gt;0"></span>, the guard maps <span data-tex="H_3&gt;0,C_3&#92;ge0"></span> bijectively onto <span data-tex="H_g&gt;0,0&#92;le C_g&lt;H_g^2/66"></span>, retaining hue. In Cartesian coordinates, the neutral case has one zero pair, not multiple distinct colors corresponding to different arbitrary hue labels.</p>
+<h3 id="83-local-conditioning-and-the-knee"><a class="header" href="#83-local-conditioning-and-the-knee">8.3 Local conditioning and the knee</a></h3>
+<p>At fixed <span data-tex="X"></span>, on the active branch with <span data-tex="P_t=1+4t+10t^2"></span>,</p>
+<div class="grade-equation" data-tex="&#92;frac{&#92;partial E}{&#92;partial D}=&#92;frac{1+5t}{P_t^{5/4}}&gt;0."></div>
+
+<p>This derivative becomes small for severe compression, so the inverse can amplify error in measured <span data-tex="E"></span>. Mathematical invertibility does not imply good conditioning after float32 rounding or LUT interpolation.</p>
+<p>The Jacobian determinant of <span data-tex="(X,D)&#92;mapsto(U,E)"></span> is</p>
+<div class="grade-equation" data-tex="&#92;det&#92;frac{&#92;partial(U,E)}{&#92;partial(X,D)}
+=F_E&#39;(X)&#92;frac{&#92;partial E}{&#92;partial D}&gt;0."></div>
+
+<p>Both branches meet with the source’s intended <span data-tex="C^2"></span> knee. They are analytic within their open branches, but the entire piecewise guard should not be described as one globally analytic formula across every boundary.</p>
+<h3 id="84-degenerate-domains"><a class="header" href="#84-degenerate-domains">8.4 Degenerate domains</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Case</th><th>Consequence and implementation policy</th></tr>
+</thead>
+<tbody>
+<tr><td><span data-tex="E_r&gt;0,H_3&gt;0"></span></td><td>Unique fixed-reference inverse as above</td></tr>
+<tr><td><span data-tex="H_3=0"></span></td><td>Every finite chromatic request on this plane is repaired to black; original chroma is unrecoverable</td></tr>
+<tr><td><span data-tex="E_r=0,D&gt;0"></span></td><td>Guard is inactive; a positive-energy output has the identity preimage</td></tr>
+<tr><td><span data-tex="E_r=0,D&#92;le0"></span></td><td>Outputs lie on <span data-tex="E=0"></span>; multiple raw requests can produce the same output</td></tr>
+<tr><td>Unknown <span data-tex="E_r"></span></td><td>Output alone does not determine the raw request; obtain <span data-tex="E_r"></span> from the candidate stage-2 color in the combined solve</td></tr>
+<tr><td>Invalid request or decode</td><td>Follow the source’s fallback contract, not a fictitious regular guard inverse</td></tr>
+</tbody>
+</table>
+</div>
+<p>For an explicit zero-reference collision, set <span data-tex="U=10000"></span>, choose <span data-tex="X=.9U"></span>, <span data-tex="G=U-X"></span>, <span data-tex="L=.44X"></span> and</p>
+<div class="grade-equation" data-tex="Z=&#92;frac{2LG}{&#92;sqrt{L^2-G^2}}."></div>
+
+<p>The two requests <span data-tex="(&#92;sqrt U,U/66,0)"></span> and <span data-tex="(&#92;sqrt X,(X+Z)/66,0)"></span> both map to <span data-tex="(100,10000/66,0)"></span> when <span data-tex="E_r=0"></span>. Numerically these requests are approximately <span data-tex="(100,151.515151515152,0)"></span> and <span data-tex="(94.8683298050514,167.681674763361,0)"></span>.</p>
+<p>For ordinary nonblack lifted inputs with nonnegative cones, appearance encoding yields <span data-tex="J_0&gt;0"></span>; a noncollapsed tone result therefore has <span data-tex="E_r&gt;0"></span>. The degenerate zero-reference case is not the normal working domain, but it must not be silently claimed to be invertible.</p>
+<h2 id="9-complete-forward-execution-including-signed-inputs-and-fallback"><a class="header" href="#9-complete-forward-execution-including-signed-inputs-and-fallback">9. Complete forward execution, including signed inputs and fallback</a></h2>
+<h3 id="91-regular-no-lift-branch"><a class="header" href="#91-regular-no-lift-branch">9.1 Regular no-lift branch</a></h3>
+<p>Define the guarded stage-3 map</p>
+<div class="grade-equation" data-tex="&#92;widetilde S(q_2)=&#92;mathcal R_{E_r(q_2)}(S(q_2)),&#92;qquad E_r(q_2)=J_2^2."></div>
+
+<p>The guard also returns its carried energy <span data-tex="E"></span>. In exact regular arithmetic,</p>
+<div class="grade-equation" data-tex="F(x)=Q^{-1}&#92;mathcal D&#92;bigl(&#92;widetilde S(T(&#92;mathcal E(QM_1x))),E&#92;bigr)."></div>
+
+<p>Writing <span data-tex="&#92;Phi^{-1}"></span> for plain decoding with the consistent energy gives the compact expression</p>
+<div class="grade-equation" data-tex="F=&#92;Phi^{-1}&#92;circ&#92;widetilde S&#92;circ T&#92;circ&#92;Phi&#92;circ M_1."></div>
+
+<p>This expression assumes the valid, no-lift, full-grade branch that reaches the guard/decode path. Exact unchanged-coordinate bypasses can skip that path and must be handled by the complete source logic below.</p>
+<h3 id="92-roundoff-guards-and-white-offset-extension"><a class="header" href="#92-roundoff-guards-and-white-offset-extension">9.2 Roundoff guards and white-offset extension</a></h3>
+<p>Let <span data-tex="v=Px_1"></span> be XYZ and <span data-tex="c_w=AW_d"></span>. Before the nonlinear stage, the source evaluates</p>
+<div class="grade-equation" data-tex="n=Av/c_w,&#92;qquad
+&#92;varepsilon_n=4&#92;times10^{-7}|A|&#92;,|v|/c_w,"></div>
+
+<p>then sets <span data-tex="n_i=0"></span> where <span data-tex="|n_i|&#92;le(&#92;varepsilon_n)_i"></span>. This is cancellation-dependent zeroing, not a fixed black threshold. The white cone triple <span data-tex="c_w"></span> is distinct from the complex Concentration parameter <span data-tex="w_c(H,C)"></span>.</p>
+<p>Set</p>
+<div class="grade-equation" data-tex="&#92;ell_{&#92;mathrm{lift}}=&#92;max(0,-&#92;min_i n_i),&#92;qquad
+n_+=n+&#92;ell_{&#92;mathrm{lift}}&#92;mathbf1,
+&#92;qquad w_{&#92;mathrm{RGB}}=P^{-1}W_d=Q^{-1}&#92;mathbf1."></div>
+
+<p>The source also zeroes lifted components satisfying</p>
+<div class="grade-equation" data-tex="|(n_+)_i|&#92;le4&#92;times10^{-7}(|n_i|+&#92;ell_{&#92;mathrm{lift}})."></div>
+
+<p>In an ordinary normalized working space <span data-tex="w_{&#92;mathrm{RGB}}=(1,1,1)^T"></span>, but use the configured matrices rather than relying on this shortcut in an inconsistent space.</p>
+<p>For mathematical descriptions ignoring these tiny zeroing intervals, define <span data-tex="&#92;mathcal C_k(n)"></span> as the normalized-cone core at level <span data-tex="k"></span>: encode, apply Tone, optionally apply Color, guard and decode. Level 2 includes Color; level 1 omits it. Then</p>
+<div class="grade-equation" data-tex="y=Q^{-1}&#92;left[&#92;mathcal C_k(n_+)-&#92;mathcal C_k(&#92;ell_{&#92;mathrm{lift}}&#92;mathbf1)&#92;right]"></div>
+
+<p>at the highest valid common level. The Blender compositor unchanged-core shortcut must return the lifted cones <span data-tex="n_+"></span>, then subtract the neutral core exactly once; version 1.12.0 corrects this shortcut. However, <strong>the exact DCTL core also receives the original XYZ value to preserve identity bypasses</strong>, so its implementation contract is more accurately represented by the following pseudocode in working RGB:</p>
+<pre><code class="language-text">Core(v_rgb, n_processed, level):
+    q0, J0 = EncodeCones(n_processed)
+    if encoding invalid: return INVALID
+    q2, J2 = Tone(q0, J0)
+    q_requested = Color(q2, J2) if level == 2 else q2
+    if q_requested.Hab == q0.Hab exactly:
+        return VALID(v_rgb)             # preserve the original value
+    qg, E = Guard(q_requested, reference=q2)
+    n_out = DecodeCones(qg, E)
+    if decode invalid: return INVALID
+    return VALID(Q_inverse * n_out)
+
+Forward(x):
+    x1 = M1 * x
+    if nonlinear reset: return x1
+    n = normalized_cones_with_source_zeroing(x1)
+    lift = max(0, -min(n))
+    n_plus = lifted_cones_with_source_zeroing(n, lift)
+    offset_rgb = lift * working_white_rgb
+    for level in [2, 1]:
+        main = Core(x1 + offset_rgb, n_plus, level)
+        if main invalid: continue
+        if lift == 0: return main.rgb
+        offset = Core(offset_rgb, lift * [1,1,1], level)
+        if offset invalid: continue
+        result = main.rgb - offset.rgb
+        if result finite: return result
+    return x1
+</code></pre>
+<p>Both terms use the <strong>same</strong> level. Level 0 returns the stage-1 result unchanged. Core level 1’s guard is inactive on regular valid tone results because its request equals its reference. A completely inactive Tone/Color configuration is an exact nonlinear identity.</p>
+<p>The Python model’s application helpers express the same design through a stage-2 fallback and normalized-cone cores; the identity/zeroing arithmetic is not byte-for-byte identical to the DCTL in every cancellation case. Use the selected renderer’s exact fast paths for final parity tests. No real-valued inverse can recover information deliberately erased by finite-precision zeroing.</p>
+<h2 id="10-full-nonlinear-inverse-on-the-regular-branch"><a class="header" href="#10-full-nonlinear-inverse-on-the-regular-branch">10. Full nonlinear inverse on the regular branch</a></h2>
+<h3 id="101-encode-the-observed-output"><a class="header" href="#101-encode-the-observed-output">10.1 Encode the observed output</a></h3>
+<p>For a no-lift candidate, calculate</p>
+<div class="grade-equation" data-tex="(q_g,J_g)=&#92;mathcal E(Qy),&#92;qquad E=J_g^2."></div>
+
+<p>Use the plain signed-response appearance encoder. Do not apply input-side lifting to <span data-tex="y"></span>, do not clip negative RGB, and do not apply the guard again. A decoded regular output may contain negative RGB or cone components while still being a valid appearance point.</p>
+<p>If encoding is invalid, this does not rule out a signed-extension or fallback preimage. It only rules out this regular full-core interpretation.</p>
+<h3 id="102-preferred-two-unknowns"><a class="header" href="#102-preferred-two-unknowns">10.2 Preferred two unknowns</a></h3>
+<p>Use <span data-tex="J_2&gt;0"></span> and <span data-tex="C_2&gt;0"></span> as the two unknowns, rather than independently subtracting to obtain reference energy. For a trial pair,</p>
+<div class="grade-equation" data-tex="H_2=&#92;operatorname{hypot}(J_2,&#92;sqrt{66C_2}),&#92;qquad E_r=J_2^2."></div>
+
+<p>This enforces the appearance domain automatically. An optimizer may use <span data-tex="p=&#92;log J_2"></span>, <span data-tex="c=&#92;log C_2"></span>; the exact neutral case <span data-tex="C_2=0"></span> is handled separately.</p>
+<p>Undo the guard with this candidate reference:</p>
+<div class="grade-equation" data-tex="(H_3^*,z_3^*)=&#92;mathcal R_{J_2^2}^{-1}(q_g;E)."></div>
+
+<p>The star denotes a raw target reconstructed for the current candidate, not an additional grade. It changes as <span data-tex="J_2"></span> changes. Never precompute one guard inverse using a neutral reference, the output’s energy, or a fixed white energy.</p>
+<h3 id="103-eliminate-original-hue-analytically"><a class="header" href="#103-eliminate-original-hue-analytically">10.3 Eliminate original hue analytically</a></h3>
+<p>Evaluate the original-input terms <span data-tex="B_A(H_2,C_2)"></span>, <span data-tex="&#92;theta(H_2,C_2)"></span> and <span data-tex="w_c(H_2,C_2)"></span>. Set</p>
+<div class="grade-equation" data-tex="V=z_3^*-B_A(H_2,C_2),&#92;qquad R=|V|,"></div>
+
+<div class="grade-equation" data-tex="&#92;eta=e^{-i&#92;theta(H_2,C_2)}&#92;frac{V}{R},&#92;qquad
+&#92;boxed{u=&#92;frac{&#92;eta-w_c}{1-&#92;overline{w_c}&#92;eta}.}"></div>
+
+<p>For a true preimage with <span data-tex="C_2&gt;0"></span>, <span data-tex="R=e^&#92;sigma C_2&gt;0"></span> and <span data-tex="|u|=1"></span>. A trial with <span data-tex="R=0"></span> cannot be an exact positive-chroma preimage with finite gain. Reject or penalize that trial; a numerical logarithm floor must not turn it into an accepted root.</p>
+<p>Construct</p>
+<div class="grade-equation" data-tex="q_2=(H_2,C_2&#92;operatorname{Re}u,C_2&#92;operatorname{Im}u)."></div>
+
+<p>Recalculate the source drivers at this reconstructed <strong>incoming</strong> point, passing the candidate <span data-tex="J_2"></span> directly and obtain <span data-tex="&#92;Delta H(q_2),&#92;sigma(q_2)"></span>. Solve exactly two real equations:</p>
+<div class="grade-equation" data-tex="&#92;boxed{
+&#92;begin{aligned}
+H_2+&#92;Delta H(q_2)-H_3^*(J_2^2)&amp;=0,&#92;&#92;
+&#92;log(R/C_2)-&#92;sigma(q_2)&amp;=0.
+&#92;end{aligned}}"></div>
+
+<p>This incorporates Concentration, Hue, all Lightness and Chroma contributions, Adaptance, and the reference-dependent guard. The fixed-reference guard contributes a unique inner scalar solve, not another ambiguous inverse branch.</p>
+<p>Use a scaled first residual, for example divide it by <span data-tex="&#92;max(100,H_g)"></span>. The second is already a logarithmic gain residual. This scaling is an optimizer choice, not a change to the exact roots. Use a trust-region method or safeguarded Newton, multiple initial guesses where needed, and continuity from neighboring LUT samples. A single converged local solve is not a proof that all roots have been found.</p>
+<p>For derivative-based implementation, the guard’s implicit equation <span data-tex="F_E(X;E_r)-U=0"></span> gives</p>
+<div class="grade-equation" data-tex="&#92;frac{&#92;partial X}{&#92;partial E_r}
+=-&#92;frac{&#92;partial F_E/&#92;partial E_r}{&#92;partial F_E/&#92;partial X}."></div>
+
+<p>The denominator is at least one on the active fixed-<span data-tex="E"></span> curve. Differentiate the implicit solution, rather than assuming the result of a branching bisection routine has zero derivative. At fixed target <span data-tex="E,U"></span>, the inactive branch has <span data-tex="X=U"></span> and zero derivative with respect to <span data-tex="E_r"></span>. Within the logarithmic parameterization,</p>
+<div class="grade-equation" data-tex="&#92;frac{&#92;partial H_2}{&#92;partial p}=J_2^2/H_2,&#92;quad
+&#92;frac{&#92;partial H_2}{&#92;partial c}=33C_2/H_2,&#92;quad
+&#92;frac{&#92;partial E_r}{&#92;partial p}=2E_r,&#92;quad
+&#92;frac{&#92;partial C_2}{&#92;partial c}=C_2."></div>
+
+<p>For the new classifier’s Jacobian, use logarithmic solver coordinates <span data-tex="&#92;xi=&#92;log J_2"></span> and <span data-tex="&#92;chi=&#92;log C_2"></span> (these are the <span data-tex="p,c"></span> coordinates above; neither is the fixed driver exponent <span data-tex="p_d"></span>). With <span data-tex="W=2&#92;omega(1-&#92;omega)"></span> and <span data-tex="N=2v_n(1-v_n)"></span>,</p>
+<div class="grade-equation" data-tex="&#92;begin{array}{c|cc}
+ &amp;&#92;partial_&#92;xi&amp;&#92;partial_&#92;chi&#92;&#92;&#92;hline
+&#92;omega&amp;-W&amp;W&#92;&#92;
+v_n&amp;0&amp;N&#92;&#92;
+d_&#92;ell&amp;v_nW&amp;N(1-&#92;omega)-v_nW&#92;&#92;
+d_h&amp;-v_nW&amp;N&#92;omega+v_nW
+&#92;end{array}"></div>
+
+<p>The remaining coefficient derivatives follow through <span data-tex="H_2(J_2,C_2)"></span> using the chain rule. For example, <span data-tex="&#92;partial_&#92;xi L(H_2)=L&#39;(H_2)J_2^2/H_2"></span> and <span data-tex="&#92;partial_&#92;chi L(H_2)=L&#39;(H_2)33C_2/H_2"></span>. Hue still has no independent input-direction driver, so the analytic hue elimination remains valid. Real-valued differentiation of the complex-pair formulas is sufficient; do not assume they are holomorphic functions of the optimizer variables.</p>
+<h3 id="104-reverse-stage-2"><a class="header" href="#104-reverse-stage-2">10.4 Reverse stage 2</a></h3>
+<p>Given a recovered regular <span data-tex="q_2,J_2"></span>, first recover <span data-tex="H_0=T_H^{-1}(H_2)"></span>. If Tone is inactive, <span data-tex="H_0=H_2"></span>. Otherwise solve the unique scalar equation</p>
+<div class="grade-equation" data-tex="f(t)=H_2/100,&#92;qquad 0&#92;le t&#92;le&#92;frac{H_2}{100m},&#92;qquad
+H_0=100(&#92;beta_T+s_Tt)."></div>
+
+<p>The bracket follows from <span data-tex="f(t)&#92;ge mt"></span> for <span data-tex="t&#92;ge0"></span>. At an exactly pinned endpoint, retain the same pinning rule. The source curve is not generally invertible through elementary functions; this root or a validated monotone inverse table evaluates <span data-tex="T_H^{-1}"></span>.</p>
+<p>The reverse saturation-preserving scale solves</p>
+<div class="grade-equation" data-tex="J_2^2k_-^2+66C_2k_--H_0^2=0,"></div>
+
+<p>so</p>
+<div class="grade-equation" data-tex="&#92;boxed{k_-=&#92;frac{2H_0^2}{&#92;operatorname{hypot}(66C_2,2J_2H_0)+66C_2}.}"></div>
+
+<p>Use the scaled quadratic evaluation from section 5.3 when needed. Then</p>
+<div class="grade-equation" data-tex="q_0=(H_0,k_-a_2,k_-b_2),&#92;quad J_0=k_-J_2,&#92;quad
+x_1=Q^{-1}&#92;mathcal D(q_0,J_0^2)."></div>
+
+<p>Carry <span data-tex="J_0"></span> directly; avoid reconstructing its square by subtraction. Validate this decode and the original-input cone domain.</p>
+<h3 id="105-reverse-stage-1-and-express-the-combined-inverse"><a class="header" href="#105-reverse-stage-1-and-express-the-combined-inverse">10.5 Reverse stage 1 and express the combined inverse</a></h3>
+<p>For a nonsingular directional target basis,</p>
+<div class="grade-equation" data-tex="M_{&#92;mathrm{CAT}}^{-1}=A^{-1}&#92;operatorname{diag}&#92;left(&#92;frac{AW_s}{AW_d}&#92;right)A,"></div>
+
+<div class="grade-equation" data-tex="&#92;boxed{M_1^{-1}=2^{-e}P^{-1}M_{&#92;mathrm{CAT}}^{-1}&#92;mathsf B(&#92;mathsf B&#39;)^{-1}P.}"></div>
+
+<p>In practice invert or factor the actual effective <span data-tex="M_1"></span> once per grade and check its conditioning. Invertible exposure/adaptation does not guarantee invertible directional controls: Spread <span data-tex="=-100"></span> can collapse a direction onto white. A singular matrix requires a stated approximate-preimage policy, not an ordinary inverse.</p>
+<p>For a selected admissible nonlinear branch <span data-tex="b"></span>,</p>
+<div class="grade-equation" data-tex="&#92;boxed{F_b^{-1}(y)=M_1^{-1}&#92;Phi^{-1}
+&#92;left[T^{-1}&#92;left(&#92;widetilde S_b^{-1}(&#92;Phi(y))&#92;right)&#92;right].}"></div>
+
+<p>This is the desired nonlinear inverse followed by the stage-1 matrix inverse. The guard is already included in <span data-tex="&#92;widetilde S_b^{-1}"></span> through the inner solve above. With inactive guard, its raw target is simply <span data-tex="(H_g,z_g)"></span> and the same equations reduce to the unguarded stage-3 inverse.</p>
+<h3 id="106-neutral-and-black-input-candidates"><a class="header" href="#106-neutral-and-black-input-candidates">10.6 Neutral and black input candidates</a></h3>
+<p>Do not use <span data-tex="&#92;log C_2"></span> to represent the exact neutral input. At <span data-tex="C_2=0"></span>, all four contribution drivers vanish, <span data-tex="H_3=H_2"></span>, and <span data-tex="z_3=B_A(H_2,0)"></span>. Find any neutral preimage by testing the one-parameter forward curve</p>
+<div class="grade-equation" data-tex="H_2&#92;longmapsto&#92;mathcal R_{H_2^2}&#92;bigl(H_2,B_A(H_2,0)&#92;bigr)."></div>
+
+<p>For a positive target its possible <span data-tex="H_2"></span> values lie in <span data-tex="[H_g/1.2,H_g]"></span>. Solve/search that one-dimensional interval and validate <strong>all</strong> target coordinates, not only lightness. This curve need not supply a preimage for an arbitrary target. An observed neutral can also arise from nonneutral input canceled by Adaptance, so it must not exclude the general two-variable search.</p>
+<p>At exact black, the original input is not uniquely recoverable if Tone clips a nonzero interval. A practical default is the valid preimage <span data-tex="x=0"></span>, labeled as a selected black preimage. Other policy choices require a prior; they cannot be inferred from black output alone.</p>
+<h2 id="11-signed-extension-and-fallback-inverse"><a class="header" href="#11-signed-extension-and-fallback-inverse">11. Signed-extension and fallback inverse</a></h2>
+<p>The no-lift solution is a candidate only if its recovered stage-1 cones satisfy the actual no-lift/roundoff branch and the source selects that level. Negative <strong>RGB</strong> alone does not establish a signed-cone lift; inspect normalized cones.</p>
+<p>Ignoring the explicitly documented roundoff zeroing, let <span data-tex="m_y=Qy"></span>. For a candidate lift <span data-tex="&#92;ell_{&#92;mathrm{lift}}&gt;0"></span> and core level <span data-tex="k&#92;in&#92;{2,1&#92;}"></span>, solve</p>
+<div class="grade-equation" data-tex="n_+=&#92;mathcal C_{k,b}^{-1}
+&#92;left(m_y+&#92;mathcal C_k(&#92;ell_{&#92;mathrm{lift}}&#92;mathbf1)&#92;right),"></div>
+
+<p>subject to</p>
+<div class="grade-equation" data-tex="n_+&#92;ge0,&#92;qquad &#92;min_i(n_+)_i=0."></div>
+
+<p>Recover</p>
+<div class="grade-equation" data-tex="n=n_+-&#92;ell_{&#92;mathrm{lift}}&#92;mathbf1,&#92;qquad
+x=M_1^{-1}Q^{-1}n."></div>
+
+<p>Each full-core inverse is the regular two-variable procedure, with the core target encoded from normalized cones directly. A level-1 core inverse needs only the tone inverse and plain appearance decoding. The remaining lift condition is a scalar outer equation on each continued core inverse branch. Unlike the positive-reference guard equation, this lift equation is <strong>not proven monotone</strong> and can have multiple branches.</p>
+<p>For a configured finite input box <span data-tex="&#92;Omega=[x_{&#92;min},x_{&#92;max}]"></span>, a useful exact linear bound, before roundoff zeroing, is obtained from <span data-tex="A_1=QM_1"></span>:</p>
+<div class="grade-equation" data-tex="n_{j,&#92;min}=&#92;sum_i(A_1)_{ji}
+&#92;begin{cases}(x_{&#92;min})_i,&amp;(A_1)_{ji}&#92;ge0,&#92;&#92;(x_{&#92;max})_i,&amp;(A_1)_{ji}&lt;0,
+&#92;end{cases}
+&#92;qquad
+&#92;ell_{&#92;max}=&#92;max(0,-&#92;min_jn_{j,&#92;min})."></div>
+
+<p>Search lifts in <span data-tex="[0,&#92;ell_{&#92;max}]"></span> with branch continuation or use direct full-forward RGB optimization for the difficult signed cases. Sign-change scanning alone can miss tangential roots. Without a finite configured input domain, do not invent a finite global lift bound.</p>
+<p>Always test the linear-only candidate <span data-tex="x=M_1^{-1}y"></span>: it can be a reset, a per-color unchanged-coordinate bypass, or a level-0 fallback preimage. This also covers exact unchanged branches that skip a guard which would otherwise modify the requested point. For level 1, reconstruct a tone-only candidate. In every case, run the <strong>complete forward evaluator</strong>. If it selects a higher valid level, only accept the candidate if that higher level still reproduces the target; label the actual selected path, not the hypothesized fallback.</p>
+<p>These equations explain how to generate candidates for the complete piecewise transform. They do not promise exhaustive enumeration of all signed roots, exact recovery through numerical zeroing, or a globally convergent solver. A practical best-effort implementation must retain a direct full-forward residual minimization path.</p>
+<h2 id="12-numerical-guard-inverse-algorithm"><a class="header" href="#12-numerical-guard-inverse-algorithm">12. Numerical guard-inverse algorithm</a></h2>
+<p>Use the dimensionless unknown <span data-tex="x_X=X/U"></span>. Its bracket is always contained in <span data-tex="[1/1.44,1]"></span>, avoiding scale-dependent root tolerances.</p>
+<pre><code class="language-text">InverseGuard(qg, E, Er):
+    require finite qg, E &gt; 0, Er &gt; 0, Hg &gt; 0
+    Cg = hypot(ag, bg)
+    U = E + 66 * Cg
+    check consistency of Hg*Hg and U within the input tolerance
+
+    if E &gt;= harmonic(Er, U):
+        return (sqrt(U), ag, bg), INACTIVE
+
+    # Here E &lt; Er and Cg &gt; 0.
+    lo = max(1/1.44, (E/U) / (1 - E/Er))
+    hi = 1
+
+    evaluate(xX):
+        X = xX * U
+        delta = harmonic(Er, X)
+        r = delta / E                  # &gt;= 1 in the exact bracket
+        clamp r to 1 only for tolerance-sized bracket roundoff
+        t = inverse_energy_parameter(r)
+        Z = E - delta + delta*t
+        allow only tolerance-sized negative roundoff in Z; then max(Z, 0)
+        L = 0.44 * X
+        G = L * (Z / hypot(2*L, Z))
+        return xX + G/U - 1, X, Z
+
+    solve increasing residual on [lo, hi] by bracketed Brent/bisection
+    _, X, Z = evaluate(root)
+    H3 = sqrt(X)
+    C3 = (X - E + Z) / 66
+    return (H3, ag*C3/Cg, bg*C3/Cg), ACTIVE
+</code></pre>
+<p>For <span data-tex="r=&#92;delta/E&#92;ge1"></span>, avoid cancellation in</p>
+<div class="grade-equation" data-tex="t=(&#92;sqrt{10r^4-6}-2)/10."></div>
+
+<p>Near <span data-tex="r=1"></span>, a rationalized expression is</p>
+<div class="grade-equation" data-tex="a=&#92;operatorname{expm1}(4&#92;log r),&#92;qquad
+t=&#92;frac{a}{&#92;sqrt{4+10a}+2}."></div>
+
+<p>For larger <span data-tex="r"></span>, use</p>
+<div class="grade-equation" data-tex="t=&#92;frac{r^2&#92;sqrt{10-6/r^4}-2}{10}"></div>
+
+<p>while monitoring overflow. If <span data-tex="r^2"></span> or the recovered chroma exceeds the configured numeric/domain limits, report an ill-conditioned or out-of-domain candidate; do not silently saturate it and label it an exact inverse. Near the knee, <span data-tex="Z"></span> is third-order small, so a tiny negative result from subtraction can be rounded to zero within a stated arithmetic tolerance. Re-run the forward guard on the returned request.</p>
+<p>Suggested initial float64 controls for ordinary test ranges are a dimensionless root tolerance around <span data-tex="10^{-12}"></span> and a residual target around <span data-tex="10^{-10}"></span> for the outer solve. These are starting numerical settings, not validated perceptual or GPU tolerances. Make tolerances configurable and scale final RGB acceptance to the target magnitude.</p>
+<h2 id="13-candidate-selection-and-best-effort-behavior"><a class="header" href="#13-candidate-selection-and-best-effort-behavior">13. Candidate selection and best-effort behavior</a></h2>
+<p>For each target <span data-tex="y"></span>, the implementation should return a candidate <span data-tex="&#92;hat x"></span>, its forward error, selected branch/level, and a status. Suggested statuses are <code>REGULAR_ROOT</code>, <code>NEUTRAL_ROOT</code>, <code>SIGNED_ROOT</code>, <code>UNCHANGED_ROOT</code>, <code>FALLBACK_ROOT</code>, <code>APPROXIMATE</code>, <code>UNRESOLVED</code>, and <code>SINGULAR_STAGE1</code>.</p>
+<p>Use a final acceptance test against the complete chosen-profile forward evaluator, for example</p>
+<div class="grade-equation" data-tex="&#92;epsilon_{&#92;mathrm{RGB}}=
+&#92;frac{&#92;|F(&#92;hat x)-y&#92;|_&#92;infty}{1+&#92;|y&#92;|_&#92;infty}."></div>
+
+<p>This is a numerical reproduction measure, not a perceptual color difference. A small two-equation residual alone is insufficient: appearance validity, no-lift/signed selection, reference repair, unchanged bypasses, fallback level, and input-domain membership must all agree.</p>
+<p>Multiple roots require a policy. One possible default is to prefer roots close to the linear-only inverse <span data-tex="x_{&#92;mathrm{prior}}=M_1^{-1}y"></span> using</p>
+<div class="grade-equation" data-tex="d_{&#92;mathrm{prior}}(x)=&#92;|&#92;operatorname{asinh}(x/s_d)-&#92;operatorname{asinh}(x_{&#92;mathrm{prior}}/s_d)&#92;|_2^2,"></div>
+
+<p>with a documented RGB scale <span data-tex="s_d&gt;0"></span> (for example <span data-tex="s_d=1"></span> in normalized working RGB), plus continuity with neighboring accepted LUT samples. The prior and continuity weights are inverse-design choices, not part of the original forward source.</p>
+<p>If no acceptable exact preimage is found, minimize a specified full-forward error over the configured domain <span data-tex="&#92;Omega"></span>, optionally regularized by the prior:</p>
+<div class="grade-equation" data-tex="&#92;min_{x&#92;in&#92;Omega}
+&#92;|W_e(F(x)-y)&#92;|_2^2+&#92;mu&#92;,d_{&#92;mathrm{prior}}(x),&#92;qquad &#92;mu&#92;ge0."></div>
+
+<p><span data-tex="W_e"></span> is an explicitly chosen error-weight matrix; identity is a numerical RGB default. Report the resulting forward residual and label the result <code>APPROXIMATE</code>. Searching only the exact two-equation manifold is not a proof of finding the best approximation for an arbitrary RGB error metric.</p>
+<p>A source-allowed fold still demonstrates why branch policy is necessary. Set all four high-chroma-to-Chroma heights to <span data-tex="g_h=-4"></span> stops, with all other stage-3 controls zero. At fixed <span data-tex="H"></span>,</p>
+<div class="grade-equation" data-tex="C&#39;=C&#92;,2^{g_hd_h(H,C)},&#92;qquad
+&#92;left.&#92;frac{dC&#39;}{dC}&#92;right|_H
+=2^{g_hd_h}&#92;left[1+g_h&#92;ln2&#92;,C&#92;left.&#92;frac{&#92;partial d_h}{&#92;partial C}&#92;right|_H&#92;right]."></div>
+
+<p>Write <span data-tex="B=C^2+r_s^2(H^2-66C)"></span>. On the regular positive domain,</p>
+<div class="grade-equation" data-tex="&#92;left.&#92;frac{&#92;partial&#92;omega}{&#92;partial C}&#92;right|_H
+=&#92;frac{r_s^2 C(2H^2-66C)}{B^2},&#92;qquad
+v_n&#39;(C)=&#92;frac{8C}{(C^2+4)^2},&#92;qquad
+&#92;left.&#92;frac{&#92;partial d_h}{&#92;partial C}&#92;right|_H
+=v_n&#39;&#92;omega+v_n&#92;left.&#92;frac{&#92;partial&#92;omega}{&#92;partial C}&#92;right|_H."></div>
+
+<p>The derivative of <span data-tex="C&#39;"></span> is negative near the classifier midpoint. At <span data-tex="H=100"></span>, the p=2 midpoint is <span data-tex="C_{50}=40.03013072108037"></span>. Two distinct valid inputs with <span data-tex="h=0"></span>, approximately <span data-tex="C=12.049497670414462"></span> and <span data-tex="C=40.03013072108041"></span>, both produce raw output <span data-tex="(H,a,b)=(100,10.042137411770025,0)"></span>. Both have an inactive guard and valid appearance decoding. This supersedes the old <span data-tex="C_s"></span> collision example; no historical driver values are used.</p>
+<p>Because the guard reference varies with the input, a fixed-reference bijection alone does not establish injectivity of the full grade. The inactive-guard p=2 collision suffices to disprove a universal unique inverse for all allowed grades.</p>
+<h2 id="14-forward-tables-and-the-scalar-inverse-table"><a class="header" href="#14-forward-tables-and-the-scalar-inverse-table">14. Forward tables and the scalar inverse table</a></h2>
+<h3 id="141-analytic-derivative-ingredients"><a class="header" href="#141-analytic-derivative-ingredients">14.1 Analytic derivative ingredients</a></h3>
+<p>For the ordinary kernel, with <span data-tex="s_l=&#92;operatorname{sigmoid}((t-l)/w)"></span> and <span data-tex="s_r=&#92;operatorname{sigmoid}((t-r)/w)"></span>,</p>
+<div class="grade-equation" data-tex="K&#39;(t)=s_l-s_r,&#92;qquad
+K&#39;&#39;(t)=&#92;frac{s_l(1-s_l)-s_r(1-s_r)}{w}."></div>
+
+<p>For the narrow-interval quadrature branch, differentiate the quadrature actually used:</p>
+<div class="grade-equation" data-tex="K&#39;(t)&#92;approx&#92;frac{r-l}{w}&#92;sum_j&#92;omega_j s_j^*(1-s_j^*),"></div>
+
+<div class="grade-equation" data-tex="K&#39;&#39;(t)&#92;approx&#92;frac{r-l}{w^2}&#92;sum_j&#92;omega_j s_j^*(1-s_j^*)(1-2s_j^*),
+&#92;quad s_j^*=&#92;operatorname{sigmoid}((t-s_j)/w)."></div>
+
+<p>Inside the normalized lightness interval,</p>
+<div class="grade-equation" data-tex="p&#39;(x)=30x^2(1-x)^2,&#92;qquad p&#39;&#39;(x)=60x(1-x)(1-2x)."></div>
+
+<p>For a normalized transition <span data-tex="K(p(x))/K(1)"></span>, its first two derivatives follow by the chain rule:</p>
+<div class="grade-equation" data-tex="U_i&#39;=K_i&#39;(p)p&#39;/K_i(1),&#92;qquad
+U_i&#39;&#39;=[K_i&#39;&#39;(p)(p&#39;)^2+K_i&#39;(p)p&#39;&#39;]/K_i(1)."></div>
+
+<p>Take the same weight differences and height dot products to obtain curve derivatives. These are derivatives with respect to normalized <span data-tex="x=H/H_&#92;star"></span>; divide by <span data-tex="H_&#92;star"></span> or <span data-tex="H_&#92;star^2"></span> for derivatives with respect to <span data-tex="H"></span>.</p>
+<h3 id="142-existing-forward-tables"><a class="header" href="#142-existing-forward-tables">14.2 Existing forward tables</a></h3>
+<p>The independent analytic reference evaluates Tone and Stage-3 coefficient functions directly. Its accelerated <code>BakeStack</code> prepares the shared scalar inverse Tone table. These are distinct execution profiles; an acceleration resource does not redefine the analytic model.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Profile</th><th>Stage 2</th><th>Stage 3</th></tr>
+</thead>
+<tbody>
+<tr><td>Independent analytic reference</td><td>closed-form forward Tone</td><td>closed-form coefficients and corrected Warp</td></tr>
+<tr><td>Reference <code>BakeStack</code></td><td>prepared inverse Tone table</td><td>reference forward kernel</td></tr>
+<tr><td>Retained production inverse</td><td>profile-specific inverse Tone preparation</td><td>retained controls and ordering</td></tr>
+<tr><td>Next Blender product</td><td>Stage 1/Tone implementation</td><td>Warp not implemented</td></tr>
+</tbody>
+</table>
+</div>
+<p>The shared inverse-Tone table used by the reference <code>BakeStack</code> solves for the scalar inverse <span data-tex="t(H)"></span> during preparation and represents <span data-tex="q(H)=t(H)/H"></span> against <span data-tex="u=&#92;log(1+H/s)"></span>, where <span data-tex="s"></span> is its table scale. It uses an adaptive node axis and quintic Hermite interpolation; the positive linear tail is evaluated analytically. Intervals are refined until five fractional probes and Bernstein checks for positive <span data-tex="q"></span> and increasing <span data-tex="Hq"></span> pass. Preparation is bounded by <code>MAX_CELLS=2048</code>, <code>MAX_ROUNDS=32</code>, <code>MAX_ROOT_EVALUATIONS=80</code> and a 64 KiB budget. A limit is not the stored size. Next’s experimental Color preparation is not evidence of a shipped Warp path.</p>
+<p><strong>Historical residual-coordinate forward table.</strong> The construction below and its uniform 2048-cell example belong to the retained derivation; they do not describe the reference <code>BakeStack</code> inverse-Tone table. Use the selected historical implementation’s own table layout when reproducing its output.</p>
+<p>Tone retains its linear tail analytically. It tables only</p>
+<div class="grade-equation" data-tex="&#92;mathcal V(&#92;zeta)=&#92;sum_i r_i&#92;frac{K(t;u_i,u_{i+1},w_T)}{K(1;u_i,u_{i+1},w_T)},
+&#92;qquad t=&#92;frac{&#92;zeta}{1-&#92;zeta},&#92;qquad &#92;zeta=&#92;frac{t}{1+t},"></div>
+
+<p>and evaluates <span data-tex="f(t)=mt+&#92;mathcal V(&#92;zeta)"></span>. Endpoint <span data-tex="&#92;zeta=1"></span> uses the finite residual limit with zero limiting derivatives. Source table generation approximates that endpoint with its prescribed large-<span data-tex="t"></span> evaluation. Do not replace this construction with a table that clips the complete tone curve at Highlights.</p>
+<p>For <span data-tex="x_i=i/N"></span>, <span data-tex="N=2048"></span>, step <span data-tex="&#92;Delta=1/N"></span>, sample a scalar curve <span data-tex="g"></span> and store float32 endpoint triples</p>
+<div class="grade-equation" data-tex="(g_i,&#92; &#92;Delta g_i&#39;,&#92; &#92;Delta^2g_i&#39;&#39;)."></div>
+
+<p>Let <span data-tex="d_i=&#92;Delta g_i&#39;"></span> and <span data-tex="c_i=&#92;Delta^2g_i&#39;&#39;"></span>. In interval <span data-tex="i"></span>, local coordinate <span data-tex="u=Nx-i"></span>, construct</p>
+<div class="grade-equation" data-tex="a_0=g_i,&#92;quad a_1=d_i,&#92;quad a_2=c_i/2,"></div>
+
+<div class="grade-equation" data-tex="&#92;Delta_0=g_{i+1}-a_0-a_1-a_2,&#92;quad
+&#92;Delta_1=d_{i+1}-a_1-2a_2,&#92;quad
+&#92;Delta_2=c_{i+1}-2a_2,"></div>
+
+<div class="grade-equation" data-tex="a_3=10&#92;Delta_0-4&#92;Delta_1+&#92;Delta_2/2,&#92;quad
+a_4=-15&#92;Delta_0+7&#92;Delta_1-&#92;Delta_2,&#92;quad
+a_5=6&#92;Delta_0-3&#92;Delta_1+&#92;Delta_2/2."></div>
+
+<p>Evaluate <span data-tex="&#92;sum_{j=0}^5a_ju^j"></span> by Horner’s rule. Adjacent intervals use the same stored values, slopes, and curvatures.</p>
+<p>The current inverse-Tone table uses the same quintic Hermite interpolation basis, but on its adaptive <span data-tex="u=&#92;log(1+H/s)"></span> nodes and stored inverse ratio <span data-tex="q=t/H"></span>; it does not use the historical residual coordinates, uniform grid, or forward residual table above. Its monotonicity gate checks the stored interpolation itself before accepting each interval. No Stage-3 table is deployed: the four-curve-family description and the <span data-tex="512&#92;times70"></span> atlas belong to the unreachable legacy generator noted in 14.2. The p=2 classifier is evaluated analytically from carried <span data-tex="J_2"></span> and current <span data-tex="C_2"></span>; height dot products remain live.</p>
+<h3 id="143-a-new-inverse-tone-table"><a class="header" href="#143-a-new-inverse-tone-table">14.3 A new inverse tone table</a></h3>
+<p>This is a general construction for a scalar inverse table. The current reference <code>BakeStack</code> uses the specialized implementation described in section 14.2; this subsection is not its storage or refinement recipe.</p>
+<p>A scalar inverse table can be constructed from root-solved endpoint values even if no elementary inverse expression exists. For <span data-tex="g=T_H^{-1}"></span>,</p>
+<div class="grade-equation" data-tex="g&#39;(y)=&#92;frac1{T_H&#39;(g(y))},&#92;qquad
+g&#39;&#39;(y)=-&#92;frac{T_H&#39;&#39;(g(y))}{[T_H&#39;(g(y))]^3}."></div>
+
+<p>Select and record the table’s output-lightness domain and normalization, then convert derivatives to that normalized coordinate before constructing endpoint jets. Validate monotonicity, endpoints, extrapolation, and forward reproduction after table quantization. Exclude the black-clipped interval from claims of unique inversion.</p>
+<p><strong>This one-dimensional table can accelerate the tone inverse. It cannot represent the general coupled stage-3 inverse.</strong> Stage 3 plus its input-dependent guard still needs the coupled evaluator or a baked 3D inverse LUT.</p>
+<h2 id="15-end-to-end-inverse-bake-algorithm"><a class="header" href="#15-end-to-end-inverse-bake-algorithm">15. End-to-end inverse-bake algorithm</a></h2>
+<pre><code class="language-text">PrepareGrade(configuration):
+    resolve effective working space, white, reference/peak nits, controls
+    build the chosen analytic or deployed-table forward evaluator
+    build M1 and factor/invert it; record its condition estimate
+    prepare tone and coefficient kernels/tables
+    retain the complete source forward evaluator for acceptance tests
+
+InverseCandidateRegular(target_rgb, seed):
+    target = EncodeCones(Q * target_rgb)           # no new lift or guard
+    if invalid or target.E &lt;= 0: return NO_REGULAR_CANDIDATE
+    solve for log(J2), log(C2):
+        H2 = hypot(J2, sqrt(66*C2))
+        raw_target = InverseGuard(target.q, target.E, J2*J2)
+        compute BA, theta, concentration parameter from H2,C2
+        remove BA and theta; analytically invert concentration direction
+        construct q2; evaluate original-input p=2 drivers with candidate J2
+        drive lightness and log-gain residuals to zero
+    invert scalar tone lightness and reverse its quadratic scaling
+    plain-decode q0 carrying J0*J0
+    apply M1_inverse
+    return candidate plus diagnostic residuals
+
+Inverse(target_rgb):
+    handle exact reset, black, and singular-matrix policy
+    test the linear-only candidate for unchanged or fallback preimages
+    collect regular candidates from appropriate seeds/continuation
+    separately test the exact neutral-input curve
+    if needed, generate signed-lift and fallback candidates
+    run every candidate through the complete source forward evaluator
+    reject invalid domain, wrong branch/level, or excessive residual
+    select an accepted candidate using the documented prior/continuity policy
+    if none accepted, run configured full-forward best-effort optimization
+    return input_rgb, status, selected level/branch, forward error
+</code></pre>
+<p>Bake by evaluating this inverse directly against the chosen source model at each <strong>inverse-input</strong> lattice point. This avoids an intermediate forward 3D LUT and its interpolation error. It does not eliminate the final inverse LUT’s interpolation error.</p>
+<p>Record at least:</p>
+<ul>
+<li>Working primaries/white and all effective grade/viewing parameters.</li>
+<li>Whether the inverse covers stage 1 or expects it to be applied separately.</li>
+<li>Forward evaluator profile, source version, and arithmetic/table precision.</li>
+<li>Input and output shapers, signed-value policy, and domain bounds.</li>
+<li>LUT lattice size, axis ordering, and interpolation method.</li>
+<li>Branch-selection policy, solver tolerances, unresolved/approximate counts, and validation errors.</li>
+</ul>
+<p>For a LUT shaper <span data-tex="&#92;mathcal S_{&#92;mathrm{in}}"></span> encoding the inverse’s input <span data-tex="y"></span> and an output shaper <span data-tex="&#92;mathcal S_{&#92;mathrm{out}}"></span> encoding its result <span data-tex="x"></span>, the stored function is</p>
+<div class="grade-equation" data-tex="L(u)=&#92;mathcal S_{&#92;mathrm{out}}&#92;left(
+F_b^{-1}(&#92;mathcal S_{&#92;mathrm{in}}^{-1}(u))&#92;right)."></div>
+
+<p>Specify the actual shapers and their domains; do not assume that <span data-tex="[0,1]"></span> scene-linear RGB covers HDR or signed colors. Validate both sample nodes and off-grid interpolation points. Forward-after-inverse reproduction is the primary check; inverse-after-forward recovery can legitimately differ when the selected inverse chooses a different valid preimage.</p>
+<h2 id="16-verification-evidence-and-implementation-acceptance-tests"><a class="header" href="#16-verification-evidence-and-implementation-acceptance-tests">16. Verification evidence and implementation acceptance tests</a></h2>
+<p>The derivation is exercised by <code>tests/blender/test_forward_inverse.py</code> against the current analytic model. The test uses the new rational drivers in the inverse Hue calculation and passes candidate <span data-tex="J_2"></span> directly into contribution evaluation. These float64 local-branch checks do not establish global solver convergence or inverse-LUT/GPU accuracy.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Check</th><th>Result</th></tr>
+</thead>
+<tbody>
+<tr><td>Guard inverse, 2400 requests; 1603 active</td><td>Maximum componentwise normalized recovery error 7.8e-13</td></tr>
+<tr><td>Full inverse, 48 RGB inputs with all three stages active; 24 active guards</td><td>Maximum absolute RGB recovery error 8.13e-14</td></tr>
+<tr><td>Forward reproduction of recovered inputs</td><td>Maximum absolute RGB error 1.25e-13</td></tr>
+<tr><td>Zero-reference-energy guard collision</td><td>Distinct requests agree within 1.42e-14</td></tr>
+</tbody>
+</table>
+</div>
+<p>The forward implementation is also covered by independent rational-driver tests, actual graph-expression arithmetic in float32/float64, compiled DCTL acceptance/parity tests, Blender 5.2.2 CPU compositor and Cycles renders, scope/prepared-path checks, and preserved plus separately reviewed p=2 fixture baselines. The historical <code>docs/engineering/p2-validation-report.md</code> records that classifier integration; current sampling validation is recorded in <a href="testing.html">Testing and measurements</a>. No Resolve GPU result or completed Buck2 release gate is claimed.</p>
+<p>The guard probes used requested <span data-tex="H_3"></span> approximately from .01 to 1000, reference ratio <span data-tex="E_r/H_3^2"></span> from <span data-tex="10^{-4}"></span> to <span data-tex="10^4"></span>, and chromatic ratio <span data-tex="66C_3/H_3^2"></span> from <span data-tex="10^{-3}"></span> to <span data-tex="10^3"></span>. They used the directly carried output energy. Appearance-domain decoding was not required for these standalone guard probes.</p>
+<h3 id="161-concrete-combined-fixture"><a class="header" href="#161-concrete-combined-fixture">16.1 Concrete combined fixture</a></h3>
+<p>Working space: Linear Rec.709, D65 destination white. All unspecified controls retain their source defaults.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Setting</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>Exposure</td><td><span data-tex=".4"></span> stops</td></tr>
+<tr><td>Source white <span data-tex="xy"></span></td><td><span data-tex="(.34,.35)"></span></td></tr>
+<tr><td>Internal directional Balances, red/blue</td><td><span data-tex="(.12,-.08)"></span> stops</td></tr>
+<tr><td>Spreads, red/blue</td><td><span data-tex="(12,-8)"></span> percent</td></tr>
+<tr><td>Headings, red/blue</td><td><span data-tex="(7,-9)"></span> degrees</td></tr>
+<tr><td>Tone input nits, Black through Highlights</td><td><span data-tex="(0,10,45,260,1250)"></span></td></tr>
+<tr><td>Reference, peak, Tone Fit</td><td><span data-tex="203,1000,0"></span></td></tr>
+<tr><td>Global chroma gain</td><td><span data-tex="1.2"></span> stops</td></tr>
+<tr><td>Global low-/high-chroma Hue</td><td><span data-tex="(13,-21)"></span> degrees</td></tr>
+<tr><td>Adaptance strength</td><td><span data-tex=".63"></span></td></tr>
+<tr><td>Adaptance/Lightness/Chroma/Hue Fit</td><td><span data-tex="(0,1,0,2)"></span></td></tr>
+</tbody>
+</table>
+</div>
+<p>For each following family/driver, set its four tonal heights to <code>base * (0.6, 1.1, 0.85, 1.4)</code>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Source stem</th><th>Base</th></tr>
+</thead>
+<tbody>
+<tr><td><code>j_low</code>, <code>j_high</code>, <code>j_a</code>, <code>j_b</code></td><td><span data-tex="-3,-8,2,-1"></span> respectively</td></tr>
+<tr><td><code>c_low</code>, <code>c_high</code>, <code>c_a</code>, <code>c_b</code></td><td><span data-tex=".08,.15,.05,-.04"></span> respectively</td></tr>
+<tr><td><code>adaptance_a</code>, <code>adaptance_b</code></td><td><span data-tex="1,-1.5"></span> respectively</td></tr>
+<tr><td><code>hue</code></td><td><span data-tex="7"></span></td></tr>
+<tr><td><code>concentration_a</code>, <code>concentration_b</code></td><td><span data-tex=".12,-.08"></span> respectively</td></tr>
+</tbody>
+</table>
+</div>
+<p>One test vector, rounded for display, is:</p>
+<pre><code class="language-text">input RGB:       (1.0, 0.05, 0.03)
+q0 = H,a,b:      (92.46258977977801, 39.67856894717561, 28.591165410325175)
+q2 = H,a,b:      (84.3346436998987, 35.39010703671729, 25.501030682910294)
+raw q3:          (79.33925026602888, 104.53290832077005, 35.128154302716894)
+guarded qg:      (85.31759837041311, 88.41997631419794, 29.713423469253726)
+reference Er:    4233.368368928621
+guard output E:  1122.6757952035593
+output RGB:      (0.6159268568211308, -0.11182657798449142, -0.010366096646826079)
+recovered RGB:   (0.9999999999999997, 0.05000000000000013, 0.029999999999999954)
+</code></pre>
+<p>The guard changes this request substantially, and the output contains negative RGB. Clipping that RGB before inversion destroys the stated round trip. The inverse computed observed <span data-tex="E"></span> from the output’s encoded achromatic response rather than subtracting <span data-tex="H_g^2-66C_g"></span>.</p>
+<p>The 48-case fixture used the six explicit inputs below plus 42 seeded random inputs. The random generator was NumPy <code>default_rng(401936)</code>; the 2400 guard probes consumed its draws first, in the order <span data-tex="H=10^{&#92;operatorname{uniform}(-2,3)}"></span>, <span data-tex="E_r/H^2=10^{&#92;operatorname{uniform}(-4,4)}"></span>, <span data-tex="66C/H^2=10^{&#92;operatorname{uniform}(-3,3)}"></span>, and <span data-tex="h=&#92;operatorname{uniform}(-&#92;pi,&#92;pi)"></span>. Each draw was an array of length 2400. Then draw a <code>(42,3)</code> array uniformly in <span data-tex="[-1.3,.5]"></span> and raise 10 to those values componentwise. The explicit inputs were:</p>
+<pre><code class="language-text">(1,.05,.03), (.2,.7,.1), (.1,.2,1), (.5,.3,.2), (2,.1,.1), (.3,.3,.3)
+</code></pre>
+<p>All tested stage-1 cone triples were positive and the full-level decode was valid. These full-inverse tests did not exercise signed lifting or fallback inversions. They used candidate seeds derived from the observed target, not the known original RGB. The p=2 collision example in section 13 is a separate nonuniqueness check.</p>
+<h3 id="162-required-tests-for-the-engineers-implementation"><a class="header" href="#162-required-tests-for-the-engineers-implementation">16.2 Required tests for the engineers’ implementation</a></h3>
+<p>Before using a production inverse LUT, verify:</p>
+<ol start="0">
+<li>
+<p>The p=2 pair, its carried-<span data-tex="J_A"></span> arithmetic, <span data-tex="d_&#92;ell+d_h=v_n"></span>, exact neutral/black behavior, <span data-tex="s=35"></span> crossover, derivative formulas, and classifier invariance under positive Tone scaling. Test the visibility fade separately.</p>
+</li>
+<li>
+<p>Exact reset and exposure/matrix-only grades; report singular or poorly conditioned matrices.</p>
+</li>
+<li>
+<p>Pure Tone, pure Hue, pure Concentration, pure gain, pure Adaptance, and mixed grades with varying tonal heights.</p>
+</li>
+<li>
+<p>Both sides of the guard knee, at the knee, and severe active repairs with carried energy.</p>
+</li>
+<li>
+<p>Tiny positive <span data-tex="J_2"></span>, tiny positive <span data-tex="C_2"></span>, exact neutral inputs, black, high dynamic range, and valid negative RGB outputs.</p>
+</li>
+<li>
+<p>Zero-reference-energy and zero-requested-lightness degeneracies as explicit nonunique cases.</p>
+</li>
+<li>
+<p>Signed normalized-cone lifts and paired level selection, including valid level-1 and level-0 fallback candidates.</p>
+</li>
+<li>
+<p>Wrong-level candidate detection: evaluate any higher level the source actually selects, require its full output to match, and report the actual path.</p>
+</li>
+<li>
+<p>Source-allowed creative folds and deterministic branch choice across neighboring LUT samples.</p>
+</li>
+<li>
+<p>Actual deployed table/float precision, response-pole rejection, and cancellation zeroing.</p>
+</li>
+<li>
+<p>LUT node and off-grid errors with the exact target shapers/interpolation; no silent RGB clipping.</p>
+</li>
+</ol>
+<p>For a known injective local fixture, check both <span data-tex="F^{-1}(F(x))&#92;approx x"></span> and <span data-tex="F(F^{-1}(y))&#92;approx y"></span>. For a nonunique fixture, require the latter and the documented branch policy, rather than demanding recovery of the unobservable original input.</p>
+<h2 id="17-implementation-boundary"><a class="header" href="#17-implementation-boundary">17. Implementation boundary</a></h2>
+<p>This specification provides the complete mathematical pipeline, an invertibility proof for the regular fixed-reference H–K guard, a two-variable reduction of its combined stage-3 inverse, and verified numerical examples. The validation does not constitute a production inverse baker, complete enumeration of all preimages, a signed/fallback convergence proof, or target-GPU certification.</p>
+<p>The intended production path is: evaluate the selected forward model directly; use the reduced inverse and explicit component inverses to obtain candidates; validate candidates through the complete source branch logic; choose a consistent branch or record an approximate result; then bake and test the final inverse LUT.</p>
+<h2 id="18-blender-inverse-and-stack-implementation-contract"><a class="header" href="#18-blender-inverse-and-stack-implementation-contract">18. Blender inverse and Stack implementation contract</a></h2>
+<p>The CPU implementation is in <code>model/inverse.py</code>, <code>model/transforms.py</code> and <code>model/lut.py</code>; <code>graph/lut.py</code> and <code>graph/stacks.py</code> integrate it with Blender. It targets the <strong>float64 analytic Python forward model</strong>, including its actual cone-roundoff, lifting, bypass and fallback decisions. From 1.23.0, <code>model/gpu.py</code> and <code>model/gpu_shader.py</code> provide the installed float32 analytic profile described below. Neither profile targets exact reversal of Direct’s Quintic evaluator or of an interpolated forward cube.</p>
+<h3 id="181-implemented-numerical-inverse"><a class="header" href="#181-implemented-numerical-inverse">18.1 Implemented numerical inverse</a></h3>
+<p><code>model/analytic.py</code> evaluates the same float64 forward equations as the independent <code>color.Model</code> / <code>tone.Model</code> references. It shares equal coefficient weights, skips zero terms and evaluates only required stable softplus/fallback branches. The signed-lift neutral offset simplifies to <span data-tex="q_3=(H_2,&#92;alpha H_2 A_a(H_2)/100,&#92;alpha H_2 A_b(H_2)/100)"></span>: at <span data-tex="C=0"></span>, all contribution drivers vanish and the Adaptance envelope is <span data-tex="&#92;alpha H_2/100"></span>. The guard/decoder then share their repeated radius and energy work while retaining branch decisions. It contains no sampled coefficient table or intermediate LUT. The inverse is semi-analytic: explicit component inverses reduce the regular problem, and bounded numerical solves select a usable preimage.</p>
+<h4 id="safeguarded-scalar-inverses"><a class="header" href="#safeguarded-scalar-inverses">Safeguarded scalar inverses</a></h4>
+<p>For the active, positive-energy, fixed-reference guard inverse of section 12, use observed energy <span data-tex="e"></span>, reference energy <span data-tex="e_0"></span> and <span data-tex="u=e+66C_g"></span>. Let <span data-tex="x=X/u"></span>, where <span data-tex="X"></span> is the unknown raw squared lightness. Solve</p>
+<div class="grade-equation" data-tex="f(x)=x+G(xu)/u-1=0,&#92;qquad
+&#92;max&#92;!&#92;left(&#92;frac1{1.44},&#92;frac{e/u}{1-e/e_0}&#92;right)&#92;le x&#92;le1."></div>
+
+<p>The active branch has <span data-tex="e&lt;e_0u/(e_0+u)"></span>, so its lower-bound denominator is positive. At a candidate <span data-tex="X=xu"></span>, define</p>
+<div class="grade-equation" data-tex="&#92;delta=&#92;frac{e_0X}{e_0+X},&#92;quad r=&#92;max(1,&#92;delta/e),&#92;quad
+ t=&#92;frac{&#92;sqrt{10r^4-6}-2}{10},&#92;quad
+Z=&#92;max(0,e-&#92;delta+&#92;delta t),&#92;quad L=.44X,&#92;quad
+D=&#92;sqrt{4L^2+Z^2},&#92;quad G=LZ/D."></div>
+
+<p>Use the rationalized expression <span data-tex="t=(r^4-1)/(&#92;sqrt{10r^4-6}+2)"></span> near <span data-tex="r=1"></span>, as in the source. For the active interior,</p>
+<div class="grade-equation" data-tex="Z_X=&#92;left(&#92;frac{e_0}{e_0+X}&#92;right)^2
+&#92;left(t-1+&#92;frac{2r^2}{&#92;sqrt{10-6/r^4}}&#92;right),
+&#92;qquad
+f&#39;(x)=1+.44&#92;left(&#92;frac ZD&#92;right)^3
+       +&#92;frac12&#92;left(&#92;frac{2L}D&#92;right)^3Z_X."></div>
+
+<p>Start at <span data-tex="x=1"></span>. Update the sign bracket, then use <span data-tex="x-f/f&#39;"></span> if strictly inside it; otherwise use its midpoint. Stop at <span data-tex="|f|&lt;8&#92;times10^{-14}"></span>, with at most 16 Newton steps. Remaining rows complete 42 bisections on their retained brackets. Reconstruct <span data-tex="H_3=&#92;sqrt X"></span> and multiply the observed chromatic vector by <span data-tex="(X-e+Z)/(66C_g)"></span>. This changes the numerical method, not the fixed-reference guard equation. Inactive and degenerate cases keep the branch behavior described earlier.</p>
+<p>For Tone, write the normalized remap as</p>
+<div class="grade-equation" data-tex="R(t)=m t+&#92;sum_i&#92;frac{v_i}{n_i}K_i(t),&#92;qquad
+ t=&#92;max(0,(H_0/100-b)/s_b),"></div>
+
+<p>where <span data-tex="m&gt;0"></span> is the stored base slope, <span data-tex="v_i&#92;ge0"></span> the residual heights, <span data-tex="n_i=K_i(1)"></span>, <span data-tex="b"></span> the normalized input black and <span data-tex="s_b"></span> the normalized source span. Away from the narrow-interval quadrature branch,</p>
+<div class="grade-equation" data-tex="R&#39;(t)=m+&#92;sum_i&#92;frac{v_i}{n_i}
+&#92;left[&#92;sigma((t-l_i)/w)-&#92;sigma((t-r_i)/w)&#92;right],
+&#92;qquad &#92;sigma(z)=&#92;frac1{1+e^{-z}}."></div>
+
+<p>For <span data-tex="r_i-l_i&lt;.1w"></span>, differentiate the same three-node quadrature used by the forward implementation: <span data-tex="K&#39;_i(t)=(r_i-l_i)&#92;sum_j a_j&#92;sigma_j(1-&#92;sigma_j)/w"></span>, with the source’s quadrature nodes/weights. This preserves the implemented forward curve rather than differentiating a different approximation.</p>
+<p>Solve <span data-tex="R(t)=H_2/100"></span> in <span data-tex="[0,(H_2/100)(1+10^{-12})/m]"></span>. Seed by linear interpolation of the known target/source landmarks, with slope-based extrapolation above the last landmark. Use at most 24 bracketed Newton steps, stopping at <span data-tex="|R(t)-H_2/100|&lt;2&#92;times10^{-14}(1+H_2/100)"></span>. Unfinished rows use the original 44-step monotone bisection safeguard. Then apply the analytic saturation inverse of section 9. Black uses the explicit zero-output convention.</p>
+<h4 id="shared-pool-damped-broyden-solve"><a class="header" href="#shared-pool-damped-broyden-solve">Shared-pool damped Broyden solve</a></h4>
+<p>Regular chromatic candidates use section 10’s two-unknown reconstruction, including analytic Hue/Concentration undo and the scalar guard inverse. The coordinates are <span data-tex="v=(&#92;log J_2,&#92;log C_2)"></span>, bounded to <span data-tex="[-18,14]^2"></span>. Neutral and black candidates avoid logarithms of zero chroma. Every resulting RGB candidate is validated through the complete nonlinear forward function <span data-tex="N"></span>, including lifting, bypass and fallback selection.</p>
+<p>The regular two-variable system supplies its analytic branchwise Jacobian <span data-tex="D=&#92;partial r/&#92;partial v"></span> at initialization and recovery. The generic full-forward RGB system initializes and recovers <span data-tex="D"></span> with one-sided coordinate perturbations <span data-tex="h=2&#92;times10^{-5}"></span>. Both use the same accepted-step Broyden update. For each unresolved row compute</p>
+<div class="grade-equation" data-tex="&#92;left[D^TD+&#92;lambda&#92;bigl(1+&#92;operatorname{tr}(D^TD)&#92;bigr)I&#92;right]p=D^Tr."></div>
+
+<p>Start <span data-tex="&#92;lambda=10^{-7}"></span>. Limit <span data-tex="&#92;lVert p&#92;rVert_&#92;infty"></span> to 1.5 and try <span data-tex="v-&#92;alpha p"></span> for <span data-tex="&#92;alpha&#92;in&#92;{1,1/2,1/8&#92;}"></span>, respecting coordinate bounds. Accept the first finite trial that strictly reduces <span data-tex="&#92;lVert r&#92;rVert_2^2"></span>. For accepted displacement <span data-tex="s=v_{new}-v"></span> and residual change <span data-tex="z=r_{new}-r"></span>, update</p>
+<div class="grade-equation" data-tex="D_{new}=D+&#92;frac{(z-Ds)s^T}{s^Ts}."></div>
+
+<p>Omit the rank-one contribution when <span data-tex="s^Ts&#92;le10^{-24}"></span>. Accepted steps reduce damping by a factor .2, with floor <span data-tex="10^{-12}"></span>; rejection increases it by 10, with ceiling <span data-tex="10^6"></span>. Refresh an approximate Jacobian after rejection and every 12 iterations. A Jacobian already measured at an unchanged point is reused while damping changes. The regular system recovers analytically; the generic RGB system recovers by finite differences. Neither measures a new Jacobian at every accepted step.</p>
+<p>For the two-variable system, avoid subtracting nearly equal products when solving the damped normal equation. Define the local Jacobian entries and damping shift by</p>
+<div class="grade-equation" data-tex="D=&#92;begin{bmatrix}a&amp;b&#92;&#92;c&amp;d&#92;end{bmatrix},&#92;quad
+&#92;delta=ad-bc,&#92;quad &#92;tau=a^2+b^2+c^2+d^2,&#92;quad
+&#92;mu=&#92;lambda(1+&#92;tau),&#92;quad &#92;Delta=&#92;delta^2+&#92;mu(&#92;tau+&#92;mu)."></div>
+
+<p>For residual <span data-tex="(r_0,r_1)^T"></span>, the step is</p>
+<div class="grade-equation" data-tex="p_0=&#92;frac{&#92;delta(dr_0-br_1)+&#92;mu(ar_0+cr_1)}{&#92;Delta},&#92;qquad
+p_1=&#92;frac{&#92;delta(ar_1-cr_0)+&#92;mu(br_0+dr_1)}{&#92;Delta}."></div>
+
+<p>These are the same damped normal equations, with a cancellation-safe determinant and numerators at rank one. The three-variable RGB system retains the general matrix solve.</p>
+<h4 id="analytic-regular-jacobian"><a class="header" href="#analytic-regular-jacobian">Analytic regular Jacobian</a></h4>
+<p>Use <span data-tex="J=J_2&gt;0"></span>, <span data-tex="C=C_2&gt;0"></span>, <span data-tex="v=(&#92;xi,&#92;chi)=(&#92;log J,&#92;log C)"></span>, and <span data-tex="H=&#92;sqrt{J^2+66C}"></span>. All gradients in this subsection are row vectors with respect to <span data-tex="v"></span>. Then</p>
+<div class="grade-equation" data-tex="&#92;nabla H=&#92;left(&#92;frac{J^2}{H},&#92;frac{33C}{H}&#92;right),&#92;qquad
+&#92;nabla E_r=(2J^2,0)."></div>
+
+<p>The fixed observation’s guard inverse returns the requested <span data-tex="(H_3,a_3,b_3)"></span>. On an active guard branch, its scalar equation is <span data-tex="X+G(X,Z(X,E_r))=U"></span>; observed energy <span data-tex="e"></span>, repaired energy <span data-tex="U"></span>, and observed hue are fixed. Use the <span data-tex="t,r,L"></span> quantities from the guard-inverse subsection above and write <span data-tex="D_g=&#92;operatorname{hypot}(2L,Z)"></span> for its scalar denominator, distinct from the solver Jacobian <span data-tex="D"></span>. Then</p>
+<div class="grade-equation" data-tex="A_Z=t-1+&#92;frac{2r^2}{&#92;sqrt{10-6/r^4}},&#92;quad
+Z_X=A_Z&#92;left(&#92;frac{E_r}{E_r+X}&#92;right)^2,&#92;quad
+Z_{E_r}=A_Z&#92;left(&#92;frac{X}{E_r+X}&#92;right)^2,"></div>
+
+<div class="grade-equation" data-tex="G_X=.44&#92;left(&#92;frac Z{D_g}&#92;right)^3,&#92;qquad
+G_Z=&#92;frac12&#92;left(&#92;frac{2L}{D_g}&#92;right)^3,&#92;qquad
+X_{E_r}=-&#92;frac{G_ZZ_{E_r}}{1+G_X+G_ZZ_X},&#92;qquad
+&#92;frac{dZ}{dE_r}=Z_XX_{E_r}+Z_{E_r}."></div>
+
+<p>Thus <span data-tex="dH_3/dE_r=X_{E_r}/(2&#92;sqrt X)"></span>. If the observed chromatic vector is <span data-tex="z_g=a_g+ib_g"></span>, its requested counterpart is <span data-tex="z_3=z_g(X-e+Z)/(66C_g)"></span>, so</p>
+<div class="grade-equation" data-tex="&#92;frac{dz_3}{dE_r}=&#92;frac{z_g}{66C_g}
+&#92;left(X_{E_r}+&#92;frac{dZ}{dE_r}&#92;right)."></div>
+
+<p>On the inactive branch both derivatives with respect to reference energy are zero. Multiply these scalar derivatives by <span data-tex="&#92;nabla E_r"></span> to obtain their solver-coordinate gradients. This differentiates the reference-dependent guard jointly with stage 3; it does not freeze the unknown stage-2 energy.</p>
+<p>Differentiate each coefficient curve at its actual clipped smoother position. For <span data-tex="s=&#92;operatorname{clip}(H/H_{&#92;rm high},0,1)"></span> and <span data-tex="t=s^3(6s^2-15s+10)"></span>,</p>
+<div class="grade-equation" data-tex="&#92;frac{dt}{dH}=&#92;frac{30s^2(s-1)^2}{H_{&#92;rm high}}."></div>
+
+<p>Multiply the implemented kernel derivative by this factor and the kernel normalization. The kernel’s narrow-interval quadrature derivative is the same one defined for Tone above. Clipped kernel values have zero derivative outside their open interval; a cumulative minimum carries the derivative of the selected operand. Multiply the resulting basis derivative by the stored coefficient heights. Families with identical Fit share their kernel work; zero coefficient families need no curve evaluation.</p>
+<p>For the chromatic reconstruction, define <span data-tex="o"></span> as the Adaptance complex offset, <span data-tex="z=z_3-o"></span>, <span data-tex="R=|z|&gt;0"></span>, <span data-tex="&#92;eta=e^{-i&#92;theta}z/R"></span>, and <span data-tex="w"></span> as the bounded Concentration disk parameter including its neutral fade. The analytically reconstructed input direction is <span data-tex="u=(&#92;eta-w)/(1-&#92;overline w&#92;eta)"></span>. Its gradients are</p>
+<div class="grade-equation" data-tex="&#92;nabla&#92;log R=&#92;frac{&#92;operatorname{Re}(&#92;overline z&#92;nabla z)}{R^2},&#92;qquad
+&#92;nabla&#92;eta=e^{-i&#92;theta}&#92;frac{&#92;nabla z-z&#92;nabla&#92;log R}{R}
+                -i&#92;eta&#92;nabla&#92;theta,"></div>
+
+<div class="grade-equation" data-tex="&#92;nabla u=&#92;frac{&#92;nabla&#92;eta-&#92;nabla w
+             +u(&#92;eta&#92;nabla&#92;overline w+&#92;overline w&#92;nabla&#92;eta)}
+                  {1-&#92;overline w&#92;eta}."></div>
+
+<p>Differentiate the p=2 lower/higher-chroma pair using section 10’s classifier gradients. For <span data-tex="n=C/&#92;operatorname{hypot}(C,2)"></span>, <span data-tex="&#92;nabla n=(0,n(1-n^2))"></span>, so the direction drivers have gradients <span data-tex="&#92;nabla(n&#92;operatorname{Re}u)"></span> and <span data-tex="&#92;nabla(n&#92;operatorname{Im}u)"></span>. If <span data-tex="h(H)"></span> is the scalar Hue curve and <span data-tex="h_&#92;ell,h_h"></span> the global low/high Hue controls in degrees, then</p>
+<div class="grade-equation" data-tex="&#92;nabla&#92;theta=&#92;frac&#92;pi{180}&#92;left[h&#39;(H)&#92;nabla H+h_&#92;ell&#92;nabla d_&#92;ell+h_h&#92;nabla d_h&#92;right]."></div>
+
+<p>For the bounded Concentration controls <span data-tex="v_c(H)&#92;in&#92;mathbb R^2"></span>, let <span data-tex="t=&#92;lVert v_c&#92;rVert/.6"></span>, <span data-tex="f(t)=&#92;tanh(t)/t"></span>, and <span data-tex="&#92;beta=f(t)v_c"></span>. Its tone derivative is</p>
+<div class="grade-equation" data-tex="&#92;beta&#39;(H)=f(t)v_c&#39;(H)+k(t)v_c&#92;,[v_c&#92;cdot v_c&#39;(H)],&#92;qquad
+k(t)=&#92;frac{1-&#92;tanh^2(t)-f(t)}{(.6t)^2}."></div>
+
+<p>At small <span data-tex="t"></span>, evaluate <span data-tex="k(t)=[-2/3+8t^2/15-34t^4/105]/.6^2"></span>, with the continuous limit <span data-tex="f(0)=1"></span>. Represent the two components of <span data-tex="&#92;beta"></span> as a complex number and set <span data-tex="w=&#92;beta n^2"></span>; then</p>
+<div class="grade-equation" data-tex="&#92;nabla w=n^2&#92;beta&#39;(H)&#92;nabla H+&#92;beta(0,2n^2(1-n^2))."></div>
+
+<p>For Adaptance, use <span data-tex="s=(C/30)^2"></span>, <span data-tex="r_A=.25+.75/(1+s)"></span>, <span data-tex="b_A=1-&#92;alpha+&#92;alpha r_A"></span>, and <span data-tex="&#92;omega_A=&#92;alpha r_A/b_A"></span>, where <span data-tex="&#92;alpha&#92;in[0,1]"></span> is the fixed strength. Then</p>
+<div class="grade-equation" data-tex="&#92;partial_&#92;chi r_A=-&#92;frac{1.5s}{(1+s)^2},&#92;qquad
+&#92;partial_&#92;chi&#92;omega_A=&#92;frac{&#92;alpha(1-&#92;alpha)&#92;partial_&#92;chi r_A}{b_A^2}."></div>
+
+<p>If <span data-tex="a_A(H)"></span> is the complex Adaptance curve, <span data-tex="o=a_AH&#92;omega_A/100"></span>, so</p>
+<div class="grade-equation" data-tex="&#92;nabla o=&#92;frac{&#92;omega_A}{100}[Ha_A&#39;(H)+a_A(H)]&#92;nabla H
+       +&#92;frac{H a_A(H)}{100}(0,&#92;partial_&#92;chi&#92;omega_A)."></div>
+
+<p>These provide <span data-tex="&#92;nabla z=&#92;nabla z_3-&#92;nabla o"></span> for the complex reconstruction above. The complex radius floor used by the numerical implementation carries zero radius derivative below its floor and never establishes an accepted root by itself.</p>
+<p>Let <span data-tex="d"></span> be the resulting four drivers, <span data-tex="j(H)"></span> and <span data-tex="c(H)"></span> the lightness and log2-chroma coefficients, <span data-tex="g"></span> the global log2-chroma gain, and <span data-tex="S=&#92;max(100,H_g)"></span> the fixed observation scale. The two residuals and Jacobian rows are</p>
+<div class="grade-equation" data-tex="r_0=&#92;frac{H+j(H)&#92;cdot d-H_3}{S},&#92;qquad
+r_1=&#92;log(R/C)-&#92;log(2)&#92;,[g+c(H)&#92;cdot d],"></div>
+
+<div class="grade-equation" data-tex="&#92;nabla r_0=&#92;frac{&#92;nabla H+(j&#39;(H)&#92;cdot d)&#92;nabla H+j(H)&#92;cdot&#92;nabla d-&#92;nabla H_3}{S},"></div>
+
+<div class="grade-equation" data-tex="&#92;nabla r_1=&#92;nabla&#92;log R-(0,1)
+ -&#92;log(2)&#92;bigl[(c&#39;(H)&#92;cdot d)&#92;nabla H+c(H)&#92;cdot&#92;nabla d&#92;bigr]."></div>
+
+<p>Every trial still computes the actual residual, and every recovered RGB candidate still passes the complete forward reproduction check. The analytic derivative changes solver cost, not the accepted forward function, iteration limits, or diagnostic tolerance.</p>
+<p>Rows with <span data-tex="&#92;lVert r&#92;rVert_&#92;infty&#92;le2&#92;times10^{-11}"></span> leave the active pool. The regular reduction allows 24 iterations. Signed/fallback and other unresolved targets use full-forward RGB refinement, allowing 30 iterations per seed. For target <span data-tex="y"></span>, its coordinates represent</p>
+<div class="grade-equation" data-tex="&#92;rho=&#92;max(10^{-7},&#92;lVert y&#92;rVert_&#92;infty),&#92;qquad
+x_N=&#92;operatorname{clip}(&#92;rho v,-2^{20},2^{20}),&#92;qquad
+r(v)=&#92;frac{N(x_N)-y}{1+&#92;lVert y&#92;rVert_&#92;infty}."></div>
+
+<p>The search coordinates are additionally bounded to <span data-tex="[-10^{14},10^{14}]^3"></span>. Target-relative <strong>linear</strong> coordinates replace the former asinh solver coordinates; the LUT’s nonnegative log1p <em>address shaper</em> is a separate sampling choice. Every refinement trial still evaluates the complete float64 forward equations.</p>
+<h4 id="candidate-choice-and-diagnostics"><a class="header" href="#candidate-choice-and-diagnostics">Candidate choice and diagnostics</a></h4>
+<ol>
+<li>Construct the regular candidate, clip it to the search domain and measure its complete-forward residual <span data-tex="&#92;epsilon_N"></span> below. Prefer it immediately if <span data-tex="&#92;epsilon_N&#92;le2&#92;times10^{-10}"></span>.</li>
+<li>For unresolved/nonfinite results, test the unchanged target as an identity/fallback candidate. Keep it only if its finite residual is smaller.</li>
+<li>Refine the current best candidate for rows still above <span data-tex="2&#92;times10^{-10}"></span>. Retain a finite result only if it improves the measured residual.</li>
+<li>For remaining rows, solve the target and half-target seeds together in one combined pool. Consider the target-seeded result first. Consider the half-target result only if that row is still above <span data-tex="2&#92;times10^{-10}"></span>. Keep only improvements.</li>
+</ol>
+<p>There is no elapsed-time cutoff, previous-bake warm start, neighbor regularizer or coarse sampled initializer. The policy is deterministic for fixed numerical inputs/environment; it is not an exhaustive root search, proof of a global minimum or continuity guarantee across folds. It may select a different valid preimage than version 1.14.0. The solver policy is included in the LUT signature.</p>
+<p>The stored diagnostic tolerance is deliberately looser than the internal stopping thresholds:</p>
+<div class="grade-equation" data-tex="&#92;epsilon_N=&#92;frac{&#92;lVert N(&#92;hat x_N)-y&#92;rVert_&#92;infty}
+                   {1+&#92;lVert y&#92;rVert_&#92;infty}&#92;le2&#92;times10^{-8}."></div>
+
+<p>Samples above it remain best-effort samples and are counted explicitly; the worst residual is stored on the packed LUT image. Diagnostics count returned vertices, not seed attempts. Float32 storage and between-vertex interpolation errors are measured separately. Exact identity bypasses retain signed/HDR inputs unchanged.</p>
+<h4 id="installed-gpu-evaluation-profile"><a class="header" href="#installed-gpu-evaluation-profile">Installed GPU evaluation profile</a></h4>
+<p>The runtime compiles Python-contained source with Blender’s
+<code>GPUShaderCreateInfo</code>. One compute invocation evaluates a lattice vertex through
+the complete enabled sequence. The forward function uses the same analytic
+Tone, modCAM16, p=2 <span data-tex="C/J_A"></span> drivers, 3×6 contributions, concentration,
+Hue, Adaptance, H–K guard, signed-lift and fallback equations, evaluated in
+float32. There is no intermediate Quintic curve or Grade LUT.</p>
+<p>For each inverse entry, the regular <span data-tex="(&#92;log J_2,&#92;log C_2)"></span> solve uses measured
+finite-difference Jacobians with damped Broyden updates, at most 24 iterations,
+and the explicit two-variable normal step above. Fixed-reference H–K and Tone
+inverses use safeguarded scalar Newton policies scaled for float32. The complete
+forward RGB recovery tries the regular candidate, identity and half-target
+seeds, each with at most 24 three-variable iterations. The CPU’s analytic
+regular Jacobian and stricter stopping thresholds are not claimed for this profile.</p>
+<p>Version 1.23.2 evaluates the complete two- and three-dimensional Broyden update
+on vector columns. With <span data-tex="D"></span>, accepted displacement <span data-tex="s"></span>, and residual change
+<span data-tex="z"></span> as defined above, let <span data-tex="D_{:,i}"></span> denote column <span data-tex="i"></span>. Then</p>
+<div class="grade-equation" data-tex="(D_{new})_{:,i}=D_{:,i}+&#92;frac{((z-Ds)s_i)}{s^Ts},&#92;qquad
+i=0,&#92;ldots,n-1,&#92;quad n&#92;in&#92;{2,3&#92;}."></div>
+
+<p>The GPU omits the contribution when <span data-tex="s^Ts&#92;le10^{-20}"></span>. Each column’s
+multiplication, division and addition is evaluated on a <code>vec2</code> or <code>vec3</code>, then
+the updated matrix is constructed from those columns. This avoids both the
+undeclared <code>outerProduct</code> builtin and matrix/scalar division rejected by the
+reported Blender Metal compiler. It preserves multiplication before division,
+the mathematical update and the existing GPU stopping policy.</p>
+<p>Let <span data-tex="y"></span> be one inverse entry’s target, <span data-tex="&#92;hat x"></span> its selected candidate,
+and <span data-tex="F_{32}"></span> that entry’s complete float32 forward function. Define</p>
+<div class="grade-equation" data-tex="s_{&#92;mathrm G}(y)=&#92;max(10^{-12},&#92;lVert y&#92;rVert_&#92;infty),&#92;qquad
+e_{&#92;mathrm G}=&#92;frac{&#92;lVert F_{32}(&#92;hat x)-y&#92;rVert_&#92;infty}{s_{&#92;mathrm G}(y)},
+&#92;qquad &#92;tau_{&#92;mathrm G}=3&#92;times10^{-6}."></div>
+
+<p>The relative scale preserves small dark adjustments. Using
+<span data-tex="1+&#92;lVert y&#92;rVert_&#92;infty"></span> with this float32 threshold would allow large relative
+errors near black. A returned candidate is audited against the complete
+forward operation. The device records a vertex bit if RGB recovery was used,
+and another if any inverse entry remains unresolved/nonfinite. Its final
+unresolved audit conservatively uses the RGB Euclidean norm against
+<span data-tex="&#92;tau_{&#92;mathrm G}s_{&#92;mathrm G}"></span>, so it can flag a vertex that passes the
+infinity-norm stopping test.</p>
+<p>For every flagged vertex, the host reevaluates <strong>the entire Stack</strong> through the
+float64 CPU path, including all matrices and Bradford connections, then stores
+that replacement. Flagged vertices from bounded GPU batches share one CPU
+recovery pool per preview/refinement phase. Unrepaired values are private and
+cannot publish. It does not refine or verify every unflagged vertex on the
+CPU. Remaining nonfinite output aborts the GPU bake and selects CPU recovery.
+Singular inverse matrices use the CPU pseudoinverse path directly.</p>
+<p>The cube’s policy identifier is <code>analytic-f32-relative3e-6-audited-v1</code>.
+Diagnostics record GPU sample/search/flag counts, repaired CPU vertices and
+repair time. CPU approximation/residual fields describe only repaired vertices;
+they do not establish the CPU <span data-tex="2&#92;times10^{-8}"></span> diagnostic tolerance for the
+unflagged GPU grid. LUT interpolation and extrapolation remain separate errors.</p>
+<p>Input/output AP1 coordinate conversions and final storage are host operations;
+each GPU dispatch uploads one numerical parameter snapshot and reads back a
+bounded vertex batch. A 33³/65³ pair still evaluates exactly 274,625 vertices,
+reusing common float32 values bit for bit. If a published matching GPU preview
+must finish on CPU, refinement preserves those common values and computes only
+the remaining vertices. CPU-completed cubes retain these preview audits under
+<code>gpu_preview_*</code> fields; their CPU residual counts cover only CPU-evaluated work.
+See <a href="architecture.html#gpu-context-scheduling-and-recovery">runtime scheduling</a>
+and <a href="testing.html#installed-gpu-baking-1230">validation</a>.</p>
+<h3 id="182-ordinary-grade-direction-and-matrix-placement"><a class="header" href="#182-ordinary-grade-direction-and-matrix-placement">18.2 Ordinary Grade direction and matrix placement</a></h3>
+<p>For Grade <span data-tex="g"></span>, let <span data-tex="M_g"></span> be Stage 1 and <span data-tex="N_g"></span> its full analytic nonlinear transform. Define</p>
+<div class="grade-equation" data-tex="F_g(x)=N_g(M_gx),&#92;qquad
+I_g(y)=M_g^&#92;dagger&#92;,&#92;widehat{N_g^{-1}}(y)."></div>
+
+<p>Here <span data-tex="M_g^&#92;dagger=M_g^{-1}"></span> when its condition number is at most <span data-tex="10^{12}"></span>; otherwise it is the Moore–Penrose pseudoinverse with relative singular-value cutoff <span data-tex="10^{-12}"></span>. The latter is explicitly approximate. It need not minimize the full grade residual because the nonlinear candidate may not lie in the range of the singular matrix.</p>
+<p>In canonical grading coordinates, an ordinary Grade node always applies its Grade forward. Its Baked LUT path evaluates <span data-tex="&#92;widehat{&#92;mathcal N}_g(M_gx)"></span>: Stage 1 stays exact outside the nonlinear cube. Its node-local Render Method selects Baked LUT or Direct. An inverse is applied by a Stack entry, including a one-entry Stack, and its complete matrix inverse is baked into that Stack’s cube. Shared Grade data stores neither direction nor render method. Section 19.5 specifies the native ACEScg coordinate changes.</p>
+<h3 id="183-stack-composition-and-one-final-cube"><a class="header" href="#183-stack-composition-and-one-final-cube">18.3 Stack composition and one final cube</a></h3>
+<p>A Stack owns an ordered list of shared Grade references, enabled states and directions. Empty and bypassed entries are omitted. Here <span data-tex="i=1,&#92;ldots,m"></span> enumerates the enabled, populated entries in order, and <span data-tex="d_i"></span> selects <span data-tex="F_{g_i}"></span> or <span data-tex="I_{g_i}"></span>. The list is local to its node; Grade IDs remain shared. Define</p>
+<div class="grade-equation" data-tex="T_i=&#92;begin{cases}F_{g_i},&amp;d_i=&#92;mathrm{forward},&#92;&#92;I_{g_i},&amp;d_i=&#92;mathrm{inverse},&#92;end{cases}
+&#92;qquad &#92;mathcal S_{&#92;mathrm{stack}}=T_m&#92;circ&#92;cdots&#92;circ T_1."></div>
+
+<p>Here <span data-tex="T_i"></span> denotes a whole Grade entry, distinct from the Stage 2 operator <span data-tex="T"></span> defined earlier. Let <span data-tex="B_{&#92;mathrm L}"></span> convert canonical grading RGB to native ACEScg/ACES white; section 19.1 defines its matrix. For the fixed nonnegative log1p axis <span data-tex="a_j"></span>, <span data-tex="0&#92;le j&lt;65"></span>, bake</p>
+<div class="grade-equation" data-tex="V_{ijk}=&#92;operatorname{float32}&#92;!&#92;left[
+ B_{&#92;mathrm L}&#92;,&#92;mathcal S_{&#92;mathrm{stack}}&#92;!&#92;left(B_{&#92;mathrm L}^{-1}[a_i,a_j,a_k]^T&#92;right)
+&#92;right]."></div>
+
+<p>Every <span data-tex="T_i"></span>, including its matrix, runs in float64 on each CPU sample or through the analytic float32 GPU profile above, with flagged whole-Stack CPU recovery. No intermediate 3D LUT or Quintic approximation is sampled. No additional clamp is placed between entries. Empty and bypassed rows are skipped; a sequence with no enabled Grades is identity. Runtime evaluates one physical-linear-ACEScg tetrahedral interpolation of <span data-tex="V"></span>; alpha bypasses the transform.</p>
+<p>The grid is <span data-tex="65^3"></span> over <span data-tex="[0,1024]^3"></span>, with zero at address 0 and 64 positive cells per component. Its plain log1p constant is <span data-tex="k=0.01"></span>. <a href="../theory/lut.html">Direct and sampled evaluation</a> defines the address curve and its inverse. This grid paragraph describes the current shared sampler: it repairs RGB into the cube before computing bounded addresses and fractions. It does not independently hold each out-of-range channel at an edge. The archived 1.23.2 sampler used its recorded domain and extrapolation rule. Stored output values remain signed linear ACEScg/ACES white. The CPU/Shader interpolant uses the equivalent vertex-difference form. Compositor storage encodes one base plane and three forward-axis difference planes independently with RGBE; it reads one base and three ordered edges and accumulates the physical fractions with fused multiply-adds. This is one LUT representation, not four chained transforms. Reducing the number of interpolations does not establish a universal precision improvement: the composed function may have sharper curvature or selected-inverse discontinuities.</p>
+<p>Stack signatures include the sampling basis, grid bounds, shape constants, solver policy/version and the ordered enabled entries with their directions, Grade whites and all three stages’ settings. Skipped entries do not contribute. Blender scene space affects only the outer matrices. Names and editor focus are excluded. Stack diagnostics validate complete inverse entries, including their matrices, and count singular matrices separately.</p>
+<h3 id="184-runtime-and-acceptance-evidence"><a class="header" href="#184-runtime-and-acceptance-evidence">18.4 Runtime and acceptance evidence</a></h3>
+<p>Stack editing first evaluates a nested <span data-tex="33^3"></span> grid. Let <span data-tex="a_i"></span>, <span data-tex="0&#92;le i&#92;le64"></span>, be the final axis above. Define the preview axis <span data-tex="b_j=a_{2j}"></span>, <span data-tex="0&#92;le j&#92;le32"></span>, and preview vertex array <span data-tex="U"></span>. For the same immutable Stack parameters,</p>
+<div class="grade-equation" data-tex="U_{ijk}=&#92;operatorname{float32}&#92;!&#92;left[
+ B_{&#92;mathrm L}&#92;,&#92;mathcal S_{&#92;mathrm{stack}}&#92;!&#92;left(B_{&#92;mathrm L}^{-1}[b_i,b_j,b_k]^T&#92;right)
+&#92;right],&#92;qquad V_{2i,2j,2k}=U_{ijk}."></div>
+
+<p>Define the remaining index set</p>
+<div class="grade-equation" data-tex="&#92;mathcal R=&#92;{0,&#92;ldots,64&#92;}^3&#92;setminus
+&#92;{(2i,2j,2k):0&#92;le i,j,k&#92;le32&#92;}."></div>
+
+<p>Only vertices in <span data-tex="&#92;mathcal R"></span> are analytically evaluated during refinement. Thus <span data-tex="33^3=35{,}937"></span> samples produce the preview and <span data-tex="|&#92;mathcal R|=65^3-33^3=238{,}688"></span> additional samples complete the final cube. Shared float32 samples are retained bit for bit; final vertices are never interpolated from the preview. Inverse diagnostics accumulate over these disjoint sets, so every final vertex is counted once per inverse entry. Preview interpolation uses the physical endpoints <span data-tex="b_j,b_{j+1}"></span>; final interpolation uses <span data-tex="a_i,a_{i+1}"></span>. Both use four tetrahedral reads and identical scene adapters, signed extrapolation and alpha handling.</p>
+<p>The preview has 32 positive cells per component, with no negative sample branch. Both levels use a 1024-pixel atlas width; the Shader raw-vertex atlas heights are 36 and 269 respectively. The Compositor single-image base/edge atlas has four planes, with heights 141 and 1073. It independently packs the base and forward differences to avoid half-float subtraction error, while retaining four reads per lookup. Packed images carry their grid size and a resolution-specific signature; native address kernels and scope caches use the installed resolution. Changing resolution does not compose two LUTs.</p>
+<p>A first preview becomes eligible after 40 ms, without restarting that delay for each mouse event. A single CPU worker receives immutable NumPy data and never accesses Blender objects; GPU dispatches use main-thread drawing contexts and timer publication. During continuous edits, an in-flight preview may finish and be installed for its captured parameters while newer edits coalesce into one latest successor. A preview cannot replace an already installed final cube for the current parameters. Refinement starts after 300 ms without an edit and only for a matching completed preview. CPU inverse phases use one shared unresolved pool, preserving compaction across the entire phase instead of independent small batches. GPU vertices independently complete their bounded solves, with flagged whole-Stack CPU recovery. Forward evaluation retains bounded blocks for the remaining vertices.</p>
+<p>Edits cancel obsolete final work at cooperative checkpoints. Removal and teardown cancel queued jobs. Arbitrary stale jobs and every stale final cube are rejected; only the tracked in-flight preview may temporarily lag controls during continuous edits. Both scopes and native output read the same installed cube, and refresh on preview and final publication. Before the first preview, a clearly marked identity path is used. Render preparation and normal save finish the latest <strong>65³</strong> bake synchronously, even with a preview installed or an older preview in flight; pending foreground GPU work finishes on CPU. Bake errors are surfaced. The extension uses Python, Blender’s bundled NumPy and Blender’s own runtime shader compiler, with no external precompiled package or native extension binary.</p>
+<p><code>test_progressive_lut.py</code> verifies nested coordinates, exact shared-vertex reuse, disjoint work counts, cancellation and inverse diagnostics. The Stack editing suite covers native 33³/65³ output, scope invalidation, continuous-edit coalescing, node removal and final-quality synchronization. <code>benchmark_progressive.py</code> measures first-preview and total numerical latency against independent 65³ bakes.</p>
+<p><code>test_inverse_math.py</code> verifies the vector guard against the independent scalar derivation, complete signed/positive forward reproduction, matrix order, deterministic evaluation and singular-matrix diagnostics. <code>test_inverse_solver.py</code> checks scalar Newton safeguards, tone derivatives, optimized/reference forward parity, secant solving, whole-lattice scheduling, cancellation and progress. <code>test_grade_stack.py</code> exercises actual Blender ownership, shared edits, stale completion rejection, cooperative worker cancellation, native Shader/Compositor lookup and alpha, animation, save/load, disabled-extension appearance and forward-only ordinary nodes. <code>test_shared_grade_undo.py</code> exercises actual undo/redo of entry direction and bypass while ordinary Render Method stays independent. <code>evaluate_inverse_precision.py</code> measures off-grid errors for the stored IMG_* fixtures and synthetic signed/HDR inputs. <code>benchmark_inverse.py</code> measures new numerical bakes without using completed LUT caches. The precision and performance reports accompany the implementation. Existing independent derivation tests remain in place. <code>test_stack_editing.py</code> runs the added RNA, compact UI, diagram gesture, installed-LUT scope and native persistence regressions through the Blender fixture runner.</p>
+<h2 id="19-shared-grade-white-authoritative-matrices-and-fixed-lut-coordinates"><a class="header" href="#19-shared-grade-white-authoritative-matrices-and-fixed-lut-coordinates">19. Shared Grade white, authoritative matrices and fixed LUT coordinates</a></h2>
+<p>This section is the Blender 1.21.0 contract. There is no older-project migration or slider-import path. The DCTL retains its existing Destination White behavior and does not perform automatic stored-matrix conversion. Its CAT16-adapted red/blue anchors are unchanged.</p>
+<h3 id="191-additional-symbols-and-the-bradford-transform"><a class="header" href="#191-additional-symbols-and-the-bradford-transform">19.1 Additional symbols and the Bradford transform</a></h3>
+<p>All matrices act on column vectors. Whites are normalized to <span data-tex="Y=1"></span>.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Symbol</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><span data-tex="W_0"></span></td><td>D65, <span data-tex="xy=(.3127,.3290)"></span>, the fixed canonical grading white</td></tr>
+<tr><td><span data-tex="W_{&#92;mathrm L}"></span></td><td>ACES white, <span data-tex="xy=(.32168,.33767)"></span>, the fixed LUT boundary white</td></tr>
+<tr><td><span data-tex="W_g"></span></td><td>Chosen working white of shared Grade <span data-tex="g"></span>; defaults to <span data-tex="W_0"></span></td></tr>
+<tr><td><span data-tex="W_r"></span></td><td>Recorded reference white of the stored Stage 1 coefficients</td></tr>
+<tr><td><span data-tex="B"></span></td><td>Bradford XYZ-to-cone matrix, distinct from CAT16 <span data-tex="A"></span> in section 2</td></tr>
+<tr><td><span data-tex="C_{a&#92;to b}"></span></td><td>Bradford adaptation from white <span data-tex="W_a"></span> to <span data-tex="W_b"></span></td></tr>
+<tr><td><span data-tex="P_0"></span></td><td>Standard linear Rec.709/D65 RGB-to-XYZ matrix from section 3.1</td></tr>
+<tr><td><span data-tex="P_g=C_{0&#92;to g}P_0"></span></td><td>XYZ interpretation of canonical grading RGB for Grade <span data-tex="g"></span></td></tr>
+<tr><td><span data-tex="P_{&#92;mathrm L}"></span></td><td>Native ACEScg/AP1 RGB-to-XYZ matrix normalized to ACES white</td></tr>
+<tr><td><span data-tex="B_{&#92;mathrm L}=P_{&#92;mathrm L}^{-1}C_{0&#92;to&#92;mathrm L}P_0"></span></td><td>Canonical grading RGB → LUT RGB, including D65-to-ACES Bradford adaptation</td></tr>
+<tr><td><span data-tex="M_{g,r}"></span></td><td>Authoritative stored Stage 1 XYZ matrix, including exposure, recorded at <span data-tex="W_r"></span></td></tr>
+<tr><td><span data-tex="M_{g}=C_{r&#92;to g}M_{g,r}C_{r&#92;to g}^{-1}"></span></td><td>Stage 1 XYZ matrix expressed at the selected Grade white</td></tr>
+<tr><td><span data-tex="L_g=P_g^{-1}M_gP_g"></span></td><td>Stage 1 in fixed grading RGB coordinates</td></tr>
+<tr><td><span data-tex="A_s"></span></td><td>Blender-native conversion from current scene RGB to linear Rec.709/D65</td></tr>
+<tr><td><span data-tex="N_g"></span></td><td>Complete Stage 2+3 evaluator in fixed RGB coordinates, using <span data-tex="P_g,W_g"></span></td></tr>
+</tbody>
+</table>
+</div>
+<p>The Bradford matrix is</p>
+<div class="grade-equation" data-tex="B=&#92;begin{bmatrix}
+ .8951&amp; .2664&amp;-.1614&#92;&#92;
+-.7502&amp;1.7135&amp; .0367&#92;&#92;
+ .0389&amp;-.0685&amp;1.0296
+&#92;end{bmatrix},&#92;qquad
+C_{a&#92;to b}=B^{-1}&#92;operatorname{diag}&#92;!&#92;left(&#92;frac{BW_b}{BW_a}&#92;right)B."></div>
+
+<p>For the supported positive-cone white presets, this is invertible and</p>
+<div class="grade-equation" data-tex="C_{b&#92;to a}=C_{a&#92;to b}^{-1},&#92;qquad
+C_{b&#92;to c}C_{a&#92;to b}=C_{a&#92;to c}."></div>
+
+<p>Presets are D65, daylight D60 <span data-tex="(.32161671,.33761992)"></span>, ACES <span data-tex="(.32168,.33767)"></span>, D50 <span data-tex="(.34567,.35850)"></span>, D55 <span data-tex="(.33242,.34743)"></span>, D75 <span data-tex="(.29903,.31488)"></span>, DCI <span data-tex="(.314,.351)"></span> and equal-energy E <span data-tex="(1/3,1/3)"></span>. Blender offers no custom working-white xy. The preset is shared with the Grade; direction and enabled state belong to Stack entries; Render Method belongs to ordinary Grade nodes.</p>
+<p>On Blender’s main thread, sample <code>mathutils.Color.from_scene_linear_to_rec709_linear()</code> on the three unit RGB vectors to obtain the columns of <span data-tex="A_s"></span>. This uses the active Blender/OCIO gamut and white conversion. The implementation uses <span data-tex="A_s^{-1}"></span> from that same matrix, rather than combining independently rounded forward and reverse probes. For native Linear Rec.709, <span data-tex="A_s=I"></span>. Cache invalidation covers file reloads and working-space changes. Workers receive numerical snapshots, never Blender API objects.</p>
+<h3 id="192-complete-forward-and-inverse-at-the-scene-boundary"><a class="header" href="#192-complete-forward-and-inverse-at-the-scene-boundary">19.2 Complete forward and inverse at the scene boundary</a></h3>
+<p>Interpret the component equations of sections 3–9 using <span data-tex="P=P_g"></span> and <span data-tex="W_d=W_g"></span>. All CAT16, H–K, tone, chroma-driver, Hue/Concentration, signed-lift and fallback rules remain in force. The complete analytic forward grade is</p>
+<div class="grade-equation" data-tex="&#92;boxed{F_{g,s}(x_s)=A_s^{-1}&#92;,N_g&#92;!&#92;left(L_g A_s x_s&#92;right).}"></div>
+
+<p>The selected semi-analytic inverse is</p>
+<div class="grade-equation" data-tex="&#92;boxed{I_{g,s}(y_s)=A_s^{-1}&#92;,L_g^&#92;dagger&#92;,
+       &#92;widehat{N_g^{-1}}&#92;!&#92;left(A_s y_s&#92;right).}"></div>
+
+<p>The pseudoinverse threshold and candidate policy are those in section 18. Pseudoinverse minimum norm is defined in the fixed grading RGB basis, not separately in each Blender scene gamut. Negative RGB is retained through both scene matrices.</p>
+<p>For a conceptual XYZ nonlinear function <span data-tex="&#92;mathcal N_g"></span> at <span data-tex="W_g"></span>,</p>
+<div class="grade-equation" data-tex="N_g(r)=P_g^{-1}&#92;mathcal N_g(P_g r),&#92;qquad
+P_gN_g(L_gr)=&#92;mathcal N_g(M_gP_gr)."></div>
+
+<p>Thus the RGB implementation is exactly the requested adaptation into the Grade white, complete grading there, and adaptation back. The nonlinear model’s <code>to_cone</code> and <code>from_cone</code> already include <span data-tex="P_g"></span> and <span data-tex="P_g^{-1}"></span>; do not add those adaptations a second time.</p>
+<p>If <span data-tex="x_t=T_{s&#92;to t}x_s"></span> denotes the same color in another scene space, the consistent scene-coordinate transform is <span data-tex="T_{s&#92;to t}=A_t^{-1}A_s"></span>. Then</p>
+<div class="grade-equation" data-tex="F_{g,t}(T_{s&#92;to t}x_s)=T_{s&#92;to t}F_{g,s}(x_s)."></div>
+
+<p>The same relation holds for the selected inverse and for the fixed sampled LUT, apart from floating-point evaluation. The Grade matrix, its chosen white, Tone/Color values and LUT signature are not changed by a Blender scene-space switch. Input colors must themselves be converted; identical numerical triples in different RGB spaces are not equivalent colors.</p>
+<h3 id="193-white-changes-and-matrix-storage"><a class="header" href="#193-white-changes-and-matrix-storage">19.3 White changes and matrix storage</a></h3>
+<p>For an explicit Grade-white change <span data-tex="W_a&#92;to W_b"></span>, retain the correction by</p>
+<div class="grade-equation" data-tex="&#92;boxed{M_b=C_{a&#92;to b}M_aC_{a&#92;to b}^{-1}.}"></div>
+
+<p>Because <span data-tex="P_b=C_{a&#92;to b}P_a"></span>, <span data-tex="L_b=L_a"></span> in exact arithmetic. Stage 1 therefore retains its color action even though its source white, exposure and directional editing readouts may change. Tone/Color parameters remain numerically unchanged. In general <span data-tex="N_b&#92;ne N_a"></span>: changing the appearance context does not preserve the nonlinear creative operation.</p>
+<p>The Grade stores nine double-precision XYZ coefficients and a recorded white, not nine authoritative slider values. For an unanimated matrix, changing white stores the conjugated matrix and updates its recorded white. When matrix animation exists, keep the coefficients and their recorded white: evaluate <span data-tex="C_{r&#92;to g}M_{g,r}(t)C_{r&#92;to g}^{-1}"></span> at every frame. This is a constant coordinate conversion around the evaluated matrix, so it covers arbitrary interpolated keys, NLA and drivers without rewriting animation curves. New edits are converted back into the recorded basis before storage.</p>
+<p>Linear auto-keying records all nine matrix coefficients. Computed slider readouts have no independent animation channels. Matrix interpolation is not generally interpolation in exposure stops, source xy or heading angles. A duplicate Grade copies its active Action independently as before. A full Linear reset stores identity, including when the editing readout is approximate.</p>
+<h3 id="194-derive-stage-1-controls-from-a-regular-matrix"><a class="header" href="#194-derive-stage-1-controls-from-a-regular-matrix">19.4 Derive Stage 1 controls from a regular matrix</a></h3>
+<p>Let <span data-tex="w=&#92;operatorname{XYZ}(W_g,1)"></span> and <span data-tex="M=M_g"></span>. The directional matrix fixes <span data-tex="w"></span>, and the creative CAT16 matrix maps its source white to <span data-tex="w"></span>. Therefore, for the regular representable case,</p>
+<div class="grade-equation" data-tex="u=M^{-1}w,&#92;qquad k=1/u_Y,&#92;qquad e=&#92;log_2 k,
+&#92;qquad W_s=u/u_Y,&#92;qquad (x_s,y_s)=&#92;operatorname{xy}(u)."></div>
+
+<p>Construct the creative CAT16 matrix <span data-tex="K=&#92;operatorname{CAT16}(W_s&#92;to w)"></span> exactly as in section 3.2. Then</p>
+<div class="grade-equation" data-tex="D=k^{-1}MK^{-1},&#92;qquad Dw=w."></div>
+
+<p>For the unchanged adapted Rec.709 anchor <span data-tex="p_i"></span>, define <span data-tex="v_i=D&#92;operatorname{XYZ}(p_i,1)"></span>, <span data-tex="q_i=&#92;operatorname{xy}(v_i)"></span>, <span data-tex="a_i=p_i-&#92;operatorname{xy}(w)"></span> and <span data-tex="b_i=q_i-&#92;operatorname{xy}(w)"></span>. The internal balance, spread and heading are</p>
+<div class="grade-equation" data-tex="&#92;beta_i=&#92;log_2(v_{i,Y}),&#92;qquad
+s_i=100&#92;left(&#92;frac{&#92;lVert b_i&#92;rVert}{&#92;lVert a_i&#92;rVert}-1&#92;right),&#92;qquad
+&#92;theta_i=&#92;frac{180}{&#92;pi}&#92;operatorname{atan2}
+(a_{i,x}b_{i,y}-a_{i,y}b_{i,x},a_i&#92;cdot b_i)."></div>
+
+<p>The UI displays <span data-tex="-&#92;beta_i"></span> as Balance. This decomposition requires valid positive luminances and an admissible source white; the target-y construction guard must also be inactive for exact reconstruction.</p>
+<p>For a singular matrix the implementation uses the least-squares preimage closest to white,</p>
+<div class="grade-equation" data-tex="u=w+M^+(w-Mw),"></div>
+
+<p>and produces finite editing values where possible. Invalid gains/xy use the documented finite neutral fallback in <code>linear.decompose</code>. Such values are only an editing view. Compute the normalized matrix reconstruction residual</p>
+<div class="grade-equation" data-tex="&#92;epsilon_{&#92;mathrm{UI}}=
+&#92;frac{&#92;lVert M-f(p)&#92;rVert_{&#92;max}}{1+&#92;lVert M&#92;rVert_{&#92;max}},"></div>
+
+<p>where <span data-tex="f"></span> constructs an XYZ matrix from the derived controls <span data-tex="p"></span>. Show an approximate-readout notice if <span data-tex="&#92;epsilon_{&#92;mathrm{UI}}&gt;2&#92;times10^{-8}"></span>. Never overwrite <span data-tex="M"></span> by <span data-tex="f(p)"></span> during reads, refreshes, scope evaluation or scene changes. A normal control edit <span data-tex="p&#92;to p&#39;"></span> preserves an unrepresentable remainder through</p>
+<div class="grade-equation" data-tex="M&#39;=M+f(p&#39;)-f(p)."></div>
+
+<p>An exposure-only edit instead uses <span data-tex="M&#39;=2^{e&#39;-e}M"></span>, preserving all existing matrix structure. Cancelling a handle gesture restores the exact matrix snapshot. Source-white edits use the existing admissible-domain projection; converted readouts may lie beyond normal slider soft ranges without clamping the stored matrix.</p>
+<h3 id="195-lut-boundaries-and-mixed-white-stacks"><a class="header" href="#195-lut-boundaries-and-mixed-white-stacks">19.5 LUT boundaries and mixed-white Stacks</a></h3>
+<p>Every extension cube has <strong>fixed native linear ACEScg/ACES-white input and output coordinates</strong>. Canonical grading RGB remains linear Rec.709 interpreted through <span data-tex="P_g"></span>; changing the sampling basis must not change the Grade model, anchors, white, matrix or controls. ACES white at the LUT boundary is not a physical display assumption and does not restrict the whites of Grades inside a Stack.</p>
+<p>Let <span data-tex="f"></span> be any complete nonlinear function expressed in canonical grading coordinates. Define its LUT-coordinate representation and stored vertex array by</p>
+<div class="grade-equation" data-tex="f_b(z)=B_{&#92;mathrm L}f(B_{&#92;mathrm L}^{-1}z),&#92;qquad
+V^f_{ijk}=&#92;operatorname{float32}&#92;!&#92;left(f_b([a_i,a_j,a_k]^T)&#92;right)."></div>
+
+<p>Define <span data-tex="&#92;mathcal C_b[f](z)"></span> as physical-linear-RGB tetrahedral interpolation of <span data-tex="V^f"></span> at the native ACEScg input <span data-tex="z"></span>. The subscript <span data-tex="b"></span> identifies the sampling basis; it is unrelated to the appearance-coordinate scalar <span data-tex="b"></span>. Thus <span data-tex="B_{&#92;mathrm L}^{-1}&#92;mathcal C_b[f](B_{&#92;mathrm L}r)"></span> approximates <span data-tex="f(r)"></span> without changing its meaning.</p>
+<p>Ordinary Grade nodes evaluate the forward LUT path:</p>
+<div class="grade-equation" data-tex="&#92;boxed{
+ y_s=A_s^{-1}B_{&#92;mathrm L}^{-1}&#92;,
+ &#92;mathcal C_b[N_g](B_{&#92;mathrm L}L_g A_s x_s)
+}"></div>
+
+<p>Stage 1 stays outside an ordinary cube. The native LUT branch combines <span data-tex="B_{&#92;mathrm L}L_gA_s"></span> into one input matrix and <span data-tex="A_s^{-1}B_{&#92;mathrm L}^{-1}"></span> into one output matrix. Direct separately uses <span data-tex="L_gA_s"></span> and <span data-tex="A_s^{-1}"></span>. Ordinary Baked LUT nodes may use their current Direct evaluation while baking. Stack image output and scopes use the installed complete Stack LUT while a replacement is pending.</p>
+<p>For enabled, populated Stack entry <span data-tex="i"></span>, use the canonical-coordinate forward map <span data-tex="G_i(r)=N_i(L_ir)"></span> or selected inverse <span data-tex="G_i(r)=L_i^&#92;dagger&#92;widehat{N_i^{-1}}(r)"></span> according to Direction. Then</p>
+<div class="grade-equation" data-tex="&#92;mathcal S_{&#92;mathrm{stack}}=G_n&#92;circ&#92;cdots&#92;circ G_1,&#92;qquad
+&#92;boxed{
+ y_s=A_s^{-1}B_{&#92;mathrm L}^{-1}&#92;,
+ &#92;mathcal C_b[&#92;mathcal S_{&#92;mathrm{stack}}](B_{&#92;mathrm L}A_s x_s).
+}"></div>
+
+<p>The analytic bake includes every entry’s Stage 1, nonlinear operations and inverse selection, with no intermediate LUT. Adjacent Grade XYZ contexts connect by</p>
+<div class="grade-equation" data-tex="P_{i+1}P_i^{-1}
+=C_{0&#92;to i+1}C_{0&#92;to i}^{-1}
+=C_{i&#92;to i+1},"></div>
+
+<p>which is Bradford between their selected whites. This connection is implicit in successive coordinate-aware evaluators. An extra CAT between their canonical RGB outputs would double-adapt the sequence.</p>
+<p>The cube shape is independent of Blender’s working space. A scene-space change updates <span data-tex="A_s"></span> and its composed native matrices, reusing the cube. A Grade-white change modifies the baked function and invalidates affected ordinary and Stack cubes. The selected white also participates in scope/model cache keys. Alpha bypasses these RGB operations.</p>
+<p>D65 is the chosen internal grading default. These scene-linear nodes remain before the view transform. D65 does not make processing display-referred, select an encoding or override an ACES creative white. A saved native graph retains its last evaluated matrices; changing scene space with the extension disabled does not update them.</p>
+<h3 id="196-sampling-choice-and-implementation-evidence"><a class="header" href="#196-sampling-choice-and-implementation-evidence">19.6 Sampling choice and implementation evidence</a></h3>
+<p>The current reference/shared grid uses native ACEScg/ACES white, bounds <span data-tex="[0,1024]"></span>, 64 positive cells and plain log1p <span data-tex="k=0.01"></span>. It repairs input into the cube before addressing and computes bounded fractions from the repaired RGB; signed stored outputs remain possible. This is a current comparison, not the 1.23.2 input policy; a numerically stable vertex-difference interpolant is defined in <a href="../theory/lut.html">Direct and sampled evaluation</a>. The shaper and the sampling space were chosen by the domain study among its <span data-tex="+128"></span> finalists; the bound was raised afterwards, so the study’s error figures describe its own domain rather than this one. The encoded-RGB objective selects a different curve. The <a href="lut-domain-study.html">domain study</a> records both objectives, experimental inputs and measured limitations.</p>
+<p>The production validation uses <code>test_lut_study.py</code>, <code>test_cube_math.py</code>, <code>test_cube_native.py</code>, <code>test_lut_grid_regression.py</code>, <code>test_working_white.py</code> and native render fixtures. <code>evaluate_lut_sampling.py --production</code> measures the actual Baker/Cube path through all four requested ACES 2.0 outputs on every stored IMG_* pixel. Solver residuals, basis covariance, native graph transport and off-grid interpolation errors remain distinct measurements.</p>
+<h3 id="197-stack-inspection-and-editing"><a class="header" href="#197-stack-inspection-and-editing">19.7 Stack inspection and editing</a></h3>
+<p>For Stack input <span data-tex="x_s"></span>, evaluate the installed cube and its actual native matrices to obtain <span data-tex="y_s"></span>. Let <span data-tex="&#92;Phi_g(r)"></span> be the selected Grade’s appearance measurement, including its white and reference settings but applying no creative grading. The Tone scopes measure <span data-tex="J_{&#92;mathrm{in}}=[&#92;Phi_g(A_sx_s)]_J/100"></span> and <span data-tex="J_{&#92;mathrm{out}}=[&#92;Phi_g(A_sy_s)]_J/100"></span>. The displayed tone curve and editable handles belong to Grade <span data-tex="g"></span>. Stage 3 image statistics analyze Stack output in that same selected context. A pending bake does not run an analytic sampled image preview. Scopes refresh when the matching installed cube changes. These diagnostics do not change the rendered transform.</p>
+<h2 id="20-the-reference-inverse"><a class="header" href="#20-the-reference-inverse">20. The reference inverse</a></h2>
+<p>Sections 10–18 invert the 1.23.2 production stage: a two-unknown reconstruction with analytic hue elimination, a safeguarded scalar guard inverse, and a pooled damped Broyden refinement. The analytic reference takes a different approach. It has no per-component inversion of Stage 3 at all. It searches for preimages of the complete forward function and validates every candidate by running that forward function.</p>
+<p>This section describes <code>libraries/perceptual-grade-reference/src/inverse.py</code> and the independent Stack oracle in <code>src/stack.py</code>. Read it instead of sections 10–18 when the question is about the reference; read those when the question is about the shipped DCTL or Blender inverse.</p>
+<h3 id="201-contract"><a class="header" href="#201-contract">20.1 Contract</a></h3>
+<p>The entry point is <code>solve(model, xyz, forward=None)</code>, returning <code>InverseResult(value, residual, status)</code> with three per-row arrays. <code>value</code> is XYZ in the model’s grading context; canonical grading RGB is the internal search and ranking coordinate. <code>residual</code> is the scaled maximum residual, and <code>status</code> is one of:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Status</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>root</code></td><td>A candidate reproduced its target to <code>2e-10</code> in the scaled infinity norm</td></tr>
+<tr><td><code>approximate</code></td><td>No candidate met that tolerance; the best validated candidate is returned with its actual residual</td></tr>
+<tr><td><code>invalid</code></td><td>The input row was non-finite and no candidate was attempted</td></tr>
+</tbody>
+</table>
+</div>
+<p>“Canonical” means nearest-linear <strong>among the roots this search found</strong>. The module docstring is explicit that the fixed search profile does not enumerate all roots and proves no reachability property. A returned <code>root</code> is a verified preimage; a <code>root</code> set is not claimed to be complete.</p>
+<h3 id="202-search-coordinates-and-bound"><a class="header" href="#202-search-coordinates-and-bound">20.2 Search coordinates and bound</a></h3>
+<p>The search runs in <code>arcsinh</code> canonical RGB, which makes the step scale roughly logarithmic away from zero and keeps near-black behavior well conditioned. Everything is clipped to the box <code>|x| &lt;= 2^20</code> before evaluation. The finite-difference step is</p>
+<div class="grade-equation" data-tex="h_i = &#92;sqrt[3]{&#92;varepsilon}&#92;,(1+&#92;lvert z_i&#92;rvert),"></div>
+
+<p>with <span data-tex="&#92;varepsilon"></span> the binary64 machine epsilon. The cube-root step scales with the search coordinate and balances central-difference truncation and floating-point roundoff; it does not guarantee a fixed number of accurate digits.</p>
+<h3 id="203-seeds"><a class="header" href="#203-seeds">20.3 Seeds</a></h3>
+<p>Each row starts from a set that is merged and de-duplicated:</p>
+<ol>
+<li>The <strong>linear prior</strong> — the least-squares solution through the Stage-1 matrix, which is exact when nothing nonlinear is active.</li>
+<li>The <strong>target</strong> itself and the <strong>zero vector</strong>.</li>
+<li><strong>Scaled priors</strong> at <span data-tex="1/4, 1/2, 2, 4"></span> times the prior, which bracket a wrong exposure.</li>
+<li>A <strong><span data-tex="3^3"></span> offset stencil</strong> at <span data-tex="prior &#92;pm &#92;mathrm{scale}"></span>, where the scale is <span data-tex="&#92;max(1, &#92;lVert prior&#92;rVert_&#92;infty, &#92;lVert target&#92;rVert_&#92;infty)"></span>. This is what recovers a preimage whose linear prior lands in the wrong basin.</li>
+<li>An <strong>analytic neutral preimage</strong>. The negative achromatic axis has a square-root chroma cusp that a smooth search can stall near, so the neutral case is solved directly: decode the target’s achromatic response, invert the tone curve for the magnitude, and reconstruct the neutral RGB. It is still passed through the same forward validation as every other seed, so it is a better starting point, not a trusted answer.</li>
+</ol>
+<p>When Stage 1 is an exact scalar gain and everything else is inactive, the neutral seed collapses to an exact three-channel preimage.</p>
+<h3 id="204-iteration"><a class="header" href="#204-iteration">20.4 Iteration</a></h3>
+<p>Candidates advance in parallel with independent damping factors — a Levenberg–Marquardt step expressed as an augmented least-squares problem rather than a normal-equations solve:</p>
+<div class="grade-equation" data-tex="&#92;Delta = &#92;operatorname{lstsq}&#92;!&#92;left(&#92;begin{bmatrix}J&#92;&#92; &#92;sqrt{&#92;lambda}I&#92;end{bmatrix},&#92;begin{bmatrix}r&#92;&#92; &#92;mathbf 0&#92;end{bmatrix}&#92;right),
+&#92;qquad z &#92;leftarrow &#92;operatorname{clip}(z-&#92;Delta,&#92; &#92;pm&#92;arcsinh 2^{20}),"></div>
+
+<p>with <span data-tex="J"></span> the central finite-difference Jacobian of the scaled residual. Damping starts at <span data-tex="10^{-3}"></span>, is multiplied by <span data-tex="1/3"></span> on an accepted step and by <span data-tex="10"></span> on a rejected one, and is clipped to <span data-tex="[10^{-12},10^{12}]"></span>. A candidate stops when its scaled residual falls below <code>TOLERANCE/10</code>, when its damping reaches the upper bound, when its step falls below <span data-tex="2&#92;times10^{-13}"></span>, or after 128 iterations. The iteration cap is a safety bound, not an expected cost: the residual test normally terminates first.</p>
+<p>The accept test requires a strict decrease in the summed squared residual. A step that does not decrease it is rejected and its damping increases, so a stalled candidate backs off rather than wandering.</p>
+<h3 id="205-acceptance-and-ranking"><a class="header" href="#205-acceptance-and-ranking">20.5 Acceptance and ranking</a></h3>
+<p>A candidate becomes a <code>root</code> when</p>
+<div class="grade-equation" data-tex="&#92;max_i&#92;bigl|r_i&#92;bigr| &#92;le &#92;texttt{TOLERANCE} = 2&#92;times10^{-10}
+&#92;quad&#92;text{on}&#92;quad
+r = &#92;frac{&#92;text{forward}(x)-&#92;text{target}}{1+&#92;lVert&#92;text{target}&#92;rVert_&#92;infty}."></div>
+
+<p>The relative scaling is what makes the tolerance meaningful for both very dark and very bright targets; an absolute tolerance would be unreachable in one and trivial in the other.</p>
+<p>Ranking differs by outcome, and the distinction matters:</p>
+<ul>
+<li><strong>When any root exists</strong>, roots rank by <span data-tex="&#92;arcsinh"></span> distance to the prior, so the nearest-linear root wins and the result stays close to the least-squares preview.</li>
+<li><strong>When no root exists</strong>, candidates rank by residual first and prior distance second, so the reported approximation is the best reproduction available rather than the nearest one.</li>
+</ul>
+<p>Lexicographic RGB breaks remaining ties. This matters because several seeds can converge to the same root with bitwise-different coordinates; without the tie-break the selected value would depend on seed order and batch composition, and the same input could return slightly different output in different batch shapes.</p>
+<h3 id="206-no-nested-guard-inverse"><a class="header" href="#206-no-nested-guard-inverse">20.6 No nested guard inverse</a></h3>
+<p>Every candidate’s residual evaluates the <strong>complete forward export</strong>: the candidate supplies its own frozen post-Tone reference energy, then Stage 3 applies Adaptance → H–K repair → common positive Scale, followed by RGB cube containment. The search never calls a separate guard inverse, never builds a guard lookup table and never reapplies H–K repair at export.</p>
+<p>This is deliberate. The post-tone reference energy is not known before the input is known, so a fixed-reference guard inverse has no meaning until a candidate proposes one. Inverting per component would require guessing the reference, and a wrong guess produces a candidate that fails validation anyway.</p>
+<p>The cube projection is a separate matter: it is many-to-one and is not inverted at all. Multiple appearance requests can export to the same RGB, and the inverse returns whichever preimage the search found and ranked first. The optional <code>hk_guard.inverse</code> helper in the shared kernels is a standalone fixed-reference mathematical probe with a bounded scalar bisection; it is not part of this path.</p>
+<h3 id="207-the-independent-stack-oracle"><a class="header" href="#207-the-independent-stack-oracle">20.7 The independent Stack oracle</a></h3>
+<p><code>src/stack.py</code> implements a second, deliberately separate inverse for mixed forward/inverse Stacks. It shares only the immutable D65 context — not the solver, not the seeds, not the reduced coordinate system.</p>
+<p>Differences worth knowing:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th><code>inverse.py</code></th><th><code>stack.py</code></th></tr>
+</thead>
+<tbody>
+<tr><td>Search coordinate</td><td><code>arcsinh</code> RGB, bound <span data-tex="&#92;lVert x&#92;rVert_&#92;infty &#92;le 2^{20}"></span></td><td><code>arcsinh(x/0.01)</code> RGB, clipped to <code>[0, 1024]</code></td></tr>
+<tr><td>Seeds</td><td>prior, target, zero, <span data-tex="1/4&#92;ldots4&#92;times"></span>, <span data-tex="3^3"></span> stencil, neutral preimage</td><td>prior, zero, the <span data-tex="Y"></span>-projected prior, <span data-tex="1/4&#92;ldots4&#92;times"></span>, <span data-tex="3^3"></span> stencil</td></tr>
+<tr><td>Bound handling</td><td>symmetric, signed</td><td>nonnegative AP1 cube</td></tr>
+<tr><td>Damping</td><td><code>1e-3</code>, <code>×1/3</code> / <code>×10</code>, <code>[1e-12, 1e12]</code></td><td>same</td></tr>
+<tr><td>Tolerance and cap</td><td><code>2e-10</code>, 128</td><td><code>2e-10</code>, 128</td></tr>
+</tbody>
+</table>
+</div>
+<p>The separate searches provide evidence about their finite solver profiles, not a proof of unique inversion. The Stack oracle also supports <code>appearance=True</code>: its target is the repaired, scaled Stage-3 appearance, including carried signed energy, before RGB cube projection. A forward→inverse handoff therefore avoids the lossy cube export while retaining H–K repair and Scale.</p>
+<p>Adjacent forward and inverse entries with equal Tone and Color settings cancel their nonlinear work as an explicit Stack optimization. Otherwise, the forward entry calls <code>grade_state</code> and passes its repaired, scaled state to the appearance inverse. A forward RGB export calls <code>release_state(..., guard=True)</code>, which applies cube containment only; H–K repair is already complete. An empty reference Stack still applies native input repair. These rules do not assert a global mathematical inverse.</p>
+<h3 id="208-limits"><a class="header" href="#208-limits">20.8 Limits</a></h3>
+<p>The search is deterministic for a given input and model, and its result does not depend on batch shape. It is not a proof of anything. Specifically:</p>
+<ul>
+<li>A <code>root</code> status means one preimage was found and verified at that residual; it does not mean the preimage is the one a user intended, nor that no closer one exists.</li>
+<li>Folds in Stage 3, the signed extension, and the many-to-one cube projection can all produce several valid preimages. The ranking policy chooses among them; it does not resolve the ambiguity.</li>
+<li>No global convergence is claimed. The seed set is a fixed engineering choice, and a preimage reachable only from a seed outside it will be reported as <code>approximate</code> or missed.</li>
+<li>The 128-iteration cap and the damping bounds are safety limits; a candidate that terminates on either is reported with its actual residual rather than promoted to a root.</li>
+</ul>
+<p>Any accuracy statement about this inverse is therefore a statement about a specific forward profile, a specific seed set and a measured residual distribution — not about the grade as a mathematical object.</p>
+
+                    <footer class="book-footer">Perceptual Grade Technical Report <a href="../reference/credits.html">Credits</a> <a href="../reference/license.html">License</a> <a href="../../../index.html">All books</a></footer></main>
+
+                    
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/math-96cc483f.js"></script>
+        <script src="../theme/reader-7b4ff642.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

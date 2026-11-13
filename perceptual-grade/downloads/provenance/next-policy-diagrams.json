@@ -1,0 +1,213 @@
+{
+  "figure_manifest_sha256": "bc943ee9339104e871e347a10d771599bd55c2c43bcc8ed38b9ef510f7d2f46e",
+  "inputs": {
+    "docs/book/diagrams/00-policy-layer.d2": "c45761afcd6159ffb28a652d007141e3b2b9c81cf8512e1d33d20a4939c49867",
+    "docs/book/diagrams/01-preparation-node-sequence.d2": "a1f77ec2db5a1811231832f2a071c96af4405a90d00ddca4ff36524d1c2f3330",
+    "docs/book/diagrams/01-preparation.d2": "c18f335b8dffcf139bc976d92b7c4437108bc74a45d4740c9ed53242167255c9",
+    "docs/book/diagrams/01b-preparation-join-sequence.d2": "cd9dd7d15e4869bd12a5ec5e1e190d7da0bb9f86d7f37d1a148175d07dce2a4e",
+    "docs/book/diagrams/01b-preparation-join.d2": "5527768f510691c2c8337985f29f0574f87cbb01bb9a5dc5b673a37892c58ae9",
+    "docs/book/diagrams/02-node.d2": "febb8fc53500ef24c302728345bc1dfc3fb6fe7d44e4825ab88eb2660e3f3f95",
+    "docs/book/diagrams/03-helper-sequence.d2": "eb7fef610c229c131f7b9cde62e438e0d4179ad31a7bc27c75c5cd2d8b145034",
+    "docs/book/diagrams/03-helper.d2": "7bee3ebb302fb776cc657a99079e28333c833631dcea6ee98572c264027fc765",
+    "docs/book/diagrams/04-bank-publication-sequence.d2": "eeaf2e55ed1e0d9f86b32cca700bc896aa8f2813a2f84b9103f0230ba3815788",
+    "docs/book/diagrams/04-bank-publication.d2": "5c028c517ee71679ca5f41de01f3ffaed6c88f27dca372889015fbac6ac8f0e6",
+    "docs/book/diagrams/05-parameter-publication-sequence.d2": "357851dd2051880a965fffe8a15b027cc81da59effea9b1073dd405e328475cf",
+    "docs/book/diagrams/05-parameter-publication.d2": "176fd10b1cfc78eb1293c348e2f3a43f1bba0ad9ac8e67911d1de33db4994d64",
+    "docs/book/diagrams/05b-image-publication-sequence.d2": "4132516860cff47c43152ff53e4750d1cdd09335a477f344d5632b9b77e84077",
+    "docs/book/diagrams/05b-image-publication.d2": "2d2d8f2b34f6af60f21a8285e53da4c4f1f2a6cd889f5f8c21a0de4006af3b00",
+    "docs/book/diagrams/05c-compositor-publication-sequence.d2": "84aacc501c60a1fa58ebb6f7af1546fde20fc1fe27e5f9ab43221d77e270a983",
+    "docs/book/diagrams/05c-compositor-publication.d2": "fb94d0a89102024a521ff5b40fb49e1bcf1ff9eaa64814ede430010b8d393aca",
+    "docs/book/diagrams/06-resources-sequence.d2": "88af7bb556bb129a09a47293627895288ac992e307f33d794b31beea45f4be47",
+    "docs/book/diagrams/06-resources.d2": "fcb92d77ee39f4a62c96b1bcafd1b51a3cc0de7fb4275eced9d402defe2a18e3",
+    "docs/book/diagrams/07-gesture-sequence.d2": "448615d3ea20f469fce9da5073ec4b7fcf44b2c486f09100e72bfaa9ab01392f",
+    "docs/book/diagrams/07-gesture.d2": "7ce79d61561d63f231fad2e3337d37435876ae057360c88d44207edccef885cb",
+    "docs/book/diagrams/07b-gesture-participants.d2": "b6c6b6a4f2ed61c2e3037875654f61ed3061d5b24ed13ab3151c3af6947896f6",
+    "docs/book/diagrams/08-render-preflight-sequence.d2": "be0702da575817fa5c44f1a3adbcc3e0d5abd61193b49e2682407602f5f36d32",
+    "docs/book/diagrams/08-render-preflight.d2": "12ae4a61a7571fcb887080456fda3c6fd295749d6a291ea023367a2def68f360"
+  },
+  "invocation": "buck2",
+  "label_check": {
+    "browser_version": "153.0.8010.12",
+    "checker_sha256": "fe812678604e37611ff61c7b6f4f269690ee358d3e9e923702a82a1bcb6378bb",
+    "engine": "Chromium",
+    "figures": {
+      "00-policy-layer": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 8
+      },
+      "01-preparation": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 11
+      },
+      "01-preparation-node-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 29
+      },
+      "01b-preparation-join": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 15
+      },
+      "01b-preparation-join-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 22
+      },
+      "02-node": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 14
+      },
+      "03-helper": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 36
+      },
+      "03-helper-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 25
+      },
+      "04-bank-publication": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 25
+      },
+      "04-bank-publication-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 25
+      },
+      "05-parameter-publication": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 31
+      },
+      "05-parameter-publication-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 24
+      },
+      "05b-image-publication": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 34
+      },
+      "05b-image-publication-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 24
+      },
+      "05c-compositor-publication": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 6
+      },
+      "05c-compositor-publication-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 22
+      },
+      "06-resources": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 21
+      },
+      "06-resources-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 21
+      },
+      "07-gesture": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 15
+      },
+      "07-gesture-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 25
+      },
+      "07b-gesture-participants": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 11
+      },
+      "08-render-preflight": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 6
+      },
+      "08-render-preflight-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 24
+      }
+    },
+    "native_runtime_manifest_sha256": "8c092fd538ea50a76d3aba62563f1f03553c5029f6f34288263e87d8505a541f",
+    "node_version": "26.13.0",
+    "platform_fonts": {
+      "NotoSerifSC-variable.ttf": "050080d9255a86808f2945bffac582b31ef32bc36411ce29563b4961670c66f9",
+      "Tinos-Bold.ttf": "393269dbab8899f938db19783eca5eac92eb431f7ae0ab45b8349ca895f1a06b",
+      "Tinos-BoldItalic.ttf": "a5de79f0fe863ea0954757acb3d47b3ccd0a930ce3dd5b97230cd3866790a06e",
+      "Tinos-Italic.ttf": "5942266ed398b155d7dc23e36833e7ec6be988f2439bdbeb8ef1bede808eaa91",
+      "Tinos-Regular.ttf": "60a0e8ef0c04dd5dd69ffe91025fa2ae5836cbd35600a82ba031977557e2cb61"
+    },
+    "playwright_version": "1.63.0",
+    "schema": 1,
+    "tolerance_svg_units": 0.5
+  },
+  "outputs": {
+    "assets/illustrations/next-policy/00-policy-layer.svg": "340f9142cbc015f2c4c17e67a392bf00bfde81f2066b9e7aa0b4c0cc78634114",
+    "assets/illustrations/next-policy/01-preparation-node-sequence.svg": "e6ff4247f1192c9553816953289caae24901c82551186e4b71e32bfb9fe67e4a",
+    "assets/illustrations/next-policy/01-preparation.svg": "54a169898a7e8c366ec101ceaad205e90c0c5775df2d25f1ed2447d9dfb839c8",
+    "assets/illustrations/next-policy/01b-preparation-join-sequence.svg": "5822dd0912ef53c6eedb8b7acafdf85d50a4a74c90a920aa2389b586e9200af4",
+    "assets/illustrations/next-policy/01b-preparation-join.svg": "1ad0e6ab9929665f293682ebb78f2852eec1d0685ff6b3f8b19f6647caef0bbb",
+    "assets/illustrations/next-policy/02-node.svg": "31f8254728bca67e94d3249a2628bc31abee4536230677aecf143cc5c8531c7f",
+    "assets/illustrations/next-policy/03-helper-sequence.svg": "1417cc36f208708aef626d8ed6c3d2a44f35a2c6324891f49626633553b2469c",
+    "assets/illustrations/next-policy/03-helper.svg": "4b462117837d7f30418dbb8632076ed859677cd8308a827844e85861d764f2a2",
+    "assets/illustrations/next-policy/04-bank-publication-sequence.svg": "8b4047c64ac1bd7d81d06cb63968db1af595e9a6cfd613ce4745328ef1787972",
+    "assets/illustrations/next-policy/04-bank-publication.svg": "ec1d2e18aa50b1cdac93a905263863c297b5e26739034640e0c3c873e2aebe03",
+    "assets/illustrations/next-policy/05-parameter-publication-sequence.svg": "3158dfe69318c334fbd27e3063865fb3c43924da1cff776230bb8fac75a262c0",
+    "assets/illustrations/next-policy/05-parameter-publication.svg": "d7148db43e5459834e5779b8096cbe99818632771402e0e8692eb22e27d6b79a",
+    "assets/illustrations/next-policy/05b-image-publication-sequence.svg": "71826c1af1480099a3020effdcb93cfc943aa673e913cf98ba31b3daf0aa1df2",
+    "assets/illustrations/next-policy/05b-image-publication.svg": "3b5fbd1e1fc5937fa0cf2c9e82e997287e496c11b4643b93d811437ff60a889a",
+    "assets/illustrations/next-policy/05c-compositor-publication-sequence.svg": "1e2a4182aca86c0ca1994e325ecb67a498168cc5f86addcafd21a701873cd24d",
+    "assets/illustrations/next-policy/05c-compositor-publication.svg": "4e05620e8356f76aece8ef1272ac20aa71c3d8485235caeecc6c77bd02d9f59d",
+    "assets/illustrations/next-policy/06-resources-sequence.svg": "1da04e1fe124d38e3f25b022020aa47399533a37ca86cfc32dc6ff6ed910b5f0",
+    "assets/illustrations/next-policy/06-resources.svg": "201a5029d6c4d88c7626210d3c5c019723c145522adf4f511903cd723dcc5776",
+    "assets/illustrations/next-policy/07-gesture-sequence.svg": "5ed57b69fb98da93d666f077573415f8199f97fb8dd5201640f4bd5e69a7e836",
+    "assets/illustrations/next-policy/07-gesture.svg": "4cafae830414434d09190dabac1ea330e5f1e2d286ee5e08c2a04a738360d188",
+    "assets/illustrations/next-policy/07b-gesture-participants.svg": "f316abb532d474106957dcfc81a0b58a9fbf00c0382e1269ab5f93bc4b80ca88",
+    "assets/illustrations/next-policy/08-render-preflight-sequence.svg": "106c8c2eb4fd24346f02aa20e808ecaf7d217a30b7b54e159a7e4a0091b22e40",
+    "assets/illustrations/next-policy/08-render-preflight.svg": "17a5dd4faff95c1c0276f2671f7a493e8e50ee54b05470a0da79776c8e0e8f36"
+  },
+  "renderer": {
+    "archive_sha256": "5669ddc46b99e942cc96078f4a4e36d5e62103348f4c05179ede27802fdd87a9",
+    "flags": [
+      "--layout",
+      "elk",
+      "--elk-nodeNodeBetweenLayers",
+      "40",
+      "--elk-edgeNodeBetweenLayers",
+      "30",
+      "--theme",
+      "0",
+      "--scale",
+      "1",
+      "--pad",
+      "24",
+      "--sketch=false",
+      "--animate-interval",
+      "0",
+      "--bundle=false"
+    ],
+    "name": "D2",
+    "version": "0.9.0"
+  },
+  "renderer_adapter_sha256": "96aa54ff6d58632d518851fcfc661e9d7d4dd9c170a47742d1b6905159e55ee2",
+  "schema": 1
+}

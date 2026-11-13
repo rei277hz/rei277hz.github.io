@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Direct and sampled evaluation - Perceptual Grade Technical Report</title>
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css" integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js" integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk" crossorigin="anonymous"></script>
+
+        <meta name="description" content="English technical report on the current Perceptual Grade reference and project development.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/fonts-6a07186e.css">
+        <link rel="stylesheet" href="../theme/grade-dda453c0.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-53542b48.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-2d92a0d7.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/pontano-sans@5.3.0/files/pontano-sans-latin-wght-normal.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64 256x256" href="../../../favicon.ico?v=b4dbc1f8e6d1">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png?v=65f37d4e63e3">
+<link rel="manifest" href="../../../site.webmanifest">
+</head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu"><li role="none"><button role="menuitem" class="grade-auto" id="grade-theme-auto">Auto</button></li>
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Dark</button></li>
+                            
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"><a href="../index.html"><img class="brand-icon" src="../../../assets/icons/perceptual-grade-32-transparent.png" srcset="../../../assets/icons/perceptual-grade-64-transparent.png 2x" alt="" width="32" height="32"><span>Perceptual Grade Technical Report</span></a></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rei277hz/chromaticity" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+<nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="direct-and-sampled-evaluation"><a class="header" href="#direct-and-sampled-evaluation">Direct and sampled evaluation</a></h1>
+<p>The independent analytic reference is <code>libraries/perceptual-grade-reference</code>; the DCTL and frozen Blender product retain older production profiles. The Next Blender product currently exposes Stage 1 and Tone, and has not implemented Warp. This chapter describes the reference and sampled-kernel coordinates, while each table names the implementation it applies to.</p>
+<h2 id="choose-the-input-sample-grid"><a class="header" href="#choose-the-input-sample-grid">Choose the input sample grid</a></h2>
+<p>The reference and shared native LUT kernels use <strong>linear ACEScg / ACES white</strong> coordinates, independent of Blender’s scene working space and each Grade’s chosen white. Each component covers <strong>0…1024</strong>, with <strong>64 positive intervals</strong> and no negative sample branch. The LUT input repair maps out-of-cube RGB into this domain before sampling; the output cube guard is a separate projection after grading.</p>
+<p>Let <span data-tex="k=0.01"></span>, <span data-tex="R=1024"></span> and <span data-tex="A=&#92;ln(1+R/k)&#92;approx11.536652"></span>. For a nonnegative channel <span data-tex="x"></span>, the address shaper and inverse are</p>
+<div class="grade-equation" data-tex="S(x)=&#92;frac{&#92;ln(1+x/k)}{A},&#92;qquad
+S^{-1}(u)=k[&#92;exp(Au)-1]."></div>
+
+<p>Final vertices are <span data-tex="x_i=S^{-1}(i/64)"></span>, <span data-tex="0&#92;le i&#92;le64"></span>, with exact zero and upper endpoints. The 33-point preview takes every second vertex, giving 32 positive intervals in the same domain. This is plain log1p; the experimental warp exponent 0.9 is not used.</p>
+<p>The bound is not a display range. A different bound changes the vertices throughout: at <span data-tex="R=128"></span> the halfway address lands near <span data-tex="1.121"></span>, at <span data-tex="R=1024"></span> near <span data-tex="3.190"></span>, and every intermediate vertex moves with it. Text or tooling carried over from the earlier <span data-tex="0…128"></span> grid describes a different table, not a different naming of this one.</p>
+<p><strong>No negative sample branch does not mean per-channel clipping.</strong> Before reference-kernel lookup, <code>input_repair</code> projects an out-of-cube input: a neutral lift removes negative components while preserving nonnegative AP1 luminance, then one common scale brings the largest component to at most 1024. In-cube inputs are unchanged. Stored LUT outputs may still be signed or exceed the bound; this input projection is not output clipping.</p>
+<p>The reference/shared sampler computes its physical interpolation fractions from the repaired input and clamps them to <span data-tex="[0,1]"></span>. This differs from the book’s legacy generator and the Next Blender kernel sampler, which use their own boundary contracts and may extrapolate the edge cell. Compare those profiles only after identifying their input repair and fraction rules.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/figures/lut-input-grid.svg"><img src="../../../assets/figures/lut-input-grid.svg" alt="Native AP1 input samples" width="513" height="221"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/figures/lut-input-grid.svg"><img src="../../../assets/figures/lut-input-grid.svg" alt="Native AP1 input samples" width="513" height="221"></a></span></label></p>
+<p class="figure-caption">The archived 0…128 ACEScg grid illustrates the sampling distribution. The current 0…1024 grid described above has different vertex positions. All intervals are positive; the zoom shows density close to zero.</p>
+
+<p>At 203 reference nits, neutral <span data-tex="&#92;mathrm{RGB}=1024"></span> corresponds to 207,872 nits. Peak Anchor remains an independent tonal target. Ordinary Grades keep Stage 1 as an exact matrix before the cube. Grade Stacks include every stage inside one cube.</p>
+<h2 id="preserve-the-grading-function-when-changing-the-sampling-basis"><a class="header" href="#preserve-the-grading-function-when-changing-the-sampling-basis">Preserve the grading function when changing the sampling basis</a></h2>
+<p>Canonical Grade coordinates still use Rec.709 primaries interpreted through the selected Grade white. They do not become AP1 primaries. Let <span data-tex="f"></span> be the canonical analytic function, <span data-tex="P_0"></span> the Rec.709/D65 RGB-to-XYZ matrix, <span data-tex="P_{&#92;mathrm L}"></span> the native AP1/ACES-white RGB-to-XYZ matrix, and <span data-tex="C_{0&#92;to&#92;mathrm L}"></span> Bradford adaptation from D65 to ACES white. Define</p>
+<div class="grade-equation" data-tex="B_{&#92;mathrm L}=P_{&#92;mathrm L}^{-1}C_{0&#92;to&#92;mathrm L}P_0,&#92;qquad
+f_b(z)=B_{&#92;mathrm L}f(B_{&#92;mathrm L}^{-1}z)."></div>
+
+<p>Surrounding matrices convert the scene to and from fixed LUT coordinates. An ordinary forward Grade composes Stage 1 into the input matrix. A Stack includes each entry’s matrix and white connection in the sampled function. The <a href="../development/forward-inverse-math.html#195-lut-boundaries-and-mixed-white-stacks">full specification</a> gives the historical deployed equations; its reference section defines current reference evaluation.</p>
+<p>Switching Blender’s working space updates matrices and may reuse a cube when the canonical sampled function is unchanged. Changing a Grade white changes that function and requires a new bake. The matrix adapters do not clip channels; the LUT input-repair contract still applies at the native cube boundary. ACES white at the LUT boundary is a sampling choice, not a change to the default D65 Grade white or a display assumption.</p>
+<h2 id="why-log1p-on-native-ap1-was-selected"><a class="header" href="#why-log1p-on-native-ap1-was-selected">Why log1p on native AP1 was selected</a></h2>
+<p>The study below is a recorded measurement, not a description of the current table. It screened grids across a candidate set and selected the shaper and the sampling space; the numeric bound it reports was later raised. Read its bound column as the configuration it actually tested.</p>
+<p>The <a href="../development/lut-domain-study.html">LUT domain study</a> screened 150 grids and fully evaluated 12 finalists on all 338,688 stored IMG_* samples at −2, 0, +2, +4 and +6 stops, under five Grade/Stack workloads and four ACES 2.0 outputs. Scene RGB is scored for exact LUT inputs inside Rec.2020/D65 [0,10]³; rendered RGB is scored separately for exact inputs inside the native AP1 domain it tested. Outside-domain pixels are excluded from the corresponding metric.</p>
+<p><strong>Version 1.21.0 adopts plain native AP1 log1p, κ = 0.01.</strong> Among the full finalists, it wins the objective using display-linear RGB divided by each output’s peak nits together with scene RGB p99/RMS: the worst ratio to the former production baseline is 0.530634. The encoded-RGB minimax winner was warped κ = 0.003, exponent 0.9. These are different objectives; plain log1p is the deliberate choice.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Recorded worst per-case statistic</th><th style="text-align: right">Former Rec.2020 −2…64</th><th style="text-align: right">Adopted AP1 log1p</th></tr>
+</thead>
+<tbody>
+<tr><td>Scene Rec.2020 absolute RGB p99</td><td style="text-align: right">0.073063413</td><td style="text-align: right">0.038344395</td></tr>
+<tr><td>Scene Rec.2020 absolute RGB RMS</td><td style="text-align: right">0.018554004</td><td style="text-align: right">0.009574135</td></tr>
+<tr><td>SDR 100 Rec.709 encoded RGB p99</td><td style="text-align: right">0.008575175</td><td style="text-align: right">0.004779925</td></tr>
+<tr><td>SDR 100 P3-D65 encoded RGB p99</td><td style="text-align: right">0.007430241</td><td style="text-align: right">0.004028931</td></tr>
+<tr><td>HDR 1000 P3-D65 encoded RGB p99</td><td style="text-align: right">0.004731874</td><td style="text-align: right">0.003116317</td></tr>
+<tr><td>HDR 1000 Rec.2020 encoded RGB p99</td><td style="text-align: right">0.003490032</td><td style="text-align: right">0.002718339</td></tr>
+</tbody>
+</table>
+</div>
+<p>These are photographic study measurements, not universal bounds. The adopted candidate improves all ten encoded-RGB objective terms too, with worst ratio 0.842753, but rare outliers remain. The stock Rec.2020/D65 → native AP1 matrix is nonnegative and maps the scene domain below the current bound, so the grid contains both requested metric domains without negative vertices. That historical sampler extrapolated signed inputs outside its domain. The study records complete distributions, limits and Buck2 reproduction commands.</p>
+<p>Note that the study’s conclusion is about the shaper and the space, not about the bound. Raising the bound from what that study tested to <span data-tex="1024"></span> leaves the shaper unchanged and moves every vertex; the error figures above were not recomputed for the wider domain, and they should not be quoted as though they had been.</p>
+<h2 id="interpolate-physical-linear-rgb"><a class="header" href="#interpolate-physical-linear-rgb">Interpolate physical linear RGB</a></h2>
+<p>For reference/shared-kernel sampling, first set <span data-tex="&#92;hat x=&#92;operatorname{input&#92;_repair}(x)"></span>. Locate the cell from its bounded address and calculate the physical fraction from that repaired input:</p>
+<div class="grade-equation" data-tex="i=&#92;operatorname{clamp}&#92;!&#92;left(&#92;left&#92;lfloor64S(&#92;hat x)&#92;right&#92;rfloor,0,63&#92;right),&#92;qquad
+f=&#92;operatorname{clamp}&#92;!&#92;left(&#92;frac{&#92;hat x-x_i}{x_{i+1}-x_i},0,1&#92;right)."></div>
+
+<p>Sort fractions <span data-tex="f_1&#92;ge f_2&#92;ge f_3"></span>. The tetrahedron vertices <span data-tex="v_0,v_1,v_2,v_3"></span> follow that channel order from the low to high corner. Barycentric weights are <span data-tex="(1-f_1,f_1-f_2,f_2-f_3,f_3)"></span>. The implementation uses their equivalent difference form:</p>
+<div class="grade-equation" data-tex="v=v_0+f_1(v_1-v_0)+f_2(v_2-v_1)+f_3(v_3-v_2)."></div>
+
+<p>This form avoids cancelling a constant offset when the fractions are large, and it reproduces affine transforms in exact arithmetic. Native graphs use fused multiply-adds and select the middle fraction with min/max comparisons. Interpolation joins continuously across cell boundaries.</p>
+<p>Because input repair precedes addressing, an input outside the cube is transformed before interpolation rather than independently clamped on each channel or extended along an edge cell. Within the cube, the tetrahedral fractions are bounded and the difference-form interpolant reproduces affine functions in exact arithmetic. Sampling error and input-projection change are separate effects.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/figures/lut-interpolation.svg"><img src="../../../assets/figures/lut-interpolation.svg" alt="Shaping and physical-cell interpolation" width="513" height="258"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/figures/lut-interpolation.svg"><img src="../../../assets/figures/lut-interpolation.svg" alt="Shaping and physical-cell interpolation" width="513" height="258"></a></span></label></p>
+<p class="figure-caption">The address curve uses the archived 0…128 domain; the current 0…1024 grid has a different curve. The affine-cell example illustrates interpolation in physical input coordinates.</p>
+
+<p>Shader lookup stores raw float RGB. Compositor lookup stores the base RGB and three forward-axis differences in four planes of one image. Each coefficient has signed mantissas and its own shared power-of-two exponent. Four reads select one base and three ordered edges, avoiding subtraction of quantized neighboring vertices; the atlas uses four times the raw vertex storage. <a href="../development/architecture.html#cross-compositor-storage-boundaries-safely">Runtime architecture</a> explains float32 computation and half-float image boundaries. Automatic precision remains a host setting.</p>
+<h2 id="curve-tables-and-current-grade-publication"><a class="header" href="#curve-tables-and-current-grade-publication">Curve tables and current-grade publication</a></h2>
+<p>Tables are not shared across implementations, and they are not the same size even within one. Treating any single count as “the table resolution” has been the source of repeated documentation errors, so each is listed per profile:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Profile</th><th>Stage 2 (Tone)</th><th>Stage 3 (Color)</th><th>Boundary</th></tr>
+</thead>
+<tbody>
+<tr><td>Independent analytic reference</td><td>closed form, no table</td><td>closed form, no curve table</td><td>Cached D65 cube context; decoded RGB is validated</td></tr>
+<tr><td>Reference <code>BakeStack</code></td><td>Prepared inverse Tone table</td><td>Reference forward kernel</td><td>Shared native AP1 LUT and output cube projection</td></tr>
+<tr><td>Frozen 1.23.2 production profile</td><td>Adaptive inverse Tone table, cap 2048 cells</td><td>1.23.2 controls and ordering</td><td>Historical production boundary resources</td></tr>
+<tr><td>Next Blender product</td><td>Current Stage 1/Tone implementation</td><td>Warp not implemented or exposed</td><td>Product LUT contract is still evolving</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>The independent analytic reference has no per-pixel curve table.</strong> It evaluates tone and coefficient kernels directly. Stage 3’s tonal web, selective Adaptance and guard-before-Scale order are the current reference model. Next Blender has not yet implemented that Warp path.</p>
+<p><strong>The reference’s accelerated <code>BakeStack</code> also prepares an inverse Tone table.</strong> This is an acceleration resource, not a change to the independent analytic forward model. Separately, the frozen 1.23.2 inverse bake adaptively adds scalar inverse-tone cells by bisection until five-fraction probe error and a Bernstein monotonicity check pass. <code>MAX_CELLS = 2048</code>, 32 refinement rounds, 80 root evaluations and a 64 KiB budget bound that historical refinement; 2048 is an abort condition, not a stored size. Above its tail threshold the legacy table is not consulted and the linear asymptote is evaluated analytically.</p>
+<p><strong>Next Blender’s current product scope is narrower than the reference model.</strong> Its user-facing implementation covers Stage 1 and Tone; the future Warp and corrected H–K-before-Scale ordering are not part of its current render contract. Experimental Color preparation code is not a shipped Warp implementation or evidence of renderer behavior.</p>
+<p><strong>The chroma classifier has no table in any profile.</strong> The p=2 low/high split is evaluated from the carried achromatic lightness and the current chroma at every pixel. An earlier design sampled a chroma threshold; that row is gone.</p>
+<p><strong>Boundary resources are implementation-specific.</strong> The archived Blender build and its shared production kernels use the recorded 257 × 257 uint16 face atlas and spline resources. The DCTL carries its own compact constants. The analytic reference validates cube trials through its decoder and uses its cached D65 cube context. Do not attribute one profile’s boundary table or solver to another.</p>
+<p>Shared endpoint value, first derivative and second derivative define the quintic interpolant wherever a tone or coefficient curve is tabulated, preserving <span data-tex="C^2"></span> joins at every knot. DCTL curves remain analytic throughout.</p>
+<p>A bake uses the selected model and publishes only for its current parameter signature. Historical Blender Direct previews and final LUT publication are release-specific behavior. Sampler agreement and analytic approximation error are separate checks. A uniform <code>.cube</code> reader would require resampling this nonuniform baker/sampler.</p>
+<h2 id="inverse-and-stack-sampling"><a class="header" href="#inverse-and-stack-sampling">Inverse and Stack sampling</a></h2>
+<p>The reference inverse and reference <code>BakeStack</code> use the current corrected forward model. The retained production inverse and Stack sections in the full mathematical specification describe their historical profile. Every reference Stack stage runs at each vertex, including its matrix, without sampling an intermediate 3D LUT.</p>
+<p>The shared nested-grid profile installs a 33³ preview, then refines to 65³, reusing all 35,937 preview vertices exactly and evaluating only the remaining 238,688. These counts describe the sampled-kernel profile, not proof of reference inverse accuracy. Small inverse residuals at vertices do not establish between-vertex accuracy.</p>
+<p><a href="../../../downloads/lut-production.json">Download the production axes, matrices and constants</a>. The file records the earlier <span data-tex="0…128"></span> axis and is retained as an archive; it is not regenerated, and its <code>axis_65</code> does not describe the <span data-tex="1024"></span> bound above.</p>
+
+                    <footer class="book-footer">Perceptual Grade Technical Report <a href="../reference/credits.html">Credits</a> <a href="../reference/license.html">License</a> <a href="../../../index.html">All books</a></footer></main>
+
+                    
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/math-96cc483f.js"></script>
+        <script src="../theme/reader-7b4ff642.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

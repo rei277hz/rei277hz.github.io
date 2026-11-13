@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bounded H–K guard - Perceptual Grade Technical Report</title>
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css" integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js" integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk" crossorigin="anonymous"></script>
+
+        <meta name="description" content="English technical report on the current Perceptual Grade reference and project development.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/fonts-6a07186e.css">
+        <link rel="stylesheet" href="../theme/grade-dda453c0.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-53542b48.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-2d92a0d7.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/pontano-sans@5.3.0/files/pontano-sans-latin-wght-normal.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64 256x256" href="../../../favicon.ico?v=b4dbc1f8e6d1">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png?v=65f37d4e63e3">
+<link rel="manifest" href="../../../site.webmanifest">
+</head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu"><li role="none"><button role="menuitem" class="grade-auto" id="grade-theme-auto">Auto</button></li>
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Dark</button></li>
+                            
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"><a href="../index.html"><img class="brand-icon" src="../../../assets/icons/perceptual-grade-32-transparent.png" srcset="../../../assets/icons/perceptual-grade-64-transparent.png 2x" alt="" width="32" height="32"><span>Perceptual Grade Technical Report</span></a></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rei277hz/chromaticity" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+<nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="bounded-hk-guard"><a class="header" href="#bounded-hk-guard">Bounded H–K guard</a></h1>
+<p>Creative lightness and chroma requests can cross into negative carried achromatic energy. The reference’s signed appearance map still has a real signed <span data-tex="J_A"></span> there. With the default <code>hk_guard=True</code>, H–K repair selects a nonnegative-energy result on the <span data-tex="H&#92;ge0"></span> branch by sharing the adjustment between a bounded increase in <span data-tex="H"></span> and a reduction in <span data-tex="C"></span>, preserving hue. It runs after Adaptance and before the final common Scale inside Stage 3. Negative <span data-tex="H"></span> takes the signed bypass; the explicit <code>hk_guard=False</code> diagnostic mode skips repair.</p>
+<h2 id="set-the-energy-knee"><a class="header" href="#set-the-energy-knee">Set the energy knee</a></h2>
+<p>Keep the Stage-2 carried energy <span data-tex="E_2"></span> as the per-pixel reference. For a finite request with <span data-tex="H&#92;ge0"></span>, define squared lightness <span data-tex="X"></span>, squared deficit <span data-tex="D"></span>, and clamped reference energy <span data-tex="E_0"></span>:</p>
+<div class="grade-equation" data-tex="X=H^2,&#92;qquad D=X-66C,&#92;qquad E_0=&#92;max(E_2,0),
+&#92;qquad&#92;delta=&#92;frac{E_0X}{E_0+X}."></div>
+
+<p>The signed requested energy <span data-tex="E_{&#92;mathrm{req}}=J_A&#92;lvert J_A&#92;rvert"></span> is authoritative. On the negative branch it differs from <span data-tex="D"></span>. The implementation avoids subtracting rounded <span data-tex="H^2"></span> and <span data-tex="66C"></span> by evaluating</p>
+<div class="grade-equation" data-tex="B=&#92;sqrt{66C},&#92;qquad u=&#92;frac{E_{&#92;mathrm{req}}}{&#92;sqrt{&#92;lvert E_{&#92;mathrm{req}}&#92;rvert+66C}+B},&#92;qquad
+D=&#92;begin{cases}E_{&#92;mathrm{req}},&amp;E_{&#92;mathrm{req}}&#92;ge0,&#92;&#92; E_{&#92;mathrm{req}}+2u^2,&amp;E_{&#92;mathrm{req}}&lt;0.&#92;end{cases}"></div>
+
+<p>Use <span data-tex="u=0"></span> when its denominator is zero. The harmonic expression for <span data-tex="&#92;delta"></span> uses min/max normalization to avoid a large product and is zero when either <span data-tex="E_0=0"></span> or <span data-tex="X=0"></span>, including the joint zero case. Its coefficient is the fixed internal constant 1.0, independent of image statistics.</p>
+<p>For <span data-tex="D&#92;ge&#92;delta"></span>, retain the request and set <span data-tex="E_g=E_{&#92;mathrm{req}}"></span>. Below a positive knee, use the repaired energy</p>
+<div class="grade-equation" data-tex="t=&#92;frac{&#92;delta-D}{&#92;delta},&#92;qquad
+E_g=&#92;frac{&#92;delta}{(1+4t+10t^2)^{1/4}}."></div>
+
+<p>This branch matches value, slope and second derivative at <span data-tex="D=&#92;delta"></span>. The implementation uses <span data-tex="v=1/(1+t)"></span> for bounded intermediate values. At <span data-tex="&#92;delta=0"></span>, the limit is <span data-tex="E_g=&#92;max(D,0)"></span>. Thus <span data-tex="H&#92;ge0"></span> and <span data-tex="E_0&#92;ge0"></span> guarantee <span data-tex="E_g&#92;ge0"></span>; <span data-tex="H&gt;0"></span> and <span data-tex="E_0&gt;0"></span> give <span data-tex="E_g&gt;0"></span>, regardless of the signed raw deficit.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/figures/guard-energy.svg"><img src="../../../assets/figures/guard-energy.svg" alt="Guard energy and nonnegative-energy boundary" width="523" height="260"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/figures/guard-energy.svg"><img src="../../../assets/figures/guard-energy.svg" alt="Guard energy and nonnegative-energy boundary" width="523" height="260"></a></span></label></p>
+<p class="figure-caption">With positive requested <span data-tex="H"></span> and reference energy, the knee keeps repaired energy strictly positive, above <span data-tex="H^2=66C"></span>. Zero-reference and zero-lightness cases can lie on the boundary.</p>
+
+<h2 id="share-the-repair"><a class="header" href="#share-the-repair">Share the repair</a></h2>
+<p>Let <span data-tex="Z"></span> be the energy deficit and <span data-tex="L"></span> the maximum squared-lightness lift. Allocate a smooth, bounded amount <span data-tex="G"></span> to <span data-tex="H"></span>:</p>
+<div class="grade-equation" data-tex="Z=&#92;max(E_g-D,0),&#92;qquad L=(1.2^2-1)X=0.44X,
+&#92;qquad G=&#92;frac{LZ}{&#92;sqrt{4L^2+Z^2}}."></div>
+
+<p>Then recover the output pair:</p>
+<div class="grade-equation" data-tex="H_g=&#92;sqrt{X+G},&#92;qquad
+C_g=&#92;frac{X+G-E_g}{66},&#92;qquad
+(a_g,b_g)=&#92;frac{C_g}{C}(a,b)."></div>
+
+<p>Explicit zero branches handle black and <span data-tex="C=0"></span>. Rounding protection bounds <span data-tex="C_g"></span> between zero and requested <span data-tex="C"></span>. On the repair branch, <span data-tex="H&#92;le H_g&#92;le1.2H"></span> and <span data-tex="0&#92;le C_g&#92;le C"></span>. These are bounds on repair alone; the later Scale can increase both coordinates. At <span data-tex="H=50,&#92; C=80"></span> with positive-branch reference <span data-tex="H=50,&#92; C=20"></span>, the repaired output is approximately <span data-tex="H=58.188,&#92; C=48.142"></span>.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/figures/guard-boundary.svg"><img src="../../../assets/figures/guard-boundary.svg" alt="Sharing repair between H and C" width="565" height="259"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/figures/guard-boundary.svg"><img src="../../../assets/figures/guard-boundary.svg" alt="Sharing repair between H and C" width="565" height="259"></a></span></label></p>
+<p class="figure-caption">At requested <span data-tex="H=50"></span>, stronger chroma requests gradually use the bounded lift and more chroma reduction. The lift approaches the fixed 20% relative cap.</p>
+
+<h2 id="carry-energy-through-scale-and-decoding"><a class="header" href="#carry-energy-through-scale-and-decoding">Carry energy through Scale and decoding</a></h2>
+<p>The reference next applies the common positive Scale: <span data-tex="(a_g,b_g,E_g)&#92;mapsto(&#92;lambda a_g,&#92;lambda b_g,&#92;lambda^2E_g)"></span>. The decoder receives this scaled energy directly. Reconstructing it from rounded appearance coordinates could erase a small positive achromatic component. The <a href="color.html#saturation-pad-and-scale">Color chapter</a> explains why the compact saturation pad stays fixed under this Scale.</p>
+<p>Requests above the knee retain their coordinates and energy. Negative requested <span data-tex="H"></span> bypasses H–K repair and retains the signed state; the nonnegative-energy guarantee does not cover this branch. Nonfinite inputs are rejected. The signed decoder accepts finite signed energy when its cone responses satisfy <span data-tex="&#92;lvert r&#92;rvert&lt;400"></span>; positivity is a repair/export policy, not a prerequisite for the signed inverse itself.</p>
+<p><a href="https://github.com/rei277hz/chromaticity/blob/main/libraries/perceptual-grade-reference/proofs/PerceptualGrade/HKCubeLuminance.lean">HKCubeLuminance.lean</a> proves nonnegative repaired energy and <span data-tex="J_A"></span>, the strict versions under <span data-tex="H&gt;0,E_0&gt;0"></span>, and the identity <span data-tex="H_g^2-66C_g=E_g"></span>. <a href="https://github.com/rei277hz/chromaticity/blob/main/libraries/perceptual-grade-reference/proofs/PerceptualGrade/WarpRepairedScale.lean">WarpRepairedScale.lean</a> proves that positive Scale preserves these signs. Zero reference energy cannot support a universal strict-positivity claim: the proved counterexample <span data-tex="H=1,C=1,E_0=0"></span> repairs to zero energy and exports to black.</p>
+<p>The reference order is implemented in <code>libraries/perceptual-grade-reference/src/grading.py</code>; its signed map is in <code>src/responses.py</code>, and the repair formula is shared from <code>libraries/perceptual-grade-core/src/perceptual_grade_core/model/hk_guard.py</code>. The frozen Blender product retains Scale-before-repair behavior. Historical DCTL and native-node comparisons below are separate evidence for their recorded implementations.</p>
+<h2 id="project-into-the-export-cube"><a class="header" href="#project-into-the-export-cube">Project into the export cube</a></h2>
+<p>H–K repair does not guarantee RGB cube containment. The reference applies a separate cube guard at export:</p>
+<ol>
+<li>Stage 3 supplies the repaired appearance after the final common Scale; export does not apply H–K repair again.</li>
+<li>For carried energy <span data-tex="E&#92;le0"></span>, cube export returns black. For <span data-tex="E&#92;ge W^2"></span>, where <span data-tex="W"></span> is the cube-white <span data-tex="J_A"></span>, it returns the neutral cube-white endpoint, RGB <span data-tex="(1024,1024,1024)"></span>.</li>
+<li>For <span data-tex="0&lt;E&lt;W^2"></span>, accept the direct decode if it is finite and inside the native AP1 cube. Otherwise search along the fixed-<span data-tex="J_A"></span>, fixed-hue ray for the greatest accepted chroma. The search brackets the radius from the eight cube vertices in cone coordinates, uses fitted capacity only as a seed, and bisects while checking each trial through the actual decoder. A trial with <span data-tex="&#92;lvert r&#92;rvert&#92;ge400"></span> is rejected. Accepted RGB is saved only when finite and inside <span data-tex="[0,1024]^3"></span>.</li>
+</ol>
+<p>Only the interior radial branch holds <span data-tex="J_A"></span> and hue fixed while reducing chroma; the black and white endpoint branches have different behavior. Cube projection is lossy: different appearance requests can export to the same RGB. It does not inherit the standalone guard’s one-to-one result, which requires fixed positive reference energy and positive requested <span data-tex="H"></span>.</p>
+<p>Appearance Stack handoffs carry each stage’s post-policy signed state after Scale, while deferring cube projection until export. With the default guard enabled, nonnegative-<span data-tex="H"></span> requests are repaired and negative-<span data-tex="H"></span> requests bypass repair; Scale multiplies either carried energy by <span data-tex="&#92;lambda^2"></span>, preserving its sign. The inverse must evaluate this complete forward order, including the selected export policy.</p>
+<p>The ideal cube composition theorem <code>hk_cube_guard_positive_luminance</code> in <code>HKCubeLuminance.lean</code> proves positive output luminance under <span data-tex="H&gt;0"></span>, <span data-tex="E_0&gt;0"></span>, and cube-white <span data-tex="W&gt;0"></span>, plus explicit assumptions: legal nonnegative output RGB, exact local decode/energy-encoding consistency, zero energy at RGB black, and positive luminance weights. The theorem includes its positive white endpoint. These exact-real results do not certify fitted capacity or floating-point containment; the executable reference checks accepted RGB through its decoder.</p>
+<p>This chapter describes the reference’s <span data-tex="[0,1024]"></span> AP1 cube. Historical release domains and LUT sampling studies retain their own stated parameters.</p>
+<h2 id="historical-evaluation"><a class="header" href="#historical-evaluation">Historical evaluation</a></h2>
+<p>This archived study concerns the earlier retain-C guard and its original LUT encoding. The measurements and fixture comparisons below document that experiment; they do not validate the current reference’s repair-before-Scale order. The sampled EXR probes and PQ PNG remain as historical evidence. Current evaluation and sampling contracts are described in <a href="lut.html">Direct and sampled evaluation</a>.</p>
+<h3 id="recorded-experiment-140"><a class="header" href="#recorded-experiment-140">Recorded experiment: 1.4.0</a></h3>
+<p>Selected coefficient: <span data-tex="k=1.0"></span>, fixed inside both implementations. The Color-stage guard preserves the requested chroma and hue and smoothly lifts H–K lightness near its real-domain boundary. The DCTL and the extension’s native-node calculations agree closely. A <span data-tex="65^3"></span> LUT remains a material approximation under strong grading, even with this smoother guard.</p>
+<h3 id="calculation"><a class="header" href="#calculation">Calculation</a></h3>
+<p>Use actual modCAM16 chroma, <span data-tex="C=&#92;sqrt{a^2+b^2}"></span>, and <span data-tex="H=J_{&#92;mathrm{HK}}"></span>, with <span data-tex="H^2=J_A^2+66C"></span>. The default reference/adapting luminances remain 203/20.3 nits. <span data-tex="H=100"></span> identifies a reference-white neutral; HDR <span data-tex="H"></span> continues above 100.</p>
+<p>Keep the Tone-stage output <span data-tex="(H_2,a_2,b_2)"></span> as the reference for the Color-stage request <span data-tex="(H,a,b)"></span>. Define:</p>
+<div class="grade-equation" data-tex="E_0=&#92;max(H_2^2-66C_2,0),&#92;quad D=H^2-66C,&#92;qquad
+&#92;delta=k&#92;frac{E_0H^2}{E_0+H^2}."></div>
+
+<div class="grade-equation" data-tex="E=&#92;begin{cases}
+D,&amp;D&#92;ge&#92;delta,&#92;&#92;[2pt]
+&#92;displaystyle&#92;frac{&#92;delta}{1+t+t^2},&#92;quad t=&#92;frac{&#92;delta-D}{&#92;delta},&amp;D&lt;&#92;delta.
+&#92;end{cases}
+&#92;qquad H_{&#92;rm safe}=&#92;sqrt{66C+E}."></div>
+
+<p>The inverse receives <span data-tex="J_A=&#92;sqrt E"></span> and the original <span data-tex="(a,b)"></span>. For positive <span data-tex="&#92;delta"></span>, the branches meet with matching value, slope and curvature. The smooth knee starts within the valid domain, providing a gradual approach to the boundary. With <span data-tex="&#92;delta=0"></span>, the limit is <span data-tex="E=&#92;max(D,0)"></span>.</p>
+<p>At reset, <span data-tex="D=E_0"></span> and <span data-tex="&#92;delta&#92;le E_0"></span> for <span data-tex="0&lt;k&#92;le1"></span>, so the request is retained exactly. For neutrals, <span data-tex="D=H^2&#92;ge&#92;delta"></span>. The harmonic expression for <span data-tex="&#92;delta"></span> avoids multiplying two large squared-lightness values. The rational branch uses the bounded variable <span data-tex="v=1/(1+t)"></span>, evaluating <span data-tex="E=&#92;delta v^2/(1-v+v^2)"></span>.</p>
+<p>Precision matters: the decoder carries <span data-tex="E"></span> directly. Reconstructing it from rounded <span data-tex="H_{&#92;mathrm{safe}}^2-66C"></span> can lose the entire small achromatic component in float32. This direct energy path is shared by the analytic DCTL, Python baking/scopes, and native nodes. Signed RGB uses paired references for the main signal and its neutral cone offset.</p>
+<p>The coefficient is a global engineering choice. <span data-tex="&#92;delta"></span> varies deterministically with the point’s coordinates, like every other color transform term. Image statistics, neighboring pixels, exposure metadata and scope selection have no influence on <span data-tex="k"></span>. The production UI and saved grading parameters contain no coefficient control.</p>
+<p>For example, take the incoming point <span data-tex="H_2=50,&#92; C_2=20"></span> and request <span data-tex="H=50"></span>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: right">Requested <span data-tex="C"></span></th><th style="text-align: right">Previous output <span data-tex="C"></span></th><th style="text-align: right">New output <span data-tex="C"></span></th><th style="text-align: right">New output <span data-tex="H"></span></th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: right">20</td><td style="text-align: right">20.00</td><td style="text-align: right">20</td><td style="text-align: right">50.00</td></tr>
+<tr><td style="text-align: right">30</td><td style="text-align: right">30.00</td><td style="text-align: right">30</td><td style="text-align: right">50.24</td></tr>
+<tr><td style="text-align: right">40</td><td style="text-align: right">37.88</td><td style="text-align: right">40</td><td style="text-align: right">53.53</td></tr>
+<tr><td style="text-align: right">80</td><td style="text-align: right">37.88</td><td style="text-align: right">80</td><td style="text-align: right">72.88</td></tr>
+<tr><td style="text-align: right">160</td><td style="text-align: right">37.88</td><td style="text-align: right">160</td><td style="text-align: right">102.79</td></tr>
+</tbody>
+</table>
+</div>
+<p>The guard keeps these high-chroma requests distinct. Negative requested <span data-tex="H"></span>, nonfinite values and the inverse cone response’s finite domain retain their existing paired fallback. Output tone and gamut mapping remain downstream.</p>
+<h3 id="photographs-and-procedure"><a class="header" href="#photographs-and-procedure">Photographs and procedure</a></h3>
+<p>The four supplied half-float EXRs identify Rec.2020/D65 chromaticities. Values were interpreted as linear RGB with reference white 1.0 = 203 neutral nits. Their signed channels were preserved.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Source</th><th style="text-align: right">Dimensions</th><th style="text-align: right">RGB minimum / maximum</th><th style="text-align: right">Negative channels</th></tr>
+</thead>
+<tbody>
+<tr><td>IMG_0436</td><td style="text-align: right">4032 × 3024</td><td style="text-align: right">−0.01275 / 1.02344</td><td style="text-align: right">0.929%</td></tr>
+<tr><td>IMG_0441</td><td style="text-align: right">4032 × 3024</td><td style="text-align: right">−0.00450 / 1.00488</td><td style="text-align: right">0.605%</td></tr>
+<tr><td>IMG_0446</td><td style="text-align: right">4032 × 3024</td><td style="text-align: right">−0.00243 / 0.87695</td><td style="text-align: right">0.658%</td></tr>
+<tr><td>IMG_0472</td><td style="text-align: right">3024 × 4032</td><td style="text-align: right">−1.75488 / 4.92578</td><td style="text-align: right">2.258%</td></tr>
+</tbody>
+</table>
+</div>
+<p>Fixtures retain every twelfth row and column, respecting each EXR’s data window. The original images’ hashes and the sampling method are recorded in <code>tests/blender/fixtures/hk-real-world/metadata.json</code>. Every candidate receives identical input pixels and slider settings.</p>
+<p>The Practical grade combines Global C Gain at +0.35 stops with Midtones Cₗ → J at −4, White Cₕ → J at +6, and small Adaptance and Hue changes. Chroma ×8 uses Global C Gain at +3 stops. Darken + chroma combines Midtones <span data-tex="a"></span> → J at −15 and White b → J at −20 with Global C Gain at +2 stops.</p>
+<p>Tonal chroma combines Midtones Cₗ → C at +2, White Cₕ → C at +3, signed a/b contributions and Global C Gain at +0.5. Strong Adaptance uses <span data-tex="a=[30,-50,60,-80]"></span>, <span data-tex="b=[-30,50,60,80]"></span> and strength 0.75. Remap + color places input Midtones, White and Highlights at 50, 350 and 1500 nits, adds +1.5 stops of global chroma gain and applies tonal J/C changes.</p>
+<p>The maximum-control stress grade sets all four Cₕ → C values to +16 stops and Global C Gain to +3, requesting up to 524,288 times the input chroma. Other settings remain at defaults.</p>
+<p>The JSON reports contain every parameter, including the settings abbreviated above. The broad sweep used 254,016 pixels per candidate: all four photographs sampled every 24 pixels, at 0/+2/+4 exposure stops, in ACEScg and Linear Rec.2020. It compared the previous cap and <span data-tex="k"></span>=0.05/0.1/0.2/0.4/0.75/1.0: 98 grade/space/ coefficient comparisons. ACEScg conversion in this numerical sweep uses XYZ and CAT16 D65→ACES adaptation explicitly.</p>
+<p>The display study separately used Blender’s own OCIO input conversion and ACES 2.0 HDR 1000-nit view on Rec.2100-PQ. It used 75,264 pixels per candidate, 0/+2 stops, and <span data-tex="k&#92;in&#92;{0.1,0.4,0.75,1.0&#92;}"></span> plus the old cap. Display errors are <span data-tex="&#92;Delta E_{&#92;mathrm{ITP}}"></span> between the resulting display RGB values. These exposure brackets exercise the supplied HDR photograph through approximately the intended 1000/4000-nit range; peak RGB component values are not luminance measurements.</p>
+<h3 id="coefficient-choice-and-interpolation-errors"><a class="header" href="#coefficient-choice-and-interpolation-errors">Coefficient choice and interpolation errors</a></h3>
+<p>The <span data-tex="65^3"></span> cube retains its signed-asinh input/output shaper, ±64 input-component domain, tetrahedral interpolation and outer-cell extrapolation. Each LUT is compared with its own analytic model, so the table measures interpolation accuracy separately from the intended appearance change between old and new guards.</p>
+<p>Define relative RGB error per pixel as <span data-tex="&#92;frac{&#92;lVert&#92;mathbf{RGB}_{&#92;mathrm{LUT}}-&#92;mathbf{RGB}_{&#92;mathrm{analytic}}&#92;rVert_&#92;infty}{&#92;max(0.01,&#92;lVert&#92;mathbf{RGB}_{&#92;mathrm{analytic}}&#92;rVert_&#92;infty)}"></span>. P99 is the error below which 99% of the sampled pixels fall. <span data-tex="&#92;Delta E_{&#92;mathrm{ITP}}"></span> is a display-space distance, not a percentage.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Grade</th><th style="text-align: right">Old RGB error P99</th><th style="text-align: right"><span data-tex="k=1"></span> RGB error P99</th><th style="text-align: right">Old <span data-tex="&#92;Delta E_{&#92;mathrm{ITP}}"></span> P99</th><th style="text-align: right"><span data-tex="k=1"></span> <span data-tex="&#92;Delta E_{&#92;mathrm{ITP}}"></span> P99</th></tr>
+</thead>
+<tbody>
+<tr><td>Practical</td><td style="text-align: right">8.21%</td><td style="text-align: right">7.69%</td><td style="text-align: right">9.74</td><td style="text-align: right">6.84</td></tr>
+<tr><td>Chroma ×8</td><td style="text-align: right">85.93%</td><td style="text-align: right">77.96%</td><td style="text-align: right">89.06</td><td style="text-align: right">102.06</td></tr>
+<tr><td>Darken + chroma</td><td style="text-align: right">96.25%</td><td style="text-align: right">54.82%</td><td style="text-align: right">86.39</td><td style="text-align: right">80.59</td></tr>
+<tr><td>Tonal chroma</td><td style="text-align: right">89.57%</td><td style="text-align: right">60.99%</td><td style="text-align: right">112.87</td><td style="text-align: right">88.65</td></tr>
+<tr><td>Strong adaptance</td><td style="text-align: right">69.76%</td><td style="text-align: right">38.71%</td><td style="text-align: right">45.98</td><td style="text-align: right">44.76</td></tr>
+<tr><td>Remap + color</td><td style="text-align: right">74.65%</td><td style="text-align: right">53.43%</td><td style="text-align: right">63.08</td><td style="text-align: right">47.42</td></tr>
+</tbody>
+</table>
+</div>
+<p>Coefficient 1.0 achieved the lowest relative-RGB P99 among the tested candidates in all six display-study grades, and the lowest display P99 in five. The Chroma ×8 display result favored a smaller knee and the previous cap. Across the six grades, the equal-weight mean of their display P99 values was 67.85 for the old cap, 67.09 for <span data-tex="k=0.1"></span>, 63.00 for <span data-tex="k=0.4"></span>, 61.89 for <span data-tex="k=0.75"></span> and 61.72 for <span data-tex="k=1.0"></span>. This supports 1.0 as a tested compromise, together with its exact-reset guarantee, rather than a universal perceptual optimum.</p>
+<p>Strong grades still show visible LUT differences. The smoother H–K guard improves interpolation in most tested cases, while the inverse appearance transform, signed extension and shaped RGB coordinates can still vary rapidly within a cube cell. A single coefficient cannot provide an overall accuracy bound for that approximation.</p>
+<p>The +4-stop stress bracket also drives some input components outside ±64; edge extrapolation can produce extremely large errors there. Those maxima are reported separately in the per-image/exposure JSON. The maximum-control grade hits the remaining inverse response-domain guard for 236,390 of 254,016 pixels in each working space; mixing valid and fallback vertices gives very poor LUT results. The six representative grades had zero analytic inverse fallbacks in the broad sweep. These are separate limits from the H–K real-domain repair.</p>
+<h3 id="rebuilt-fixture-comparisons"><a class="header" href="#rebuilt-fixture-comparisons">Rebuilt fixture comparisons</a></h3>
+<p>The following sheets are generated anew from today’s model. They compare the source, the historical retain-C formula embedded in the current surrounding pipeline, the current bounded guard, and the current <span data-tex="65^3"></span> LUT. They isolate the guard change; the historical numerical tables above remain recorded results from their original experiment.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/figures/photo-practical.png"><img src="../../../assets/figures/photo-practical.png" alt="Practical grade across five fixtures" width="1310" height="1667"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/figures/photo-practical.png"><img src="../../../assets/figures/photo-practical.png" alt="Practical grade across five fixtures" width="1310" height="1667"></a></span></label></p>
+<p class="figure-caption">Four point-sampled EXRs and one decoded P3-D65/PQ image. Every column uses the same Blender ACES 2.0 / sRGB view.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/figures/photo-chroma-8x.png"><img src="../../../assets/figures/photo-chroma-8x.png" alt="Strong chroma gain across five fixtures" width="1310" height="1667"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/figures/photo-chroma-8x.png"><img src="../../../assets/figures/photo-chroma-8x.png" alt="Strong chroma gain across five fixtures" width="1310" height="1667"></a></span></label></p>
+<p class="figure-caption">Global <span data-tex="C"></span> Gain = +3 stops stresses the guard and finite LUT sampling.</p>
+
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><a class="figure-link" href="../../../assets/figures/photo-dark-chroma.png"><img src="../../../assets/figures/photo-dark-chroma.png" alt="Directional darkening with chroma gain" width="1310" height="1667"></a><span class="img-wrapper"><a class="figure-link" href="../../../assets/figures/photo-dark-chroma.png"><img src="../../../assets/figures/photo-dark-chroma.png" alt="Directional darkening with chroma gain" width="1310" height="1667"></a></span></label></p>
+<p class="figure-caption">Midtones <span data-tex="a"></span> → J = −15, White <span data-tex="b"></span> → J = −20 and Global <span data-tex="C"></span> Gain = +2 stops. The calculation uses Linear Rec.709 working RGB throughout.</p>
+
+<p><a href="../../../downloads/photo-metrics.json">Current comparison metrics</a> record all 15 grade/fixture pairs. <a href="../../../downloads/photo-grades.json">Grade definitions</a> contain the complete deviations from current defaults.</p>
+<p>The rebuilt columns show source, historical retain-C formula, current analytic result, and current <span data-tex="65^3"></span> LUT result. Every column uses the same Blender ACES 2.0 sRGB view. The point-sampled photographs retain their original aspect ratios. These SDR figures complement the HDR display-space measurements above.</p>
+<p>The large-gain examples show how sharing the repair changes lightness and chroma. Differences between the two rightmost columns reveal the remaining LUT approximation, including changes to the red-lit subject and HDR foliage.</p>
+<h3 id="implementation-checks-and-performance"><a class="header" href="#implementation-checks-and-performance">Implementation checks and performance</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Check</th><th>Measured result</th></tr>
+</thead>
+<tbody>
+<tr><td>H–K invariants</td><td>16 checks; 12,000 numerical samples; 700 independent 70-digit Decimal cases</td></tr>
+<tr><td>DCTL vs Python, supplied-photo probes</td><td>10,476 samples; max relative RGB difference 0.0024%</td></tr>
+<tr><td>DCTL vs Python, signed/HDR control sweep</td><td>34,344 cases; max relative XYZ difference 0.173%</td></tr>
+<tr><td>Native Color-stage rendering vs DCTL</td><td>CPU Compositor/Cycles passed; compositor maximum relative error 0.0149%</td></tr>
+<tr><td>Native LUT sampler vs CPU tetrahedral sampler</td><td>Maximum relative difference 0.000338%</td></tr>
+<tr><td>Full extension graph in Blender</td><td>1,256 compositor node instances; 792 reachable in responsive path, 170 in LUT path</td></tr>
+<tr><td>Native-test cold bake</td><td>1.48 s on this test host</td></tr>
+<tr><td>Numerical cached rebake</td><td>0.45 s in the seeded cube test; approximately 0.13–0.23 s for coefficient-only cached sweeps</td></tr>
+</tbody>
+</table>
+</div>
+<p>Implementation agreement and LUT approximation are different measurements. The sampler accurately evaluates the baked cube, while a cube can still differ substantially from the analytic transform between its vertices.</p>
+<p>The complete DCTL, parity, extension numerical/UI and CPU render suites passed. Resolve Metal/CUDA compilation and interactive GPU performance require a workstation run. Clang was unavailable here, so the provided OpenCL syntax check was skipped; C++ float compilation and static portability checks passed.</p>
+<h3 id="current-reproducible-inputs"><a class="header" href="#current-reproducible-inputs">Current reproducible inputs</a></h3>
+<p>Sampled EXR probes and source metadata live in <code>tests/blender/fixtures/hk-real-world/</code>; the original PQ PNG and its metadata are in <code>tests/blender/fixtures/hk-pq/</code>. The selected shared-guard numerical reference is in <code>tests/blender/fixtures/hk-bounded/</code>, and frozen independent LUT comparisons are in <code>tests/blender/fixtures/lut-asymmetric/</code>.</p>
+<p>Run current fixture targets through <a href="../development/building.html">Buck2</a>. Running an exploratory script against today’s model evaluates today’s equations; it does not recreate an older release’s results. Generated comparison sheets and their metrics are included in the deployment. Temporary test report directories remain isolated build outputs.</p>
+
+                    <footer class="book-footer">Perceptual Grade Technical Report <a href="../reference/credits.html">Credits</a> <a href="../reference/license.html">License</a> <a href="../../../index.html">All books</a></footer></main>
+
+                    
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/math-96cc483f.js"></script>
+        <script src="../theme/reader-7b4ff642.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

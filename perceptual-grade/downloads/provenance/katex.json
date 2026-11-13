@@ -1,0 +1,37 @@
+{
+  "generator_sha256": "d0324f36509a05c6dad9d65bfaca97369a3507118d09531a9900651f70fc8353",
+  "inputs": {
+    "katex-LICENSE": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
+    "katex.min.css": "d4ab5b8ee16989b070cdb0ea24bd6ad48fc8df1b787f280f29d3ae4f959f2c00",
+    "katex.min.js": "103a53763cc033bba8d175bf3f0ba597c3505c9b6747dd3f2c7bc2a6bfcc8ae7"
+  },
+  "integrity": {
+    "script": "sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk",
+    "stylesheet": "sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp"
+  },
+  "invocation": "buck2",
+  "katex": {
+    "license": {
+      "out": "katex-LICENSE",
+      "sha256": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3",
+      "url": "https://raw.githubusercontent.com/KaTeX/KaTeX/v0.19.0/LICENSE"
+    },
+    "script": {
+      "out": "katex.min.js",
+      "sha256": "103a53763cc033bba8d175bf3f0ba597c3505c9b6747dd3f2c7bc2a6bfcc8ae7",
+      "url": "https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js"
+    },
+    "stylesheet": {
+      "out": "katex.min.css",
+      "sha256": "d4ab5b8ee16989b070cdb0ea24bd6ad48fc8df1b787f280f29d3ae4f959f2c00",
+      "url": "https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css"
+    },
+    "version": "0.19.0"
+  },
+  "outputs": {
+    "head.hbs": "05e2c8154160dc25920318bdb3ec8d1a23de26fa1b39380cf2b91d92fe564dbb"
+  },
+  "pins_sha256": "7b4d6487a4feed5156d4da629f407505eec33cc9f460b006ba64261fc6c67d29",
+  "producer": "Pinned CDN equations",
+  "schema": 1
+}

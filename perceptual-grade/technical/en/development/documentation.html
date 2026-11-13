@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Documentation and media - Perceptual Grade Technical Report</title>
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css" integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js" integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk" crossorigin="anonymous"></script>
+
+        <meta name="description" content="English technical report on the current Perceptual Grade reference and project development.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/fonts-6a07186e.css">
+        <link rel="stylesheet" href="../theme/grade-dda453c0.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-53542b48.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-2d92a0d7.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/pontano-sans@5.3.0/files/pontano-sans-latin-wght-normal.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64 256x256" href="../../../favicon.ico?v=b4dbc1f8e6d1">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png?v=65f37d4e63e3">
+<link rel="manifest" href="../../../site.webmanifest">
+</head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu"><li role="none"><button role="menuitem" class="grade-auto" id="grade-theme-auto">Auto</button></li>
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Dark</button></li>
+                            
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"><a href="../index.html"><img class="brand-icon" src="../../../assets/icons/perceptual-grade-32-transparent.png" srcset="../../../assets/icons/perceptual-grade-64-transparent.png 2x" alt="" width="32" height="32"><span>Perceptual Grade Technical Report</span></a></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rei277hz/chromaticity" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+<nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="documentation-and-media"><a class="header" href="#documentation-and-media">Documentation and media</a></h1>
+<p>This chapter preserves the original 1.23.2 source layout and build commands. For
+the maintained monorepo targets, editable sources, generated resources, and
+deployment ZIP, see the <a href="https://github.com/rei277hz/chromaticity/blob/main/products/perceptual-grade-book/README.md">current book build guide</a>.
+The current build regenerates derived media from source and keeps historical
+release downloads as verified attachments.</p>
+<p>The User Manual and Technical Report are independent mdBooks with declared Buck2 inputs for chapters, recordings, screenshots, numerical figures and runtime assets. Reader scripts and generated media are local; KaTeX equations and the text and code fonts load from pinned CDN resources. The User Manual introduction uses the local WebP demonstration. The Bilibili player proof of concept remains commented out in its Markdown source until a real video is ready. Validation retains the exact player URL allowlist for future use.</p>
+<h2 id="edit-and-build"><a class="header" href="#edit-and-build">Edit and build</a></h2>
+<p>The maintained publication now contains two books. The User Manual uses
+<code>docs/book/src/README.md</code>, <code>guide/</code>, and <code>reference/</code>, with matching Simplified
+Chinese chapters under <code>docs/book/zh-Hans</code>. Their <code>SUMMARY.md</code> files must keep
+the same chapter paths and order. The English-only Technical Report uses
+<code>theory/</code>, <code>development/</code>, shared <code>reference/</code>, and its own introduction and
+<code>SUMMARY.md</code> under <code>docs/book/src/report/</code>. Chinese technical chapters have been
+discarded. Keep reader instructions in the manual and model calculations and
+maintenance guidance in the report. Use Markdown chapter links, <code>$$</code> display
+equations and <code>\( ... \)</code> inline TeX.</p>
+<p>Assembly projects these sources into independent mdBook roots. The combined
+site serves the manual at <code>manual/en/</code> and <code>manual/zh-Hans/</code>, and the report at
+<code>technical/en/</code>, with a book chooser at the root. Shared assets and downloads
+remain at the site root. Chapter links across the books are resolved within
+that deployment; print editions link to the corresponding published web page.
+Build <code>//products/perceptual-grade-book:archive[zip]</code> for the single site ZIP,
+or <code>:user-manual[pdf]</code>, <code>:user-manual[epub]</code>, <code>:technical-report[pdf]</code>, and
+<code>:technical-report[epub]</code> in that package for the six print files. Run build
+and test commands through Buck2 with <code>--remote-only</code>.</p>
+<h3 id="code-references-to-the-books"><a class="header" href="#code-references-to-the-books">Code references to the books</a></h3>
+<p>Code comments can point to a stable section without copying a filename or a
+heading slug. Use the exact form below; the book and language are part of the
+reference, and the identifier is declared by an explicit anchor immediately
+after the Markdown heading:</p>
+<pre><code class="language-python"># pg-book: technical-report/en#next-policy.node-output
+</code></pre>
+<pre><code class="language-markdown">## Node output policy
+
+&lt;a id="next-policy.node-output"&gt;&lt;/a&gt;
+</code></pre>
+<p>The resolver reads Python comments with the Python tokenizer, so the same text
+inside a string or docstring is ignored. It indexes only chapters listed by the
+edition’s <code>SUMMARY.md</code>, checks that each identifier is unique, and then checks
+the generated HTML contains exactly one matching ID. A chapter can move or its
+heading can be renamed while the reference remains valid as long as the
+explicit identifier stays with the section. Identifiers are unique within a
+book and language. Supported editions are <code>technical-report/en</code>,
+<code>user-manual/en</code>, and <code>user-manual/zh-Hans</code>.</p>
+<p>Build the reference report with:</p>
+<pre><code class="language-sh">buck2 build --remote-only //products/perceptual-grade-book:book_refs --show-output
+</code></pre>
+<p>The output directory contains <code>book-refs.json</code> and <code>book-refs.txt</code>. They locate
+the source comment, original Markdown heading, generated site page, published
+URL, and local preview URL. Missing or duplicate anchors and malformed comments
+fail the build. The declared input covers Next Blender Python sources and the
+comparison publication example; add markers at the policy and effect-consumer
+contracts that need navigation. Both reports are build artifacts.</p>
+<p>To follow the local URLs, serve the same generated site:</p>
+<pre><code class="language-sh">buck2 run --remote-only //products/perceptual-grade-book:preview -- --port 8080
+</code></pre>
+<h3 id="historical-build-commands"><a class="header" href="#historical-build-commands">Historical build commands</a></h3>
+<p>The commands below describe the original repository:</p>
+<pre><code class="language-sh">buck2 build //:docs_site '//:docs_deploy[zip]' --show-full-output
+buck2 run //:docs_preview -- --port 8080
+buck2 test //:build_inputs //:documentation_intro //:documentation_fonts //:documentation_favicon //:documentation_demos //:documentation_inputs //:documentation_site
+</code></pre>
+<p>The Light and Dark themes adapt the ACES documentation’s typography, neutral surfaces and gold accent. Auto follows system appearance. The full-width title bar sits above both the sidebar and the reading column. The contents stop at chapters and sections; page headings are excluded. Each book and language edition has its own sidebar and search index, with chapter numbers restarting at each part. Previous/next page buttons are removed.</p>
+<p>The CSS and reader controls live in docs/book/theme. The maintained builder runs <code>tools/parts.py</code> through mdBook’s preprocessor protocol before rendering, so the dynamic and no-JavaScript contents have identical numbering. Changing either book’s SUMMARY.md updates its hierarchy; a third nesting level fails instead of adding more detailed navigation.</p>
+<h3 id="cdn-typography"><a class="header" href="#cdn-typography">CDN typography</a></h3>
+<p>Pontano Sans supplies text and Roboto Mono supplies code, matching the font families in the ACES overview page. Text sizes, line heights, heading weights and wide-screen scaling follow that page’s styles. The browser loads version-pinned WOFF2 files directly from jsDelivr, with an early connection and preload for the body font. The swap setting lets the intended font appear even when the first request is slow.</p>
+<p>The original //:book_fonts action verified every font and license against third_party/docs.bzl, then generated the CSS and downloads/provenance/fonts.json. In the current monorepo, the CDN assets action verifies pinned font and KaTeX resources and assembles their configuration, integrity hashes, and license notices. The browser requests their versioned jsDelivr URLs; their payloads are absent from the deployment ZIP. Missing inputs, changed hashes and unexpected external scripts or styles fail validation.</p>
+<pre><code class="language-sh">buck2 build //:book_fonts '//:docs_deploy[zip]' --show-full-output
+buck2 test //:documentation_fonts //:documentation_site //:build_inputs
+</code></pre>
+<h2 id="require-complete-sources"><a class="header" href="#require-complete-sources">Require complete sources</a></h2>
+<p>The checked inventory in build_defs/source_inventory.bzl lists every authored source, including MOVs, screenshot PNGs, appearance artwork, catalogs, model code, fixtures, build definitions and locks. The separate <code>products/perceptual-grade-icon</code> package owns the authored icon configuration and Blender generator; its <code>:icons</code> target supplies the sixteen rendered PNGs to the book. Buck2 checks its source collections against that inventory; missing or unregistered files fail. Pinned downloads require their declared hashes and have no local substitute. All generators run in clean output directories and must produce every declared output; fixture capture, extension packaging, release packaging and site packaging reject incomplete inputs.</p>
+<p>Catalog and translation-review actions require every catalog, binding and source module, then check the generated MO files and CSV. Native diagram assets require the pinned model and CMF dependencies. DCTL generation and C++ validation require every fragment, UI specification, catalog and harness source.</p>
+<p>Fixtures require their scripts, extension modules and captured reports. Numerical and photographic figures require their model, data and sampled images. Screenshots require every configured PNG; demonstrations require both MOVs for every operation.</p>
+<p>The book requires all chapters, theme files, illustrations, fonts, runtime assets and generated media. Deployment checks the complete site manifest. Extension and release packaging require all authored extension files, compiled catalogs, localized DCTLs, the review CSV and dependency locks.</p>
+<p>Measurement requires Blender, its worker and resources; lock maintenance requires the existing dependency lock. A missing new measurement cannot reuse an old JSON result.</p>
+<p>Replacing an existing file needs no inventory change. After intentionally adding or removing a source, explicitly refresh and review the inventory:</p>
+<pre><code class="language-sh">python3 tools/build/source_inventory.py --refresh
+buck2 test //:build_inputs //:packaging_artifacts
+</code></pre>
+<p>The build never refreshes this inventory automatically and never generates a substitute for a missing input. The screenshot dummy generator is an explicit authoring command; the required dummy PNGs are already included as source files.</p>
+<h2 id="replace-the-icons"><a class="header" href="#replace-the-icons">Replace the icons</a></h2>
+<p>The icon product generates transparent and opaque artwork at 16, 32, 48, 64, 180, 192, 256 and 512 pixels by rendering each requested size in Blender. Keep every filename and native dimension when changing its authored configuration. The book consumes <code>//products/perceptual-grade-icon:icons</code>; it does not keep a second authored icon set.</p>
+<p>The ICO contains the original transparent PNG payloads at 16, 32, 48, 64 and 256 pixels. The title uses the 32px artwork and the 64px render for high-density displays. The 180px opaque image is copied byte-for-byte to apple-touch-icon.png. The web manifest uses the supplied transparent 192px and 512px images for ordinary Android icons.</p>
+<p>The icon generator produces the transparent and opaque variants directly. The book’s favicon packager embeds the transparent 16, 32, 48, 64 and 256px PNG bytes in the ICO and copies the native 180, 192 and 512px platform images. It creates the separate 512px maskable tile by placing the opaque 256px render on a padded background; the generated manifest declares only this separate variant as maskable. These icons do not add offline caching or a service worker.</p>
+<pre><code class="language-sh">buck2 build //:book_favicon '//:docs_deploy[zip]' --show-full-output
+buck2 test //:documentation_favicon //:documentation_site
+</code></pre>
+<h2 id="replace-the-introduction-recording"><a class="header" href="#replace-the-introduction-recording">Replace the introduction recording</a></h2>
+<p>Replace docs/media/intro/match-three-images.mp4 with your final recording of matching three differently lit images. The supplied Timeline 1.mp4 occupies this required path as a dummy source. The recording is one complete composition; the build does not rearrange it into the paired tutorial layout.</p>
+<p>The //:book_intro action reads docs/data/intro-video.json. It explicitly interprets Rec.709 primaries, the BT.709 YCbCr matrix, limited video range and a Gamma 2.4 transfer, then converts to sRGB and embeds an sRGB profile in the WebP. The transfer interpretation does not depend on the MP4’s unspecified transfer metadata. Set range explicitly to full if a replacement export uses full-range levels.</p>
+<p>The WebP keeps the source dimensions and playback speed, loops indefinitely, and has no audio. Optional start and end values trim the recording in seconds; null end means its recorded end. Frame durations follow the original frame rate, with millisecond rounding distributed across frames. The default quality is 90 to keep the animation practical to download; quality and lossless are explicit encoding settings. A separate lossless still is used only for printing.</p>
+<pre><code class="language-sh">buck2 build //:book_intro '//:docs_deploy[zip]' --show-full-output
+buck2 test //:documentation_intro //:documentation_site
+</code></pre>
+<p>Missing, corrupt, empty or incorrectly configured sources fail before producing an animation. Replace the MP4 or edit its trim settings, then rebuild the site.</p>
+<h2 id="replace-paired-recordings"><a class="header" href="#replace-paired-recordings">Replace paired recordings</a></h2>
+<p>Each demonstration consumes two square MOV screen recordings containing the image and the Perceptual Grade extension’s gizmo in Blender. Example A is SDR, Example B is HDR. Both recordings are Rec.709 gamut with Rec.709-A transfer; the recording of HDR footage is still a display-referred screen recording, not a PQ or HLG video master.</p>
+<p>The source pack includes the supplied square dummy recording at every sdr.mov and hdr.mov path below. The same clip occupies both sides of all ten operations; these temporary clips do not illustrate the grades described in the lessons. Replace them with the real recordings, keeping the filenames, in the indicated directory under docs/media/demos:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Directory</th><th>What to record on both sides</th></tr>
+</thead>
+<tbody>
+<tr><td>linear-white-balance</td><td>Drag the vectorscope, reset Source White, then repeat by dragging the source-white point directly.</td></tr>
+<tr><td>linear-correction</td><td>Continue from white balance; adjust both Balance handles and all four Spread/Heading handles.</td></tr>
+<tr><td>colorchecker-match</td><td>Starting with that correction, align the chart’s scope readings to the connected EXR.</td></tr>
+<tr><td>tone-curve</td><td>A: S-shaped contrast. B: gamma-like dark-area lift.</td></tr>
+<tr><td>color-j</td><td>A: Shadows and White. B: Midtones and Highlights. Use the J curve twice in each recording.</td></tr>
+<tr><td>color-jc-curves</td><td>Both select Midtones; adjust J and C curves together.</td></tr>
+<tr><td>color-jc-pads</td><td>Both select Midtones; adjust J and C a/b pads together.</td></tr>
+<tr><td>color-adaptance</td><td>A: Shadows and White. B: Midtones and Highlights.</td></tr>
+<tr><td>color-hue-pad</td><td>A: Shadows and White. B: Midtones and Highlights.</td></tr>
+<tr><td>color-hue-rotation</td><td>A: Shadows and White. B: Midtones and Highlights.</td></tr>
+</tbody>
+</table>
+</div>
+<p>For example, replace color-j/sdr.mov and color-j/hdr.mov. Each clip begins with the previous step’s final grade. Within the first white-balance clip, reset only Source White between the two equivalent gestures; carry its final correction into linear-correction. Retain the same image, zoom, framing and display transform throughout. Record only the few seconds of the adjustment; no Resolve recording is required. Its corresponding named sliders are documented in the lesson. The suggested tonal choices and purposes can be revised with the lesson text when final footage is selected; keep the two-tone versus shared-tone structure.</p>
+<p>Every MOV is required. One absent side or an absent pair fails before any demonstration is generated. Nonsquare recordings and invalid trims also fail. The build identifies the bundled dummy by its SHA-256 and labels only panels that still contain those bytes. Replacing a MOV automatically removes that panel’s dummy label; no flag needs to be edited. A normal site build never overwrites source recordings or screenshots.</p>
+<h3 id="trim-each-side-independently"><a class="header" href="#trim-each-side-independently">Trim each side independently</a></h3>
+<p>Edit docs/data/demos.json. Start and end are seconds on that file’s timeline; end = null means the end of the recording. For example:</p>
+<pre><code class="language-json">{
+  "sdr": {"file": "tone-curve/sdr.mov", "start": 0.4, "end": 4.7, "range": "auto"},
+  "hdr": {"file": "tone-curve/hdr.mov", "start": 1.1, "end": 5.8, "range": "auto"}
+}
+</code></pre>
+<p>Both trimmed clips start together at playback time zero. Each keeps its elapsed time; the shorter side holds its last frame until the longer side finishes. The default 700 ms final hold gives the viewer time to inspect the result, then the pair loops from the beginning. There is no reverse playback or speed matching. Choose trims around the complete gesture to make the loop easy to follow.</p>
+<p>The output settings select a 640-pixel square per side at 20 fps. Frame-rate resampling does not slow or accelerate the operation. A clip may contain up to 60 seconds after trimming. The output has a static first-frame companion for printing. On-screen demonstrations always animate, with infinite looping encoded in the WebP; there is no playback selector.</p>
+<h3 id="interpret-color-explicitly"><a class="header" href="#interpret-color-explicitly">Interpret color explicitly</a></h3>
+<p>The pinned imageio-ffmpeg 0.6.0 wheel supplies the FFmpeg binary. The build does not search the host for another FFmpeg installation. For YCbCr input, decoding uses the Rec.709 matrix and the recording’s declared range. Range can be set to full or limited in each clip entry when metadata is wrong; auto uses decoder metadata.</p>
+<p>The pipeline decodes to 16-bit RGB, interprets Rec.709-A as a 1.961 power transfer, then applies the piecewise sRGB encoding before quantizing for WebP. Rec.709 and sRGB share primaries and D65 white, so no primary matrix change is needed. An sRGB ICC profile is embedded. The explicit interpretation overrides reliance on ambiguous QuickTime transfer tags. Blender’s <a href="https://github.com/blender/blender/blob/main/release/datafiles/colormanagement/config.ocio">OCIO configuration</a> is the reference for the Rec.709-A exponent.</p>
+<p>The already-rendered screen image is converted for browsers; this step neither re-grades the footage nor applies another HDR tone map. The build writes source hashes, independent trims, decoded frame counts, durations, conversion settings and FFmpeg version to assets/demos/manifest.json in the site.</p>
+<pre><code class="language-sh">buck2 build //:book_demos '//:docs_deploy[zip]' --show-full-output
+buck2 test //:documentation_demos //:documentation_site
+</code></pre>
+<p>The MOV test generates real lossless MOV fixtures and checks color conversion, trim timing, original speed, end holds, loop metadata, ICC, deterministic output and missing-source errors, including an entirely absent pair.</p>
+<h2 id="replace-screenshots"><a class="header" href="#replace-screenshots">Replace screenshots</a></h2>
+<p>Overwrite the PNGs in docs/media/screenshots, keeping their stable filenames. The layouts in docs/data/screenshots.json compose them into full-size linked figures. Keep sockets, relevant controls and their labels legible.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Filename</th><th>Capture</th></tr>
+</thead>
+<tbody>
+<tr><td>blender-install.png</td><td>Install from Disk and the enabled extension.</td></tr>
+<tr><td>blender-shading.png</td><td>Image Texture → Perceptual Grade → shader → Material Output.</td></tr>
+<tr><td>blender-compositing.png</td><td>Image or Render Layers → Perceptual Grade → output, plus Viewer.</td></tr>
+<tr><td>resolve-install.png</td><td>Open LUT Folder, installed DCTL, Update Lists and effect selection.</td></tr>
+<tr><td>resolve-cst-input.png</td><td>Unmanaged DaVinci YRGB node chain and input CST’s XYZ/Linear output.</td></tr>
+<tr><td>resolve-dctl-white.png</td><td>Destination White and the matching linear XYZ chain.</td></tr>
+<tr><td>resolve-cst-output.png</td><td>Return CST’s XYZ/Linear input and selected output encoding.</td></tr>
+<tr><td>colorchecker-connect.png</td><td>Photograph → Color and ACEScg EXR → Color Reference, with both traces.</td></tr>
+<tr><td>waveform-sdr.png</td><td>A’s image and waveform: label dark areas, midtones and diffuse white.</td></tr>
+<tr><td>waveform-hdr.png</td><td>B’s image and waveform at the same scale: label diffuse white and brighter highlights.</td></tr>
+</tbody>
+</table>
+</div>
+<p>Use the English UI. Record the host version, image interpretation, working space, view transform and changed controls alongside your original capture notes. Disable auto exposure. For the chart, match orientation and crop, interpret the reference EXR explicitly as ACEScg, and avoid glare on the photographed patches.</p>
+<pre><code class="language-sh">buck2 build //:book_screenshot_figures '//:docs_deploy[zip]' --show-full-output
+buck2 test //:documentation_inputs //:documentation_site
+</code></pre>
+<p>The optional //:screenshot_placeholders target creates new dummy files in its output directory; ordinary builds never replace authored source captures.</p>
+<h2 id="appearance-references-and-generated-figures"><a class="header" href="#appearance-references-and-generated-figures">Appearance references and generated figures</a></h2>
+<p>The runtime flowchart is authored as assets/illustrations/runtime-flow.svg and has a text explanation in Architecture and runtime. Edit its vector source when changing the update lifecycle.</p>
+<p>The two published modCAM16 reference images are ordinary source PNGs under docs/book/src/assets/illustrations. Replace them directly and update captions and attribution when choosing final artwork. Their origin and hashes are recorded in docs/data/appearance-references.json. They have no drawing generator.</p>
+<p>The <code>//products/perceptual-grade-book/generators:figures</code> target uses the current reference for the linear basis, Tone, coefficient weights, drivers, and H–K repair. Concentration and the archived LUT examples use the isolated 1.23.2 model; benchmarks and LUT-study comparisons retain their recorded inputs. Each figure declares its scope in <code>figures.json</code>, and provenance includes the reference and legacy source hashes. Python supplies the numerical samples to pinned XeLaTeX/PGFPlots, which emits static SVGs for the English Technical Report’s website, PDF and EPUB editions. Four book-facing LUT-study figures are redrawn from recorded data. The domain-128 finalist errors retain the report’s eight-decimal precision, and two placement axes are reconstructed from the documented formulas; the downloadable report archives remain unchanged. The <code>//products/perceptual-grade-book/generators:photos</code> target generates preserved-release and historical-guard comparisons from the five sampled EXR/PQ fixtures. Historical recorded measurements remain explicitly identified inside Bounded H–K guard; regenerated comparison sheets are distinct.</p>
+<p>Each producer records input/output hashes. Source or data changes invalidate the corresponding Buck2 action; <code>//products/perceptual-grade-book:book_inputs</code> collects and projects the declared outputs into both book trees. The combined site manifest inventories all shipped files, including local media and pinned CDN resource manifests. Browser font and KaTeX payloads remain on the CDN; print editions package their required fonts separately.</p>
+<p><a href="../../../downloads/chart-sources.zip">Download the chart sources and plotted data</a> to inspect the numerical inputs, figure definitions and provenance used by the current vector renderer. Candidate keys beside the historical LUT plots map their compact labels to complete grid names.</p>
+
+                    <footer class="book-footer">Perceptual Grade Technical Report <a href="../reference/credits.html">Credits</a> <a href="../reference/license.html">License</a> <a href="../../../index.html">All books</a></footer></main>
+
+                    
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/math-96cc483f.js"></script>
+        <script src="../theme/reader-7b4ff642.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

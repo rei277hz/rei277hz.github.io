@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Building, testing and provenance - Perceptual Grade Technical Report</title>
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css" integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js" integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk" crossorigin="anonymous"></script>
+
+        <meta name="description" content="English technical report on the current Perceptual Grade reference and project development.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/fonts-6a07186e.css">
+        <link rel="stylesheet" href="../theme/grade-dda453c0.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-53542b48.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-2d92a0d7.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/pontano-sans@5.3.0/files/pontano-sans-latin-wght-normal.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64 256x256" href="../../../favicon.ico?v=b4dbc1f8e6d1">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png?v=65f37d4e63e3">
+<link rel="manifest" href="../../../site.webmanifest">
+</head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu"><li role="none"><button role="menuitem" class="grade-auto" id="grade-theme-auto">Auto</button></li>
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Dark</button></li>
+                            
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"><a href="../index.html"><img class="brand-icon" src="../../../assets/icons/perceptual-grade-32-transparent.png" srcset="../../../assets/icons/perceptual-grade-64-transparent.png 2x" alt="" width="32" height="32"><span>Perceptual Grade Technical Report</span></a></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rei277hz/chromaticity" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+<nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="building-perceptual-grade"><a class="header" href="#building-perceptual-grade">Building Perceptual Grade</a></h1>
+<blockquote>
+<p><strong>Historical implementation guidance:</strong> this chapter retains the 1.23.2 runtime, source layout, and validation profile. For current development commands and supported behavior, use the product READMEs in <a href="https://github.com/rei277hz/chromaticity">chromaticity</a>.</p>
+</blockquote>
+<p>Buck2 builds the extension ZIP, localized DCTLs, diagram artwork, translation review CSV, static handbook, test harness, and complete source archive. Dependencies are declared in <code>BUCK</code>; generated files live in <code>buck-out</code>.</p>
+<h2 id="docker-linux-x86-64"><a class="header" href="#docker-linux-x86-64">Docker (Linux x86-64)</a></h2>
+<pre><code class="language-sh">docker build -t perceptual-grade .
+docker run --name pg-build perceptual-grade build //:release --show-full-output
+docker cp pg-build:/project/buck-out ./buck-out-docker
+docker rm pg-build
+</code></pre>
+<p>The root Dockerfile installs Rust <code>nightly-2026-07-05</code> with rustup, then runs <code>cargo install --locked --git … --rev … buck2</code>. The exact revision is <code>bd5d1960828e1585d7cdfde3400e828841bd4fc9</code>, resolved from upstream’s <code>latest</code> pre-release tag. It is recorded with the Rust version in <code>buck2-toolchain.json</code>. The final image receives the resulting Cargo-built executable. Each build uses the Prelude bundled with that executable.</p>
+<p>Buck2’s upstream <code>.cargo/config.toml</code> requires <code>--cfg tokio_unstable</code>. The Docker Cargo command supplies this through <code>RUSTFLAGS</code>, because <code>cargo install --git</code> does not inherit the checked-out repository’s local Cargo configuration.</p>
+<p>The Docker image also contains C++ compilers and the system libraries needed by the pinned <code>bpy</code> wheel. Buck2 downloads pinned CPython and wheels; installation requires network access. Docker’s build cache can reuse the Cargo layer.</p>
+<h2 id="native-host"><a class="header" href="#native-host">Native host</a></h2>
+<p>Install a C++ compiler, Clang, Git, curl, and the libraries listed in the Dockerfile for your platform. Install the same toolchain and executable:</p>
+<pre><code class="language-sh">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | \
+  sh -s -- --default-toolchain nightly-2026-07-05 --profile minimal -y
+. "$HOME/.cargo/env"
+RUSTFLAGS='--cfg tokio_unstable' cargo +nightly-2026-07-05 install --locked \
+  --git https://github.com/facebook/buck2.git \
+  --rev bd5d1960828e1585d7cdfde3400e828841bd4fc9 buck2
+buck2 build //:release --show-full-output
+</code></pre>
+<p>Locked Python wheels cover Linux x86-64 and macOS Apple Silicon. The host compiler and system libraries remain host dependencies. Use the Docker environment when you need the documented Linux setup. <code>bpy</code> is the headless Blender runtime used by tests; a desktop Blender installation is needed for interactive GPU checks.</p>
+<h2 id="outputs"><a class="header" href="#outputs">Outputs</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Target</th><th>Product</th></tr>
+</thead>
+<tbody>
+<tr><td><code>//:extension[zip]</code></td><td>Installable extension ZIP</td></tr>
+<tr><td><code>//:dctl</code></td><td>One DCTL and UI schema per locale</td></tr>
+<tr><td><code>//:assets</code></td><td>Both PNGs and compiled gettext catalogs</td></tr>
+<tr><td><code>//:i18n_review[csv]</code></td><td>One CSV containing every locale, including notices</td></tr>
+<tr><td><code>//:dctl_host</code></td><td>C++ numerical fixture compiled from the generated DCTL</td></tr>
+<tr><td><code>//:ui_layout[png]</code></td><td>Optional UI layout evidence from recorded drawing</td></tr>
+<tr><td><code>//:docs_site[html]</code></td><td>Self-contained static handbook directory</td></tr>
+<tr><td><code>//:docs_deploy[zip]</code></td><td>Site deployment ZIP, including generated downloads</td></tr>
+<tr><td><code>//:release[source]</code></td><td>Complete source ZIP with installables and provenance</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-sh">buck2 build '//:extension[zip]' '//:i18n_review[csv]' --show-full-output
+buck2 build //:release --build-report /tmp/grade-build.json
+buck2 uquery 'allpaths(//:extension, //third_party:colour-science)'
+buck2 uquery 'deps(//:release)' --output-format dot
+buck2 log what-ran
+</code></pre>
+<h2 id="source-ownership"><a class="header" href="#source-ownership">Source ownership</a></h2>
+<p>The <a href="architecture.html">project structure</a> separates installed runtime code, DCTL sources, build-time generators and fixtures. <code>src/blender</code> is the package root, with Blender manifest ID <code>perceptual_grade</code>.</p>
+<p><code>tests/packaging</code> checks archive contents, deterministic ZIP metadata, per-file hashes, dependency-lock agreement and compiled translations. These checks use actual built products.</p>
+<h2 id="provenance-and-maintenance"><a class="header" href="#provenance-and-maintenance">Provenance and maintenance</a></h2>
+<p><code>provenance.json</code> records source hashes, lock content and artifact hashes; <code>SHA256.json</code> covers release outputs. ZIP ordering, timestamps and permissions are deterministic. The DCTL host depends on the generated DCTL, while production DCTL generation is independent of the host test fixtures.</p>
+<p>For a Buck2 update, resolve an upstream pre-release revision, read its <code>rust-toolchain.toml</code> and <code>.cargo/config.toml</code>, update <code>buck2-toolchain.json</code> and the Dockerfile, then run the build and tests. The packaging test checks that these pins agree. Prelude customization is unnecessary for this build.</p>
+<p>Python dependency records live in <code>third_party/python-lock.json</code> and the generated <code>third_party/wheels.bzl</code>. Use <code>buck2 run //:lock_wheels -- --repository .</code> to refresh them. This is an explicit maintenance command that writes reviewable source locks. See <a href="contributing.html">contributing</a> and <a href="documentation.html">documentation maintenance</a> for reader-facing resources.</p>
+<h2 id="run-tests"><a class="header" href="#run-tests">Run tests</a></h2>
+<p>All tests run through Buck2. Follow <a href="building.html">the building guide</a> for the Cargo-built Buck2 installation or Docker image. Buck2 provides the pinned interpreter, Python dependencies, generated PNGs, MO catalogs, DCTLs and C++ harness.</p>
+<pre><code class="language-sh"># Fast numerical, DCTL and release-packaging checks.
+buck2 test //... --include numerical dctl build -j 2
+# Headless Blender registration, UI, scopes and native graph checks.
+buck2 test //... --include blender -j 2
+# Cross-implementation comparisons.
+buck2 test //... --include parity -j 2
+# CPU render fixtures, or the entire suite.
+buck2 test //... --include renders -j 2 -- --timeout 1800
+buck2 test //... -j 2 -- --timeout 1800
+# Focused source/package checks.
+buck2 test //:numerical_test_i18n_terms //:blender_test_extension_namespace \
+  //:blender_blender_registration_test //:blender_test_ui //:packaging_artifacts
+</code></pre>
+<p>Docker uses the same commands after the image name:</p>
+<pre><code class="language-sh">docker build -t perceptual-grade .
+docker run --rm perceptual-grade test //... --include numerical dctl build -j 2
+docker run --rm perceptual-grade test //... --include blender -j 2
+</code></pre>
+<p><code>build_defs/test_suites.bzl</code> lists the fixture targets. The internal execution adapter in <code>tools/testing</code> copies each test’s declared inputs into an isolated workspace, loads <code>src/blender</code> under its installed package ID, and runs the fixture. Source files and generated inputs cannot be modified by another test. There is one environment/setup path: the Buck2 target graph.</p>
+<p>Translation tests validate keys, formatting placeholders, compiled catalogs, native tooltip lookup and DCTL parity. Reviewed wording lives in the locale JSONs; it is not repeated as a second set of expected sentences. All discovered locales participate automatically. <code>//:i18n_review[csv]</code> produces the review document.</p>
+<p>Packaging checks verify the contents and hashes of actual release ZIPs. Numeric fixtures retain independent reference samples, including signed values and HDR samples. These are current mathematical regression oracles, rather than saved extension-version compatibility snapshots.</p>
+<p>For optional drawing evidence:</p>
+<pre><code class="language-sh">buck2 build //:ui_observations '//:ui_layout[png]' --show-full-output
+</code></pre>
+<p>The headless tests exercise Blender’s Python runtime and CPU evaluation. They do not establish Resolve Metal/CUDA compilation or interactive viewport performance. Those checks require the corresponding desktop applications and GPU.</p>
+<h3 id="documentation-checks"><a class="header" href="#documentation-checks">Documentation checks</a></h3>
+<pre><code class="language-sh">buck2 test //:documentation_fonts //:documentation_favicon //:documentation_demos //:documentation_site //:packaging_artifacts //:build_text_sources
+buck2 build '//:docs_deploy[zip]' --show-full-output
+</code></pre>
+<p>The font, favicon and MOV fixtures check source replacement, format conversion and required-input failures. The documentation fixture checks the rendered site and archive: chapter coverage, local links and fragments, locally packaged runtime resources, fonts, downloads, hashes, and ZIP metadata. It also enforces the root-README-only source layout.</p>
+<h3 id="desktop-acceptance"><a class="header" href="#desktop-acceptance">Desktop acceptance</a></h3>
+<p>Install the built extension in desktop Blender and create a node in both Shader and Compositor editors. Open every stage and receiver page; check dragging, Esc/R, hover help, translated labels, tone selection and Color Reference.</p>
+<p>In Compositor, compare CPU and GPU with Automatic and Full precision, including Direct updates and publication of a matching LUT during a drag. In Shader, compare both render methods on signed/HDR inputs and check Alpha. Load each generated DCTL in Resolve to check GPU compilation, reset identity, representative controls and the diagram overlay.</p>
+<p>Record host application build, OS, GPU, precision, working space and render method with any mismatch. These desktop checks complement the headless fixtures.</p>
+<h2 id="documentation-build-status"><a class="header" href="#documentation-build-status">Documentation build status</a></h2>
+<p>The documentation redesign adds focused targets for figure inputs, screenshot replacement, native benchmark workloads and the rendered site. The current authoring environment cannot launch Buck2 because its sandbox omits <code>/proc/self/exe</code>; elevated execution is disabled. A rendered authoring preview is provided, while these final build gates remain pending on a supported host:</p>
+<pre><code class="language-sh">buck2 build //:release '//:docs_deploy[zip]' --show-full-output
+buck2 test //:documentation_inputs //:documentation_benchmark \
+  //:documentation_fonts //:documentation_favicon //:documentation_demos //:documentation_site //:packaging_artifacts //:build_text_sources
+</code></pre>
+<p>The earlier source/build record includes numerical, DCTL, registration, UI, parity and native CPU compositor checks. Those results describe the preceding source refactor; the current control-name and documentation revision does not rerun that broad suite. Resolve GPU compilation and interactive Metal performance require desktop checks.</p>
+
+                    <footer class="book-footer">Perceptual Grade Technical Report <a href="../reference/credits.html">Credits</a> <a href="../reference/license.html">License</a> <a href="../../../index.html">All books</a></footer></main>
+
+                    
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/math-96cc483f.js"></script>
+        <script src="../theme/reader-7b4ff642.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
