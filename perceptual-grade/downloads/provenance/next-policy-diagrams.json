@@ -1,0 +1,178 @@
+{
+  "figure_manifest_sha256": "881a9dcdd54ada36cd05f2b00516de87242312f09d87acfdfa31e88a8933a679",
+  "inputs": {
+    "docs/book/diagrams/00-policy-layer.d2": "c45761afcd6159ffb28a652d007141e3b2b9c81cf8512e1d33d20a4939c49867",
+    "docs/book/diagrams/01-preparation-node-sequence.d2": "a415953040e5868f5895d52df82392296ff4f3bf3a688af1c002e9413ac1964e",
+    "docs/book/diagrams/01-preparation.d2": "c18f335b8dffcf139bc976d92b7c4437108bc74a45d4740c9ed53242167255c9",
+    "docs/book/diagrams/02-node.d2": "febb8fc53500ef24c302728345bc1dfc3fb6fe7d44e4825ab88eb2660e3f3f95",
+    "docs/book/diagrams/03-helper-sequence.d2": "9d1fb74bfc72fefc2129260b08b4bc47c02fc6623b07ae65b8b76ec8daca4558",
+    "docs/book/diagrams/03-helper.d2": "8a5ebddc9d612b5baff9bfdbd48cc2f5eb88ac77a662f5f453dfe4e0e205a249",
+    "docs/book/diagrams/04-bank-publication-sequence.d2": "6a7147cc68597c030ef75e25ce3c2fab3508db0ad8db8177cdf4028c5262988a",
+    "docs/book/diagrams/04-bank-publication.d2": "0b949da0a05033b8e2dfab77ee78e9909e3c76ede214ee90e3a3d256456e918a",
+    "docs/book/diagrams/06-resources-sequence.d2": "6741444455d56902e2c75e5e679a8295beec7c5d554c39736199e70fc9e47898",
+    "docs/book/diagrams/06-resources.d2": "bd11734a0a8e51a42390d630c5982332378ff7ea3e8eeef687c9aa3ad99a1636",
+    "docs/book/diagrams/07-gesture-sequence.d2": "448615d3ea20f469fce9da5073ec4b7fcf44b2c486f09100e72bfaa9ab01392f",
+    "docs/book/diagrams/07-gesture.d2": "7ce79d61561d63f231fad2e3337d37435876ae057360c88d44207edccef885cb",
+    "docs/book/diagrams/07b-gesture-participants.d2": "b6c6b6a4f2ed61c2e3037875654f61ed3061d5b24ed13ab3151c3af6947896f6",
+    "docs/book/diagrams/08-render-preflight-sequence.d2": "953dafd7375c39466cc612eda0287f7bab87153557a892f33af84e42c2ee1c0c",
+    "docs/book/diagrams/08-render-preflight.d2": "abd07789b5de8742086b89816198db0c0db7ee0931bb9d83ac61bef2ec8221b1",
+    "docs/book/diagrams/09-bake-sequence.d2": "f07a45962d76c87546d4430dc44f3db2e88422d7d423c7e2482e3f03847cb37a",
+    "docs/book/diagrams/09-bake.d2": "b384e1577856d80c2d73989da1d0ae03a7763ab7a621af0215f2ada7479d15b4",
+    "docs/book/diagrams/10-color-authoring-sequence.d2": "bd8e3939d1d7552058cc262972f9f57823783ad8ba6b599b069bc1e4ef67394f"
+  },
+  "invocation": "buck2",
+  "label_check": {
+    "browser_version": "153.0.8010.12",
+    "checker_sha256": "fe812678604e37611ff61c7b6f4f269690ee358d3e9e923702a82a1bcb6378bb",
+    "engine": "Chromium",
+    "figures": {
+      "00-policy-layer": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 8
+      },
+      "01-preparation": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 11
+      },
+      "01-preparation-node-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 31
+      },
+      "02-node": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 14
+      },
+      "03-helper": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 36
+      },
+      "03-helper-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 32
+      },
+      "04-bank-publication": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 23
+      },
+      "04-bank-publication-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 37
+      },
+      "06-resources": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 24
+      },
+      "06-resources-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 30
+      },
+      "07-gesture": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 15
+      },
+      "07-gesture-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 25
+      },
+      "07b-gesture-participants": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 11
+      },
+      "08-render-preflight": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 5
+      },
+      "08-render-preflight-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 23
+      },
+      "09-bake": {
+        "collision_count": 0,
+        "embedded_font_count": 2,
+        "label_count": 20
+      },
+      "09-bake-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 77
+      },
+      "10-color-authoring-sequence": {
+        "collision_count": 0,
+        "embedded_font_count": 1,
+        "label_count": 33
+      }
+    },
+    "native_runtime_manifest_sha256": "8c092fd538ea50a76d3aba62563f1f03553c5029f6f34288263e87d8505a541f",
+    "node_version": "26.13.0",
+    "platform_fonts": {
+      "NotoSerifSC-variable.ttf": "050080d9255a86808f2945bffac582b31ef32bc36411ce29563b4961670c66f9",
+      "Tinos-Bold.ttf": "393269dbab8899f938db19783eca5eac92eb431f7ae0ab45b8349ca895f1a06b",
+      "Tinos-BoldItalic.ttf": "a5de79f0fe863ea0954757acb3d47b3ccd0a930ce3dd5b97230cd3866790a06e",
+      "Tinos-Italic.ttf": "5942266ed398b155d7dc23e36833e7ec6be988f2439bdbeb8ef1bede808eaa91",
+      "Tinos-Regular.ttf": "60a0e8ef0c04dd5dd69ffe91025fa2ae5836cbd35600a82ba031977557e2cb61"
+    },
+    "playwright_version": "1.63.0",
+    "schema": 1,
+    "tolerance_svg_units": 0.5
+  },
+  "outputs": {
+    "assets/illustrations/next-policy/00-policy-layer.svg": "340f9142cbc015f2c4c17e67a392bf00bfde81f2066b9e7aa0b4c0cc78634114",
+    "assets/illustrations/next-policy/01-preparation-node-sequence.svg": "77f7883b53689f7ac0364aa9e00fc758ba90953f338806566d9e1e219d67ff75",
+    "assets/illustrations/next-policy/01-preparation.svg": "54a169898a7e8c366ec101ceaad205e90c0c5775df2d25f1ed2447d9dfb839c8",
+    "assets/illustrations/next-policy/02-node.svg": "31f8254728bca67e94d3249a2628bc31abee4536230677aecf143cc5c8531c7f",
+    "assets/illustrations/next-policy/03-helper-sequence.svg": "f9104f23d238b91f6f6ff292c350cae80ae70f290c57654c43f0327b48bc1e4a",
+    "assets/illustrations/next-policy/03-helper.svg": "4a9e9b70694046bcd59fac35640bb4a256968a3955dfbdb795d136ee771ace40",
+    "assets/illustrations/next-policy/04-bank-publication-sequence.svg": "1a050a82e1bedb3fcd8e06a237d6af4395ef5881e96d929a9a1b97f7b69d3014",
+    "assets/illustrations/next-policy/04-bank-publication.svg": "7307751a4988914c8761311a2d581a2f147a9c8f2c2b8f892d08b2be61ce5892",
+    "assets/illustrations/next-policy/06-resources-sequence.svg": "3e2cc53cf12f68e289371d9a36ef1996c8e4668370b9d398ea5073b9836e04e6",
+    "assets/illustrations/next-policy/06-resources.svg": "81d2e1f3a6147e37fad2090146d8b115896af930366c3aa2088cd8336a528a9f",
+    "assets/illustrations/next-policy/07-gesture-sequence.svg": "5ed57b69fb98da93d666f077573415f8199f97fb8dd5201640f4bd5e69a7e836",
+    "assets/illustrations/next-policy/07-gesture.svg": "4cafae830414434d09190dabac1ea330e5f1e2d286ee5e08c2a04a738360d188",
+    "assets/illustrations/next-policy/07b-gesture-participants.svg": "f316abb532d474106957dcfc81a0b58a9fbf00c0382e1269ab5f93bc4b80ca88",
+    "assets/illustrations/next-policy/08-render-preflight-sequence.svg": "6844c68d150accd4a2b036603a96ed6152cc24c3827c96c1094aad4f762d446e",
+    "assets/illustrations/next-policy/08-render-preflight.svg": "88b2dc3e388e95654ecf85872d7aa0ab240d5efd11e3484e11e4d743b0618c71",
+    "assets/illustrations/next-policy/09-bake-sequence.svg": "acb308b9e382f2144bfadcd44293ab164a08c90574ba5ff3e93bba01ac6dd4a8",
+    "assets/illustrations/next-policy/09-bake.svg": "5580f8999e1b793341ef8836049e3229b108900417ce43befa5d9bd9e10bc091",
+    "assets/illustrations/next-policy/10-color-authoring-sequence.svg": "9c52f40101774f7d96a1b09a31d93a0a2b93bf5b2892c8566ab21516d0ccd3d1"
+  },
+  "renderer": {
+    "archive_sha256": "5669ddc46b99e942cc96078f4a4e36d5e62103348f4c05179ede27802fdd87a9",
+    "flags": [
+      "--layout",
+      "elk",
+      "--elk-nodeNodeBetweenLayers",
+      "40",
+      "--elk-edgeNodeBetweenLayers",
+      "30",
+      "--theme",
+      "0",
+      "--scale",
+      "1",
+      "--pad",
+      "24",
+      "--sketch=false",
+      "--animate-interval",
+      "0",
+      "--bundle=false"
+    ],
+    "name": "D2",
+    "version": "0.9.0"
+  },
+  "renderer_adapter_sha256": "f9569fde28502f8ac4d6b335691512ee7b5b9131de40de2eb50e5bc8ee14d8d8",
+  "schema": 1
+}

@@ -1,0 +1,695 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Perceptual Grade User Manual</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css" integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js" integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk" crossorigin="anonymous"></script>
+
+        <meta name="description" content="A bilingual guide to using Perceptual Grade. Some interface and workflow chapters describe the preserved 1.23.2 release.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/fonts-6a07186e.css">
+        <link rel="stylesheet" href="theme/grade-dda453c0.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-3673e9b9.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-66499cdd.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/pontano-sans@5.3.0/files/pontano-sans-latin-wght-normal.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64 256x256" href="../../favicon.ico?v=d3809710a7bd">
+<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png?v=dd75e1757261">
+<link rel="manifest" href="../../site.webmanifest">
+<link rel="alternate" hreflang="en" href="../en/print.html">
+<link rel="alternate" hreflang="zh-Hans" href="../zh-Hans/print.html">
+<script src="../language.js" defer></script>
+</head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu"><li role="none"><button role="menuitem" class="grade-auto" id="grade-theme-auto">Auto</button></li>
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Dark</button></li>
+                            
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"><a href="index.html"><img class="brand-icon" src="../../assets/icons/perceptual-grade-32-transparent.png" srcset="../../assets/icons/perceptual-grade-64-transparent.png 2x" alt="" width="32" height="32"><span>Perceptual Grade User Manual</span></a></h1>
+
+                    <div class="right-buttons"><details class="language-picker"><summary title="Choose language" aria-label="Choose language" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18Z"/></svg></summary><div class="language-options"><a href="../en/print.html" data-book-language="en" lang="en" hreflang="en" aria-current="page">English</a><a href="../zh-Hans/print.html" data-book-language="zh-Hans" lang="zh-Hans" hreflang="zh-Hans">简体中文</a></div></details>
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rei277hz/chromaticity" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+<nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="perceptual-grade-for-blender"><a class="header" href="#perceptual-grade-for-blender">Perceptual Grade for Blender</a></h1>
+<p>Perceptual Grade is a three-stage color transform for Blender’s Shader and
+Compositor node editors. The current Next implementation provides <strong>Linear</strong>,
+<strong>Tone</strong>, and <strong>Color</strong> controls, shared Grades, animated node-owned Grades,
+Grade Stacks, and managed image baking. The <a href="../../technical/en/index.html">Technical Report</a>
+describes the model and current implementation contracts.</p>
+<div class="download-grid">
+<a class="download primary" href="../../downloads/perceptual_grade-v1.23.2-20261101.zip"><strong>Legacy Blender download</strong><span>Perceptual Grade 1.23.2 · 2026-11-01 · not Next</span></a>
+</div>
+
+<p>The ZIP above is retained for users of the preserved 1.23.2 extension. It does
+not contain Perceptual Grade Next. This handbook does not yet distribute a Next
+extension ZIP.</p>
+<p>Begin with <a href="#install-and-connect">installation and node connections</a>, then follow
+the <a href="#grade-in-three-stages">three-stage workflow</a>. Set white balance and exposure
+in <strong>Linear</strong>, set the tone landmarks in <strong>Tone</strong>, and shape lightness, chroma,
+Adaptance, and the six-handle Warp web in <strong>Color</strong>. Shared Grades can be reused
+across nodes; convert a Grade node to node-owned settings when it needs its own
+animation. A Grade Stack combines ordered forward entries in one sampled
+transform.</p>
+<p>The manual covers the Shader and Compositor nodes. The <a href="../../technical/en/index.html">reference chapters</a>
+explain the mathematics, while the <a href="../../technical/en/development/next-policies.html">Next policy chapter</a>
+documents runtime publication, failure handling, and bake behavior.</p>
+<p>See <a href="#credits-and-references">credits</a> for model and implementation references,
+and <a href="#license">license</a> for licensing.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="install-and-connect"><a class="header" href="#install-and-connect">Install and connect</a></h1>
+<h2 id="blender-extension"><a class="header" href="#blender-extension">Blender extension</a></h2>
+<p>The <a href="../../downloads/perceptual_grade-v1.23.2-20261101.zip">legacy development ZIP</a>
+contains Perceptual Grade 1.23.2, not Next. It remains available for users of
+that release. The legacy ZIP is not the Next product described by this manual.
+The handbook site does not distribute a Next extension ZIP. When you have a
+Next package, install it through Blender’s Extensions preferences.</p>
+<p>In a Shader or Compositor editor, use <strong>Add → Color → Grade</strong> or <strong>Grade Stack</strong>.
+Select a node and open the <strong>Perceptual Grade</strong> sidebar in the editor’s N-panel.
+The Linear and Tone controls appear for the selected Grade output. Color controls
+are divided into J, C, Adaptance, and Warp panels.
+Choose an existing Grade in the node’s selector, or use <strong>New Grade</strong> to create
+one, before editing the shared controls.</p>
+<h2 id="connect-a-material-in-shading"><a class="header" href="#connect-a-material-in-shading">Connect a material in Shading</a></h2>
+<p>Connect an <strong>Image Texture</strong> Color output to the Grade Color input. Connect the
+Grade output to the material input to adjust, such as Principled BSDF Base Color,
+and keep the shader connected to Material Output. For an unlit image preview,
+connect the Grade output to an Emission shader instead.</p>
+<p>Set the Image Texture’s Color Space to match the source encoding so Blender
+decodes the image correctly. Use the scene’s supported working color space for
+the overall node graph; Next supports Linear Rec.709, Linear Rec.2020, and
+ACEScg scene spaces.</p>
+<h2 id="connect-an-image-in-compositing"><a class="header" href="#connect-an-image-in-compositing">Connect an image in Compositing</a></h2>
+<p>Enable <strong>Use Nodes</strong> in the Compositor. Connect an Image or Render Layers Image
+output to Grade Color, then connect the result to the next operation or output.
+Add a Viewer branch to inspect adjustments while editing. Render once before
+sampling Render Layers.</p>
+<p>For node-owned animation, right-click a Grade node and choose <strong>Convert to
+Node-Owned Grade</strong>. This copies its current settings into that node. Shared
+Grades and Stack entries retain datablock ownership; see <a href="#share-and-animate-grades">Share and reuse
+Grades</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="grade-in-three-stages"><a class="header" href="#grade-in-three-stages">Grade in three stages</a></h1>
+<p>A Grade applies three connected stages: <strong>Linear</strong> establishes exposure, white
+balance, and broad color relationships; <strong>Tone</strong> maps scene luminance to
+perceptual lightness; <strong>Color</strong> shapes lightness and chroma by tone and hue.
+Adjust them in that order, checking the complete image after each stage.</p>
+<p>Start with a neutral reference and a correctly decoded input. In Linear, correct
+the cast and set an overall level without forcing highlights to white. In Tone,
+place the black, shadow, midtone, white, and highlight anchors for the image’s
+dynamic range. In Color, make selective changes while watching skin, neutrals,
+and saturated colors together. A single grade is a global transform, so it
+cannot compensate for local lighting or an incorrect input color profile.</p>
+<p>Next exposes the full numeric Stage 3 controls in the sidebar. <strong>J</strong> adjusts
+lightness response by low/high chroma and opponent direction. <strong>C</strong> adjusts
+chroma response using the same drivers, plus global chroma gain. <strong>Adaptance</strong>
+sets opponent-space targets at Shadows, Midtones, White, and Highlights with a
+shared half-influence saturation. <strong>Warp</strong> uses a six-handle cyclic color web at
+the four non-black tone anchors: chroma is expressed in stops, hue as the stored
+degree offset, and Scale in stops. Each family is interpolated smoothly across
+tone. The draggable Warp diagram is not part of this control set; use its numeric
+fields.</p>
+<p>The numerical grading model uses frozen post-Tone selectors and signed energy.
+The order is J/C response, Warp hue/chroma and positive Scale selection,
+selective Adaptance, H–K repair, then Scale on the repaired opponent coordinates
+and Scale squared to energy. The H–K guard runs before Scale. The output boundary separately
+projects values into the supported RGB cube when required.</p>
+<p>Keep exposure, view transform, and input decoding consistent while comparing
+versions of a grade. Scene-linear values can exceed display white; judge them
+through the intended display transform rather than clamping source highlights.</p>
+<p>Continue with <a href="#linear">Linear</a>, <a href="#tone">Tone</a>, and <a href="#color">Color</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="linear"><a class="header" href="#linear">Linear</a></h1>
+<p>Linear performs an exact matrix transform before the nonlinear Tone and Color
+stages. It establishes a useful exposure and color balance for the rest of the
+grade.</p>
+<h2 id="exposure-and-source-white"><a class="header" href="#exposure-and-source-white">Exposure and source white</a></h2>
+<p><strong>Exposure</strong> is measured in stops; +1 doubles scene-linear RGB. Set it early so
+the image uses a useful signal range, then avoid using it to erase highlight
+detail. The source-white x and y controls set the chromaticity that Stage 1
+adapts. Use <strong>Match White</strong> to return the source white to D65.</p>
+<p>The displayed Working White label is fixed at D65 in this Next version. The
+Linear controls also include Cyan-Red and Yellow-Blue <strong>Balance</strong>, <strong>Spread</strong>,
+and <strong>Heading</strong>. Balance changes the relative exposure of opposing colors;
+Spread changes the reference displacement from white; Heading rotates that
+direction in the xy plane. These controls combine into the Grade’s matrix.</p>
+<p>For a white-balance correction, choose a neutral surface photographed under the
+lighting you want to correct. Adjust source white until that surface is neutral,
+then inspect other colors and skin tones. If the neutral moves correctly but
+colored surfaces remain wrong, use Balance, Spread, or Heading for the broad
+relationship. They affect the whole image, not one sampled patch.</p>
+<p>Blender decodes each Image Texture according to its Color Space setting. Check
+that input setting before grading; an incorrect transfer function or gamut
+cannot be repaired reliably by the Grade. The scene working color space is
+handled by the node’s scene adapter. Next supports Linear Rec.709, Linear
+Rec.2020, and ACEScg.</p>
+<p>An ordinary Grade evaluates Stage 1 as an exact matrix before its native
+nonlinear stages. In a Grade Stack, the complete ordered transform is sampled
+together. See <a href="#scene-working-spaces">working spaces</a> for how those sampling
+coordinates relate to scene RGB.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="tone"><a class="header" href="#tone">Tone</a></h1>
+<p>Tone maps neutral input luminance to a perceptual lightness curve. Complete
+Linear first, then set the curve’s input landmarks and diffuse/peak reference.</p>
+<h2 id="set-the-landmarks"><a class="header" href="#set-the-landmarks">Set the landmarks</a></h2>
+<p>Tone exposes Black, Shadows, Midtones, White, and Highlights input levels in
+nits. Black maps to black; Shadows, Midtones, and White map to their respective
+neutral lightness anchors; Highlights maps to the configured peak anchor. These
+are soft curve landmarks, not hard clamps or independent output values.</p>
+<p>Place the levels according to the image. An SDR image may keep most tones near
+or below diffuse white. In HDR, distinguish a diffuse surface from emissive or
+specular peaks instead of moving ordinary midtones toward the brightest pixel.
+The curve fit changes how closely the curve approaches each control point and
+how narrowly each point influences its neighbors. Peak selects one of the
+supported neutral peak targets.</p>
+<p>The shared Grade and Stack controls are static. A Grade converted to
+<strong>Node-Owned Grade</strong> can animate numeric controls other than the discrete Peak
+selection. Keyframes live on the containing node tree’s Action and are shared by
+all users of that tree.</p>
+<h2 id="evaluate-the-curve"><a class="header" href="#evaluate-the-curve">Evaluate the curve</a></h2>
+<p>Inspect the Grade output and the rendered/viewed image under the intended scene
+display transform. A tone adjustment changes the signal consumed by Color, so
+after moving a landmark recheck selective Color work. Use Blender’s image and
+Viewer displays to compare the result while editing a selected Stack Grade.</p>
+<p>The <a href="../../technical/en/theory/tone.html">Tone model</a> details the smooth interpolation and its
+reference-lightness scale.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="color"><a class="header" href="#color">Color</a></h1>
+<p>Color is Stage 3. It adjusts appearance after Linear and Tone, with smooth
+controls across tone, chroma, and hue. The sidebar separates the numeric controls
+into <strong>J</strong>, <strong>C</strong>, <strong>Adaptance</strong>, and <strong>Warp</strong>.</p>
+<h2 id="j-and-c-response"><a class="header" href="#j-and-c-response">J and C response</a></h2>
+<p>J changes perceptual lightness response and C changes chroma response. Each
+family has four tone anchors: Shadows, Midtones, White, and Highlights. At each
+anchor, low/high chroma weights adjust the radial contribution, while a/b values
+adjust opponent directions. The fit controls shape the blending across tone;
+Global C Gain applies an overall chroma multiplier.</p>
+<p>Use small values first. J changes can alter contrast or emphasize a subject;
+changes to C can strengthen or quiet color. Inspect neutrals and saturated
+colors while adjusting, because a large adjustment can affect colors beyond the
+intended subject.</p>
+<h2 id="selective-adaptance"><a class="header" href="#selective-adaptance">Selective Adaptance</a></h2>
+<p>Adaptance assigns a/b target coordinates at Shadows, Midtones, White, and
+Highlights. Its saturation parameter sets where the correction reaches half
+influence. Use it for a targeted appearance shift across selected tonal ranges;
+it is not the Linear white-balance control.</p>
+<p>The two coordinates form one radial destination. Next shortens an out-of-range
+request along its direction so the calibrated cone responses remain valid;
+it does not clip a and b independently. <strong>Limited</strong> marks a sampled request
+whose effective destination must be shortened, such as an animated value.
+The normal slider spans are ±4, ±10, ±20, and ±25 for Shadows, Midtones, White,
+and Highlights, with a 0.01 drag increment. Typed values are not rounded to
+that increment. These are editing spans; the valid radial
+boundary depends on the tone anchor. A nonfinite request fails visibly.</p>
+<h2 id="warp-color-web"><a class="header" href="#warp-color-web">Warp color web</a></h2>
+<p>Warp supplies six cyclic color handles—red, yellow, green, cyan, blue, and
+magenta—at each of the four tone anchors. Chroma values are log2 changes in
+stops. Hue values are the stored degree offsets. Scale values are also in stops
+and determine the common positive scale used after the H–K repair. The controls
+interpolate around the cyclic web and between tone anchors. The current UI has
+numeric fields and does not provide a draggable diagram.</p>
+<p>Neighboring destination hues keep at least 4° of cyclic separation, including
+the magenta-to-red seam. An edit pins the selected hue and pushes neighbors
+when needed, in either direction around the web. Later edits of the initiating
+hue solve its automatic return positions together, approaching each saved
+position as far as neighboring gaps allow. A blocked return stays pending.
+Editing one of those hues yourself starts from its current position
+and detaches only that hue from the earlier automatic adjustment.</p>
+<p>Changing Peak clears the automatic return relationships and resolves the new
+hue geometry and Adaptance limits together. Shared Grades keep their automatic
+relationships across frame changes. A node-owned Grade clears them when the
+actual frame or subframe changes. If interpolated animation violates the hue
+gaps, evaluation projects the angles into the valid range and shows <strong>Limited</strong>; it does
+not rewrite stored values or keyframes.</p>
+<p>Review the entire image after changing Warp. Its evaluation uses frozen
+post-Tone selectors, then performs J/C response, Warp hue/chroma and Scale
+selection, selective Adaptance, H–K repair, and finally applies Scale to the
+repaired opponent coordinates and Scale squared to signed energy. This order preserves the
+reference model’s guard-before-Scale contract. RGB cube containment is a
+separate output-boundary operation.</p>
+<p>Node-owned Grades expose their Stage 3 values to Blender keyframing. Shared
+Grades and Stack entries remain static. A Stack samples all enabled forward
+Grades into a single 33³ preview and then a 65³ final transform; see <a href="#grade-stacks">Grade
+Stacks</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="share-and-animate-grades"><a class="header" href="#share-and-animate-grades">Share and animate Grades</a></h1>
+<p>A <strong>Grade</strong> datablock stores the authoritative Linear, Tone, and Color settings.
+Shader and Compositor Grade nodes can use the same datablock, so an edit made in
+one editor updates every reader. A Grade Stack owns its ordered list of entries;
+each entry refers to a shared Grade.</p>
+<h2 id="create-and-reuse-a-grade"><a class="header" href="#create-and-reuse-a-grade">Create and reuse a Grade</a></h2>
+<p>A new Grade node has no Grade datablock selected, and its default-value controls
+remain disabled. Use the selector to choose an existing Grade or <strong>New Grade</strong>
+to create one before editing. Selecting the same datablock shares it with another
+node. With a Grade selected, New Grade makes an independent copy when one node
+needs different settings. Renaming a Grade changes only its name.</p>
+<p>Unlinking a Grade from a node clears that node’s association and restores its
+default settings; it does not remove the datablock. A Grade Stack entry can be
+unlinked or removed while preserving its referenced Grade. Blender’s fake-user
+setting keeps an otherwise-unused datablock when the file is saved.</p>
+<h2 id="animate-a-node-owned-grade"><a class="header" href="#animate-a-node-owned-grade">Animate a node-owned Grade</a></h2>
+<p>Right-click a Grade node and choose <strong>Convert to Node-Owned Grade</strong>. Next copies
+the node’s current settings onto the node, independently of its shared Grade.
+This mode is useful when a transform should follow Blender’s timeline. Numeric
+Linear, Tone, and Stage 3 fields can be keyed with Blender’s normal keyframe
+commands or Auto Key. The discrete Tone Peak choice is static.</p>
+<p>The animation belongs to the containing Shader or Compositor node tree’s Action.
+Reusing a material or group shares that animation across its users. To return to
+shared settings, choose <strong>Convert to Datablock-Owned Grade</strong>. Next creates a
+Grade datablock from the current frame’s values and removes that node’s Grade
+animation; undo restores the previous node-owned animation.</p>
+<p>During forward or reverse playback, a node-owned Grade can display the last
+completed Grade from the current playback session while the next frame prepares.
+<strong>Updating</strong> means the displayed Grade is still catching up with the playhead.
+Stopping playback or scrubbing requests the exact settings at the selected frame.</p>
+<p>Node-owned Grade nodes intentionally have no Bake control. Their time-varying
+values are evaluated as part of animation and render preflight. Shared Grade
+and Grade Stack nodes support Bake; see <a href="#render-and-bake">Render and bake</a>.</p>
+<h2 id="save-and-render"><a class="header" href="#save-and-render">Save and render</a></h2>
+<p>The extension reconciles kernels after file load and before rendering. During
+interaction, a previous complete result can remain visible with an <strong>Updating</strong>
+status while a replacement is prepared. Only the current complete result is
+render-ready. A current preparation failure is visible as magenta output with
+alpha preserved, and render preflight stops the affected frame.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="scene-working-spaces"><a class="header" href="#scene-working-spaces">Scene working spaces</a></h1>
+<p>Next uses a fixed D65 Grade reference white. The Linear panel displays
+<strong>Working White: D65</strong> as a disabled value; it is not a Grade setting that can
+be changed in this product version. The source-white xy controls remain
+available for the creative Stage 1 correction.</p>
+<p>The node adapts between the scene’s RGB working space and its internal grading
+coordinates. Supported Blender scene spaces are <strong>Linear Rec.709</strong>,
+<strong>Linear Rec.2020</strong>, and <strong>ACEScg</strong>. Switching the scene space updates the
+surrounding conversion matrices and causes the derived graph to reconcile. It
+does not reinterpret the same numeric RGB triplet as the same color: Blender
+must convert input RGB when colorimetrically equivalent values are intended.</p>
+<p>Ordinary Grade nodes apply the Linear matrix before their native Tone/Color
+graph. A Grade Stack samples the complete sequence in fixed linear ACEScg / ACES-white
+coordinates, with scene conversion around the LUT. The LUT’s sampling white is
+an implementation boundary and does not change the Grade’s fixed D65
+appearance reference.</p>
+<p>Changing a working space can require new graph data. If graph preparation or
+recovery fails, Next shows a visible magenta result that preserves alpha and
+blocks rendering until the current kernel is repaired. See <a href="../../technical/en/theory/lut.html">evaluation and
+interpolation</a> for the LUT coordinates and <a href="#linear">Linear</a>
+for input decoding and Stage 1 controls.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="grade-stacks"><a class="header" href="#grade-stacks">Grade Stacks</a></h1>
+<p>A <strong>Grade Stack</strong> combines an ordered list of shared Grades into one sampled
+transform. Enabled entries run from top to bottom. Use the direction selector
+on each entry to choose <strong>Forward</strong> (the default) or <strong>Inverse</strong>. An Inverse
+entry can appear anywhere, including alone or next to another Inverse. It
+searches for an input whose Grade result before AP1-D65 boundary mapping
+matches the target. This applies to both RGB and appearance targets. Grading
+can discard information, so the recovered input can be approximate or one of
+several possible inputs. Inverse requires an invertible Linear transform.</p>
+<p>An <strong>Inverse → Forward</strong> pair passes the recovered pre-Tone appearance directly
+when the entries have the same Linear transform. Different Linear transforms
+compose in CAT16 cone space. A <strong>Forward → Inverse</strong> pair passes the post-Color
+appearance. Both handoffs carry signed values and avoid an RGB round trip.
+Only a final Forward entry applies the AP1-D65 boundary mapping. A final Inverse
+entry returns recovered signed RGB, which can exceed the LUT grid maximum of
+1024.</p>
+<h2 id="arrange-and-edit-entries"><a class="header" href="#arrange-and-edit-entries">Arrange and edit entries</a></h2>
+<p>Use <strong>Add Grade</strong> to create an enabled empty entry, then choose a shared Grade
+in its selector or use the entry’s plus button to create a new Grade.
+Use the entry controls to enable or bypass it, select its sidebar editing target,
+move it up or down, or remove it. Unlinking the Grade leaves an empty entry;
+removing the entry leaves the shared Grade datablock intact. A Stack with no
+enabled Grades is identity.</p>
+<p>Selecting an entry’s edit control opens the sidebar for that shared Grade.
+Changes update every ordinary Grade node and Stack entry that references it.
+Create an independent Grade when one entry needs different parameters. Stack
+membership and order belong to the node; the Grade settings belong to the
+shared datablock.</p>
+<h2 id="one-lut-for-the-full-sequence"><a class="header" href="#one-lut-for-the-full-sequence">One LUT for the full sequence</a></h2>
+<p>The Stack evaluates all enabled Grades, including each Linear matrix, into one
+65³ GPU-prepared LUT. While editing, a 33³ preview can install first; the final
+65³ result follows. The preview uses every other final-grid coordinate; the GPU
+helper evaluates the two resolutions separately. A complete prior result can
+remain visible during updates, but rendering and normal saving wait for a
+current full result.</p>
+<p>The Stack can use a LUT with finite inverse approximations outside tolerance.
+It warns how many vertices of the displayed preview or full LUT are affected
+and reports the worst error as a multiple of tolerance.</p>
+<p>Changing a referenced Grade, entry direction, enable state, or order changes the sampled
+function. A current setting signature is required before a result can install.
+After file load or before rendering, Next reconciles the derived LUT. A
+preparation failure is visible and fails closed with magenta output preserving
+alpha.</p>
+<p>The Stack works in fixed internal linear ACEScg / ACES-white coordinates. Scene
+conversion surrounds the LUT, while all entries are evaluated within it. See
+<a href="#scene-working-spaces">Scene working spaces</a> and <a href="../../technical/en/theory/lut.html">evaluation and interpolation</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="render-and-bake"><a class="header" href="#render-and-bake">Render and bake</a></h1>
+<p>Shared Grade and Grade Stack nodes provide a <strong>Bake</strong> operation in Shader and
+Compositor trees. Per-node animated Grade nodes intentionally do not provide
+Bake, because their settings are time-varying.</p>
+<h2 id="bake-a-node-result"><a class="header" href="#bake-a-node-result">Bake a node result</a></h2>
+<p>Select a supported Grade or Stack node, set the output dimensions when the
+route allows it, and click <strong>Bake</strong> in the sidebar. The result is published to
+a managed packed 32-bit float RGBA Image and the node switches to that reader.
+The result is the native evaluated output of the node tree, so Grade uses its
+helper-image kernel and Grade Stack uses its full 65³ LUT graph.</p>
+<p><strong>Use Bake</strong> chooses between the Image and live node output without removing the
+Image binding. A valid Image remains available when settings, tracked source
+data, or the render engine change. The node warns that the bake may be outdated
+and shows the reason. Switching back to the engine used for the bake clears the
+engine warning when the other inputs still match. Rebaking a shared managed
+Image updates every reader.</p>
+<p>Settings tracking includes Linear, Tone, and every Stage 3 control on the target,
+enabled Stack entries, and live upstream Grade/Stack nodes.</p>
+<p>The optional Shader <strong>Vector</strong> input controls baked sampling only. When it is
+unlinked, sampling uses the recorded bake UV map, or the active render UV map
+for an Image bake.</p>
+<h2 id="image-and-uv-routes"><a class="header" href="#image-and-uv-routes">Image and UV routes</a></h2>
+<p>A pointwise Shader graph with one ordinary still Image and unlinked source
+coordinates uses an Image bake: one output pixel per source texel. A constant
+Shader graph uses a 1×1 image. Compositor bakes retain the native compositor
+output domain, including the scene canvas size for constants.</p>
+<p>Linked coordinates, surface-dependent shading, multiple source Images, or an
+upstream managed UV bake require a UV bake on a mesh. UV baking uses Cycles and
+needs an active, non-overlapping map in the 0–1 tile. Image bakes follow the
+Scene render engine: EEVEE uses a private orthographic render, Cycles uses the
+selected CPU or GPU device, and Workbench or an unknown engine falls back to
+Cycles CPU. UV bakes use the Scene’s Cycles CPU/GPU choice. An unavailable GPU
+selection fails visibly instead of silently changing devices. The bake helper
+does not change Scene or user preferences.</p>
+<p>Bake explicitly rejects UDIM/tiled Images, movies and image sequences,
+multiview/multilayer sources, Shader to RGB, movie clips and masks, linked or
+animated cache/Alembic geometry, missing or overlapping UVs, and unsupported
+graph occurrences. Apply unsupported topology-changing or deformation
+modifiers before a UV bake. The <a href="../../technical/en/development/next-policies.html#next-policy.bake">Next bake policy</a>
+lists the current route boundaries.</p>
+<h2 id="render-readiness"><a class="header" href="#render-readiness">Render readiness</a></h2>
+<p>Next reconciles derived kernels before rendering. Only a full result for the
+current settings signature is render-ready. During interaction a previous
+complete result may remain visible with <strong>Updating</strong>; a failed current result
+shows magenta with alpha preserved and blocks render preflight. Grade Stack
+preparation can show its 33³ preview during editing, but final rendering waits
+for 65³.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="credits-and-references"><a class="header" href="#credits-and-references">Credits and references</a></h1>
+<p>Perceptual Grade is developed by Rei277Hz. Its current monorepo source, including
+DCTL, is available under <code>MIT OR Apache-2.0</code>; packaged Blender extensions and
+their Corresponding Source are additionally offered under <code>GPL-3.0-or-later</code>.
+The preserved 1.23.2 DCTL and Blender extension share their historical grading
+model. The current analytic reference and Next have separate implementation
+scopes, described in <a href="../../technical/en/theory/structure.html">Appearance coordinates and grading</a>
+and <a href="../../technical/en/development/next-policies.html">Next Blender policy machines</a>. See the
+<a href="#license">License</a> for the current policy and the separate historical downloads.</p>
+<h2 id="color-appearance"><a class="header" href="#color-appearance">Color appearance</a></h2>
+<p>Hellwig and Fairchild, <a href="https://doi.org/10.1002/col.22792">Brightness, lightness, colorfulness, and chroma in CIECAM02 and CAM16</a>, 2022.</p>
+<p>Hellwig and Fairchild, <a href="https://doi.org/10.1002/col.22793">Extending CIECAM02 and CAM16 for the Helmholtz–Kohlrausch effect</a>, 2022.</p>
+<p>Hellwig and Fairchild, <a href="https://doi.org/10.2352/CIC.2022.30.1.48">Revising CAM16-UCS</a>, 2022.</p>
+<p><a href="https://colour.readthedocs.io/en/develop/_modules/colour/appearance/hellwig2022.html">Colour’s Hellwig2022 implementation</a>, used as a primary model reference.</p>
+<p><a href="https://colour.readthedocs.io/en/develop/_modules/colour/adaptation/vonkries.html">Colour’s von Kries adaptation implementation</a>, for CAT16 adaptation.</p>
+<p>The historical native Stage 2 graph and NumPy scope implementation share the
+1.23.2 DCTL’s modCAM16 coordinates, H–K compensation, hue eccentricity, default
+calibration and monotone softplus remapping. That product adds its own
+signed-value extension, tonal coefficient model, Adaptance weighting,
+hue-concentration controls and bounded H–K inverse guard. The theory chapters
+identify the current reference equations and distinguish this historical profile.</p>
+<h2 id="robust-statistics"><a class="header" href="#robust-statistics">Robust statistics</a></h2>
+<p>Hubert, Rousseeuw and Verdonck, <a href="https://wis.kuleuven.be/stat/robust/papers/2012/DetMCD.pdf">A deterministic algorithm for robust location and scatter</a>, 2012, supplies the DetMCD algorithm used for the historical extension’s diagnostic contours. That implementation is original, using six deterministic starts, Qn scales, concentration steps and reweighting. No code from robustbase or scikit-learn is included. Its contours describe diagnostic pixel distributions and never feed the grading calculation.</p>
+<p>The article appears in <em>Journal of Computational and Graphical Statistics</em>
+21(3), 618–637. The original NumPy implementation now lives in
+<code>libraries/perceptual-grade-core/src/perceptual_grade_core/model/statistics.py</code>.
+It is a two-dimensional, bounded-sample implementation using asymptotic Gaussian
+corrections and documented degenerate/display fallbacks.</p>
+<h2 id="host-and-build-tools"><a class="header" href="#host-and-build-tools">Host and build tools</a></h2>
+<p>Perceptual Grade runs as an extension inside <a href="https://www.blender.org/">Blender</a>.
+Next implements its grading controls and native evaluation using Blender’s node
+system and color-management facilities. The retained 1.23.2 manual describes
+that earlier extension’s scopes and render-method controls.</p>
+<p>The Perceptual Grade DCTL runs inside DaVinci Resolve. <a href="https://www.blackmagicdesign.com/support/family/davinci-resolve-and-fusion">Blackmagic Design’s documentation</a> describes the host; use the DCTL Developer documentation shipped with your build for its interface.</p>
+<p><a href="https://buck2.build/">Buck2</a> builds generated resources, packages and tests.</p>
+<p><a href="https://rust-lang.github.io/mdBook/">mdBook</a>, licensed under MPL-2.0, generates this static handbook.</p>
+<p><a href="https://katex.org/">KaTeX</a>, licensed under MIT, renders equations using version-pinned JavaScript, CSS, and fonts from jsDelivr. The script and stylesheet use integrity hashes; their payloads are not included in the deployment archive.</p>
+<p>The build pins actual dependency releases and hashes. Third-party documentation notices are available as <a href="../../downloads/licenses/mdbook-LICENSE">mdBook</a> and <a href="../../downloads/licenses/katex-LICENSE">KaTeX</a> license files.</p>
+<h2 id="tutorial-and-chapter-organization"><a class="header" href="#tutorial-and-chapter-organization">Tutorial and chapter organization</a></h2>
+<p>The ColorChecker2014 reference EXR is supplied by <a href="https://github.com/colour-science/colour-nuke">colour-science/colour-nuke</a> at the pinned commit recorded in <code>third_party/book/pins.bzl</code>. It is distributed with the project’s <a href="../../downloads/licenses/colour-nuke-LICENSE">BSD license</a>.</p>
+<p>The <a href="https://docs.acescentral.com/system-components/output-transforms/technical-details/rendering-overview/">ACES Output Transform structure documentation</a> provides an example of explaining processing stages through purpose, equations and interleaved numerical figures. The handbook’s calculations and figure producers describe Perceptual Grade’s own model.</p>
+<h2 id="theme-and-reference-illustrations"><a class="header" href="#theme-and-reference-illustrations">Theme and reference illustrations</a></h2>
+<p>The reading theme adapts <a href="https://docs.acescentral.com/">ACES Documentation</a>’s Pontano Sans typography, neutral palette, gold rule and navigation layout. Its <a href="https://docs.acescentral.com/stylesheets/extra.css">extra.css</a> is Copyright Contributors to the ACES Documentation, under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. The adaptation changes layout, contrast and mdBook integration. The mdBook layout and reader controls are adapted for this handbook. Text uses Pontano Sans and code uses Roboto Mono, loaded as version-pinned WOFF2 files from the Fontsource distribution on jsDelivr. Their SIL Open Font License 1.1 notices are available for <a href="../../downloads/licenses/pontano-sans-OFL.txt">Pontano Sans</a> and <a href="../../downloads/licenses/roboto-mono-OFL.txt">Roboto Mono</a>.</p>
+<p>The appearance introduction reproduces Figures 2 and 3 from Agahian and Stolitzka, <a href="https://doi.org/10.2352/CIC.2025.33.1.7">Modeling Perceived Brightness in HDR Displays</a>, 33rd Color and Imaging Conference (2025), pp. 31–34. The figures are unmodified reference illustrations, with original authorship retained; they are replaceable source assets for review. They retain the copyright of the 2025 Society for Imaging Science and Technology publication and are not covered by the project’s original-artwork license grant. They describe the published model, not measurements of this tool. Source details and hashes are kept in docs/data/appearance-references.json.</p>
+<p><a href="https://github.com/imageio/imageio-ffmpeg">imageio-ffmpeg</a> supplies the pinned FFmpeg binary used by the retained recording producers; Pillow encodes their paired and introductory WebP outputs. These outputs and their stills remain build-only and are excluded from current book publication.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="license"><a class="header" href="#license">License</a></h1>
+<p>Copyright © 2026 Rei277Hz.</p>
+<h2 id="repository-source"><a class="header" href="#repository-source">Repository source</a></h2>
+<p>The original source code in the development repository,
+<a href="https://github.com/rei277hz/chromaticity">rei277hz/chromaticity</a>, is available under either the
+<a href="https://github.com/rei277hz/chromaticity/blob/main/LICENSE-MIT">MIT License</a>
+or the <a href="https://github.com/rei277hz/chromaticity/blob/main/LICENSE-APACHE">Apache License, Version 2.0</a>,
+at your option (<code>MIT OR Apache-2.0</code>). This includes the Blender product source,
+shared libraries, web product, build tools, and DCTL. DCTL follows these root
+licenses and has no additional product license.</p>
+<p><a href="https://github.com/rei277hz/perceptual-grade">rei277hz/perceptual-grade</a> is the
+downstream code snapshot, currently containing the preserved Perceptual Grade
+v1.23.2 code from the 2026-11-01 build, not Perceptual Grade Next. It accepts
+<a href="https://github.com/rei277hz/perceptual-grade/issues">issues</a>,
+but does not accept pull requests; submit
+<a href="https://github.com/rei277hz/chromaticity/pulls">pull requests to chromaticity</a>.
+See <a href="../../technical/en/development/contributing.html">Contributing</a> for the repository roles.</p>
+<h2 id="blender-extension-distributions"><a class="header" href="#blender-extension-distributions">Blender extension distributions</a></h2>
+<p>The original code in each packaged Blender extension and its Corresponding
+Source are additionally offered under the GNU General Public License, version 3
+or any later version (<code>GPL-3.0-or-later</code>). This grant does not withdraw the MIT
+or Apache-2.0 permissions for the repository source.</p>
+<p>Each Blender product’s <code>LICENSE</code> is a packaging input: it supplies the release
+explanation and full GPLv3 text in the ZIP’s single <code>LICENSE</code> file. It does not
+replace the root source-code licenses. The ZIP does not include separate
+MIT/Apache license texts or a <code>NOTICE.md</code>, and its manifest declares
+<code>license = ["SPDX:GPL-3.0-or-later"]</code>.</p>
+<p>Corresponding Source means the preferred form for modifying the release,
+including the required generator inputs and build scripts for generated code.
+Release downloads must identify and provide that source for the exact released
+version under the additional GPL grant. General-purpose build tools and
+unrelated monorepo products do not become GPL-licensed through this grant.
+See <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3, sections 1 and 6</a>.</p>
+<p>For a release, create a full monorepo source archive with <code>git archive</code> from the
+committed release revision, build the extension ZIPs from a clean extraction of
+that archive, and publish the source archive alongside the ZIPs. The release
+listing must identify the exact commit and link to that source archive. This
+preserves the generator inputs and build scripts without adding them to the
+installation ZIP. A link to a changing branch is not an exact release reference.</p>
+<h2 id="assets-third-party-materials-and-historical-downloads"><a class="header" href="#assets-third-party-materials-and-historical-downloads">Assets, third-party materials, and historical downloads</a></h2>
+<p>The GPL grant above covers code. Original non-code assets included in Blender
+extension releases are dedicated under
+<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>, as identified in
+the packaged <code>LICENSE</code>. This follows the
+<a href="https://extensions.blender.org/terms-of-service/">Blender Extensions licensing requirements</a>.
+It does not relicense third-party data, reference illustrations, fonts, or other
+credited materials; their existing terms and attributions remain applicable.
+See <a href="#credits-and-references">Credits and references</a>.</p>
+<p>The maintained handbook also preserves historical release downloads. The supplied
+<a href="../../downloads/perceptual_grade-v1.23.2-20261101.zip">Perceptual Grade 1.23.2 development ZIP dated 2026-11-01</a>
+replaces the original extension download; its included license applies to that
+download. The archived DCTL downloads, original runtime notice, and
+<a href="../../downloads/licenses/perceptual-grade-LICENSE">historical GPL license</a> are
+preserved as published under their historical terms. This page documents the
+current monorepo and extension-distribution policy; it does not rewrite those
+archived files.</p>
+
+                    <footer class="book-footer">Perceptual Grade User Manual <a href="reference/credits.html">Credits</a> <a href="reference/license.html">License</a> <a href="../../index.html">All books</a></footer></main>
+
+                    
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/math-96cc483f.js"></script>
+        <script src="theme/reader-7b4ff642.js"></script>
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>

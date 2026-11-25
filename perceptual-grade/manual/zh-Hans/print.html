@@ -1,0 +1,612 @@
+<!DOCTYPE HTML>
+<html lang="zh-Hans" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Perceptual Grade User Manual</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css" integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js" integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk" crossorigin="anonymous"></script>
+
+        <meta name="description" content="A bilingual guide to using Perceptual Grade. Some interface and workflow chapters describe the preserved 1.23.2 release.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/fonts-6a07186e.css">
+        <link rel="stylesheet" href="theme/grade-dda453c0.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-3c351922.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-c8264b49.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/pontano-sans@5.3.0/files/pontano-sans-latin-wght-normal.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64 256x256" href="../../favicon.ico?v=d3809710a7bd">
+<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png?v=dd75e1757261">
+<link rel="manifest" href="../../site.webmanifest">
+<script src="../chinese-search.js"></script>
+<link rel="alternate" hreflang="en" href="../en/print.html">
+<link rel="alternate" hreflang="zh-Hans" href="../zh-Hans/print.html">
+<script src="../language.js" defer></script>
+</head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="切换目录" aria-label="切换目录" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="切换主题" aria-label="切换主题" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu"><li role="none"><button role="menuitem" class="grade-auto" id="grade-theme-auto">自动</button></li>
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">浅色</button></li>
+                            
+                            
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">深色</button></li>
+                            
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="搜索（/）" aria-label="切换搜索框" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"><a href="index.html"><img class="brand-icon" src="../../assets/icons/perceptual-grade-32-transparent.png" srcset="../../assets/icons/perceptual-grade-64-transparent.png 2x" alt="" width="32" height="32"><span>Perceptual Grade User Manual</span></a></h1>
+
+                    <div class="right-buttons"><details class="language-picker"><summary title="选择语言" aria-label="选择语言" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18Z"/></svg></summary><div class="language-options"><a href="../en/print.html" data-book-language="en" lang="en" hreflang="en">English</a><a href="../zh-Hans/print.html" data-book-language="zh-Hans" lang="zh-Hans" hreflang="zh-Hans" aria-current="page">简体中文</a></div></details>
+                        <a href="print.html" title="打印本书" aria-label="打印本书">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rei277hz/chromaticity" title="Git 仓库" aria-label="Git 仓库">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+<nav id="mdbook-sidebar" class="sidebar" aria-label="目录">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="搜索本书……" aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="blender-感知调色"><a class="header" href="#blender-感知调色">Blender 感知调色</a></h1>
+<p>Perceptual Grade 是用于 Blender 着色器和合成器节点编辑器的三阶段色彩变换。
+当前 Next 实现提供 <strong>Linear</strong>、<strong>Tone</strong> 与 <strong>Color</strong> 控件、共享调色、节点自有
+动画调色、调色栈和受管理的图像烘焙。<a href="../../technical/en/index.html">技术报告</a>
+介绍模型及当前实现约定。</p>
+<div class="download-grid">
+<a class="download primary" href="../../downloads/perceptual_grade-v1.23.2-20261101.zip"><strong>旧版 Blender 下载</strong><span>Perceptual Grade 1.23.2 · 2026-11-01 · 并非 Next</span></a>
+</div>
+
+<p>上方 ZIP 仅为保留的 1.23.2 扩展，供旧版用户使用，其中不包含 Perceptual Grade
+Next。本手册目前尚未提供 Next 扩展 ZIP。</p>
+<p>请从<a href="#安装与连接">安装与节点连接</a>开始，再按<a href="#分三个阶段调色">三个阶段调色</a>
+操作。在 <strong>Linear</strong> 中处理场景工作空间下的白平衡和颜色关系，在 <strong>Tone</strong> 中
+设置影调锚点，在 <strong>Color</strong> 中调整明度、彩度、Adaptance 和六点 Warp 色网。共享
+调色可供多个节点复用；若节点需要独立动画，可转换为节点自有设置。调色栈则把
+按顺序排列的正向条目合并为一次采样变换。</p>
+<p>本手册介绍 Blender 着色器和合成器节点。<a href="../../technical/en/index.html">参考章节</a>
+讲解数学模型；<a href="../../technical/en/development/next-policies.html">Next 策略章节</a>记录运行时发布、
+故障处理和烘焙行为。</p>
+<p>模型和实现参考见<a href="#致谢与参考文献">致谢</a>，许可信息见<a href="#许可证">许可证</a>。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="安装与连接"><a class="header" href="#安装与连接">安装与连接</a></h1>
+<h2 id="blender-扩展"><a class="header" href="#blender-扩展">Blender 扩展</a></h2>
+<p><a href="../../downloads/perceptual_grade-v1.23.2-20261101.zip">旧版开发 ZIP</a>包含
+Perceptual Grade 1.23.2，并非本手册介绍的 Next 产品。手册网站不提供 Next
+扩展 ZIP。获得 Next 安装包后，请通过 Blender 的扩展偏好设置安装。</p>
+<p>在着色器或合成器编辑器中选择 <strong>添加 → 颜色 → Grade</strong> 或 <strong>Grade Stack</strong>。
+选中节点后，打开编辑器 N 面板中的 <strong>Perceptual Grade</strong> 侧栏。选中的 Grade
+输出会显示 Linear 和 Tone 控件；Color 控件分为 J、C、Adaptance 和 Warp 面板。
+编辑共享控件前，请在节点选择器中指定已有 Grade，或使用 <strong>新建调色</strong> 创建一个。</p>
+<h2 id="在着色器中连接材质"><a class="header" href="#在着色器中连接材质">在着色器中连接材质</a></h2>
+<p>将 <strong>Image Texture</strong> 的 Color 输出连接到 Grade 的 Color 输入。把 Grade 输出连接到
+需要调整的材质输入，例如 Principled BSDF 的 Base Color，并保持着色器连接到
+Material Output。若要预览不受照明影响的图像，可把 Grade 输出连接到 Emission
+着色器。</p>
+<p>Image Texture 的 Color Space 应与源图像编码一致，以便 Blender 正确解码。整个节点
+图使用场景当前支持的工作色彩空间；Next 支持 Linear Rec.709、Linear Rec.2020
+和 ACEScg 场景空间。</p>
+<h2 id="在合成器中连接图像"><a class="header" href="#在合成器中连接图像">在合成器中连接图像</a></h2>
+<p>在合成器中启用 <strong>Use Nodes</strong>。将 Image 或 Render Layers 的 Image 输出连接到
+Grade Color，再把处理结果连接到后续操作或输出。添加 Viewer 分支，以便编辑时
+检查结果。采样 Render Layers 前先渲染一次。</p>
+<p>若要制作节点自有动画，请右键 Grade 节点并选择 <strong>转换为节点自有调色</strong>。这会将
+当前设置复制到该节点。共享 Grade 和栈条目仍由数据块持有；详见<a href="#共享与动画-grade">共享与复用调色</a>。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="分三个阶段调色"><a class="header" href="#分三个阶段调色">分三个阶段调色</a></h1>
+<p>Grade 由三个相连的阶段组成：<strong>Linear</strong> 设置曝光、白平衡和整体色彩关系；
+<strong>Tone</strong> 将场景亮度映射到感知明度；<strong>Color</strong> 按影调与色相调整明度和彩度。
+建议按此顺序操作，并在每个阶段后检查完整图像。</p>
+<p>先选择中性参考，并确保输入图像已正确解码。在 Linear 中校正偏色并设置整体
+亮度，不要把高光一律推到白色。在 Tone 中，根据图像动态范围放置黑、阴影、
+中间调、白和高光锚点。在 Color 中进行选择性调整，同时观察肤色、中性色和
+高彩度颜色。单个 Grade 是全局变换，无法补偿局部光照或错误的输入色彩配置。</p>
+<p>Next 在侧栏中提供完整的 Stage 3 数值控件。<strong>J</strong> 按低／高彩度及对立色方向
+调整明度响应。<strong>C</strong> 使用相同驱动因素调整彩度响应，并提供全局彩度增益。
+<strong>Adaptance</strong> 为 Shadows、Midtones、White 和 Highlights 设置对立色空间目标，
+并共享半影响彩度。<strong>Warp</strong> 在四个非黑色调锚点上使用六点循环色网：彩度以档为
+单位，相位显示存储的角度偏移，Scale 也以档为单位。各类控件会在影调间平滑
+插值。目前没有可拖动的 Warp 图示，请使用数值字段。</p>
+<p>数值模型使用冻结的 Tone 后选择器及带符号能量。执行顺序为 J/C 响应、Warp
+色相与彩度并选择正 Scale、选择性 Adaptance、H–K 修复，最后将 Scale 应用于
+修复后的对立色坐标，并将 Scale 的平方应用于能量。H–K 守护在 Scale 之前执行。若需要，RGB 输出边界
+会另行把结果投影到受支持的 RGB 色域内。</p>
+<p>比较调色版本时，保持曝光、视图变换和输入解码方式一致。场景线性值可以高于
+显示白；应通过预期的显示变换判断，而不是截断源高光。</p>
+<p>接下来阅读 <a href="#linear">Linear</a>、<a href="#tone">Tone</a> 和 <a href="#color">Color</a>。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="linear"><a class="header" href="#linear">Linear</a></h1>
+<p>Linear 在非线性的 Tone 与 Color 阶段之前执行精确矩阵变换，为后续调色建立
+合适的曝光和色彩平衡。</p>
+<h2 id="曝光与源白"><a class="header" href="#曝光与源白">曝光与源白</a></h2>
+<p><strong>Exposure</strong> 以档为单位；+1 会使场景线性 RGB 加倍。先设置合适的信号范围，
+但不要用它抹去高光细节。源白 x、y 控件指定 Stage 1 适应的色度坐标。点击
+<strong>Match White</strong> 可将源白恢复为 D65。</p>
+<p>当前 Next 版本显示的 Working White 固定为 D65。Linear 还提供青红和黄蓝方向的
+<strong>Balance</strong>、<strong>Spread</strong> 和 <strong>Heading</strong>。Balance 改变对立颜色的相对曝光；Spread
+改变该方向相对白点的位移；Heading 在 xy 平面旋转方向。这些控件共同形成 Grade
+矩阵。</p>
+<p>校正白平衡时，选择在目标光照下拍摄的中性表面。调整源白直至该表面呈中性，
+再检查其他颜色与肤色。若中性色正确而其他表面仍不协调，可使用 Balance、Spread
+或 Heading 调整整体关系。它们作用于整幅图像，并非仅修改采样色块。</p>
+<p>Blender 按 Image Texture 的 Color Space 设置解码图像。调色前请确认此设置；
+错误的传递函数或色域无法靠 Grade 可靠补偿。节点会处理场景工作色彩空间适配；
+Next 支持 Linear Rec.709、Linear Rec.2020 和 ACEScg。</p>
+<p>普通 Grade 在原生非线性阶段之前以精确矩阵计算 Stage 1。在 Grade Stack
+中，完整的有序变换会一起采样。关于采样坐标与场景 RGB 的关系，见<a href="#场景工作空间">工作空间</a>。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="tone"><a class="header" href="#tone">Tone</a></h1>
+<p>Tone 将中性输入亮度映射到感知明度曲线。完成 Linear 后，再设置输入锚点及
+漫反射白和峰值参考。</p>
+<h2 id="设置影调锚点"><a class="header" href="#设置影调锚点">设置影调锚点</a></h2>
+<p>Tone 提供以尼特为单位的 Black、Shadows、Midtones、White 和 Highlights 输入值。
+Black 映射为黑色；Shadows、Midtones 和 White 分别映射到相应的中性明度锚点；
+Highlights 映射到已配置的峰值锚点。这些是柔和曲线锚点，不是硬截断，也不是
+独立输出值。</p>
+<p>根据图像安排这些输入值。SDR 图像的大部分影调可能位于漫反射白附近或以下。
+对于 HDR，应区分漫反射表面与发光或镜面高光，不要把普通中间调推向最亮像素。
+曲线 Fit 控制曲线接近控制点的程度，以及每个控制点影响相邻区域的范围。Peak
+用于选择受支持的中性峰值目标之一。</p>
+<p>共享 Grade 与 Stack 控件为静态。转换为 <strong>Node-Owned Grade</strong> 后，可为数值控件
+制作动画，但离散的 Peak 选择除外。关键帧属于包含该节点树的 Action，并由该
+节点树的所有用户共享。</p>
+<h2 id="检查曲线效果"><a class="header" href="#检查曲线效果">检查曲线效果</a></h2>
+<p>在预期场景显示变换下检查 Grade 输出及最终图像。Tone 会改变 Color 接收的信号，
+所以移动锚点后应重新检查选择性色彩调整。编辑 Stack 中选定的 Grade 时，可通过
+Blender 的图像与 Viewer 显示比较效果。</p>
+<p><a href="../../technical/en/theory/tone.html">Tone 模型</a>介绍平滑插值及其参考明度刻度。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="color"><a class="header" href="#color">Color</a></h1>
+<p>Color 是 Stage 3，在 Linear 和 Tone 之后调整感知外观，并通过影调、彩度和色相
+进行平滑控制。侧栏将数值控件分为 <strong>J</strong>、<strong>C</strong>、<strong>Adaptance</strong> 和 <strong>Warp</strong>。</p>
+<h2 id="j-与-c-响应"><a class="header" href="#j-与-c-响应">J 与 C 响应</a></h2>
+<p>J 改变感知明度响应，C 改变彩度响应。每一类都具有四个影调锚点：Shadows、
+Midtones、White 和 Highlights。每个锚点上的低／高彩度权重用于调整径向贡献，
+a/b 值用于调整对立色方向。Fit 控制影调间的平滑融合；Global C Gain 调整整体
+彩度倍率。</p>
+<p>建议先从较小的数值开始。J 可改变对比或突出主体；C 可增强或减弱色彩。调整时
+同时检查中性色和高彩度颜色，因为较大的改动可能影响目标之外的颜色。</p>
+<h2 id="选择性-adaptance"><a class="header" href="#选择性-adaptance">选择性 Adaptance</a></h2>
+<p>Adaptance 在 Shadows、Midtones、White 和 Highlights 处设置 a/b 目标坐标。其
+彩度参数决定修正达到一半影响的位置。它用于在选定影调范围内改变外观，不是
+Linear 的白平衡控件。</p>
+<p>a、b 两个坐标共同表示一个径向目标。若请求超出有效范围，Next 会沿原方向缩短
+该目标，使校准后的锥体响应保持有效，而不会分别截断 a 和 b。<strong>Limited</strong> 表示
+当前采样请求（例如动画值）在求值时需要缩短。Shadows、Midtones、White、Highlights
+的常用滑块范围依次为 ±4、±10、±20、±25，拖动增量为 0.01；键入值不会按此增量
+取整。这些是编辑范围；有效的径向边界取决于影调
+锚点。非有限数值请求会显示失败。</p>
+<h2 id="warp-色网"><a class="header" href="#warp-色网">Warp 色网</a></h2>
+<p>Warp 在四个影调锚点各提供六个循环色相手柄：red、yellow、green、cyan、blue
+和 magenta。彩度值是以档为单位的 log2 变化；色相值是存储的角度偏移；Scale
+值也以档为单位，用于确定 H–K 修复之后使用的正缩放量。控件会沿循环色网及
+影调锚点间插值。当前界面使用数值字段，不提供可拖动的图示。</p>
+<p>相邻目标色相始终保留至少 4° 的循环间隔，包括 magenta 与 red 之间的接缝。
+编辑时会固定当前色相，并在需要时沿任一方向推动相邻手柄。再次编辑发起色相时，
+会一起求解其自动返回位置，在满足相邻间隔的前提下尽量返回保存的位置；暂时无法返回时，
+该关系仍会保留。若手动编辑其中一个色相，会从其当前位置开始，并且只解除该色相
+与先前自动调整的关系。</p>
+<p>修改 Peak 会清除自动返回关系，并一起解析新的色相几何与 Adaptance 限制。
+共享 Grade 的自动关系可跨帧保留；节点自有 Grade 则在实际帧或子帧改变时清除。
+若插值后的动画值不满足色相间隔，求值会将角度投影到有效范围，并显示
+<strong>Limited</strong>，不会改写保存的数值或关键帧。</p>
+<p>修改 Warp 后应检查完整图像。求值使用 Tone 后冻结的选择器，然后依次执行 J/C
+响应、Warp 色相／彩度并选择 Scale、选择性 Adaptance、H–K 修复，最后将 Scale
+应用于修复后的对立色坐标，并将 Scale 的平方应用于带符号能量。该顺序符合参考模型的先守护、后缩放
+约定。RGB 色域包含是独立的输出边界操作。</p>
+<p>节点自有 Grade 的 Stage 3 数值可使用 Blender 关键帧。共享 Grade 和 Stack 条目
+为静态。Stack 会将所有启用的正向 Grade 采样到单一的 33³ 预览，再细化为 65³
+最终变换；详见<a href="#grade-stack">Grade Stack</a>。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="共享与动画-grade"><a class="header" href="#共享与动画-grade">共享与动画 Grade</a></h1>
+<p><strong>Grade</strong> 数据块保存权威的 Linear、Tone 和 Color 设置。着色器与合成器 Grade
+节点可共用同一数据块，因此在任一编辑器中修改都会更新所有读取者。Grade Stack
+拥有自己的有序条目列表，每个条目引用一个共享 Grade。</p>
+<h2 id="创建与复用-grade"><a class="header" href="#创建与复用-grade">创建与复用 Grade</a></h2>
+<p>新建 Grade 节点尚未选择 Grade 数据块，显示默认值的控件会被禁用。编辑前，请用
+选择器指定已有 Grade，或通过 <strong>新建调色</strong> 创建一个。选择相同数据块即可与其他
+节点共享设置。已选择 Grade 时，新建调色会创建独立副本，适用于只有一个节点
+需要不同设置的情况。重命名只会改变名称。</p>
+<p>从节点解除 Grade 关联只会清除该节点的引用并恢复默认设置，不会删除数据块。Stack
+条目可解除关联或移除，引用的 Grade 仍会保留。Blender 的伪用户设置可让未使用的
+数据块在保存文件后继续存在。</p>
+<h2 id="为节点自有-grade-制作动画"><a class="header" href="#为节点自有-grade-制作动画">为节点自有 Grade 制作动画</a></h2>
+<p>右键 Grade 节点并选择 <strong>转换为节点自有调色</strong>。Next 会把当前设置复制到节点上，
+使其独立于共享 Grade。这种模式适合跟随 Blender 时间轴变化的变换。Linear、Tone
+及 Stage 3 数值字段可使用 Blender 的普通关键帧命令或 Auto Key。离散的 Tone Peak
+选择为静态设置。</p>
+<p>动画属于所在着色器或合成器节点树的 Action。复用材质或节点组会让所有用户共享此
+动画。要恢复共享设置，请选择 <strong>转换为数据块调色</strong>。Next 会根据当前帧值创建 Grade
+数据块，并移除此节点的 Grade 动画；撤销可恢复之前的节点自有动画。</p>
+<p>无论正向还是反向播放，如果当前帧的调色结果尚未就绪，节点自有 Grade 都可以
+显示本次播放中最近完成的结果。<strong>Updating</strong> 表示显示的调色结果仍在追赶播放头。
+停止播放或拖动时间轴后，节点会按所选帧的准确设置更新。</p>
+<p>节点自有 Grade 不提供 Bake 控件，因为动画中的数值会随时间变化，并通过渲染预检
+求值。共享 Grade 与 Grade Stack 支持 Bake，详见<a href="#渲染与烘焙">渲染与烘焙</a>。</p>
+<h2 id="保存与渲染"><a class="header" href="#保存与渲染">保存与渲染</a></h2>
+<p>扩展会在载入文件后以及渲染前协调内核。交互期间，准备替换结果时可暂时显示上一
+个完整结果，并标记 <strong>Updating</strong>。只有当前的完整结果可用于渲染。若当前准备失败，
+节点会显示保留 alpha 的洋红错误输出，渲染预检会停止受影响的帧。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="场景工作空间"><a class="header" href="#场景工作空间">场景工作空间</a></h1>
+<p>Next 的 Grade 参考白固定为 D65。Linear 面板以不可编辑的值显示
+<strong>Working White: D65</strong>；当前产品版本不提供此项 Grade 设置。源白 xy 控件仍可用于
+Stage 1 的创意校正。</p>
+<p>节点会在场景 RGB 工作空间与内部调色坐标之间适配。支持的 Blender 场景空间为
+<strong>Linear Rec.709</strong>、<strong>Linear Rec.2020</strong> 和 <strong>ACEScg</strong>。切换场景空间会更新外围转换
+矩阵并协调派生节点图。不同空间下相同的 RGB 数字不代表相同颜色；若要保持色度学
+等价，输入 RGB 也应由 Blender 正确转换。</p>
+<p>普通 Grade 节点在原生 Tone／Color 节点图之前应用 Linear 矩阵。Grade Stack 在固定
+的线性 ACEScg／ACES 白点坐标中采样完整序列，并在 LUT 两端转换场景坐标。LUT 采样白点
+是实现边界，不会改变 Grade 固定的 D65 外观参考。</p>
+<p>切换工作空间可能需要新的派生图数据。若准备或恢复失败，Next 会显示保留 alpha
+的洋红错误结果，并阻止渲染，直到当前内核修复。LUT 坐标见<a href="../../technical/en/theory/lut.html">求值与插值</a>，
+输入解码及 Stage 1 控件见 <a href="#linear">Linear</a>。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="grade-stack"><a class="header" href="#grade-stack">Grade Stack</a></h1>
+<p><strong>Grade Stack</strong> 将有序的共享 Grade 合并为一个采样变换。已启用的条目从上到下执行。
+每个条目可选择<strong>正向</strong>（默认）或<strong>反向</strong>。反向条目可以出现在任意位置，也可以单独使用或连续排列。
+反向求解会寻找一个输入，使 Grade 在 AP1-D65 边界映射之前的结果与目标匹配。RGB 和外观值均可作为目标。
+调色可能会丢失信息，因此求得的输入可能是近似解，也可能只是多个解中的一个。反向条目的 Linear 变换必须可逆。</p>
+<p>在<strong>反向 → 正向</strong>的相邻条目之间，如果两个条目的 Linear 变换相同，Stack 会直接传递求得的
+Tone 之前的外观值。如果 Linear 变换不同，则在 CAT16 视锥空间中组合这两个变换。<strong>正向 → 反向</strong>
+的相邻条目传递 Color 之后的外观值。两种交接都保留有符号的值，并避免经由 RGB 往返转换。
+只有当序列以正向条目结束时，才会在输出端应用 AP1-D65 边界映射。如果序列以反向条目结束，
+输出是求得的有符号 RGB 值，其中的分量可以超过 LUT 网格的上限 1024。</p>
+<h2 id="排列与编辑条目"><a class="header" href="#排列与编辑条目">排列与编辑条目</a></h2>
+<p>使用 <strong>添加调色</strong> 创建已启用的空条目，再通过选择器指定共享 Grade，或用条目
+中的加号按钮新建 Grade。使用条目控件可启用或旁路它、选定侧栏编辑目标、上下
+移动或移除它。解除 Grade 关联会留下空条目；移除条目不会删除共享 Grade 数据块。
+没有已启用 Grade 的 Stack 为恒等变换。</p>
+<p>点击条目的编辑控件后，侧栏会显示该共享 Grade 的设置。修改会更新所有引用它的
+普通 Grade 节点和 Stack 条目。若某一条目需要不同参数，请先创建独立 Grade。Stack
+的成员关系和顺序属于节点；Grade 设置属于共享数据块。</p>
+<h2 id="整个序列共用一个-lut"><a class="header" href="#整个序列共用一个-lut">整个序列共用一个 LUT</a></h2>
+<p>Stack 将所有已启用 Grade（包括每个 Linear 矩阵）计算到一个由 GPU helper 准备的
+65³ LUT 中。编辑时可以先安装 33³ 预览，随后更新为最终 65³。预览采用最终网格
+每隔一个顶点的坐标，GPU helper 分别计算两种分辨率。更新期间可暂时显示上一个
+完整结果，但渲染和正常保存需等待当前的完整结果。</p>
+<p>如果 LUT 包含超出容差的有限反向近似解，Stack 仍可使用该 LUT，并显示警告。警告会指出当前显示的
+预览或完整 LUT 中有多少顶点受到影响，以及最大误差是容差的多少倍。</p>
+<p>修改被引用的 Grade、条目方向、启用状态或顺序都会改变采样函数。安装结果前必须匹配
+当前设置签名。文件载入后及渲染前，Next 会协调派生 LUT。若准备失败，会显示
+错误，并以保留 alpha 的洋红结果关闭调色输出。</p>
+<p>Stack 在固定的内部线性 ACEScg／ACES 白点坐标中运行。场景坐标转换位于 LUT 两端，
+所有条目则包含在 LUT 内。详见<a href="#场景工作空间">场景工作空间</a>和<a href="../../technical/en/theory/lut.html">求值与插值</a>。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="渲染与烘焙"><a class="header" href="#渲染与烘焙">渲染与烘焙</a></h1>
+<p>着色器和合成器中的共享 Grade 与 Grade Stack 节点提供 <strong>Bake</strong> 操作。节点自有的
+动画 Grade 不提供 Bake，因为其设置会随时间变化。</p>
+<h2 id="烘焙节点输出"><a class="header" href="#烘焙节点输出">烘焙节点输出</a></h2>
+<p>选中受支持的 Grade 或 Stack 节点，按当前路线设置输出尺寸，然后点击侧栏中的
+<strong>Bake</strong>。结果会发布到受管理、打包的 32 位浮点 RGBA Image，节点随后改用该图像。
+烘焙内容来自原生节点树求值：Grade 使用 helper 图像内核，Grade Stack 使用完整
+65³ LUT 节点图。</p>
+<p><strong>Use Bake</strong> 可在图像输出和实时节点输出间切换，同时保留图像关联。调色设置、
+被跟踪的源数据或渲染引擎发生更改后，仍可使用有效的烘焙图像。节点会提示烘焙
+可能已过时，并说明原因。若其他输入仍匹配，切回烘焙时使用的渲染引擎即可清除
+引擎变更提示。重新烘焙共享的受管理图像会更新所有读取节点。</p>
+<p>设置跟踪包含目标节点、已启用 Stack 条目和实时上游 Grade／Stack 节点中的 Linear、
+Tone 及全部 Stage 3 控件。</p>
+<p>可选的 Shader <strong>Vector</strong> 输入只控制烘焙采样。未连接时，使用记录的烘焙 UV 图，
+Image 烘焙则使用当前活动渲染 UV 图。</p>
+<h2 id="image-与-uv-路线"><a class="header" href="#image-与-uv-路线">Image 与 UV 路线</a></h2>
+<p>对于单个普通静态 Image、未连接源坐标的逐点 Shader 图，采用 Image 烘焙：每个源
+纹素对应一个输出像素。无源图像的 Shader 常量会烘焙为 1×1 图像。合成器烘焙保留
+原生输出范围；常量使用场景画布尺寸。</p>
+<p>若图中有连接的坐标、依赖表面的着色、多个源 Image，或上游受管理的 UV 烘焙，则
+需要在网格上执行 UV 烘焙。UV 烘焙使用 Cycles，并要求活动 UV 图位于 0–1 区域且
+互不重叠。Image 烘焙遵从 Scene 渲染引擎：EEVEE 使用私有正交渲染；Cycles 使用
+所选 CPU 或 GPU 设备；Workbench 或未知引擎会回退到 Cycles CPU。UV 烘焙使用 Scene
+选定的 Cycles CPU／GPU。若 GPU 设备不可用，会显示失败，不会静默切换设备。烘焙
+helper 不修改 Scene 或用户偏好设置。</p>
+<p>烘焙会明确拒绝 UDIM／平铺图像、影片与图像序列、多视图／多层源、Shader to RGB、
+影片剪辑与 Mask、关联或动画中的缓存／Alembic 几何、缺失或重叠的 UV，以及不受
+支持的节点图实例。UV 烘焙前应应用不受支持的拓扑修改器或形变修改器。完整路线
+边界见<a href="../../technical/en/development/next-policies.html#next-policy.bake">Next 烘焙策略</a>。</p>
+<h2 id="渲染就绪"><a class="header" href="#渲染就绪">渲染就绪</a></h2>
+<p>Next 会在渲染前协调派生内核。只有当前设置签名对应的完整结果可用于渲染。交互时
+可暂时显示之前的完整结果并标记 <strong>Updating</strong>；当前结果准备失败时，会显示保留
+alpha 的洋红输出，并阻止渲染预检。Grade Stack 编辑时可先使用 33³ 预览，但最终
+渲染需等待 65³。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="致谢与参考文献"><a class="header" href="#致谢与参考文献">致谢与参考文献</a></h1>
+<p>Perceptual Grade 由 Rei277Hz 开发。当前单体仓库源代码（包括 DCTL）采用
+<code>MIT OR Apache-2.0</code> 许可；随附的 Blender 扩展及其对应源代码还以
+<code>GPL-3.0-or-later</code> 许可提供。其解析式 DCTL 与原生扩展使用相同的调色模型。
+当前许可政策及分别存档的历史下载详见<a href="#许可证">许可</a>。</p>
+<h2 id="色彩外观"><a class="header" href="#色彩外观">色彩外观</a></h2>
+<p>Hellwig 与 Fairchild，2022 年发表的
+<a href="https://doi.org/10.1002/col.22792">Brightness, lightness, colorfulness, and chroma in CIECAM02 and CAM16</a>。</p>
+<p>Hellwig 与 Fairchild，2022 年发表的
+<a href="https://doi.org/10.1002/col.22793">Extending CIECAM02 and CAM16 for the Helmholtz–Kohlrausch effect</a>。</p>
+<p>Hellwig 与 Fairchild，2022 年发表的
+<a href="https://doi.org/10.2352/CIC.2022.30.1.48">Revising CAM16-UCS</a>。</p>
+<p><a href="https://colour.readthedocs.io/en/develop/_modules/colour/appearance/hellwig2022.html">Colour 中的 Hellwig2022 实现</a>
+是主要模型参考之一。</p>
+<p><a href="https://colour.readthedocs.io/en/develop/_modules/colour/adaptation/vonkries.html">Colour 中的 von Kries 适应实现</a>
+为 CAT16 适应提供参考。</p>
+<p>原生 Stage 2 图与 NumPy 示波器实现共用 DCTL 的 modCAM16 坐标、H–K 补偿、色相
+偏心率、默认校准及单调 softplus 重映射。该工具还加入了自身的带符号数值扩展、
+影调系数模型、Adaptance 权重、色相集中度控件，以及有界 H–K 逆向保护。这些
+工程选择在理论章节中说明。</p>
+<h2 id="稳健统计"><a class="header" href="#稳健统计">稳健统计</a></h2>
+<p>Hubert、Rousseeuw 与 Verdonck 于 2012 年发表的
+<a href="https://wis.kuleuven.be/stat/robust/papers/2012/DetMCD.pdf">A deterministic algorithm for robust location and scatter</a>
+提供了用于诊断轮廓的 DetMCD 算法。实现由本项目独立编写，使用六个确定性初值、
+Qn 尺度、集中步骤和重加权；未包含 robustbase 或 scikit-learn 的代码。轮廓用于
+描述诊断像素分布，不参与调色计算。</p>
+<p>该论文发表于 <em>Journal of Computational and Graphical Statistics</em> 第 21 卷第 3 期，
+第 618–637 页。原始 NumPy 实现现位于
+<code>libraries/perceptual-grade-core/src/perceptual_grade_core/model/statistics.py</code>。
+这是一个二维、有界样本实现，使用渐近高斯校正，并记录了退化情形与显示回退策略。</p>
+<h2 id="宿主与构建工具"><a class="header" href="#宿主与构建工具">宿主与构建工具</a></h2>
+<p>Perceptual Grade 作为扩展运行于 <a href="https://www.blender.org/">Blender</a> 内。该扩展使用
+Blender 节点系统与色彩管理功能实现调色控件、示波器和渲染方式。</p>
+<p>Perceptual Grade DCTL 在 DaVinci Resolve 中运行。
+<a href="https://www.blackmagicdesign.com/support/family/davinci-resolve-and-fusion">Blackmagic Design 文档</a>
+介绍了宿主软件；DCTL 的界面说明请查阅对应版本随附的 DCTL 开发者文档。</p>
+<p><a href="https://buck2.build/">Buck2</a> 用于构建生成资源、打包和运行测试。</p>
+<p><a href="https://rust-lang.github.io/mdBook/">mdBook</a> 采用 MPL-2.0 许可，用于生成本静态手册。</p>
+<p><a href="https://katex.org/">KaTeX</a> 采用 MIT 许可，通过 jsDelivr 上版本固定的 JavaScript、CSS
+和字体渲染公式。脚本与样式表引用包含完整性哈希；这些资源文件本身不包含在部署
+归档中。</p>
+<p>构建会固定实际依赖版本及其哈希。第三方文档许可声明见
+<a href="../../downloads/licenses/mdbook-LICENSE">mdBook</a> 和
+<a href="../../downloads/licenses/katex-LICENSE">KaTeX</a> 许可文件。</p>
+<h2 id="教程与章节组织"><a class="header" href="#教程与章节组织">教程与章节组织</a></h2>
+<p>ColorChecker2014 参考 EXR 由
+<a href="https://github.com/colour-science/colour-nuke">colour-science/colour-nuke</a>
+提供，使用的固定提交记录在 <code>third_party/book/pins.bzl</code> 中。该文件依项目的
+<a href="../../downloads/licenses/colour-nuke-LICENSE">BSD 许可</a>分发。</p>
+<p><a href="https://docs.acescentral.com/system-components/output-transforms/technical-details/rendering-overview/">ACES 输出变换结构文档</a>
+展示了如何围绕处理目的和方程说明各个阶段，并穿插数值图示。本手册中的计算与图示
+生成器描述的是 Perceptual Grade 自身的模型。</p>
+<h2 id="主题与参考插图"><a class="header" href="#主题与参考插图">主题与参考插图</a></h2>
+<p>阅读主题借鉴了 <a href="https://docs.acescentral.com/">ACES Documentation</a> 的 Pontano Sans
+字体、克制的配色、金色分隔线和导航布局。其中的
+<a href="https://docs.acescentral.com/stylesheets/extra.css">extra.css</a> 版权归 ACES 文档贡献者
+所有，采用 <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> 许可。此处的改编
+调整了布局、对比度和 mdBook 集成；mdBook 页面布局与阅读控件也针对本手册进行了适配。
+正文使用 Pontano Sans，代码使用 Roboto Mono；字体以版本固定的 WOFF2 文件形式从
+jsDelivr 上的 Fontsource 发行包加载。其 SIL Open Font License 1.1 许可声明见
+<a href="../../downloads/licenses/pontano-sans-OFL.txt">Pontano Sans</a> 和
+<a href="../../downloads/licenses/roboto-mono-OFL.txt">Roboto Mono</a>。</p>
+<p>外观模型简介重现了 Agahian 与 Stolitzka 发表的
+<a href="https://doi.org/10.2352/CIC.2025.33.1.7">Modeling Perceived Brightness in HDR Displays</a>
+中的图 2 与图 3。该论文发表于第 33 届色彩与成像会议（2025 年），第 31–34 页。
+这些图是未修改的参考插图，保留原作者署名，并作为可替换的源素材供审阅。其版权仍归
+2025 年 Society for Imaging Science and Technology 出版物所有，不在项目原创艺术品
+的授权范围内。它们说明已发表的模型，并非对本工具的测量结果。源信息与哈希记录于
+<code>docs/data/appearance-references.json</code>。</p>
+<p><a href="https://github.com/imageio/imageio-ffmpeg">imageio-ffmpeg</a> 提供固定版本的 FFmpeg
+二进制文件，供保留的录像生成器转换屏幕录像；Pillow 用于编码成对及简介 WebP 输出。
+这些输出及其静态帧仅供构建阶段使用，不进入当前发布的书籍产品。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="许可证"><a class="header" href="#许可证">许可证</a></h1>
+<p>版权所有 © 2026 Rei277Hz。</p>
+<h2 id="仓库源代码"><a class="header" href="#仓库源代码">仓库源代码</a></h2>
+<p>上游开发仓库 <a href="https://github.com/rei277hz/chromaticity">rei277hz/chromaticity</a> 的原创源代码采用双许可证，使用者可自行选择
+<a href="https://github.com/rei277hz/chromaticity/blob/main/LICENSE-MIT">MIT 许可证</a>
+或 <a href="https://github.com/rei277hz/chromaticity/blob/main/LICENSE-APACHE">Apache 许可证 2.0 版</a>
+（<code>MIT OR Apache-2.0</code>）。这包括 Blender 产品源代码、共享库、Web 产品、构建工具及
+DCTL。DCTL 遵循仓库根目录的许可证，不另设产品许可证。</p>
+<p><a href="https://github.com/rei277hz/perceptual-grade">rei277hz/perceptual-grade</a> 是用于代码分发的下游快照仓库，当前存放的是
+2026-11-01 构建的旧版 Perceptual Grade v1.23.2 代码，并非 Perceptual Grade Next。
+接受 Issues，不接受 PR；所有 PR 请提交到 <code>rei277hz/chromaticity</code>。
+具体链接见<a href="../../technical/en/development/contributing.html">参与贡献</a>。</p>
+<h2 id="blender-扩展发行包"><a class="header" href="#blender-扩展发行包">Blender 扩展发行包</a></h2>
+<p>Blender 扩展发行包中的原创代码及其对应源代码（Corresponding Source）另以
+GNU 通用公共许可证第 3 版或任何后续版本（<code>GPL-3.0-or-later</code>）提供。
+这一额外授权不会撤销仓库源代码已有的 MIT 或 Apache-2.0 授权。</p>
+<p>各 Blender 产品目录中的 <code>LICENSE</code> 是打包输入：它包含发行授权说明和完整的
+GPLv3 正文，并作为 ZIP 中唯一的 <code>LICENSE</code> 文件。它不替代仓库根目录的源代码许可证。
+ZIP 不另外包含 MIT/Apache 许可证文本或 <code>NOTICE.md</code>，清单声明为
+<code>license = ["SPDX:GPL-3.0-or-later"]</code>。</p>
+<p>对应源代码指修改该发行版本时首选的形式，包括生成代码所需的生成器输入及构建脚本。
+发行下载必须标明并提供与发行版本准确对应的这些源代码，并适用上述额外 GPL 授权。
+通用构建工具及无关的 monorepo 产品不会因此获得 GPL 授权。
+详见 <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3 第 1 节及第 6 节</a>。</p>
+<p>发行时应从已提交的发行版本用 <code>git archive</code> 创建完整 monorepo 源代码归档，
+从该归档的干净解压目录构建扩展 ZIP，并将源代码归档与扩展 ZIP 一起发布。
+发行页面必须标明确切的提交编号并提供对应源代码归档的链接。这样可以保留生成器输入及
+构建脚本，而无需把它们加入安装 ZIP。指向持续变化的分支的链接不能准确标识发行源代码。</p>
+<h2 id="素材第三方材料与历史下载"><a class="header" href="#素材第三方材料与历史下载">素材、第三方材料与历史下载</a></h2>
+<p>上述 GPL 授权针对代码。Blender 扩展发行包中包含的原创非代码素材采用
+<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>，具体范围在包内
+<code>LICENSE</code> 中标明，以符合
+<a href="https://extensions.blender.org/terms-of-service/">Blender Extensions 的许可证要求</a>。
+此授权不会改变第三方数据、参考插图、字体及其他署名材料的许可；这些材料仍保留原有条款与署名。
+详见<a href="#致谢与参考文献">致谢与参考文献</a>。</p>
+<p>本手册在持续更新的同时保留历史版本下载。提供的
+<a href="../../downloads/perceptual_grade-v1.23.2-20261101.zip">日期为 2026-11-01 的 Perceptual Grade 1.23.2 开发版 ZIP</a>
+已替换原扩展下载，该下载适用 ZIP 内的许可证。归档的 DCTL 下载、原始运行时声明及
+<a href="../../downloads/licenses/perceptual-grade-LICENSE">历史 GPL 许可证</a>
+均保持原样，沿用历史发行条款。本页说明当前 monorepo 与扩展发行包的许可政策，
+不会改写这些归档文件。</p>
+
+                    <footer class="book-footer">Perceptual Grade 用户手册 <a href="reference/credits.html">致谢</a> <a href="reference/license.html">许可证</a> <a href="../../index.html">全部书籍</a></footer></main>
+
+                    
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-dce93ee8e75d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/math-96cc483f.js"></script>
+        <script src="theme/reader-7b4ff642.js"></script>
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>

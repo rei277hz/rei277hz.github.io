@@ -1,0 +1,48 @@
+{
+  "fonts": {
+    "pontano-sans": {
+      "family": "Pontano Sans",
+      "license": {
+        "out": "pontano-sans-OFL.txt",
+        "sha256": "8ba38df62c6f6fd4504faa77242ba47360430ad4f6f51be395799c89e0212a0e",
+        "url": "https://cdn.jsdelivr.net/npm/@fontsource-variable/pontano-sans@5.3.0/LICENSE"
+      },
+      "normal": {
+        "out": "pontano-sans.woff2",
+        "sha256": "9ce17b0d450bdd4e14bb325afad8344e2ded081abb6b72831ee5580649cff6bb",
+        "url": "https://cdn.jsdelivr.net/npm/@fontsource-variable/pontano-sans@5.3.0/files/pontano-sans-latin-wght-normal.woff2"
+      },
+      "version": "5.3.0",
+      "weights": "300 700"
+    },
+    "roboto-mono": {
+      "family": "Roboto Mono",
+      "license": {
+        "out": "roboto-mono-OFL.txt",
+        "sha256": "b489132782690f2cc1ed23ab56d7057bbb08c42573603e8e704ae2e2ea9c8216",
+        "url": "https://cdn.jsdelivr.net/npm/@fontsource-variable/roboto-mono@5.3.0/LICENSE"
+      },
+      "normal": {
+        "out": "roboto-mono.woff2",
+        "sha256": "b81cd55177300649be8f95b3b747d721ce607e8ed2856e25bd0c630cfd631faf",
+        "url": "https://cdn.jsdelivr.net/npm/@fontsource-variable/roboto-mono@5.3.0/files/roboto-mono-latin-wght-normal.woff2"
+      },
+      "version": "5.3.0",
+      "weights": "100 700"
+    }
+  },
+  "generator_sha256": "d0324f36509a05c6dad9d65bfaca97369a3507118d09531a9900651f70fc8353",
+  "inputs": {
+    "pontano-sans-OFL.txt": "8ba38df62c6f6fd4504faa77242ba47360430ad4f6f51be395799c89e0212a0e",
+    "pontano-sans.woff2": "9ce17b0d450bdd4e14bb325afad8344e2ded081abb6b72831ee5580649cff6bb",
+    "roboto-mono-OFL.txt": "b489132782690f2cc1ed23ab56d7057bbb08c42573603e8e704ae2e2ea9c8216",
+    "roboto-mono.woff2": "b81cd55177300649be8f95b3b747d721ce607e8ed2856e25bd0c630cfd631faf"
+  },
+  "invocation": "buck2",
+  "outputs": {
+    "fonts.css": "6a07186eb8b58bfa143dc6d3f7892ab296624d11d645df8a2a27938181aeadd0"
+  },
+  "pins_sha256": "7b4d6487a4feed5156d4da629f407505eec33cc9f460b006ba64261fc6c67d29",
+  "producer": "Pinned CDN typography",
+  "schema": 1
+}
